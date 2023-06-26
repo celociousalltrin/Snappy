@@ -1,0 +1,16 @@
+.sidebar-container {
+  height: 100vh;
+  overflow: auto;
+  border-right: 1px solid black;
+}
+
+.sidebar-menu {
+  margin: 0.5rem;
+  padding: 0.5rem 0.5rem;
+  cursor: pointer;
+}
+
+.sidebar-menu:hover {
+  background-color: rgb(13, 110, 253);
+  color: white;
+}
