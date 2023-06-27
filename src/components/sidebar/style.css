@@ -1,13 +1,14 @@
 .sidebar-container {
-  height: 100vh;
+  height: 80vh;
   overflow: auto;
   border-right: 1px solid black;
 }
 
 .sidebar-menu {
-  margin: 0.5rem;
-  padding: 0.5rem 0.5rem;
+  margin: 0 0.5rem 0.5rem;
+  padding: 0.5rem;
   cursor: pointer;
+  display: inline-block;
 }
 
 .sidebar-menu:hover {

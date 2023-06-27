@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <nav className="navbar navbar-dark bg-primary sticky-top row head">
       <div className="col-md-4 d-flex justify-content-start">
-        <a class="navbar-brand ms-5 ps-5" href="/">
+        <a class="navbar-brand ms-5 ps-5" href="/explore">
           <img src={snappyLogo} alt="logo image" width="60" height="54" />
         </a>
       </div>
@@ -34,7 +34,7 @@ const Header = () => {
       <div className="col-md-4">
         <div className="d-flex justify-content-end  pe-3">
           <div className="me-4 align-self-center">
-            <a href="/" className="head_explore">
+            <a href="/explore" className="head_explore">
               Explore
             </a>
           </div>

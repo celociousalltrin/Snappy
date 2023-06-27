@@ -7,7 +7,9 @@ import {
   FaUserFriends,
   FaSearch,
   FaBell,
+  FaNewspaper,
 } from "react-icons/fa";
+import { MdTheaterComedy } from "react-icons/md";
 import { BsFillChatFill } from "react-icons/bs";
 
 export const sideBarName = [
@@ -18,6 +20,51 @@ export const sideBarName = [
   { id: 5, name: "Notifications", icon: <FaBell />, route: "/notification" },
   { id: 6, name: "Bookmarks", icon: <FaBookmark />, route: "/bookmark" },
   { id: 7, name: "Profile", icon: <FaUserAlt />, route: "/profile" },
+  { id: 7, name: "News", icon: <FaNewspaper />, route: "/news" },
+  { id: 7, name: "Jokes", icon: <MdTheaterComedy />, route: "/jokes" },
   { id: 8, name: "Setting", icon: <FaCog />, route: "/setting" },
   { id: 9, name: "Log Out", icon: <FaSignOutAlt />, route: "/logout" },
+];
+
+export const page_info = [
+  {
+    id: "home",
+    title: "Home",
+  },
+  {
+    id: "explore",
+    title: "Explore",
+  },
+  {
+    id: "messages",
+    title: "Messages",
+  },
+  {
+    id: "friends",
+    title: "Friends",
+  },
+  {
+    id: "notification",
+    title: "Notifications",
+  },
+  {
+    id: "bookmark",
+    title: "Bookmarks",
+  },
+  {
+    id: "profile",
+    title: "Profile",
+  },
+  {
+    id: "news",
+    title: "News",
+  },
+  {
+    id: "jokes",
+    title: "Jokes",
+  },
+  {
+    id: "setting",
+    title: "Setting",
+  },
 ];

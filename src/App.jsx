@@ -29,7 +29,6 @@ const AppRoutes = () => {
     <>
       <Routes>
         <Route path="/" element={<Explore />}></Route>
-        <Route path="/explore" element={<Explore />}></Route>
         <Route path="/:page_id" element={<Home />}></Route>
         <Route path="/:page_id/:id" element={<Home />}></Route>
       </Routes>
