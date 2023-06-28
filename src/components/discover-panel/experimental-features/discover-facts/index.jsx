@@ -1,19 +1,19 @@
 import React from "react";
-import { mockDiscoverJokes } from "../../../../utils/mock-common";
+import { mockDiscoverfacts } from "../../../../utils/mock-common";
 import { useNavigate } from "react-router-dom";
 
-const DiscoverJokes = () => {
+const DiscoverFacts = () => {
   const navigate = useNavigate();
-  const mockJoke = mockDiscoverJokes[Math.floor(Math.random() * 3) + 1];
+  const mockFacts = mockDiscoverfacts[Math.floor(Math.random() * 10) + 1];
   return (
     <div className="mt-3 ms-2">
-      <h5>{mockJoke.question}</h5>
-      <p>{mockJoke.answer}</p>
+      <h5>{mockFacts.question}</h5>
+      <p>{mockFacts.answer}</p>
       <div>
         <p
           className="text-center text-primary cursor-pointer"
           onClick={() => {
-            navigate("/jokes");
+            navigate("/facts");
             window.scrollTo(0, 0);
           }}
         >
@@ -24,4 +24,4 @@ const DiscoverJokes = () => {
   );
 };
 
-export default DiscoverJokes;
+export default DiscoverFacts;

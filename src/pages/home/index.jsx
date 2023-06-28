@@ -10,8 +10,8 @@ import Notification from "../../components/notification";
 import Bookmark from "../../components/bookmark";
 import Setting from "../../components/setting";
 import Explore from "../explore";
-import News from "../../components/news";
 import Jokes from "../../components/jokes";
+import Facts from "../../components/facts";
 
 const Home = () => {
   const { page_id } = useParams();
@@ -34,8 +34,8 @@ const Home = () => {
               return <Bookmark />;
             case "profile":
               return <Profile />;
-            case "news":
-              return <News />;
+            case "facts":
+              return <Facts />;
             case "jokes":
               return <Jokes />;
             case "setting":

@@ -20,7 +20,7 @@ export const sideBarName = [
   { id: 5, name: "Notifications", icon: <FaBell />, route: "/notification" },
   { id: 6, name: "Bookmarks", icon: <FaBookmark />, route: "/bookmark" },
   { id: 7, name: "Profile", icon: <FaUserAlt />, route: "/profile" },
-  { id: 8, name: "News", icon: <FaNewspaper />, route: "/news" },
+  { id: 8, name: "Facts", icon: <FaNewspaper />, route: "/facts" },
   { id: 9, name: "Jokes", icon: <MdTheaterComedy />, route: "/jokes" },
   { id: 10, name: "Setting", icon: <FaCog />, route: "/setting" },
   { id: 11, name: "Log Out", icon: <FaSignOutAlt />, route: "/logout" },
@@ -56,8 +56,8 @@ export const page_info = [
     title: "Profile",
   },
   {
-    id: "news",
-    title: "News",
+    id: "facts",
+    title: "Facts",
   },
   {
     id: "jokes",
