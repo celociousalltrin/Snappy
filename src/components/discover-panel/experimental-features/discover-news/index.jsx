@@ -1,7 +1,7 @@
 import React from "react";
 
 const DiscoverNews = () => {
-  return <div>This is DiscoverNews page</div>;
+  return <div>This is DiscoverNew page</div>;
 };
 
 export default DiscoverNews;

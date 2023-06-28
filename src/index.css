@@ -5,3 +5,10 @@
 body {
   overflow-x: hidden;
 }
+
+.discover_container {
+  border: 2px solid whitesmoke;
+  border-radius: 1rem;
+  /* background-color: rgba(181, 196, 209, 0.715); */
+  background-color: #f5f5f5;
+}

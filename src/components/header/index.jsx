@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <nav className="navbar navbar-dark bg-primary sticky-top row head">
       <div className="col-md-4 d-flex justify-content-start">
-        <a class="navbar-brand ms-5 ps-5" href="/explore">
+        <a className="navbar-brand ms-5 ps-5" href="/explore">
           <img src={snappyLogo} alt="logo image" width="60" height="54" />
         </a>
       </div>

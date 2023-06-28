@@ -1,0 +1,12 @@
+.mutual_friends--img {
+  object-fit: cover;
+  object-position: center;
+  margin: 0.7rem;
+  border-radius: 50%;
+}
+
+.mutual_friend--button {
+  margin-left: auto;
+  align-self: center;
+  margin-right: 1rem;
+}

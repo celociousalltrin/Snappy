@@ -5,7 +5,7 @@ import DiscoverSearch from "./discover-search";
 
 const DiscoverPanel = () => {
   return (
-    <div>
+    <div className="me-5 pe-5">
       <DiscoverSearch />
       <MutualFriends />
       <ExperimentalFeatures />

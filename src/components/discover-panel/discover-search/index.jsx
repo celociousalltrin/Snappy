@@ -1,14 +1,31 @@
 import React, { useState } from "react";
+import { FaSearch } from "react-icons/fa";
+
+import "./style.css";
 
 const DiscoverSearch = () => {
   const [searchText, setSearchText] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       alert(`${searchText} is the search word`);
     }
   };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
   return (
-    <div>
+    <div
+      className={`${
+        isFocused ? "discover-search__focused" : "discover_container"
+      }`}
+    >
+      <span>{<FaSearch />}</span>
       <input
         type="text"
         placeholder="search"
@@ -16,6 +33,8 @@ const DiscoverSearch = () => {
         name="search"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
     </div>
   );

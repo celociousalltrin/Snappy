@@ -20,10 +20,10 @@ export const sideBarName = [
   { id: 5, name: "Notifications", icon: <FaBell />, route: "/notification" },
   { id: 6, name: "Bookmarks", icon: <FaBookmark />, route: "/bookmark" },
   { id: 7, name: "Profile", icon: <FaUserAlt />, route: "/profile" },
-  { id: 7, name: "News", icon: <FaNewspaper />, route: "/news" },
-  { id: 7, name: "Jokes", icon: <MdTheaterComedy />, route: "/jokes" },
-  { id: 8, name: "Setting", icon: <FaCog />, route: "/setting" },
-  { id: 9, name: "Log Out", icon: <FaSignOutAlt />, route: "/logout" },
+  { id: 8, name: "News", icon: <FaNewspaper />, route: "/news" },
+  { id: 9, name: "Jokes", icon: <MdTheaterComedy />, route: "/jokes" },
+  { id: 10, name: "Setting", icon: <FaCog />, route: "/setting" },
+  { id: 11, name: "Log Out", icon: <FaSignOutAlt />, route: "/logout" },
 ];
 
 export const page_info = [
