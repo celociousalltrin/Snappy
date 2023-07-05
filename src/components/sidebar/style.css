@@ -2,6 +2,8 @@
   height: 80vh;
   overflow: auto;
   border-right: 1px solid black;
+  position: sticky;
+  top: 0;
 }
 
 .sidebar-menu {
