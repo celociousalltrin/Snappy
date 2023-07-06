@@ -2,7 +2,7 @@ import mutual1 from "../assets/mock-image/5mutual.jpg";
 import mutual2 from "../assets/mock-image/5mutual.jpg";
 import mutual3 from "../assets/mock-image/5mutual.jpg";
 import mutual4 from "../assets/mock-image/5mutual.jpg";
-import mutual5 from "../assets/mock-image/5mutual.jpg";
+import snappImage from "../assets/mock-image/2mutual.jpg";
 
 export const mockMutual = [
   { id: 1, name: "Jack", profile_img: mutual1, snappy_username: "jack111" },
@@ -24,12 +24,6 @@ export const mockMutual = [
     profile_img: mutual4,
     snappy_username: "jenefier1213",
   },
-  // {
-  //   id: 5,
-  //   name: "Jhansi",
-  //   profile_img: mutual5,
-  //   snappy_username: "jhansi3221",
-  // },
 ];
 
 export const mockDiscoverJokes = [
@@ -161,5 +155,42 @@ export const mockDiscoverfacts = [
     id: 20,
     question: "What is the speed of light?",
     answer: "Approximately 299,792 kilometers per second.",
+  },
+];
+
+export const feedData = [
+  {
+    id: "1",
+    profile_img: mutual1,
+    name: "Json Roy",
+    snappy_username: "json1343",
+    snapped_at: "15m",
+    snapp: {
+      message: "This is my First Snapp which I have snapped in this web site",
+      image: snappImage,
+    },
+  },
+  {
+    id: "2",
+    profile_img: mutual1,
+    name: "Michelle Janny",
+    snappy_username: "janny111",
+    snapped_at: "Aug 21",
+    snapp: {
+      message:
+        "ChatGPT is an advanced language model developed by OpenAI. Powered by the GPT-3.5 architecture, it is designed to generate human-like text and engage in interactive conversations with users. With a vast knowledge base and the ability to understand and respond to a wide range of topics, ChatGPT serves as a versatile tool for information retrieval, creative writing, and general conversation. It leverages its training on a diverse dataset to provide accurate and contextually appropriate responses to user queries. However, it is important to note that while ChatGPT is capable of producing coherent and fluent text, it may occasionally generate incorrect or nonsensical answers. Users should exercise critical thinking and verify information from reliable sources. OpenAI continues to refine and improve ChatGPT to enhance its capabilities and address any limitations or biases it may have",
+      image: snappImage,
+    },
+  },
+  {
+    id: "3",
+    profile_img: mutual1,
+    name: "Smithy bou",
+    snappy_username: "smithhh111",
+    snapped_at: "21h",
+    snapp: {
+      message: "Hello Snappyess",
+      image: snappImage,
+    },
   },
 ];

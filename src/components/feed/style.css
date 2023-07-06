@@ -1,0 +1,14 @@
+.feed-container {
+  padding: 0.5rem;
+}
+
+.feed-container:hover {
+  background-color: #f5f5f5;
+}
+
+.feed-profile-image {
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}

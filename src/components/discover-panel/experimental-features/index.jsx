@@ -8,7 +8,7 @@ import Tabs from "react-bootstrap/Tabs";
 const ExperimentalFeatures = () => {
   return (
     <div className="discover_container mt-5">
-      <Tabs defaultActiveKey="jokes">
+      <Tabs defaultActiveKey="jokes" variant="tabs" justify="true">
         <Tab eventKey="jokes" title="Jokes">
           <DiscoverJokes />
         </Tab>
