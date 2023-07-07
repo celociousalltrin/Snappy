@@ -14,12 +14,9 @@
   border: none !important;
   padding: 0.7rem 0rem;
   background-color: white;
+  outline: none;
+  margin-left: 1rem;
 }
-
-/* .discover-search > input:focus {
-  background-color: white;
-  border: none !important;
-} */
 
 .discover_container > span {
   padding: 0rem 1rem;

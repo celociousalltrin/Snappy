@@ -17,7 +17,7 @@ const MutualFriends = () => {
             alt={obj.name}
             width="50px"
             height="50px"
-            onLoad={(e) => console.log(e)}
+            // onLoad={(e) => console.log(e)}
             className="mutual_friends--img"
           />
           <div className="mt-2">

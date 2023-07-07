@@ -8,30 +8,30 @@ const Feeds = () => {
     <div>
       {feedData.map((obj) => (
         <div key={`fd_data${obj.id}`} className="mb-4">
-          <div className="d-flex feed-container">
+          <div className="d-flex feed-container rounded">
             <div>
               <img
                 src={obj.profile_img}
-                placeholder="pic img"
-                width="50px"
-                height="50px"
+                alt="pic-img"
+                width="40px"
+                height="40px"
                 className="feed-profile-image"
               />
             </div>
             <div className="container">
               <div className="d-flex">
-                <p className="fw-bold">{obj.name}</p>
-                <p className="text-muted ms-1">{`@${obj.snappy_username}`}</p>
-                <p className="text-muted ms-1">{`.${obj.snapped_at}`}</p>
+                <p className="fw-bold mb-1">{obj.name}</p>
+                <p className="text-muted ms-1 mb-1">{`@${obj.snappy_username}`}</p>
+                <p className="text-muted ms-1 mb-1">{`.${obj.snapped_at}`}</p>
               </div>
 
               <div>
-                <p>{obj.snapp.message}</p>
+                <p className="mb-2">{obj.snapp.message}</p>
                 <img
                   src={obj.snapp.image}
-                  placeholder="pic img"
-                  width="27px"
-                  height="30px"
+                  alt="pic-img"
+                  width="100%"
+                  height="60%"
                 />
               </div>
             </div>

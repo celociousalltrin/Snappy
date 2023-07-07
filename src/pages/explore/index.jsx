@@ -1,9 +1,10 @@
 import React from "react";
+import Feeds from "../../components/feed";
 
 const Explore = () => {
   return (
     <div>
-      <h3>This is Explore Page</h3>
+      <Feeds />
     </div>
   );
 };

@@ -9,6 +9,7 @@ const DiscoverSearch = () => {
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       alert(`${searchText} is the search word`);
+      setSearchText("");
     }
   };
 
@@ -25,7 +26,7 @@ const DiscoverSearch = () => {
         isFocused ? "discover-search__focused" : "discover_container"
       }`}
     >
-      <span>{<FaSearch />}</span>
+      <span className="ms-2">{<FaSearch />}</span>
       <input
         type="text"
         placeholder="search"

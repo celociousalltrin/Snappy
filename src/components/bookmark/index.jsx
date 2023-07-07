@@ -1,7 +1,12 @@
 import React from "react";
+import Feeds from "../feed";
 
 const Bookmark = () => {
-  return <div>This is Bookmark Page</div>;
+  return (
+    <div>
+      <Feeds />
+    </div>
+  );
 };
 
 export default Bookmark;

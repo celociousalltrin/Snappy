@@ -5,6 +5,7 @@ import FeedForYou from "./feed-for-you";
 import FriendsFeed from "./friends-feed";
 
 import "./style.css";
+import Snapp from "../snapp";
 
 const HomePage = () => {
   return (
@@ -16,9 +17,11 @@ const HomePage = () => {
         variant="underline"
       >
         <Tab eventKey="feed-for-you" title="Feed For you">
+          <Snapp />
           <FeedForYou />
         </Tab>
         <Tab eventKey="friends-feed" title="Friends Feed">
+          <Snapp />
           <FriendsFeed />
         </Tab>
       </Tabs>
