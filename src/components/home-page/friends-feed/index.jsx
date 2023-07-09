@@ -1,10 +1,11 @@
 import React from "react";
-import Feeds from "../../feed";
+import Feeds from "../../feeds";
+import { feedData } from "../../../utils/mock-common";
 
 const FriendsFeed = () => {
   return (
     <div>
-      <Feeds />
+      <Feeds feedData={feedData} />
     </div>
   );
 };

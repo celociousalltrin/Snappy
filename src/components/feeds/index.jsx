@@ -1,14 +1,20 @@
 import React from "react";
-import { feedData } from "../../utils/mock-common";
+import { AiOutlineLike } from "react-icons/ai";
+import { FaRegBookmark, FaRegComment } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 import "./style.css";
 
-const Feeds = () => {
+const Feeds = ({ feedData }) => {
+  const navigate = useNavigate();
   return (
     <div>
       {feedData.map((obj) => (
         <div key={`fd_data${obj.id}`} className="mb-4">
-          <div className="d-flex feed-container rounded">
+          <div
+            className="d-flex feed-container rounded cursor-pointer"
+            onClick={() => navigate("single-feed")}
+          >
             <div>
               <img
                 src={obj.profile_img}
@@ -32,7 +38,19 @@ const Feeds = () => {
                   alt="pic-img"
                   width="100%"
                   height="60%"
+                  className="rounded"
                 />
+              </div>
+              <div className="d-flex justify-content-around mt-2">
+                <div>
+                  <AiOutlineLike size={20} /> <span>80</span>
+                </div>
+                <div>
+                  <FaRegComment size={20} /> <span>27</span>
+                </div>
+                <div>
+                  <FaRegBookmark size={20} />
+                </div>
               </div>
             </div>
           </div>

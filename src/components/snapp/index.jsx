@@ -1,17 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import snappImage from "../../assets/mock-image/5mutual.jpg";
 import "./style.css";
 
 import { FiImage } from "react-icons/fi";
+import AppTextArea from "../app-text-area";
 
 const Snapp = () => {
-  const elementRef = useRef();
-  const handleChange = function (e) {
-    elementRef.current.style.height = `${e.target.scrollHeight}px`;
-  };
-
   return (
-    <div className="d-flex row container pb-2 mb-4 ms-1 border border-1 rounded">
+    <div className="d-flex row container pb-2 mb-4 ms-1 pt-2 border border-1 rounded">
       <div className="col-md-1">
         <img
           src={snappImage}
@@ -22,12 +18,7 @@ const Snapp = () => {
         />
       </div>
       <div className="col-md-11">
-        <textarea
-          ref={elementRef}
-          onChange={handleChange}
-          className="snapp-text-area border-bottom pt-2"
-          placeholder="Share Your Snapps"
-        />
+        <AppTextArea placeholder="Share your Snapps" />
         <div className="d-flex mt-1">
           <FiImage
             size={20}

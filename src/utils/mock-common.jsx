@@ -1,6 +1,6 @@
-import mutual1 from "../assets/mock-image/5mutual.jpg";
-import mutual2 from "../assets/mock-image/5mutual.jpg";
-import mutual3 from "../assets/mock-image/5mutual.jpg";
+import mutual1 from "../assets/mock-image/2mutual.jpg";
+import mutual2 from "../assets/mock-image/1mutual.jpg";
+import mutual3 from "../assets/mock-image/3mutual.jpg";
 import mutual4 from "../assets/mock-image/5mutual.jpg";
 import snappImage from "../assets/mock-image/2mutual.jpg";
 
@@ -194,3 +194,104 @@ export const feedData = [
     },
   },
 ];
+
+export const singleFeedData = {
+  id: "1",
+  profile_img: mutual1,
+  name: "Json Roy",
+  snappy_username: "json1343",
+  snapped_at: "12:53Pm Aug 8,2023",
+  snapp: {
+    message: "This is my First Snapp which I have snapped in this web site",
+    image: snappImage,
+  },
+  likes: 39,
+  bookmarks: 10,
+  comments_count: 3,
+  comments: [
+    {
+      id: 1,
+      user_profile_pic: mutual1,
+      user_name: "Alex",
+      snapp_user_name: "aalex232e",
+      commented_at: "23h",
+      msg: "It is great",
+      replied: [
+        {
+          id: 1,
+          user_profile_pic: mutual2,
+          user_name: "Kavya",
+          snapp_user_name: "kavya123",
+          commented_at: "27h",
+          msg: "Where is the location Bro?",
+        },
+        {
+          id: 2,
+          user_profile_pic: mutual1,
+          user_name: "Alex",
+          snapp_user_name: "alex213",
+          commented_at: "27h",
+          msg: "Chennai",
+        },
+        {
+          id: 3,
+          user_profile_pic: mutual3,
+          user_name: "Sam",
+          snapp_user_name: "sam122",
+          commented_at: "27h",
+          msg: "Great It is awsome place I have vistied once",
+        },
+        {
+          id: 4,
+          user_profile_pic: mutual1,
+          user_name: "Alex",
+          snapp_user_name: "alex213",
+          commented_at: "27h",
+          msg: "yesssss.Its a greatt Place",
+        },
+      ],
+    },
+    {
+      id: 2,
+      user_profile_pic: mutual4,
+      user_name: "Eoin",
+      snapp_user_name: "eoin211",
+      commented_at: "15m",
+      msg: "Oh! It is wonderful",
+    },
+    {
+      id: 3,
+      user_profile_pic: mutual1,
+      user_name: "Cary",
+      snapp_user_name: "carry11323",
+      commented_at: "23 June",
+      msg: "New Life Starts is great",
+      replied: [
+        {
+          id: 3,
+          user_profile_pic: mutual3,
+          user_name: "Sam",
+          snapp_user_name: "sam122",
+          commented_at: "27h",
+          msg: "Great It is awsome place I have vistied once",
+        },
+        {
+          id: 4,
+          user_profile_pic: mutual1,
+          user_name: "Alex",
+          snapp_user_name: "alex213",
+          commented_at: "27h",
+          msg: "yesssss.Its a greatt Place",
+        },
+      ],
+    },
+    {
+      id: 4,
+      user_profile_pic: mutual4,
+      user_name: "Ricky Rogers",
+      snapp_user_name: "ricky754",
+      commented_at: "May 01",
+      msg: "I hope these wishes help you to express your love and appreciation for the special person in your life",
+    },
+  ],
+};
