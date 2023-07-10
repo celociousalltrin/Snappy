@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import DiscoverPanel from "../discover-panel";
 
 const Page = ({ children }) => {
-  const { page_id } = useParams();
+  const { page_id, id } = useParams();
   return (
     <div>
       <Header />
@@ -15,7 +15,7 @@ const Page = ({ children }) => {
           <SideBar />
         </div>
         <div className="col-md-5">
-          <PageHeader id={page_id} title={children?.type?.name} />
+          <PageHeader page_id={page_id} id={id} title={children?.type?.name} />
           <div>{children}</div>
         </div>
         <div className="col-md-4">

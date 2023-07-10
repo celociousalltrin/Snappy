@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineLike } from "react-icons/ai";
-import { FaRegBookmark, FaRegComment } from "react-icons/fa";
+import { FaRegBookmark, FaRegComment, FaReply } from "react-icons/fa";
 
 import commentProfile from "../../assets/mock-image/5mutual.jpg";
 
 import "./style.css";
 import AppTextArea from "../app-text-area";
+import AppModal from "../app-modal";
 
 const SingleFeed = ({ singleFeedData }) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+  };
   return (
     <div>
       {
@@ -87,34 +93,52 @@ const SingleFeed = ({ singleFeedData }) => {
               {singleFeedData.comments.map((obj) => (
                 <div key={`cmnt${obj.id}`} className="border-bottom mt-2 pb-3">
                   <div className="d-flex">
-                    <img
-                      src={obj.user_profile_pic}
-                      alt="pic-img"
-                      width="40px"
-                      height="40px"
-                      className="profile-image me-2"
-                    />
-                    <p className="fw-bold">{obj.user_name}</p>
-                    <p className="text-muted ms-2">{`@${obj.snapp_user_name}`}</p>
-                    <p className="text-muted ms-2">{`.${obj.commented_at}`}</p>
+                    <div>
+                      <img
+                        src={obj.user_profile_pic}
+                        alt="pic-img"
+                        width="40px"
+                        height="40px"
+                        className="profile-image me-2"
+                      />
+                    </div>
+                    <div>
+                      <div className="d-flex comment-profile-data">
+                        <p className="fw-bold">{obj.user_name}</p>
+                        <p className="text-muted ms-2">{`@${obj.snapp_user_name}`}</p>
+                        <p className="text-muted ms-2">{`.${obj.commented_at}`}</p>
+                        <FaReply
+                          size={20}
+                          className="ms-3 mt-1 cursor-pointer"
+                          onClick={() => setShow(true)}
+                          color="#0d6efd"
+                        />
+                      </div>
+                      <p>{obj.msg}</p>
+                    </div>
                   </div>
-                  <p>{obj.msg}</p>
                   <div>
                     {obj?.replied?.map((o) => (
                       <div>
                         <div key={`${o.id}`} className="d-flex mt-3">
-                          <img
-                            src={o.user_profile_pic}
-                            alt="pic-img"
-                            width="40px"
-                            height="40px"
-                            className="profile-image me-2"
-                          />
-                          <p className="fw-bold">{o.user_name}</p>
-                          <p className="text-muted ms-2">{`@${o.snapp_user_name}`}</p>
-                          <p className="text-muted ms-2">{`.${o.commented_at}`}</p>
+                          <div>
+                            <img
+                              src={o.user_profile_pic}
+                              alt="pic-img"
+                              width="40px"
+                              height="40px"
+                              className="profile-image me-2"
+                            />
+                          </div>
+                          <div>
+                            <div className="d-flex comment-profile-data">
+                              <p className="fw-bold">{o.user_name}</p>
+                              <p className="text-muted ms-2">{`@${o.snapp_user_name}`}</p>
+                              <p className="text-muted ms-2">{`.${o.commented_at}`}</p>
+                            </div>
+                            <p>{o.msg}</p>
+                          </div>
                         </div>
-                        <p>{o.msg}</p>
                       </div>
                     ))}
                   </div>
@@ -124,6 +148,7 @@ const SingleFeed = ({ singleFeedData }) => {
           </div>
         </div>
       }
+      <AppModal show={show} handleClose={handleClose} heading="Reply Comment" />
     </div>
   );
 };
