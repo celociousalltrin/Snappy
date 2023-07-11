@@ -295,3 +295,62 @@ export const singleFeedData = {
     },
   ],
 };
+
+export const feedMetaDataList = [
+  {
+    id: 1,
+    name: "Jack",
+    profile_img: mutual1,
+    snappy_username: "jack111",
+    bio: "Lorem ipsum dolor sit amet, consectetur adipisicing.",
+  },
+  {
+    id: 2,
+    name: "Aaron",
+    profile_img: mutual2,
+    snappy_username: "aaron63211",
+    bio: "Lorem ipsu!",
+  },
+  {
+    id: 3,
+    name: "Antony",
+    profile_img: mutual3,
+    snappy_username: "antony76677",
+    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur enim rerum molestiae.",
+  },
+  {
+    id: 4,
+    name: "Jenifer",
+    profile_img: mutual4,
+    snappy_username: "jenefier1213",
+    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt provident recusandae qui pariatur.",
+  },
+  {
+    id: 3,
+    name: "Antony",
+    profile_img: mutual3,
+    snappy_username: "antony76677",
+    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur enim rerum molestiae.",
+  },
+  {
+    id: 4,
+    name: "Jenifer",
+    profile_img: mutual4,
+    snappy_username: "jenefier1213",
+    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt provident recusandae qui pariatur.",
+  },
+  {
+    id: 3,
+    name: "Antony",
+    profile_img: mutual3,
+    snappy_username: "antony76677",
+    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur enim rerum molestiae.",
+  },
+  {
+    id: 4,
+    name: "Jenifer",
+    profile_img: mutual4,
+    snappy_username: "jenefier1213",
+    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt provident recusandae qui pariatur.",
+  },
+];

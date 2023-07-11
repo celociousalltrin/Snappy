@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Modal from "react-bootstrap/Modal";
 import { AiOutlineLike } from "react-icons/ai";
 import { FaRegBookmark, FaRegComment, FaReply } from "react-icons/fa";
 
@@ -9,10 +10,15 @@ import AppTextArea from "../app-text-area";
 import AppModal from "../app-modal";
 
 const SingleFeed = ({ singleFeedData }) => {
+  const init = {
+    show: false,
+    open_type: "",
+  };
+  const [openModal, setOpenModal] = useState(init);
   const [show, setShow] = useState(false);
 
-  const handleClose = () => {
-    setShow(false);
+  const handleModelClose = () => {
+    setOpenModal(init);
   };
   return (
     <div>
@@ -46,15 +52,28 @@ const SingleFeed = ({ singleFeedData }) => {
             <div className="d-flex snapp-feed-data border-bottom mt-3">
               <p>
                 {singleFeedData.likes}
-                <span>Likes</span>
+                <span
+                  onClick={() => setOpenModal({ show: true, open_type: 1 })}
+                >
+                  Likes
+                </span>
+              </p>
+
+              <p>
+                {singleFeedData.comments_count}
+                <span
+                  onClick={() => setOpenModal({ show: true, open_type: 2 })}
+                >
+                  Comments
+                </span>
               </p>
               <p>
                 {singleFeedData.bookmarks}
-                <span>Bookmarks</span>
-              </p>
-              <p>
-                {singleFeedData.comments_count}
-                <span>Comments</span>
+                <span
+                  onClick={() => setOpenModal({ show: true, open_type: 3 })}
+                >
+                  Bookmarks
+                </span>
               </p>
             </div>
             <div className="d-flex justify-content-around mt-3 pb-3 border-bottom">
@@ -110,8 +129,8 @@ const SingleFeed = ({ singleFeedData }) => {
                         <FaReply
                           size={20}
                           className="ms-3 mt-1 cursor-pointer"
-                          onClick={() => setShow(true)}
                           color="#0d6efd"
+                          onClick={() => setShow(true)}
                         />
                       </div>
                       <p>{obj.msg}</p>
@@ -120,7 +139,7 @@ const SingleFeed = ({ singleFeedData }) => {
                   <div>
                     {obj?.replied?.map((o) => (
                       <div>
-                        <div key={`${o.id}`} className="d-flex mt-3">
+                        <div key={`rply${o.id}`} className="d-flex mt-3">
                           <div>
                             <img
                               src={o.user_profile_pic}
@@ -148,7 +167,33 @@ const SingleFeed = ({ singleFeedData }) => {
           </div>
         </div>
       }
-      <AppModal show={show} handleClose={handleClose} heading="Reply Comment" />
+      <AppModal openModal={openModal} handleModelClose={handleModelClose} />
+      <Modal
+        show={show}
+        onHide={() => setShow(false)}
+        backdrop="static"
+        keyboard={false}
+        size="m"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Reply Comment</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          This is the body
+          <AppTextArea type={1} />
+        </Modal.Body>
+        <Modal.Footer>
+          <button className="btn btn-danger" onClick={() => setShow(false)}>
+            Close
+          </button>
+          <button
+            className="btn btn-primary ms-3"
+            onClick={() => setShow(false)}
+          >
+            Save Changes
+          </button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

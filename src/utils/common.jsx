@@ -68,3 +68,9 @@ export const page_info = [
     title: "Setting",
   },
 ];
+
+export const modelOpenInfo = [
+  { heading: "Liked by", type: 1 },
+  { heading: "Commented by", type: 2 },
+  { heading: "Bookmarked by", type: 3 },
+];
