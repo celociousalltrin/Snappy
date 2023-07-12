@@ -1,0 +1,9 @@
+.tab-container > li > button {
+  font-size: large;
+  color: black;
+}
+
+.tab-container > li > button:hover {
+  font-size: large;
+  color: black;
+}

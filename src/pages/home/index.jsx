@@ -2,7 +2,7 @@ import { useLocation, useParams } from "react-router-dom";
 
 import React from "react";
 import Profile from "../../components/profile";
-import Friends from "../../components/Friends";
+import Friends from "../../components/friends";
 import Page from "../../components/page";
 import HomePage from "../../components/home-page";
 import Message from "../../components/message";

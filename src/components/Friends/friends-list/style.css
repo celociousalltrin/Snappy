@@ -1,0 +1,11 @@
+.friends_profile--img {
+  object-fit: cover;
+  object-position: center;
+  margin: 0.7rem;
+  border-radius: 50%;
+}
+
+.friends-list-container:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
