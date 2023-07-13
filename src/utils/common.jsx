@@ -74,3 +74,13 @@ export const modelOpenInfo = [
   { heading: "Commented by", type: 2 },
   { heading: "Bookmarked by", type: 3 },
 ];
+
+export const notificationInfo = [
+  { type: 1, value: "Liked" },
+  { type: 2, value: "Commented" },
+  { type: 3, value: "Bookmarked" },
+  { type: 4, value: "Accepted" },
+  { type: 5, value: "Rejected" },
+  { type: 6, value: "Friend Request" },
+  { type: 7, value: "Profile Viewed" },
+];
