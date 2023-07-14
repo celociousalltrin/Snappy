@@ -29,29 +29,103 @@ export const mockMutual = [
 export const mockDiscoverJokes = [
   {
     id: 1,
+    question: "Why did the tomato turn red?",
+    answer: "Because it saw the salad dressing!",
+  },
+  {
+    id: 2,
+    question: "What do you call a bear with no teeth?",
+    answer: "A gummy bear!",
+  },
+  {
+    id: 3,
     question: "Why don't scientists trust atoms?",
     answer: "Because they make up everything!",
   },
   {
-    id: 2,
-    question:
-      "Did you hear about the mathematician who's afraid of negative numbers?",
-    answer: "He'll stop at nothing to avoid them!",
-  },
-  {
-    id: 3,
-    question: "Why did the scarecrow win an award?",
-    answer: "Because he was outstanding in his field!",
-  },
-  {
     id: 4,
-    question: "Why don't skeletons fight each other?",
-    answer: "They don't have the guts!",
+    question: "What do you call a fake noodle?",
+    answer: "An impasta!",
   },
   {
     id: 5,
-    question: "What did one wall say to the other wall?",
-    answer: "I'll meet you at the corner!",
+    question: "Why did the cookie go to the doctor?",
+    answer: "Because it was feeling crumbly!",
+  },
+  {
+    id: 6,
+    question: "What do you call a lazy kangaroo?",
+    answer: "A pouch potato!",
+  },
+  {
+    id: 7,
+    question: "Why did the chicken cross the playground?",
+    answer: "To get to the other slide!",
+  },
+  {
+    id: 8,
+    question: "What do you call a snowman with a six-pack?",
+    answer: "An abdominal snowman!",
+  },
+  {
+    id: 9,
+    question: "Why did the math book look so sad?",
+    answer: "Because it had too many problems!",
+  },
+  {
+    id: 10,
+    question: "Why did the grape stop in the middle of the road?",
+    answer: "Because it ran out of juice!",
+  },
+  {
+    id: 11,
+    question: "What do you call a sleeping bull?",
+    answer: "A bulldozer!",
+  },
+  {
+    id: 12,
+    question: "Why did the bicycle fall over?",
+    answer: "Because it was two-tired!",
+  },
+  {
+    id: 13,
+    question: "What do you call a belt made out of watches?",
+    answer: "A waist of time!",
+  },
+  {
+    id: 14,
+    question: "Why don't scientists trust atoms?",
+    answer: "Because they make up everything!",
+  },
+  {
+    id: 15,
+    question: "What do you call a belt made out of watches?",
+    answer: "A waist of time!",
+  },
+  {
+    id: 16,
+    question: "Why did the banana go to the doctor?",
+    answer: "Because it wasn't peeling well!",
+  },
+  {
+    id: 17,
+    question: "What do you get when you cross a snowman and a shark?",
+    answer: "Frostbite!",
+  },
+  {
+    id: 18,
+    question: "Why don't oysters share their pearls?",
+    answer: "Because they're shellfish!",
+  },
+  {
+    id: 19,
+    question: "What do you call a fake noodle?",
+    answer: "An impasta!",
+  },
+  {
+    id: 20,
+    question: "Why did the chicken go to the seance?",
+    answer: "To talk to the other side!",
   },
 ];
 

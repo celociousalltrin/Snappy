@@ -1,7 +1,13 @@
 import React from "react";
+import ExperimentalComponent from "../experimental-component";
+import { mockDiscoverfacts } from "../../utils/mock-common";
 
 const Facts = () => {
-  return <div>This is Facts Page</div>;
+  return (
+    <div>
+      <ExperimentalComponent list={mockDiscoverfacts} />
+    </div>
+  );
 };
 
 export default Facts;
