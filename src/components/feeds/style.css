@@ -10,5 +10,12 @@
   object-fit: cover;
   object-position: center;
   border-radius: 50%;
-  margin-right: 0.5rem;
+}
+
+.feed-profile-image:hover {
+  border: 1px solid black;
+}
+
+.profile_name:hover {
+  text-decoration: underline;
 }

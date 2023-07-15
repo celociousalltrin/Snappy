@@ -8,9 +8,12 @@ import {
   FaSearch,
   FaBell,
   FaNewspaper,
+  FaRegComment,
 } from "react-icons/fa";
 import { MdTheaterComedy } from "react-icons/md";
 import { BsFillChatFill } from "react-icons/bs";
+import { AiTwotoneLike } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 export const sideBarName = [
   { id: 1, name: "Home", icon: <FaHome />, route: "/home" },
@@ -84,3 +87,29 @@ export const notificationInfo = [
   { type: 6, value: "Friend Request" },
   { type: 7, value: "Profile Viewed" },
 ];
+
+export const feedInfo = [
+  {
+    type: 1,
+    value: "Liked",
+    icon: (
+      <AiTwotoneLike className="align-self-center me-2 ms-2" color="blue" />
+    ),
+  },
+  {
+    type: 2,
+    value: "Commented",
+    icon: <FaRegComment className="align-self-center me-2 ms-2" />,
+  },
+  {
+    type: 3,
+    value: "Bookmarked",
+    icon: <FaBookmark className="align-self-center me-2 ms-2" />,
+  },
+];
+
+export const NavigateToProfile = (e, navigate, username, pageId) => {
+  e.preventDefault();
+  e.stopPropagation();
+  navigate(`/profile/${username}`, { state: { from: pageId } });
+};

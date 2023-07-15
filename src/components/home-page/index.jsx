@@ -14,7 +14,7 @@ const HomePage = () => {
   const { id } = useParams();
   return (
     <>
-      {id ? (
+      {id === "single-feed" ? (
         <SingleFeed singleFeedData={singleFeedData} />
       ) : (
         <Tabs

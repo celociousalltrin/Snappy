@@ -570,3 +570,78 @@ export const mockNotifications = [
     created_at: "just mow",
   },
 ];
+
+export const mockProfileInfo = {
+  id: 1,
+  name: "Jack",
+  snapp_user_name: "jack12432",
+  profile_img: mutual4,
+  banner_img: mutual1,
+  bio: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore, sunt?",
+  friends: 34,
+  created_at: "24 july 2023",
+  snapp_count: 39,
+};
+
+export const mockSnappInfo = [
+  {
+    id: "1",
+    profile_img: mutual1,
+    name: "Json Roy",
+    snappy_username: "json1343",
+    snapped_at: "15m",
+    snapp: {
+      message: "This is my First Snapp which I have snapped in this web site",
+      image: snappImage,
+    },
+  },
+  {
+    id: "2",
+    profile_img: mutual1,
+    name: "Json Roy",
+    snappy_username: "json1343",
+    snapped_at: "15m",
+    snapp: {
+      message: "This is my First Snapp which I have snapped in this web site",
+      image: snappImage,
+      pinned_snapp: true,
+    },
+  },
+  {
+    id: "3",
+    profile_img: mutual1,
+    name: "Json Roy",
+    snappy_username: "json1343",
+    snapped_at: "15m",
+    snapp: {
+      message:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, sequi!",
+      image: snappImage,
+      pinned_snapp: false,
+    },
+  },
+  {
+    id: "4",
+    profile_img: mutual1,
+    name: "Json Roy",
+    snappy_username: "json1343",
+    snapped_at: "15m",
+    snapp: {
+      message: "This is my First Snapp which I have snapped in this web site",
+      image: snappImage,
+      pinned_snapp: false,
+    },
+  },
+  {
+    id: "5",
+    profile_img: mutual1,
+    name: "Json Roy",
+    snappy_username: "json1343",
+    snapped_at: "15m",
+    snapp: {
+      message: "Lorem ipsum dolor sit amet consectetur adipisicing.",
+      image: snappImage,
+      pinned_snapp: false,
+    },
+  },
+];

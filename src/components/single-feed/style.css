@@ -5,6 +5,10 @@
   margin-right: 0rem;
 }
 
+.profile-image:hover {
+  border: 1px solid black;
+}
+
 .snapp-feed-data > p {
   font-weight: bolder;
 }
@@ -24,4 +28,8 @@
 
 .comment-profile-data > p {
   margin-bottom: 0px;
+}
+
+.profile__name:hover {
+  text-decoration: underline;
 }

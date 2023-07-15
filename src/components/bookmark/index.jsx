@@ -8,10 +8,10 @@ const Bookmark = () => {
   const { id } = useParams();
   return (
     <div>
-      {id ? (
+      {id === "single-feed" ? (
         <SingleFeed singleFeedData={singleFeedData} />
       ) : (
-        <Feeds feedData={feedData} />
+        <Feeds feedData={feedData} type={3} />
       )}
     </div>
   );

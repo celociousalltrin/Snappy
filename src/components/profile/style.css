@@ -1,0 +1,27 @@
+.banner_img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.profile_cover--img {
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -30%;
+  left: 6%;
+}
+
+.image-container {
+  position: relative;
+}
+
+.profile-container > li > button {
+  font-size: large;
+  color: black;
+}
+
+.profile-container > li > button:hover {
+  font-size: large;
+  color: black;
+}

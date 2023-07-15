@@ -8,6 +8,8 @@ import commentProfile from "../../assets/mock-image/5mutual.jpg";
 import "./style.css";
 import AppTextArea from "../app-text-area";
 import AppModal from "../app-modal";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { NavigateToProfile } from "../../utils/common";
 
 const SingleFeed = ({ singleFeedData }) => {
   const init = {
@@ -16,10 +18,13 @@ const SingleFeed = ({ singleFeedData }) => {
   };
   const [openModal, setOpenModal] = useState(init);
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
+  const { page_id } = useParams();
 
   const handleModelClose = () => {
     setOpenModal(init);
   };
+
   return (
     <div>
       {
@@ -30,10 +35,30 @@ const SingleFeed = ({ singleFeedData }) => {
               alt="pic-img"
               width="40px"
               height="40px"
-              className="profile-image me-2"
+              className="profile-image me-2 cursor-pointer"
+              onClick={(e) =>
+                NavigateToProfile(
+                  e,
+                  navigate,
+                  singleFeedData.snappy_username,
+                  page_id
+                )
+              }
             />
             <div>
-              <p className="fw-bold mb-0">{singleFeedData.name}</p>
+              <p
+                className="fw-bold mb-0 cursor-pointer profile__name"
+                onClick={(e) =>
+                  NavigateToProfile(
+                    e,
+                    navigate,
+                    singleFeedData.snappy_username,
+                    page_id
+                  )
+                }
+              >
+                {singleFeedData.name}
+              </p>
               <p className="text-muted">{`@${singleFeedData.snappy_username}`}</p>
             </div>
           </div>
