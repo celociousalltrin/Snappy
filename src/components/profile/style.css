@@ -25,3 +25,35 @@
   font-size: large;
   color: black;
 }
+
+.edit-profile__camicon {
+  color: white;
+  background-color: grey;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.edit-profile__camicon1 {
+  color: white;
+  background-color: #000;
+  opacity: 0.5;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.edit-profile-img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.edit-prof {
+  display: inline-block;
+  position: relative;
+}
+
+.edit-prof-container {
+  top: 35%;
+  left: 10%;
+}

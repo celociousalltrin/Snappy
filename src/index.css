@@ -11,3 +11,7 @@ body {
   border-radius: 1rem;
   background-color: #f5f5f5;
 }
+
+.form-control:focus {
+  border-color: red; /* Change this to your desired color */
+}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  mockEditProfileInfo,
   mockProfileInfo,
   mockSnappInfo,
   singleFeedData,
@@ -13,6 +14,8 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import SingleFeed from "../single-feed";
 import Feeds from "../feeds";
 import { MdOutlineArrowBack } from "react-icons/md";
+import { TbCameraPlus } from "react-icons/tb";
+import Form from "react-bootstrap/Form";
 
 const Profile = () => {
   const { id } = useParams();
@@ -121,16 +124,55 @@ const Profile = () => {
         onHide={() => setShow(false)}
         backdrop="static"
         keyboard={false}
-        size="m"
+        size="lg"
+        scrollable={true}
       >
         <Modal.Header closeButton>
           <Modal.Title>Edit Profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
-            <input type="text" />
-            <input />
-            <input />
+            <div className="mb-5">
+              <div className="position-relative">
+                <div className="position-relative">
+                  <img
+                    src={mockEditProfileInfo.banner_img}
+                    alt="banner_img"
+                    width="100%"
+                    height="200vh"
+                    className="banner_img"
+                  />
+                  <TbCameraPlus
+                    size={45}
+                    className="edit-profile__camicon position-absolute top-50 start-50 translate-middle"
+                  />
+                </div>
+              </div>
+              <div className="position-absolute edit-prof-container">
+                <div className="edit-prof">
+                  <img
+                    src={mockEditProfileInfo.profile_img}
+                    alt="profile-img"
+                    width="130px"
+                    height="130px"
+                    className="rounded-circle edit-profile-img"
+                  />
+                  <TbCameraPlus
+                    size={50}
+                    className="edit-profile__camicon1 position-absolute start-50 top-50 translate-middle"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="mt-5">
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" placeholder="name@example.com" />
+              </Form.Group>
+            </div>
           </div>
         </Modal.Body>
         <Modal.Footer>

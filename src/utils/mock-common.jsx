@@ -645,3 +645,11 @@ export const mockSnappInfo = [
     },
   },
 ];
+
+export const mockEditProfileInfo = {
+  id: 1,
+  profile_img: mutual4,
+  banner_img: mutual1,
+  bio: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore, sunt?",
+  dob: "15 Dec 1999",
+};
