@@ -16,6 +16,7 @@ import Feeds from "../feeds";
 import { MdOutlineArrowBack } from "react-icons/md";
 import { TbCameraPlus } from "react-icons/tb";
 import Form from "react-bootstrap/Form";
+import AppTextArea from "../app-text-area";
 
 const Profile = () => {
   const { id } = useParams();
@@ -80,7 +81,7 @@ const Profile = () => {
             ) : (
               <div className="d-flex justify-content-end">
                 <button
-                  className="btn btn-outline-dark rounded-pill mt-3"
+                  className="btn btn-outline-secondary rounded-pill mt-3"
                   onClick={() => setShow(true)}
                 >
                   Edit Profile
@@ -164,13 +165,23 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            <div className="mt-5">
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="name@example.com" />
+            <div className="mt-5 pt-3">
+              <Form.Group className="mb-3">
+                <Form.Label>Name</Form.Label>
+                <Form.Control type="text" placeholder="Name" />
+              </Form.Group>
+
+              <label>Bio</label>
+              <AppTextArea
+                placeholder="Add Your Bio"
+                rows="1"
+                cols="80"
+                type={1}
+              />
+
+              <Form.Group className="mb-3 mt-2">
+                <Form.Label>Birth Date</Form.Label>
+                <Form.Control type="text" placeholder="DOB" />
               </Form.Group>
             </div>
           </div>
