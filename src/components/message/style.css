@@ -1,0 +1,9 @@
+.message-container > li > button {
+  font-size: large;
+  color: black;
+}
+
+.message-container > li > button:hover {
+  font-size: large;
+  color: black;
+}

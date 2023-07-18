@@ -2,7 +2,7 @@ import React from "react";
 
 import "./style.css";
 
-const FriendsList = ({ MockFriendsList }) => {
+const FriendsList = ({ MockFriendsList, isMessage }) => {
   return (
     <div>
       {MockFriendsList.map((obj) => (
@@ -23,7 +23,9 @@ const FriendsList = ({ MockFriendsList }) => {
                 <p className="text-muted mb-0"> {`@${obj.snappy_username}`}</p>
               </div>
               <div className="d-flex align-items-center">
-                <button className="btn btn-sm btn-primary">Add friend</button>
+                <button className="btn btn-sm btn-primary">
+                  {isMessage ? "Send Message" : "Add friend"}
+                </button>
               </div>
             </div>
             <p>{obj.bio}</p>

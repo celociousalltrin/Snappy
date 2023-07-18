@@ -653,3 +653,222 @@ export const mockEditProfileInfo = {
   bio: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore, sunt?",
   dob: "15 Dec 1999",
 };
+
+export const mockMessageInfo = [
+  {
+    id: 1,
+    users: {
+      profile_img: mutual1,
+      user_name: "Jack",
+      snappy_user_name: "jack125",
+    },
+    convesation: [
+      {
+        from: "john",
+        msg: "Hi Bro, How are you?",
+        is_read: true,
+        created_at: "23 july 10:47 am",
+      },
+      {
+        from: "Jack",
+        msg: "Great Bro",
+        is_read: true,
+        created_at: "23 july 10:49 am",
+      },
+      {
+        from: "john",
+        msg: "How is life going?",
+        is_read: true,
+        created_at: "23 july 10:57 am",
+      },
+      {
+        from: "jack",
+        msg: "Nice",
+        is_read: true,
+        created_at: "23 july 11:47 am",
+      },
+      {
+        from: "jack",
+        msg: "Hi about you bro?",
+        is_read: true,
+        created_at: "23 july 11:57 am",
+      },
+      {
+        from: "john",
+        msg: "Fine bro",
+        is_read: true,
+        created_at: "23 july 12:47 am",
+      },
+      {
+        from: "jack",
+        msg: "Now where are you bro",
+        is_read: false,
+        created_at: "23 july 10:47 am",
+      },
+    ],
+    is_clear: false,
+  },
+  {
+    id: 2,
+    users: {
+      profile_img: mutual4,
+      user_name: "Milly",
+      snappy_user_name: "milly125",
+    },
+    convesation: [
+      {
+        from: "jack",
+        msg: "Hi Sis, How are you?",
+        is_read: true,
+        created_at: "23 july 10:47 am",
+      },
+      {
+        from: "Milly",
+        msg: "Great Bro",
+        is_read: true,
+        created_at: "23 july 10:49 am",
+      },
+    ],
+    is_clear: false,
+  },
+  {
+    id: 3,
+    users: {
+      profile_img: mutual2,
+      user_name: "Milly",
+      snappy_user_name: "milly125",
+    },
+    convesation: [
+      {
+        from: "jack",
+        msg: "Hi Sis, How are you?",
+        is_read: true,
+        created_at: "23 july 10:47 am",
+      },
+      {
+        from: "Milly",
+        msg: "Great Bro",
+        is_read: true,
+        created_at: "23 july 10:49 am",
+      },
+      {
+        from: "Milly",
+        msg: "Hello",
+        is_read: false,
+        created_at: "23 july 10:49 am",
+      },
+      {
+        from: "Milly",
+        msg: "Are you there",
+        is_read: false,
+        created_at: "23 july 10:49 am",
+      },
+    ],
+    is_clear: false,
+  },
+  {
+    id: 4,
+    users: {
+      profile_img: mutual1,
+      user_name: "Milly",
+      snappy_user_name: "milly125",
+    },
+    convesation: [
+      {
+        from: "jack",
+        msg: "Hi Sis, How are you?",
+        is_read: true,
+        created_at: "23 july 10:47 am",
+      },
+      {
+        from: "Milly",
+        msg: "Great Bro, Today is the nice day in which we are planning to go outside",
+        is_read: true,
+        created_at: "23 july 10:49 am",
+      },
+    ],
+    is_clear: false,
+  },
+  {
+    id: 5,
+    users: {
+      profile_img: mutual3,
+      user_name: "Ezhumalai",
+      snappy_user_name: "ezhumalai323",
+    },
+    convesation: [
+      {
+        from: "jack",
+        msg: "Hi Bro, How are you?",
+        is_read: true,
+        created_at: "23 july 10:47 am",
+      },
+      {
+        from: "Ezhumalai",
+        msg: "Great Bro",
+        is_read: true,
+        created_at: "23 july 10:49 am",
+      },
+      {
+        from: "jack",
+        msg: "How is life going?",
+        is_read: false,
+        created_at: "23 july 10:57 am",
+      },
+      {
+        from: "jack",
+        msg: "Bro?",
+        is_read: false,
+        created_at: "23 july 10:57 am",
+      },
+      {
+        from: "jack",
+        msg: "Reply Bro?",
+        is_read: false,
+        created_at: "23 july 10:57 am",
+      },
+    ],
+    is_clear: false,
+  },
+  {
+    id: 6,
+    users: {
+      profile_img: mutual1,
+      user_name: "Arumugam",
+      snappy_user_name: "ezhumalai323",
+    },
+    convesation: [
+      {
+        from: "jack",
+        msg: "Hi Bro, How are you?",
+        is_read: true,
+        created_at: "23 july 10:47 am",
+      },
+      {
+        from: "Arumugam",
+        msg: "Great Bro",
+        is_read: true,
+        created_at: "23 july 10:49 am",
+      },
+      {
+        from: "jack",
+        msg: "How is life going?",
+        is_read: true,
+        created_at: "23 july 10:57 am",
+      },
+      {
+        from: "jack",
+        msg: "Bro?",
+        is_read: true,
+        created_at: "23 july 10:57 am",
+      },
+      {
+        from: "jack",
+        msg: "Bro?",
+        is_read: true,
+        created_at: "23 july 10:57 am",
+      },
+    ],
+    is_clear: false,
+  },
+];
