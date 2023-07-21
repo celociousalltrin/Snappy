@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
-import { mockMessageInfo } from "../../../utils/mock-common";
+import { mockChatInfo, mockMessageInfo } from "../../../utils/mock-common";
 import { NavigateToProfile } from "../../../utils/common";
+import Modal from "react-bootstrap/Modal";
 
 import "./style.css";
 
 const Chat = () => {
   const navigate = useNavigate();
   const { page_id } = useParams();
+
+  const [show, setShow] = useState(false);
   return (
     <div>
       {mockMessageInfo.map((obj) => {
@@ -19,6 +22,7 @@ const Chat = () => {
           <div
             key={`msg_lst${obj.id}`}
             className="d-flex message-container row"
+            onClick={() => setShow(true)}
           >
             <div className="col-md-1 me-3">
               <img
@@ -74,6 +78,60 @@ const Chat = () => {
           </div>
         );
       })}
+      <Modal
+        show={show}
+        onHide={() => setShow(false)}
+        backdrop="static"
+        keyboard={false}
+        size="lg"
+        scrollable={true}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <div className="d-flex">
+              <div>
+                <img
+                  src={mockChatInfo.profile_image}
+                  alt="chat_profile"
+                  width="40px"
+                  height="40px"
+                  className="chat_profile_img"
+                />
+              </div>
+              <div className="align-self-center ms-1">
+                <div className="d-flex">
+                  <p className="fw-bold fs-6 me-1">{mockChatInfo.user_name}</p>
+                  <p className="text-muted fs-6">{`@${mockChatInfo.snappy_user_name}`}</p>
+                </div>
+              </div>
+              <div>
+                <button type="button" className="btn btn-sm btn-outline-danger">
+                  Remove Friend
+                </button>
+              </div>
+            </div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {mockChatInfo.conversation.map((obj) => (
+            <div className="bg-primary w-50">
+              <p>{obj.from}</p>
+              <p>{obj.msg}</p>
+            </div>
+          ))}
+        </Modal.Body>
+        <Modal.Footer>
+          <button className="btn btn-danger" onClick={() => setShow(false)}>
+            Close
+          </button>
+          <button
+            className="btn btn-primary ms-3"
+            onClick={() => setShow(false)}
+          >
+            Save Changes
+          </button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

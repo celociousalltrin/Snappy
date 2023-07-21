@@ -31,3 +31,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.chat_profile_img {
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  border: 2px solid black;
+  margin: 0.7rem;
+}

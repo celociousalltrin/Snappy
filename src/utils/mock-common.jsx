@@ -872,3 +872,28 @@ export const mockMessageInfo = [
     is_clear: false,
   },
 ];
+
+export const mockChatInfo = {
+  user_name: "jack",
+  snappy_user_name: "jack12422",
+  profile_image: mutual2,
+  conversation: [
+    { from: "jack12422", msg: "Hi Bro ?", is_read: "true" },
+    { from: "john878", msg: "Fine Bro ?", is_read: "true" },
+    {
+      from: "jack12422",
+      msg: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, nesciunt.",
+      is_read: "true",
+    },
+    {
+      from: "john878",
+      msg: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse odio sunt fugiat placeat deserunt. Temporibus non quasi repellendus.",
+      is_read: "true",
+    },
+    { from: "jack12422", msg: "Bro this is WHich Language", is_read: "true" },
+    { from: "jack12422", msg: "Bro reply Bro?", is_read: "true" },
+    { from: "john878", msg: "Yeah bro", is_read: "true" },
+    { from: "john878", msg: "Whats the issue bro", is_read: "true" },
+    { from: "john878", msg: "I am there for you bro", is_read: "true" },
+  ],
+};

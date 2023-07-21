@@ -71,6 +71,18 @@ const Feeds = ({ feedData, type }) => {
                     className="rounded"
                   />
                 </div>
+                {type === 2 && (
+                  <div
+                    style={{ "background-color": "#E5E4E2" }}
+                    className="mt-2 rounded p-2 pb-0"
+                  >
+                    <p className="fw-bold fs-6 mb-0">Comment:</p>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                      Dignissimos, nisi.
+                    </p>
+                  </div>
+                )}
                 <div className="d-flex justify-content-around mt-2">
                   <div>
                     <AiOutlineLike size={20} /> <span>80</span>
