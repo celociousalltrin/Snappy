@@ -101,13 +101,11 @@ const NotificationList = ({ list }) => {
             </div>
             <div>{displayNotificationButton(obj.type)}</div>
           </div>
-          {!obj.viewed && (
-            <AiOutlineClose
-              onClick={(e) => handleCloseNotification(e)}
-              size={20}
-              className="position-absolute top-0 end-0 "
-            />
-          )}
+          <AiOutlineClose
+            onClick={(e) => handleCloseNotification(e)}
+            size={20}
+            className="notification-close__btn"
+          />
         </div>
       ))}
     </div>

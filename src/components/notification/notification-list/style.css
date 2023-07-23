@@ -13,3 +13,13 @@
 .notify-container--unread {
   background-color: rgb(9 114 243 / 14%);
 }
+
+.notification-close__btn {
+  position: absolute;
+  top: 6%;
+  right: 0.7%;
+}
+
+.notification-close__btn:hover {
+  color: red;
+}
