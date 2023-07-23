@@ -39,3 +39,58 @@
   border: 2px solid black;
   margin: 0.7rem;
 }
+.msg-recieved__container {
+  margin-right: 50%;
+  background-color: #ffeeff;
+}
+
+.msg-send__container {
+  margin-left: 50%;
+  background-color: #f0f8ff;
+}
+
+.chat_input {
+  position: sticky;
+  top: 90%;
+  width: 100%;
+}
+
+.msg-send-icon {
+  position: absolute;
+  top: 20%;
+  right: 1%;
+  padding: 2px 5px 5px 8px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.msg-send-icon:hover {
+  background-color: rgb(13, 110, 253);
+  opacity: 1;
+  color: #f0f8ff;
+  border: none;
+  cursor: pointer;
+}
+
+.msg-send-icon__focused {
+  position: absolute;
+  top: 20%;
+  right: 1%;
+  padding: 2px 5px 5px 8px;
+  border-radius: 50%;
+  background-color: rgb(13, 110, 253);
+  opacity: 1;
+  color: #f0f8ff;
+  cursor: pointer;
+}
+
+.chat-modal-close__button {
+  position: absolute;
+  top: 2%;
+  right: 0.5%;
+  cursor: pointer;
+}
+
+.chat-modal-close__button:active {
+  color: red;
+}

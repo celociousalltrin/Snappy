@@ -1,5 +1,5 @@
 import React from "react";
-import DiscoverSearch from "../../discover-panel/discover-search";
+import AppInput from "../../app-input";
 
 import "./style.css";
 
@@ -7,7 +7,7 @@ const FriendsList = ({ MockFriendsList, isMessage }) => {
   return (
     <div>
       <div className="mb-4">
-        <DiscoverSearch isFriend />
+        <AppInput isFriend />
       </div>
       <div>
         {MockFriendsList.map((obj) => (
@@ -19,6 +19,11 @@ const FriendsList = ({ MockFriendsList, isMessage }) => {
                 width="50px"
                 height="50px"
                 className="friends_profile--img "
+                style={
+                  isMessage && obj.connected
+                    ? { border: "3px solid green" }
+                    : null
+                }
               />
             </div>
             <div className="col-md-10 ms-4">

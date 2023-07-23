@@ -436,6 +436,7 @@ export const MockFriendsList = [
     profile_img: mutual1,
     snappy_username: "jack111",
     bio: "Lorem ipsum dolor sit amet, consectetur adipisicing.",
+    connected: true,
   },
   {
     id: 2,
@@ -443,6 +444,7 @@ export const MockFriendsList = [
     profile_img: mutual2,
     snappy_username: "aaron63211",
     bio: "Lorem ipsu!",
+    connected: false,
   },
   {
     id: 3,
@@ -450,6 +452,7 @@ export const MockFriendsList = [
     profile_img: mutual3,
     snappy_username: "antony76677",
     bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur enim rerum molestiae.",
+    connected: true,
   },
   {
     id: 4,
@@ -457,6 +460,7 @@ export const MockFriendsList = [
     profile_img: mutual4,
     snappy_username: "jenefier1213",
     bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt provident recusandae qui pariatur.",
+    connected: false,
   },
   {
     id: 3,
@@ -464,6 +468,7 @@ export const MockFriendsList = [
     profile_img: mutual3,
     snappy_username: "antony76677",
     bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur enim rerum molestiae.",
+    connected: true,
   },
   {
     id: 4,
@@ -471,6 +476,7 @@ export const MockFriendsList = [
     profile_img: mutual4,
     snappy_username: "jenefier1213",
     bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt provident recusandae qui pariatur.",
+    connected: false,
   },
   {
     id: 3,
@@ -478,6 +484,7 @@ export const MockFriendsList = [
     profile_img: mutual3,
     snappy_username: "antony76677",
     bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur enim rerum molestiae.",
+    connected: true,
   },
   {
     id: 4,
@@ -485,6 +492,7 @@ export const MockFriendsList = [
     profile_img: mutual4,
     snappy_username: "jenefier1213",
     bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt provident recusandae qui pariatur.",
+    connected: false,
   },
 ];
 
@@ -661,6 +669,8 @@ export const mockMessageInfo = [
       profile_img: mutual1,
       user_name: "Jack",
       snappy_user_name: "jack125",
+      connected: true,
+      last_seen: "today at 12:31 pm",
     },
     convesation: [
       {
@@ -714,6 +724,8 @@ export const mockMessageInfo = [
       profile_img: mutual4,
       user_name: "Milly",
       snappy_user_name: "milly125",
+      connected: false,
+      last_seen: "today at 12:31 pm",
     },
     convesation: [
       {
@@ -737,6 +749,8 @@ export const mockMessageInfo = [
       profile_img: mutual2,
       user_name: "Milly",
       snappy_user_name: "milly125",
+      connected: true,
+      last_seen: "today at 12:31 pm",
     },
     convesation: [
       {
@@ -772,6 +786,8 @@ export const mockMessageInfo = [
       profile_img: mutual1,
       user_name: "Milly",
       snappy_user_name: "milly125",
+      connected: true,
+      last_seen: "today at 12:31 pm",
     },
     convesation: [
       {
@@ -795,6 +811,8 @@ export const mockMessageInfo = [
       profile_img: mutual3,
       user_name: "Ezhumalai",
       snappy_user_name: "ezhumalai323",
+      connected: false,
+      last_seen: "today at 12:31 pm",
     },
     convesation: [
       {
@@ -836,6 +854,8 @@ export const mockMessageInfo = [
       profile_img: mutual1,
       user_name: "Arumugam",
       snappy_user_name: "ezhumalai323",
+      connected: false,
+      last_seen: "today at 12:31 pm",
     },
     convesation: [
       {
@@ -877,9 +897,26 @@ export const mockChatInfo = {
   user_name: "jack",
   snappy_user_name: "jack12422",
   profile_image: mutual2,
+  connected: false,
+  last_seen: "today at 12:31 pm",
   conversation: [
     { from: "jack12422", msg: "Hi Bro ?", is_read: "true" },
-    { from: "john878", msg: "Fine Bro ?", is_read: "true" },
+    { from: "john878", msg: "Fine ?", is_read: "true" },
+    {
+      from: "jack12422",
+      msg: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, nesciunt.",
+      is_read: "true",
+    },
+    {
+      from: "john878",
+      msg: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse odio sunt fugiat placeat deserunt. Temporibus non quasi repellendus.",
+      is_read: "true",
+    },
+    { from: "jack12422", msg: "Bro this is WHich Language", is_read: "true" },
+    { from: "jack12422", msg: "Bro reply Bro?", is_read: "true" },
+    { from: "john878", msg: "Yeah bro", is_read: "true" },
+    { from: "john878", msg: "Whats the issue bro", is_read: "true" },
+    { from: "john878", msg: "I am there for you bro", is_read: "true" },
     {
       from: "jack12422",
       msg: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, nesciunt.",

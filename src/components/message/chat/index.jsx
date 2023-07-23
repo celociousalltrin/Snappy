@@ -4,14 +4,22 @@ import { FaCheck } from "react-icons/fa";
 import { mockChatInfo, mockMessageInfo } from "../../../utils/mock-common";
 import { NavigateToProfile } from "../../../utils/common";
 import Modal from "react-bootstrap/Modal";
+import AppInput from "../../app-input";
 
 import "./style.css";
+import { AiOutlineClose } from "react-icons/ai";
 
 const Chat = () => {
   const navigate = useNavigate();
   const { page_id } = useParams();
 
   const [show, setShow] = useState(false);
+
+  const handleCloseModal = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setShow(false);
+  };
   return (
     <div>
       {mockMessageInfo.map((obj) => {
@@ -31,7 +39,13 @@ const Chat = () => {
                 width="50px"
                 height="50px"
                 className="message_users--img "
-                style={isRead ? { border: "2px solid blue" } : null}
+                style={
+                  obj.users.connected
+                    ? { border: "3px solid green" }
+                    : isRead
+                    ? { border: "3px solid blue" }
+                    : null
+                }
                 onClick={(e) =>
                   NavigateToProfile(e, navigate, obj.users.user_name, page_id)
                 }
@@ -82,55 +96,77 @@ const Chat = () => {
         show={show}
         onHide={() => setShow(false)}
         backdrop="static"
-        keyboard={false}
         size="lg"
         scrollable={true}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>
-            <div className="d-flex">
-              <div>
-                <img
-                  src={mockChatInfo.profile_image}
-                  alt="chat_profile"
-                  width="40px"
-                  height="40px"
-                  className="chat_profile_img"
-                />
-              </div>
-              <div className="align-self-center ms-1">
-                <div className="d-flex">
-                  <p className="fw-bold fs-6 me-1">{mockChatInfo.user_name}</p>
-                  <p className="text-muted fs-6">{`@${mockChatInfo.snappy_user_name}`}</p>
-                </div>
-              </div>
-              <div>
-                <button type="button" className="btn btn-sm btn-outline-danger">
-                  Remove Friend
-                </button>
-              </div>
+        <Modal.Header className="d-flex position-relative pb-0 pt-1">
+          <div>
+            <img
+              src={mockChatInfo.profile_image}
+              alt="chat_profile"
+              width="40px"
+              height="40px"
+              className="chat_profile_img"
+            />
+          </div>
+          <div className="mt-2 ms-1">
+            <div className="d-flex ">
+              <p className="fw-bold fs-6 me-1 mb-0">{mockChatInfo.user_name}</p>
+              <p className="fs-6 mb-0">{`@${mockChatInfo.snappy_user_name}`}</p>
             </div>
-          </Modal.Title>
+            <p
+              className={mockChatInfo.connected ? "text-success" : "text-muted"}
+            >
+              {mockChatInfo.connected
+                ? "online"
+                : `last seen at ${mockChatInfo.last_seen}`}
+            </p>
+          </div>
+          <div style={{ marginLeft: "auto" }} className="me-4">
+            <button type="button" className="btn btn-sm btn-outline-dark">
+              Block
+            </button>
+            <button
+              type="button"
+              className="btn btn-sm  btn-outline-danger ms-3"
+            >
+              Remove Friend
+            </button>
+          </div>
+          <div>
+            <AiOutlineClose
+              className="chat-modal-close__button"
+              size={23}
+              onClick={(e) => handleCloseModal(e)}
+            />
+          </div>
         </Modal.Header>
         <Modal.Body>
-          {mockChatInfo.conversation.map((obj) => (
-            <div className="bg-primary w-50">
-              <p>{obj.from}</p>
-              <p>{obj.msg}</p>
+          <>
+            <div className="chat_input">
+              <AppInput isSendMessage />
             </div>
-          ))}
+            {mockChatInfo.conversation.map((obj) => (
+              <div
+                className={`d-flex ${
+                  obj.from === "jack12422"
+                    ? "justify-content-end"
+                    : "justify-content-start"
+                }`}
+              >
+                <p
+                  className={`${
+                    obj.from === "jack12422"
+                      ? "msg-send__container"
+                      : "msg-recieved__container"
+                  }  rounded p-2`}
+                >
+                  {obj.msg}
+                </p>
+              </div>
+            ))}
+          </>
         </Modal.Body>
-        <Modal.Footer>
-          <button className="btn btn-danger" onClick={() => setShow(false)}>
-            Close
-          </button>
-          <button
-            className="btn btn-primary ms-3"
-            onClick={() => setShow(false)}
-          >
-            Save Changes
-          </button>
-        </Modal.Footer>
       </Modal>
     </div>
   );
