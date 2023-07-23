@@ -14,7 +14,7 @@ const Page = ({ children }) => {
         <div className="col-md-3 ps-5">
           <SideBar />
         </div>
-        <div className="col-md-5">
+        <div className="col-md-5 shadow-sm p-3 mb-5 pt-0 bg-body rounded">
           <PageHeader page_id={page_id} id={id} title={children?.type?.name} />
           <div>{children}</div>
         </div>
