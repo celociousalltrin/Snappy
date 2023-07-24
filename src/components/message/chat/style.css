@@ -94,3 +94,6 @@
 .chat-modal-close__button:active {
   color: red;
 }
+.chat-modal-close__button:hover {
+  color: red;
+}

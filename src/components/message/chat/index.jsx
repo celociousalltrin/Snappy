@@ -5,9 +5,9 @@ import { mockChatInfo, mockMessageInfo } from "../../../utils/mock-common";
 import { NavigateToProfile } from "../../../utils/common";
 import Modal from "react-bootstrap/Modal";
 import AppInput from "../../app-input";
+import { AiOutlineClose } from "react-icons/ai";
 
 import "./style.css";
-import { AiOutlineClose } from "react-icons/ai";
 
 const Chat = () => {
   const navigate = useNavigate();

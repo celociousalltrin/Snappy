@@ -9,7 +9,6 @@ import { SlCalender } from "react-icons/sl";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Modal from "react-bootstrap/Modal";
-import "./style.css";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import SingleFeed from "../single-feed";
 import Feeds from "../feeds";
@@ -17,6 +16,8 @@ import { MdOutlineArrowBack } from "react-icons/md";
 import { TbCameraPlus } from "react-icons/tb";
 import Form from "react-bootstrap/Form";
 import AppTextArea from "../app-text-area";
+
+import "./style.css";
 
 const Profile = () => {
   const { id } = useParams();
