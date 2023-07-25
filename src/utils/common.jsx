@@ -14,6 +14,10 @@ import { MdTheaterComedy } from "react-icons/md";
 import { BsFillChatFill } from "react-icons/bs";
 import { AiTwotoneLike } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import createProfileLogin from "../assets/login-images/create_profile_login.svg";
+import imageUploadLogin from "../assets/login-images/image_upload_login.svg";
+import snappShareLogin from "../assets/login-images/snapp_share_login.svg";
+import socialCommunicateLogin from "../assets/login-images/social_communicate_login.svg";
 
 export const sideBarName = [
   { id: 1, name: "Home", icon: <FaHome />, route: "/home" },
@@ -113,3 +117,21 @@ export const NavigateToProfile = (e, navigate, username, pageId) => {
   e.stopPropagation();
   navigate(`/profile/${username}`, { state: { from: pageId } });
 };
+
+export const loginCarouselImageDetails = [
+  {
+    id: 1,
+    image: createProfileLogin,
+    content: "Create your Social Profile and Cultivate your Social Community",
+  },
+  {
+    id: 2,
+    image: snappShareLogin,
+    content: "Share the Snapp and Share the Joy",
+  },
+  {
+    id: 3,
+    image: socialCommunicateLogin,
+    content: "Connect and Communicate Socially",
+  },
+];

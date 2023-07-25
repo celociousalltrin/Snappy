@@ -24,7 +24,7 @@ const Setting = () => {
             />
           </div>
         </div>
-        <button className="btn btn-outline-primary mt-3 mb-2" type="button">
+        <button className="btn btn-outline-dark mt-3 mb-2" type="button">
           Change Password
         </button>
       </div>

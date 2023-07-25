@@ -1,0 +1,18 @@
+.container {
+  display: grid;
+  height: 100vh;
+}
+
+.center-content {
+  margin: auto;
+  width: 90%;
+}
+
+.login-input-container {
+  margin-left: 22%;
+  width: 60%;
+}
+
+.login-button {
+  margin-left: 22%;
+}
