@@ -8,7 +8,7 @@ const Login = () => {
   const [loadstate, setLoadState] = useState(false);
 
   return (
-    <div className="container">
+    <div className="login-container">
       <div className="center-content">
         <div className="shadow-sm bg-white rounded row">
           <div className="col-md-6 bg-primary rounded-start">
