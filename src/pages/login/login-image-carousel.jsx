@@ -20,9 +20,10 @@ const LoginImageCarousel = () => {
           <Carousel.Item key={obj.id} interval={3000}>
             <img
               src={obj.image}
-              width="550px"
+              width="420px"
               height="400px"
               className="mt-5"
+              style={{ marginLeft: "9%" }}
             />
           </Carousel.Item>
         ))}

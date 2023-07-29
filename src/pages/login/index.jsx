@@ -9,7 +9,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="center-content">
+      <div className="center-login-content">
         <div className="shadow-sm bg-white rounded row">
           <div className="col-md-6 bg-primary rounded-start">
             <LoginImageCarousel />

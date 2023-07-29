@@ -1,0 +1,28 @@
+.signup-container {
+  margin: auto;
+  width: 75%;
+  margin-top: 3%;
+  position: relative;
+}
+
+.signup-parent-container {
+  height: 600px;
+  padding: 0;
+  background-color: rgb(245, 245, 245);
+}
+
+.signup-content-container {
+  display: inline-block;
+  margin: 0;
+  background-color: rgb(245, 245, 245);
+}
+
+.signup-button-container {
+  position: absolute;
+  bottom: 10%;
+}
+
+.signup-check-icon {
+  padding: 0.6rem 0.7rem 0.8rem;
+  background-color: rgb(13, 110, 253);
+}

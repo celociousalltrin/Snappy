@@ -10,6 +10,7 @@ import { Toaster } from "react-hot-toast";
 import Explore from "./pages/explore";
 import Home from "./pages/home";
 import Login from "./pages/login";
+import SignUp from "./pages/signup";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Explore />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/:page_id" element={<Home />} />
         <Route path="/:page_id/:id" element={<Home />} />
       </Routes>

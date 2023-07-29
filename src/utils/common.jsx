@@ -30,7 +30,7 @@ export const sideBarName = [
   { id: 8, name: "Facts", icon: <FaNewspaper />, route: "/facts" },
   { id: 9, name: "Jokes", icon: <MdTheaterComedy />, route: "/jokes" },
   { id: 10, name: "Setting", icon: <FaCog />, route: "/setting" },
-  { id: 11, name: "Log Out", icon: <FaSignOutAlt />, route: "/logout" },
+  { id: 11, name: "Log Out", icon: <FaSignOutAlt />, route: "/login" },
 ];
 
 export const page_info = [
