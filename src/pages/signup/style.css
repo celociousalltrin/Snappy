@@ -1,28 +1,104 @@
 .signup-container {
   margin: auto;
   width: 75%;
-  margin-top: 3%;
+  margin-top: 2%;
   position: relative;
 }
 
 .signup-parent-container {
-  height: 600px;
+  height: 90vh;
   padding: 0;
   background-color: rgb(245, 245, 245);
 }
 
 .signup-content-container {
   display: inline-block;
-  margin: 0;
+  max-width: 70%;
+  max-height: 63%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: auto;
   background-color: rgb(245, 245, 245);
 }
 
 .signup-button-container {
   position: absolute;
-  bottom: 10%;
+  bottom: 5%;
 }
 
 .signup-check-icon {
   padding: 0.6rem 0.7rem 0.8rem;
   background-color: rgb(13, 110, 253);
+}
+
+.signup-user-info-container > div:not(:first-child):not(:nth-child(2)) {
+  margin-top: 1.3rem;
+}
+
+.signup-user-info-container > div > label {
+  display: block;
+  text-align: start;
+  margin-left: 0.3rem;
+}
+
+.signup-user-info-container > div > input {
+  width: 80%;
+}
+
+.signup-create-password-container {
+  padding: 1rem 2.5rem 1rem;
+}
+
+.signup-create-password-container > div > label {
+  margin-bottom: 0.5rem;
+  display: block;
+  text-align: start;
+  margin-left: 0.2rem;
+}
+.signup-create-password-container > div > div > input {
+  width: 300px !important;
+}
+
+.signup-edit-prof__camicon1 {
+  color: white;
+  background-color: #000;
+  opacity: 0.5;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.signup-edit-prof-img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.signup-edit-prof {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.interest-single-container {
+  height: 70%;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.interest-single-container:hover {
+  border: 1.5px solid blue;
+}
+
+.interset-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.interest-selected-count {
+  padding-top: 0.6rem;
+  position: sticky;
+  top: -8%;
+  background-color: whitesmoke;
 }

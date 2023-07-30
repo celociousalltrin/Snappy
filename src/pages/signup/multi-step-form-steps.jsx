@@ -8,7 +8,7 @@ const MultiStepFormSteps = ({ currentIndex }) => {
 
   return (
     <div className="d-flex justify-content-around">
-      {[1, 2, 3, 4, 5, 6].map((obj) => (
+      {[1, 2, 3, 4, 5, 6, 7].map((obj) => (
         <p
           className={`${
             activeSteps(obj) ? "signup-check-icon" : "pt-2 pb-2 ps-3 pe-3"

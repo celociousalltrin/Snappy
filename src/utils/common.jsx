@@ -135,3 +135,36 @@ export const loginCarouselImageDetails = [
     content: "Connect and Communicate Socially",
   },
 ];
+
+export const signupComponentHeader = [
+  { index: 0, header: "User Info" },
+  { index: 1, header: "Verify Code" },
+  { index: 2, header: "Create Password" },
+  { index: 3, header: "Pick a Profile Picture" },
+  { index: 4, header: "Describe Yourself" },
+  { index: 5, header: "What are you interested in?" },
+  { index: 6, header: "Suggested Snappers you can connect" },
+];
+
+export const SignupInterestedFields = [
+  { id: 1, field: "Science" },
+  { id: 2, field: "Technology" },
+  { id: 3, field: "Sports" },
+  { id: 4, field: "Politics" },
+  { id: 5, field: "Entertainment" },
+  { id: 6, field: "Art and Culture" },
+  { id: 7, field: "Business and Economics" },
+  { id: 8, field: "Environment and Sustainability" },
+  { id: 9, field: "History and Archaeology" },
+  { id: 10, field: "Education and Learning" },
+  { id: 11, field: "Travel and Tourism" },
+  { id: 12, field: "Health and Wellness" },
+  { id: 13, field: "Literature" },
+  { id: 14, field: "Philosophy" },
+  { id: 15, field: "Food and Cooking" },
+  { id: 16, field: "Psychology" },
+  { id: 17, field: "Fashion and Style" },
+  { id: 18, field: "Music" },
+  { id: 19, field: "Astronomy" },
+  { id: 20, field: "Sociology" },
+];

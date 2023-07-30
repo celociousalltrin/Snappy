@@ -1,0 +1,15 @@
+.verify-code-container {
+  padding: 0.5rem 2rem 0rem;
+}
+
+.verify-code-container > p {
+  text-align: start;
+}
+
+.verify-code-container > p:last-child:hover {
+  text-decoration: underline;
+}
+
+.verify-code-container > p:not(:first-child) {
+  margin-left: 0.2rem;
+}

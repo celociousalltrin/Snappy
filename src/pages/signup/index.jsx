@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import UserInfoForm from "./user-info";
 import AppVerificationCode from "../../components/app-verification-code";
 import CreatePassword from "./create-password";
-import UpdateUserInfoForm from "./update-user-info";
-import FavouriteTopics from "./favourite-topics";
+import UploadProfilePicture from "./upload-profile-picture";
+import InterestedFields from "./interested-fields";
 import SignupAddFriends from "./signup-add-friends";
 import useMultiStepForm from "../../custom-hooks/useMultiStepForm";
 import "./style.css";
 import MultiStepFormSteps from "./multi-step-form-steps";
+import { signupComponentHeader } from "../../utils/common";
+import UserBio from "./user-bio";
 
 const SignUp = () => {
   const [isFinish, setIsFinsish] = useState(false);
@@ -24,18 +26,26 @@ const SignUp = () => {
       <UserInfoForm />
       <AppVerificationCode />
       <CreatePassword />
-      <UpdateUserInfoForm />
-      <FavouriteTopics />
+      <UploadProfilePicture />
+      <UserBio />
+      <InterestedFields />
       <SignupAddFriends />
     </div>
   );
 
   return (
     <div className="signup-container">
-      <div className="shadow p-3 mb-5 bg-white rounded signup-parent-container text-center">
+      <div className="shadow p-3 bg-white rounded signup-parent-container text-center">
+        <h3 className="mb-4 mt-0 pt-0">Create Your Snappy Account</h3>
         <MultiStepFormSteps currentIndex={currentIndex} />
         {!(currentIndex === components.length) && (
-          <div className="shadow-none p-4 mb-5 mt-4 rounded signup-content-container">
+          <div className="shadow-none p-4 pb-5 mb-5 mt-4 rounded signup-content-container">
+            <h4 className="mb-3">
+              {
+                signupComponentHeader.find((obj) => obj.index === currentIndex)
+                  .header
+              }
+            </h4>
             {currentComponent}
           </div>
         )}

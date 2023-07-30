@@ -1,15 +1,21 @@
-.snapp-text-area {
-  overflow: hidden;
+.app-text-area {
   width: 100%;
-  height: 35px;
   font-size: large;
   border: none;
+  height: "35px";
+  overflow: hidden;
 }
 
-.snapp-text-area:focus {
+.app-text-area:focus {
   outline: none;
 }
 
-.snapp-text-area::placeholder {
+.app-text-area::placeholder {
   font-size: large;
+}
+
+.normal-text-area {
+  font-size: large;
+  outline-color: rgb(134, 183, 254);
+  border-radius: 7px;
 }
