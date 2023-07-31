@@ -31,7 +31,7 @@
   background-color: rgb(13, 110, 253);
 }
 
-.signup-user-info-container > div:not(:first-child):not(:nth-child(2)) {
+.signup-user-info-container > div:not(:nth-child(-n + 2)) {
   margin-top: 1.3rem;
 }
 
