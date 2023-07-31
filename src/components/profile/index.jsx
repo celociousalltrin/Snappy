@@ -20,7 +20,7 @@ import AppTextArea from "../app-text-area";
 import "./style.css";
 
 const Profile = () => {
-  const { id } = useParams();
+  const { id, sec_id } = useParams();
   const navigate = useNavigate();
   const { pathname, state } = useLocation();
   const [show, setShow] = useState(false);
@@ -28,7 +28,7 @@ const Profile = () => {
   const cond = "";
   return (
     <div className="container">
-      {id === "single-feed" ? (
+      {id === "single-feed" || sec_id ? (
         <SingleFeed singleFeedData={singleFeedData} />
       ) : (
         <>

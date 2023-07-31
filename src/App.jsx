@@ -35,6 +35,7 @@ const AppRoutes = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/:page_id" element={<Home />} />
         <Route path="/:page_id/:id" element={<Home />} />
+        <Route path="/:page_id/:id/:sec_id" element={<Home />} />
       </Routes>
     </>
   );
