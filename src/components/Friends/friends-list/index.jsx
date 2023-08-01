@@ -3,15 +3,24 @@ import AppInput from "../../app-input";
 
 import "./style.css";
 
-const FriendsList = ({ MockFriendsList, isMessage }) => {
+const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
   return (
     <div>
-      <div className="mb-4">
-        <AppInput isFriend />
-      </div>
+      {!isSignup && (
+        <div className="mb-4">
+          <AppInput isFriend />
+        </div>
+      )}
       <div>
         {MockFriendsList.map((obj) => (
-          <div className="d-flex row friends-list-container" key={obj.id}>
+          <div
+            className={`d-flex row ${
+              isSignup
+                ? "signup-friends-list-container shadow-sm mb-4 rounded"
+                : "friends-list-container"
+            }`}
+            key={obj.id}
+          >
             <div className="col-md-1">
               <img
                 src={obj.profile_img}

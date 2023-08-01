@@ -9,3 +9,12 @@
   background-color: #f5f5f5;
   cursor: pointer;
 }
+
+.signup-friends-list-container {
+  background-color: white;
+}
+
+.signup-friends-list-container:hover {
+  cursor: pointer;
+  background-color: aliceblue;
+}
