@@ -11,7 +11,6 @@ const SignupAddFriends = () => {
         see their snaps in your feeds. You will also receive relevant
         recommendations. Atleast Add one Friend in your Snapp Community.
       </p>
-
       <FriendsList MockFriendsList={MockFriendsList} isSignup />
     </div>
   );

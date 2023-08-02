@@ -10,6 +10,8 @@ import "./style.css";
 import MultiStepFormSteps from "./multi-step-form-steps";
 import { signupComponentHeader } from "../../utils/common";
 import UserBio from "./user-bio";
+import Framer from "../../framer";
+
 
 const SignUp = () => {
   const [isFinish, setIsFinsish] = useState(false);
@@ -23,6 +25,7 @@ const SignUp = () => {
     isLastStep,
   } = useMultiStepForm(
     <div>
+      <Framer />
       <UserInfoForm />
       <AppVerificationCode />
       <CreatePassword />
