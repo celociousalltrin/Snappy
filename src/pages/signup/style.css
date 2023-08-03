@@ -9,6 +9,7 @@
   height: 90vh;
   padding: 0;
   background-color: rgb(245, 245, 245);
+  overflow: hidden;
 }
 
 .signup-content-container {

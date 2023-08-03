@@ -463,7 +463,7 @@ export const MockFriendsList = [
     connected: false,
   },
   {
-    id: 3,
+    id: 5,
     name: "Antony",
     profile_img: mutual3,
     snappy_username: "antony76677",
@@ -471,7 +471,7 @@ export const MockFriendsList = [
     connected: true,
   },
   {
-    id: 4,
+    id: 6,
     name: "Jenifer",
     profile_img: mutual4,
     snappy_username: "jenefier1213",
@@ -479,7 +479,7 @@ export const MockFriendsList = [
     connected: false,
   },
   {
-    id: 3,
+    id: 7,
     name: "Antony",
     profile_img: mutual3,
     snappy_username: "antony76677",
@@ -487,7 +487,7 @@ export const MockFriendsList = [
     connected: true,
   },
   {
-    id: 4,
+    id: 8,
     name: "Jenifer",
     profile_img: mutual4,
     snappy_username: "jenefier1213",

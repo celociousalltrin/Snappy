@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserInfoForm from "./user-info";
 import AppVerificationCode from "../../components/app-verification-code";
 import CreatePassword from "./create-password";
@@ -10,8 +10,10 @@ import "./style.css";
 import MultiStepFormSteps from "./multi-step-form-steps";
 import { signupComponentHeader } from "../../utils/common";
 import UserBio from "./user-bio";
-import Framer from "../../framer";
-
+import Framer from "../../custom-sandbox/framer";
+import { AnimatePresence, motion } from "framer-motion";
+import MyComponent from "../../custom-sandbox/framer";
+import { signupFormVariants } from "../../utils/framer-variants";
 
 const SignUp = () => {
   const [isFinish, setIsFinsish] = useState(false);
@@ -20,12 +22,12 @@ const SignUp = () => {
     components,
     currentComponent,
     next,
-    back,
+    previous,
     isFirstStep,
     isLastStep,
+    direction,
   } = useMultiStepForm(
     <div>
-      <Framer />
       <UserInfoForm />
       <AppVerificationCode />
       <CreatePassword />
@@ -42,15 +44,27 @@ const SignUp = () => {
         <h3 className="mb-4 mt-0 pt-0">Create Your Snappy Account</h3>
         <MultiStepFormSteps currentIndex={currentIndex} />
         {!(currentIndex === components.length) && (
-          <div className="shadow-none p-4 pb-5 mb-5 mt-4 rounded signup-content-container">
-            <h4 className="mb-3">
-              {
-                signupComponentHeader.find((obj) => obj.index === currentIndex)
-                  .header
-              }
-            </h4>
-            {currentComponent}
-          </div>
+          <AnimatePresence mode="wait" initial={false} custom={direction}>
+            <motion.div
+              className="shadow-none p-4 pb-5 mb-5 mt-4 rounded signup-content-container"
+              key={currentIndex}
+              variants={signupFormVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              custom={direction}
+              transition={{ duration: 0.7 }}
+            >
+              <h4 className="mb-3">
+                {
+                  signupComponentHeader.find(
+                    (obj) => obj.index === currentIndex
+                  ).header
+                }
+              </h4>
+              {currentComponent}
+            </motion.div>
+          </AnimatePresence>
         )}
 
         <div className="signup-button-container">
@@ -77,10 +91,10 @@ const SignUp = () => {
           {!isFirstStep && (
             <button
               type="button"
-              onClick={back}
+              onClick={previous}
               className="btn btn-outline-dark ms-4 ps-3 pe-3"
             >
-              Back
+              Previous
             </button>
           )}
         </div>
