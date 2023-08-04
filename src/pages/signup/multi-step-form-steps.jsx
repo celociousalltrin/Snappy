@@ -1,6 +1,9 @@
 import React from "react";
-import { FaCheck } from "react-icons/fa";
 import useCustomArray from "../../custom-hooks/useCustomArray";
+import { motion } from "framer-motion";
+import { SignupStepContainervariants } from "../../utils/framer-variants";
+import { FramerCheckIcon } from "../../utils/framer-svgs";
+import { signupStepIconVariants } from "../../utils/framer-variants";
 
 const MultiStepFormSteps = ({ currentIndex }) => {
   const activeSteps = (input) => {
@@ -12,15 +15,29 @@ const MultiStepFormSteps = ({ currentIndex }) => {
   return (
     <div className="d-flex justify-content-around">
       {customArray.map((obj) => (
-        <p
+        <motion.p
           className={`${
             activeSteps(obj) ? "signup-check-icon" : "pt-2 pb-2 ps-3 pe-3"
-          } rounded-circle border border-dark `}
+          } rounded-circle`}
+          custom={activeSteps(obj)}
+          variants={SignupStepContainervariants}
+          initial="initial"
+          animate="animate"
         >
           <span className={!activeSteps(obj) ? "fs-5" : ""}>
-            {activeSteps(obj) ? <FaCheck color="white" size={20} /> : obj}
+            {activeSteps(obj) ? (
+              <FramerCheckIcon
+                variants={signupStepIconVariants}
+                color="rgb(255, 255, 255)"
+                width="30"
+                height="30"
+                iconwidth="3.5"
+              />
+            ) : (
+              obj
+            )}
           </span>
-        </p>
+        </motion.p>
       ))}
     </div>
   );

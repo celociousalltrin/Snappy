@@ -39,7 +39,14 @@ const SignUp = () => {
   );
 
   return (
-    <div className="signup-container">
+    <motion.div
+      className="signup-container"
+      initial={{ opacity: 0 }}
+      animate={{
+        transition: { duration: 1 },
+        opacity: 1,
+      }}
+    >
       <div className="shadow p-3 bg-white rounded signup-parent-container text-center">
         <h3 className="mb-4 mt-0 pt-0">Create Your Snappy Account</h3>
         <MultiStepFormSteps currentIndex={currentIndex} />
@@ -99,7 +106,7 @@ const SignUp = () => {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

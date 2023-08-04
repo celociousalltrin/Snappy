@@ -28,8 +28,7 @@
 }
 
 .signup-check-icon {
-  padding: 0.6rem 0.7rem 0.8rem;
-  background-color: rgb(13, 110, 253);
+  padding: 0.4rem 0.4rem 0.2rem;
 }
 
 .signup-user-info-container > div:not(:nth-child(-n + 2)) {

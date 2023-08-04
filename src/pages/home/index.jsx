@@ -12,6 +12,7 @@ import Setting from "../../components/setting";
 import Explore from "../explore";
 import Jokes from "../../components/jokes";
 import Facts from "../../components/facts";
+import SandBox from "../../custom-sandbox";
 
 const Home = () => {
   const { page_id } = useParams();
@@ -40,6 +41,8 @@ const Home = () => {
               return <Jokes />;
             case "setting":
               return <Setting />;
+            case "sandbox":
+              return <SandBox />;
             default:
               return "404 - Not Found";
           }

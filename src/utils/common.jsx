@@ -74,6 +74,10 @@ export const page_info = [
     id: "setting",
     title: "Setting",
   },
+  {
+    id: "sandbox",
+    title: "sandbox",
+  },
 ];
 
 export const modelOpenInfo = [
