@@ -11,6 +11,7 @@ import Explore from "./pages/explore";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
+import SignupSuccess from "./pages/signup-success";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Explore />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/signup-success" element={<SignupSuccess />} />
         <Route path="/:page_id" element={<Home />} />
         <Route path="/:page_id/:id" element={<Home />} />
         <Route path="/:page_id/:id/:sec_id" element={<Home />} />

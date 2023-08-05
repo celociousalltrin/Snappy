@@ -1,0 +1,16 @@
+.signup-success-parent-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.signup-success-parent-container > div {
+  text-align: center;
+}
+
+.signup-success-check-icon {
+  padding: 1.8rem 0.7rem 1.8rem 0.7rem;
+  border: 0.1px solid grey;
+  background-color: rgb(139, 195, 74);
+}

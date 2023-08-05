@@ -14,6 +14,7 @@ import Framer from "../../custom-sandbox/framer";
 import { AnimatePresence, motion } from "framer-motion";
 import MyComponent from "../../custom-sandbox/framer";
 import { signupFormVariants } from "../../utils/framer-variants";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [isFinish, setIsFinsish] = useState(false);
@@ -38,13 +39,15 @@ const SignUp = () => {
     </div>
   );
 
+  const navigate = useNavigate();
+
   return (
     <motion.div
       className="signup-container"
       initial={{ opacity: 0 }}
       animate={{
         transition: { duration: 1 },
-        opacity: 1,
+        opacity: isFinish ? 0 : 1,
       }}
     >
       <div className="shadow p-3 bg-white rounded signup-parent-container text-center">
@@ -91,6 +94,9 @@ const SignUp = () => {
               onClick={() => {
                 next();
                 setIsFinsish(true);
+                setTimeout(() => {
+                  navigate("/signup-success");
+                }, 2000);
               }}
               className="btn btn-success ms-3"
             >

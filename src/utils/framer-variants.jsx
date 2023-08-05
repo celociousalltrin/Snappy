@@ -31,11 +31,12 @@ export const signupStepIconVariants = {
     pathLength: 0,
     opacity: 0,
   },
-  animate: {
+  animate: (active) => ({
     pathLength: 1,
     opacity: 1,
     transition: {
-      duration: 0.8,
+      duration: active ? 1 : 0.8,
+      delay: active ? 0.6 : 0,
     },
-  },
+  }),
 };
