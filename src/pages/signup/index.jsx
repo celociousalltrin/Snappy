@@ -76,13 +76,15 @@ const SignUp = () => {
 
         <div className="signup-button-container">
           {!isLastStep ? (
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               type="button"
               onClick={next}
-              className="btn btn-outline-primary ms-3 ps-3 pe-3"
+              className="btn btn-primary ms-3 ps-3 pe-3"
             >
               Next
-            </button>
+            </motion.button>
           ) : (
             <button
               type="button"
@@ -90,19 +92,21 @@ const SignUp = () => {
                 next();
                 setIsFinsish(true);
               }}
-              className="btn btn-primary ms-3"
+              className="btn btn-success ms-3"
             >
               Finish
             </button>
           )}
           {!isFirstStep && (
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               type="button"
               onClick={previous}
               className="btn btn-outline-dark ms-4 ps-3 pe-3"
             >
               Previous
-            </button>
+            </motion.button>
           )}
         </div>
       </div>
