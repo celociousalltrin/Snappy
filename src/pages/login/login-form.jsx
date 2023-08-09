@@ -54,6 +54,7 @@ const LoginForm = () => {
           className="btn btn-lg btn-dark p-2 pt-1"
           type="button"
           style={{ width: "62%", marginLeft: "21%" }}
+          onClick={() => navigate("/home")}
         >
           Log in
         </button>

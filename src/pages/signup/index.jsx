@@ -96,7 +96,7 @@ const SignUp = () => {
                 setIsFinsish(true);
                 setTimeout(() => {
                   navigate("/signup-success");
-                }, 2000);
+                }, 1000);
               }}
               className="btn btn-success ms-3"
             >

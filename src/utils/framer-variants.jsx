@@ -36,7 +36,7 @@ export const signupStepIconVariants = {
     opacity: 1,
     transition: {
       duration: active ? 1 : 0.8,
-      delay: active ? 0.6 : 0,
+      delay: active ? 0.7 : 0,
     },
   }),
 };
