@@ -1,5 +1,5 @@
 import React from "react";
-import { sideBarName } from "../../utils/common";
+import { sideBarData } from "../../utils/common";
 import "./style.css";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const SideBar = () => {
 
   return (
     <div className="sidebar-container ps-5">
-      {sideBarName.map((obj) => (
+      {sideBarData.map((obj) => (
         <div
           key={obj.id}
           className={`sidebar-menu rounded-pill pe-4 ${

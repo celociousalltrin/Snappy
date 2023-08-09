@@ -12,14 +12,20 @@ import {
 } from "react-icons/fa";
 import { MdTheaterComedy } from "react-icons/md";
 import { BsFillChatFill } from "react-icons/bs";
-import { AiTwotoneLike } from "react-icons/ai";
+import { AiFillCodeSandboxCircle, AiTwotoneLike } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import createProfileLogin from "../assets/login-images/create_profile_login.svg";
 import imageUploadLogin from "../assets/login-images/image_upload_login.svg";
 import snappShareLogin from "../assets/login-images/snapp_share_login.svg";
 import socialCommunicateLogin from "../assets/login-images/social_communicate_login.svg";
 
-export const sideBarName = [
+export const sideBarData = [
+  {
+    id: 0,
+    name: "SanboX",
+    icon: <AiFillCodeSandboxCircle />,
+    route: "/sandbox",
+  },
   { id: 1, name: "Home", icon: <FaHome />, route: "/home" },
   { id: 2, name: "Explore", icon: <FaSearch />, route: "/explore" },
   { id: 3, name: "Messages", icon: <BsFillChatFill />, route: "/messages" },
