@@ -11,14 +11,14 @@ const Page = ({ children }) => {
     <div>
       <Header />
       <div className="row mt-4">
-        <div className="col-md-3 ps-5">
+        <div className="col-md-3 ps-5 d-none d-lg-flex">
           <SideBar />
         </div>
-        <div className="col-md-5 shadow-sm p-3 mb-5 pt-0 bg-body rounded">
+        <div className="col-lg-5 shadow-sm p-3 mb-5 pt-0 bg-body rounded">
           <PageHeader page_id={page_id} id={id} title={children?.type?.name} />
           <div>{children}</div>
         </div>
-        <div className="col-md-4">
+        <div className="col-md-4 d-none d-lg-flex">
           <DiscoverPanel />
         </div>
       </div>

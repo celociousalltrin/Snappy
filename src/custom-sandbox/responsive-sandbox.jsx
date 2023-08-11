@@ -1,22 +1,35 @@
-import React from "react";
-import useCustomArray from "../custom-hooks/useCustomArray";
-import "./style.css";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import Offcanvas from "react-bootstrap/Offcanvas";
 
-const ResponsiveSandBox = () => {
-  const data = useCustomArray(12);
+function BasicExample() {
   return (
-    <div className="container">
-      <div className="row no-gutter">
-        <div className="res-container col-sm-3 col-md-2"></div>
-        <div className="res-container col-sm-3 col-md-2"></div>
-        <div className="res-container col-sm-3 col-md-2"></div>
-        <div className="res-container col-sm-3 col-md-2"></div>
-        <div className="res-container col-sm-3 col-md-2"></div>
-        <div className="res-container col-sm-3 col-md-2"></div>
-        <div className="res-container col-sm-3 col-md-2"></div>
-      </div>
-    </div>
+    <Navbar expand="xs" bg="primary" data-bs-theme="dark" sticky="top">
+      <Container>
+        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Offcanvas id="basic-navbar-nav">
+          <Nav className="me-auto d-lg-none d-xs-flex">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#link">Link</Nav.Link>
+            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Another action
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Offcanvas>
+      </Container>
+    </Navbar>
   );
-};
+}
 
-export default ResponsiveSandBox;
+export default BasicExample;

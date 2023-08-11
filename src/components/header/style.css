@@ -1,71 +1,7 @@
-.acc_dropdown {
-  .act_head {
-    color: #181818;
-  }
-  .dropdown-menu {
-    font-size: 0.8rem;
-    color: #181818;
-    padding-top: 1rem;
-    border: 1px solid #eee;
-
-    .dropdown-item {
-      margin-bottom: 0.3rem;
-      svg {
-        margin-right: 0.4rem;
-        color: #181818;
-      }
-      &:hover {
-        background: #eee;
-        color: #333333;
-      }
-    }
-  }
+.navbar-items-style > a {
+  font-size: 1.2rem;
 }
 
-.act_head {
-  align-items: center;
-  display: flex;
-  justify-content: end;
-  border: 1px solid #181818 !important;
-  padding: 0.3rem 1rem;
-  border-radius: 0.2rem;
-  float: right;
-  background: #fff !important;
-  &:active,
-  &:focus {
-    background: #ddd;
-  }
-  .act_img img {
-    border-radius: 50%;
-    border-radius: 50%;
-    height: 45px;
-    width: 45px;
-    object-fit: cover;
-  }
-  .profile_meta {
-    display: flex;
-    background-color: #fff;
-    align-items: center;
-    flex-direction: column;
-    font-size: 0.8rem;
-    float: left;
-    color: #181818;
-    .act_cost {
-      color: #df6c16;
-    }
-  }
-}
-.act_head::after {
-  margin-left: 5px;
-  color: #181818 !important;
-}
-
-.head {
-  border-bottom: 1px solid black;
-}
-
-.head_explore {
-  color: white;
-  text-decoration: none !important;
-  font-size: 1.25rem;
+.navbar-app-name {
+  margin-left: 40%;
 }

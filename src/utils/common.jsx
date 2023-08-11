@@ -20,12 +20,6 @@ import snappShareLogin from "../assets/login-images/snapp_share_login.svg";
 import socialCommunicateLogin from "../assets/login-images/social_communicate_login.svg";
 
 export const sideBarData = [
-  {
-    id: 0,
-    name: "SanboX",
-    icon: <AiFillCodeSandboxCircle />,
-    route: "/sandbox",
-  },
   { id: 1, name: "Home", icon: <FaHome />, route: "/home" },
   { id: 2, name: "Explore", icon: <FaSearch />, route: "/explore" },
   { id: 3, name: "Messages", icon: <BsFillChatFill />, route: "/messages" },
