@@ -32,7 +32,7 @@ const Chat = () => {
             className="d-flex message-container row"
             onClick={() => setShow(true)}
           >
-            <div className="col-md-1 me-3">
+            <div className="col-1 me-3">
               <img
                 src={obj.users?.profile_img}
                 alt="msg_profile_img"
@@ -51,7 +51,7 @@ const Chat = () => {
                 }
               />
             </div>
-            <div className="ms-2 col-md-7 mt-2">
+            <div className="ms-4 ms-md-0 ms-lg-3 col-6 col-md-7 mt-2">
               <div className="d-flex">
                 <p
                   className="fw-bold mb-1 cursor-pointer profile__name"
@@ -61,7 +61,7 @@ const Chat = () => {
                 >
                   {obj.users.user_name}
                 </p>
-                <p className="ms-2 mb-1">{`@${obj.users.snappy_user_name}`}</p>
+                <p className="ms-2 mb-1 d-none d-md-block">{`@${obj.users.snappy_user_name}`}</p>
               </div>
               <div>
                 <div className="d-flex">
@@ -75,11 +75,11 @@ const Chat = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-3">
               <p
                 className={`${
                   isRead ? "text-primary" : " "
-                } mb-2 d-flex justify-content-end`}
+                } mb-1 mt-2 d-flex justify-content-end text-nowrap`}
               >
                 {lastMessage?.created_at}
               </p>
