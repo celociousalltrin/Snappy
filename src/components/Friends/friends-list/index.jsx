@@ -21,7 +21,7 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
             }`}
             key={obj.id}
           >
-            <div className="col-md-1">
+            <div className="col-1">
               <img
                 src={obj.profile_img}
                 alt="profile_image"
@@ -35,7 +35,7 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
                 }
               />
             </div>
-            <div className="col-md-10 ms-4">
+            <div className="col-10 ms-4 ps-4 ps-md-0 ps-lg-3">
               <div className="d-flex justify-content-between mt-2">
                 <div>
                   <p className="fw-bold mb-0">{obj.name}</p>

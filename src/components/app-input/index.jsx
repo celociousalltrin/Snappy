@@ -23,7 +23,7 @@ const AppInput = ({ isFriend, isSendMessage }) => {
   };
   return (
     <div
-      className={isFriend ? "ms-3 row" : isSendMessage && "position-relative"}
+      className={isFriend ? "ms-3 row " : isSendMessage && "position-relative"}
     >
       <div
         className={`${

@@ -13,7 +13,7 @@ const Message = () => {
         defaultActiveKey="message-chat"
         justify="true"
         variant="underline"
-        className="message-container mb-4"
+        className="message-container mb-2"
       >
         <Tab eventKey="message-chat" title="Chats">
           <Chat />
