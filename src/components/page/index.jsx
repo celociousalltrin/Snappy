@@ -18,7 +18,7 @@ const Page = ({ children }) => {
           <PageHeader page_id={page_id} id={id} title={children?.type?.name} />
           <div>{children}</div>
         </div>
-        <div className="col-md-4 d-none d-lg-flex">
+        <div className="col-md-4 d-none d-lg-block">
           <DiscoverPanel />
         </div>
       </div>

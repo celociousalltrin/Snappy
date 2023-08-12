@@ -72,7 +72,7 @@ const Header = () => {
               <NavDropdown
                 title="Hi Celocious"
                 id="basic-nav-dropdown"
-                className="ms-2 rounded border border-1"
+                className="ms-2 rounded border border-light"
               >
                 <NavDropdown.Item onClick={() => navigate("/profile")}>
                   <FaUserAlt /> Profile
