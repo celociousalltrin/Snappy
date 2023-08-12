@@ -33,6 +33,12 @@ export const sideBarData = [
   { id: 11, name: "Log Out", icon: <FaSignOutAlt />, route: "/login" },
 ];
 
+export const bottomNavbarData = [
+  { id: 1, name: "home", icon: <FaHome />, route: "/home" },
+  { id: 2, name: "search", icon: <FaSearch />, route: "" },
+  { id: 3, name: "notification", icon: <FaBell />, route: "/notification" },
+  { id: 4, name: "message", icon: <BsFillChatFill />, route: "/messages" },
+];
 export const page_info = [
   {
     id: "home",

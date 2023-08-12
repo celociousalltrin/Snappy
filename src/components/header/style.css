@@ -5,3 +5,26 @@
 .navbar-app-name {
   margin-left: 40%;
 }
+
+.canvas-header {
+  position: relative;
+}
+
+.canvas-header > button {
+  position: absolute;
+  top: 30px;
+  right: 5%;
+  font-size: larger;
+}
+
+.canvas-header > div > p {
+  margin-bottom: 0;
+}
+
+.nav-select > a:active {
+  border: 1px solid black;
+  border-radius: 40px;
+  background-color: rgb(13, 110, 253);
+  color: white;
+  padding-left: 0.5rem;
+}
