@@ -28,9 +28,9 @@ const AppInput = ({ isFriend, isSendMessage }) => {
       <div
         className={`${
           isFocused ? "discover-search__focused" : "discover_container"
-        } ${isFriend && "col-md-8"}`}
+        } ${isFriend && "col-8"}`}
       >
-        {!isSendMessage && <span className="ms-2">{<FaSearch />}</span>}
+        {!isSendMessage && <span>{<FaSearch />}</span>}
         <input
           type="text"
           placeholder={
@@ -51,7 +51,7 @@ const AppInput = ({ isFriend, isSendMessage }) => {
         />
       </div>
       {isFriend && (
-        <div className="col-md-2 d-flex align-self-center ms-1">
+        <div className="col-2 d-flex align-self-center ms-1">
           <button className="btn btn-outline-secondary">Search</button>
         </div>
       )}
