@@ -13,11 +13,11 @@ const MultiStepFormSteps = ({ currentIndex }) => {
   const customArray = useCustomArray(7);
 
   return (
-    <div className="d-flex justify-content-around">
+    <div className="d-flex justify-content-between justify-content-md-around">
       {customArray.map((obj) => (
         <motion.p
           className={`${
-            activeSteps(obj) ? "signup-check-icon" : "pt-2 pb-2 ps-3 pe-3"
+            activeSteps(obj) ? "signup-check-icon" : " signup-un-check-icon"
           } rounded-circle`}
           custom={activeSteps(obj)}
           variants={SignupStepContainervariants}

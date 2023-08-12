@@ -27,10 +27,6 @@
   bottom: 5%;
 }
 
-.signup-check-icon {
-  padding: 0.4rem 0.4rem 0.2rem;
-}
-
 .signup-user-info-container > div:not(:nth-child(-n + 2)) {
   margin-top: 1.3rem;
 }
@@ -101,4 +97,22 @@
   position: sticky;
   top: -8%;
   background-color: whitesmoke;
+}
+
+@media (min-width: 768px) {
+  .signup-check-icon {
+    padding: 0.4rem 0.4rem 0.2rem;
+  }
+  .signup-un-check-icon {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .signup-check-icon {
+    padding: 0.2rem 0.05rem 0.025rem;
+  }
+  .signup-un-check-icon {
+    padding: 0.3rem 0.65rem 0.3rem 0.65rem;
+  }
 }
