@@ -73,7 +73,7 @@ const NotificationList = ({ list }) => {
   };
 
   return (
-    <div>
+    <div className="container">
       {list.map((obj) => (
         <div
           key={`ntfy_lst${obj.id}`}
