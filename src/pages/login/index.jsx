@@ -11,11 +11,11 @@ const Login = () => {
     <div className="login-container">
       <div className="center-login-content">
         <div className="shadow-sm bg-white rounded row">
-          <div className="col-md-6 bg-primary rounded-start">
+          <div className="col-6 bg-primary rounded-start d-none d-lg-block">
             <LoginImageCarousel />
           </div>
           <div
-            className="col-md-6"
+            className="col-12 col-lg-6"
             style={{ backgroundColor: "rgb(248, 248, 247)" }}
           >
             <LoginForm />
