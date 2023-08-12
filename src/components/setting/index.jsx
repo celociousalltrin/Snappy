@@ -3,7 +3,7 @@ import AppPasswordInput from "../app-password-input";
 
 const Setting = () => {
   return (
-    <div>
+    <div className="container">
       <div className="shadow-none p-3 mb-5 bg-light rounded">
         <h5>Change Password</h5>
         <div className="row mt-3">

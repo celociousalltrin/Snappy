@@ -36,9 +36,9 @@ const ExperimentalComponent = ({ list }) => {
                           onClick={() =>
                             setListIndex(listIndex.filter((obj) => obj !== i))
                           }
-                          className="ms-3 text-danger cursor-pointer"
+                          className="ms-3 text-danger cursor-pointer text-nowrap me-3 text-decoration-underline"
                         >
-                          <u>Hide Answer</u>
+                          Hide Answer
                         </p>
                       </>
                     )}
