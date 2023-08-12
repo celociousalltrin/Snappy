@@ -8,11 +8,51 @@
   width: 65%;
 }
 
-.login-input-container {
-  margin-left: 22%;
-  width: 60%;
+@media (min-width: 992px) {
+  .login-input-container {
+    margin-left: 22%;
+    width: 60%;
+  }
+  .login-button {
+    width: 62%;
+    margin-left: 21%;
+  }
+  .login-forgot-password {
+    margin-left: 45%;
+    cursor: pointer;
+  }
+  .login-forgot-password:hover {
+    text-decoration: underline;
+  }
+  .login-signup-content {
+    margin-left: 35%;
+    cursor: pointer;
+  }
+  .login-signup-content > p > span:hover {
+    text-decoration: underline;
+  }
 }
 
-.login-button {
-  margin-left: 22%;
+@media (max-width: 991px) {
+  .login-input-container {
+    margin-left: 5%;
+    width: 90%;
+  }
+  .login-button {
+    width: 90%;
+    margin-left: 5%;
+  }
+  .login-forgot-password {
+    margin-left: 32%;
+  }
+  .login-forgot-password:hover {
+    text-decoration: underline;
+  }
+  .login-signup-content {
+    margin-left: 15%;
+    cursor: pointer;
+  }
+  .login-signup-content > p > span:hover {
+    text-decoration: underline;
+  }
 }

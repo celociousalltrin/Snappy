@@ -21,7 +21,7 @@ const LoginImageCarousel = () => {
             <img
               src={obj.image}
               width="100%"
-              className="mt-5"
+              className="mt-4"
               style={{ marginLeft: "9%" }}
             />
           </Carousel.Item>

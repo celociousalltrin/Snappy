@@ -22,18 +22,15 @@ const LoginForm = () => {
       <div className="mt-3 text-center">
         <h4 className="fs-2">Welcome Back!</h4>
       </div>
-      <div className="mt-4 login-button">
-        <button
-          type="button"
-          className="btn btn-lg btn-outline-primary pt-1 p-2"
-          style={{ width: "77%" }}
-        >
-          <FaGoogle className="me-3" /> Login with Google
+      <div className="mt-4">
+        <button type="button" className="btn btn-primary p-2 login-button">
+          <FaGoogle className="me-2 mb-1" size={20} />{" "}
+          <span className="fs-5">Login with Google</span>
         </button>
       </div>
       <div className="text-center mt-3">
         <p className="text-muted text-primary">
-          ---------- Or Login with Email ---------{" "}
+          -------- Or Login with Email -------{" "}
         </p>
       </div>
       <div>
@@ -47,19 +44,18 @@ const LoginForm = () => {
             <Form.Control type="password" placeholder="Password" />
           </Form.Group>
         </div>
-        <p className="text-primary mt-0" style={{ marginLeft: "55%" }}>
+        <p className="text-primary mt-0 login-forgot-password">
           Forgot Your Password ?
         </p>
         <button
-          className="btn btn-lg btn-dark p-2 pt-1"
+          className="btn btn-dark p-2 pt-1 login-button"
           type="button"
-          style={{ width: "62%", marginLeft: "21%" }}
           onClick={() => navigate("/home")}
         >
-          Log in
+          <span className="fs-5">Log in</span>
         </button>
       </div>
-      <div className="mt-3 text-center mb-5">
+      <div className="mt-3 mb-5 login-signup-content">
         <p className="text-muted">
           Haven't sign up yet?{" "}
           <span
