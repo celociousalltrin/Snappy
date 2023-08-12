@@ -6,6 +6,9 @@ import { NavigateToProfile } from "../../../utils/common";
 import Modal from "react-bootstrap/Modal";
 import AppInput from "../../app-input";
 import { AiOutlineClose } from "react-icons/ai";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import { BsThreeDots } from "react-icons/bs";
 
 import "./style.css";
 
@@ -122,7 +125,7 @@ const Chat = () => {
                 : `last seen at ${mockChatInfo.last_seen}`}
             </p>
           </div>
-          <div style={{ marginLeft: "auto" }} className="me-4">
+          <div className="me-4 ms-auto d-none d-lg-block">
             <button type="button" className="btn btn-sm btn-outline-dark">
               Block
             </button>
@@ -132,6 +135,12 @@ const Chat = () => {
             >
               Remove Friend
             </button>
+          </div>
+          <div className="d-lg-none mt-3">
+            <DropdownButton variant="white" title={<BsThreeDots />}>
+              <Dropdown.Item as="button">Block</Dropdown.Item>
+              <Dropdown.Item as="button">Remove Friend</Dropdown.Item>
+            </DropdownButton>
           </div>
           <div>
             <AiOutlineClose
