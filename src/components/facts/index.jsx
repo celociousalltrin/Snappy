@@ -4,7 +4,7 @@ import { mockDiscoverfacts } from "../../utils/mock-common";
 
 const Facts = () => {
   return (
-    <div>
+    <div className="ms-2">
       <ExperimentalComponent list={mockDiscoverfacts} />
     </div>
   );
