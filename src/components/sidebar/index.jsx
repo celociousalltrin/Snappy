@@ -8,11 +8,11 @@ const SideBar = () => {
   const { ["*"]: page_name } = useParams();
 
   return (
-    <div className="sidebar-container ps-5">
+    <div className="sidebar-container row ms-2">
       {sideBarData.map((obj) => (
         <div
           key={obj.id}
-          className={`sidebar-menu rounded-pill pe-4 ${
+          className={`col-12 sidebar-menu rounded-pill ${
             `/${page_name}` === obj.route && "fw-bold"
           }`}
           onClick={() => navigate(obj.route)}
