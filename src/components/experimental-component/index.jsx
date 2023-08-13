@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import useListToggleContent from "../../custom-hooks/useListToggleContent";
 
 import "./style.css";
 
 const ExperimentalComponent = ({ list }) => {
-  const [listIndex, setListIndex] = useState([]);
+  const { showMore, showLess, listIndex } = useListToggleContent();
   const [showAnswers, setShowAnswers] = useState(false);
   const [listCount, setListCount] = useState(5);
   return (
@@ -33,9 +34,7 @@ const ExperimentalComponent = ({ list }) => {
                     {!showAnswers && (
                       <>
                         <p
-                          onClick={() =>
-                            setListIndex(listIndex.filter((obj) => obj !== i))
-                          }
+                          onClick={() => showLess(i)}
                           className="ms-3 text-danger cursor-pointer text-nowrap me-3 text-decoration-underline"
                         >
                           Hide Answer
@@ -45,7 +44,7 @@ const ExperimentalComponent = ({ list }) => {
                   </div>
                 ) : (
                   <p
-                    onClick={() => setListIndex([...listIndex, i])}
+                    onClick={() => showMore(i)}
                     className="cursor-pointer text-primary"
                   >
                     <u>Show Answer</u>

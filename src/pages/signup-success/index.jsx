@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 const SignupSuccess = () => {
   const navigate = useNavigate();
   return (
-    <div className="signup-success-parent-container">
+    <div className="signup-success-parent-container ps-3 pe-3 ps-md-0 pe-md-0">
       <motion.div
         className="border-none p-4 bg-light rounded"
         initial={{ opacity: 0 }}

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import AppInput from "../../app-input";
-
+import { AiOutlineDownCircle, AiOutlineUpCircle } from "react-icons/ai";
 import "./style.css";
+import useListToggleContent from "../../../custom-hooks/useListToggleContent";
 
 const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
+  const { showMore, showLess, listIndex } = useListToggleContent();
+
   return (
     <div>
       {!isSignup && (
@@ -12,7 +15,7 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
         </div>
       )}
       <div>
-        {MockFriendsList.map((obj) => (
+        {MockFriendsList.map((obj, index) => (
           <div
             className={`d-flex row ${
               isSignup
@@ -68,21 +71,44 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
                     <span
                       className={`${
                         isSignup && "signup-addfriend-button d-md-none"
-                      }`}
+                      } ${isMessage && "d-none"}`}
                     >
-                      {" "}
-                      {isMessage ? "Send Message" : "Add"}{" "}
+                      Add
                     </span>
                   </button>
                 </div>
               </div>
-              <p
-                className={`${
-                  isSignup && "mt-1 ms-4 ps-2 ps-md-0 ms-md-0 mt-md-0"
-                }`}
-              >
-                {obj.bio}
-              </p>
+              <div className="position-relative">
+                <p
+                  className={`${
+                    isSignup && "mt-1 ms-4 ps-2 ps-md-0 ms-md-0 mt-md-0"
+                  } ${
+                    obj.bio.length > 50 &&
+                    !listIndex.includes(index) &&
+                    "signup-friends-bio"
+                  }`}
+                >
+                  {obj.bio}{" "}
+                  {isSignup && obj.bio.length > 50 && (
+                    <span
+                      onClick={() => showLess(index)}
+                      className="ms-1 d-md-none"
+                    >
+                      <AiOutlineUpCircle size={23} />
+                    </span>
+                  )}
+                </p>
+                {isSignup && obj.bio.length > 50 && (
+                  <span
+                    className="signup-friend-bio-icon d-flex d-md-none"
+                    onClick={() => showMore(index)}
+                  >
+                    {!listIndex.includes(index) && (
+                      <AiOutlineDownCircle size={23} />
+                    )}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         ))}
