@@ -1,5 +1,5 @@
 import React from "react";
-import { sideBarData } from "../../utils/common";
+import { sideBarData } from "../../utils/common-data";
 import "./style.css";
 import { useNavigate, useParams } from "react-router-dom";
 

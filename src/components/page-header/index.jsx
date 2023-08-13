@@ -1,5 +1,5 @@
 import React from "react";
-import { page_info } from "../../utils/common";
+import { page_info } from "../../utils/common-data";
 import { MdOutlineArrowBack } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
 

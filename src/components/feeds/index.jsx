@@ -4,7 +4,8 @@ import { FaBookmark, FaRegBookmark, FaRegComment } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 
 import "./style.css";
-import { NavigateToProfile, feedInfo } from "../../utils/common";
+import { feedInfo } from "../../utils/common-data";
+import { NavigateToProfile } from "../../utils/common-function";
 
 const Feeds = ({ feedData, type }) => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./style.css";
-import { SignupInterestedFields } from "../../utils/common";
+import { SignupInterestedFields } from "../../utils/common-data";
 
 const InterestedFields = () => {
   const [userInterest, setUserInterest] = useState([]);

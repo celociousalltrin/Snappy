@@ -8,7 +8,7 @@ import SignupAddFriends from "./signup-add-friends";
 import useMultiStepForm from "../../custom-hooks/useMultiStepForm";
 import "./style.css";
 import MultiStepFormSteps from "./multi-step-form-steps";
-import { signupComponentHeader } from "../../utils/common";
+import { signupComponentHeader } from "../../utils/common-data";
 import UserBio from "./user-bio";
 import Framer from "../../custom-sandbox/framer";
 import { AnimatePresence, motion } from "framer-motion";

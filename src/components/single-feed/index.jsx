@@ -9,7 +9,7 @@ import "./style.css";
 import AppTextArea from "../app-text-area";
 import AppModal from "../app-modal";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { NavigateToProfile } from "../../utils/common";
+import { NavigateToProfile } from "../../utils/common-function";
 
 const SingleFeed = ({ singleFeedData }) => {
   const init = {

@@ -15,7 +15,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useNavigate } from "react-router-dom";
-import { bottomNavbarData, sideBarData } from "../../utils/common";
+import { bottomNavbarData, sideBarData } from "../../utils/common-data";
 
 import "./style.css";
 

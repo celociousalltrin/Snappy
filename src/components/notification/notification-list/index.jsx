@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 
 import "./style.css";
-import { notificationInfo } from "../../../utils/common";
+import { notificationInfo } from "../../../utils/common-data";
 
 const NotificationList = ({ list }) => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import { modelOpenInfo } from "../../utils/common";
+import { modelOpenInfo } from "../../utils/common-data";
 import { feedMetaDataList } from "../../utils/mock-common";
 
 import "./style.css";

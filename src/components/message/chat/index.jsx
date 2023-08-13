@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 import { mockChatInfo, mockMessageInfo } from "../../../utils/mock-common";
-import { NavigateToProfile } from "../../../utils/common";
+import { NavigateToProfile } from "../../../utils/common-function";
 import Modal from "react-bootstrap/Modal";
 import AppInput from "../../app-input";
 import { AiOutlineClose } from "react-icons/ai";

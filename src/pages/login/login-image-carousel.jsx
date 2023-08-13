@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
-import { loginCarouselImageDetails } from "../../utils/common";
+import { loginCarouselImageDetails } from "../../utils/common-data";
 
 import "./style.css";
 
