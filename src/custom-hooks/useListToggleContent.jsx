@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 
 const useListToggleContent = () => {
-  const [listIndex, setListIndex] = useState([]);
+  const [listUniqueId, setListUniqueId] = useState([]);
+  console.log(
+    "🚀 ~ file: useListToggleContent.jsx:5 ~ useListToggleContent ~ listUniqueId:",
+    listUniqueId
+  );
 
-  const showMore = (index) => {
-    setListIndex([...listIndex, index]);
+  const showMore = (id) => {
+    setListUniqueId([...listUniqueId, id]);
   };
 
-  const showLess = (index) => {
-    setListIndex(listIndex.filter((obj) => obj !== index));
+  const showLess = (id) => {
+    setListUniqueId(listUniqueId.filter((obj) => obj !== id));
   };
-  return { showMore, showLess, listIndex };
+  return { showMore, showLess, listUniqueId };
 };
 
 export default useListToggleContent;

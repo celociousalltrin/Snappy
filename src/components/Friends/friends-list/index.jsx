@@ -5,7 +5,7 @@ import "./style.css";
 import useListToggleContent from "../../../custom-hooks/useListToggleContent";
 
 const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
-  const { showMore, showLess, listIndex } = useListToggleContent();
+  const { showMore, showLess, listUniqueId } = useListToggleContent();
 
   return (
     <div>
@@ -84,7 +84,7 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
                     isSignup && "mt-1 ms-4 ps-2 ps-md-0 ms-md-0 mt-md-0"
                   } ${
                     obj.bio.length > 50 &&
-                    !listIndex.includes(index) &&
+                    !listUniqueId.includes(index) &&
                     "signup-friends-bio"
                   }`}
                 >
@@ -103,7 +103,7 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
                     className="signup-friend-bio-icon d-flex d-md-none"
                     onClick={() => showMore(index)}
                   >
-                    {!listIndex.includes(index) && (
+                    {!listUniqueId.includes(index) && (
                       <AiOutlineDownCircle size={23} />
                     )}
                   </span>

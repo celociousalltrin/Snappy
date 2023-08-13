@@ -4,7 +4,7 @@ import useListToggleContent from "../../custom-hooks/useListToggleContent";
 import "./style.css";
 
 const ExperimentalComponent = ({ list }) => {
-  const { showMore, showLess, listIndex } = useListToggleContent();
+  const { showMore, showLess, listUniqueId } = useListToggleContent();
   const [showAnswers, setShowAnswers] = useState(false);
   const [listCount, setListCount] = useState(5);
   return (
@@ -28,7 +28,7 @@ const ExperimentalComponent = ({ list }) => {
               </div>
               <div>
                 <h5>{obj.question}</h5>
-                {listIndex.includes(i) || showAnswers ? (
+                {listUniqueId.includes(i) || showAnswers ? (
                   <div className="d-flex">
                     <p>{obj.answer}</p>
                     {!showAnswers && (
