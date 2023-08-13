@@ -34,7 +34,7 @@ const ExperimentalComponent = ({ list }) => {
                     {!showAnswers && (
                       <>
                         <p
-                          onClick={() => showLess(i)}
+                          onClick={(e) => showLess(e, i)}
                           className="ms-3 text-danger cursor-pointer text-nowrap me-3 text-decoration-underline"
                         >
                           Hide Answer
@@ -44,7 +44,7 @@ const ExperimentalComponent = ({ list }) => {
                   </div>
                 ) : (
                   <p
-                    onClick={() => showMore(i)}
+                    onClick={(e) => showMore(e, i)}
                     className="cursor-pointer text-primary"
                   >
                     <u>Show Answer</u>

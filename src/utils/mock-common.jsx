@@ -267,6 +267,30 @@ export const feedData = [
       image: snappImage,
     },
   },
+  {
+    id: "4",
+    profile_img: mutual1,
+    name: "Smithy bou",
+    snappy_username: "smithhh111",
+    snapped_at: "21h",
+    snapp: {
+      message:
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia alias facilis, neque velit necessitatibus commodi222222!",
+      image: snappImage,
+    },
+  },
+  {
+    id: "5",
+    profile_img: mutual1,
+    name: "Smithy bou",
+    snappy_username: "smithhh111",
+    snapped_at: "21h",
+    snapp: {
+      message:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus maxime voluptates alias similique reprehenderit a suscipit adipisci nemo, debitis ullam incidunt tempora, aliquid animi natus illo neque accusantium. Repudiandae unde aperiam minus fugit deserunt tempore amet culpa, quae labore. Corporis?",
+      image: snappImage,
+    },
+  },
 ];
 
 export const singleFeedData = {

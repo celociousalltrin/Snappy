@@ -4,6 +4,10 @@ export const navigateToProfile = (e, navigate, username, pageId) => {
   navigate(`/profile/${username}`, { state: { from: pageId } });
 };
 
-export const toggleDetails = (input, number) => {
+export const isToggleContent = (input, number) => {
   return input.length > number;
+};
+
+export const sliceContent = (string, number) => {
+  return `${string.slice(0, number)}...`;
 };

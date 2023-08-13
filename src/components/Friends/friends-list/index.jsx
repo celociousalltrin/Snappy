@@ -3,7 +3,7 @@ import AppInput from "../../app-input";
 import { AiOutlineDownCircle, AiOutlineUpCircle } from "react-icons/ai";
 import "./style.css";
 import useListToggleContent from "../../../custom-hooks/useListToggleContent";
-import { toggleDetails } from "../../../utils/common-function";
+import { isToggleContent } from "../../../utils/common-function";
 
 const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
   const { showMore, showLess, listUniqueId } = useListToggleContent();
@@ -84,25 +84,25 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
                   className={`${
                     isSignup && "mt-1 ms-4 ps-2 ps-md-0 ms-md-0 mt-md-0"
                   } ${
-                    toggleDetails(obj.bio, 50) &&
+                    isToggleContent(obj.bio, 50) &&
                     !listUniqueId.includes(index) &&
                     "signup-friends-bio"
                   }`}
                 >
                   {obj.bio}{" "}
-                  {isSignup && toggleDetails(obj.bio, 50) && (
+                  {isSignup && isToggleContent(obj.bio, 50) && (
                     <span
-                      onClick={() => showLess(index)}
+                      onClick={(e) => showLess(e, index)}
                       className="ms-1 d-md-none"
                     >
                       <AiOutlineUpCircle size={23} />
                     </span>
                   )}
                 </p>
-                {isSignup && toggleDetails(obj.bio, 50) && (
+                {isSignup && isToggleContent(obj.bio, 50) && (
                   <span
                     className="signup-friend-bio-icon d-flex d-md-none"
-                    onClick={() => showMore(index)}
+                    onClick={(e) => showMore(e, index)}
                   >
                     {!listUniqueId.includes(index) && (
                       <AiOutlineDownCircle size={23} />
