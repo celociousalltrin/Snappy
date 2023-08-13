@@ -120,4 +120,20 @@
   .signup-user-info-container > div > input {
     width: 100%;
   }
+  .signup-content-expand {
+    height: 3rem;
+    overflow: hidden;
+  }
+  .content-expand-icon {
+    position: absolute;
+    top: 2%;
+    right: 0%;
+    color: rgb(13, 110, 253);
+  }
+  .content-expand-interest-icon {
+    position: absolute;
+    top: 28%;
+    right: -1%;
+    color: rgb(13, 110, 253);
+  }
 }

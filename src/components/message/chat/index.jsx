@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 import { mockChatInfo, mockMessageInfo } from "../../../utils/mock-common";
-import { NavigateToProfile } from "../../../utils/common-function";
+import { navigateToProfile } from "../../../utils/common-function";
 import Modal from "react-bootstrap/Modal";
 import AppInput from "../../app-input";
 import { AiOutlineClose } from "react-icons/ai";
@@ -50,7 +50,7 @@ const Chat = () => {
                     : null
                 }
                 onClick={(e) =>
-                  NavigateToProfile(e, navigate, obj.users.user_name, page_id)
+                  navigateToProfile(e, navigate, obj.users.user_name, page_id)
                 }
               />
             </div>
@@ -59,7 +59,7 @@ const Chat = () => {
                 <p
                   className="fw-bold mb-1 cursor-pointer profile__name"
                   onClick={(e) =>
-                    NavigateToProfile(e, navigate, obj.users.user_name, page_id)
+                    navigateToProfile(e, navigate, obj.users.user_name, page_id)
                   }
                 >
                   {obj.users.user_name}

@@ -3,6 +3,7 @@ import AppInput from "../../app-input";
 import { AiOutlineDownCircle, AiOutlineUpCircle } from "react-icons/ai";
 import "./style.css";
 import useListToggleContent from "../../../custom-hooks/useListToggleContent";
+import { toggleDetails } from "../../../utils/common-function";
 
 const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
   const { showMore, showLess, listUniqueId } = useListToggleContent();
@@ -83,13 +84,13 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
                   className={`${
                     isSignup && "mt-1 ms-4 ps-2 ps-md-0 ms-md-0 mt-md-0"
                   } ${
-                    obj.bio.length > 50 &&
+                    toggleDetails(obj.bio, 50) &&
                     !listUniqueId.includes(index) &&
                     "signup-friends-bio"
                   }`}
                 >
                   {obj.bio}{" "}
-                  {isSignup && obj.bio.length > 50 && (
+                  {isSignup && toggleDetails(obj.bio, 50) && (
                     <span
                       onClick={() => showLess(index)}
                       className="ms-1 d-md-none"
@@ -98,7 +99,7 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
                     </span>
                   )}
                 </p>
-                {isSignup && obj.bio.length > 50 && (
+                {isSignup && toggleDetails(obj.bio, 50) && (
                   <span
                     className="signup-friend-bio-icon d-flex d-md-none"
                     onClick={() => showMore(index)}

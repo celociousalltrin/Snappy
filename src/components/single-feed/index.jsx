@@ -9,7 +9,7 @@ import "./style.css";
 import AppTextArea from "../app-text-area";
 import AppModal from "../app-modal";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { NavigateToProfile } from "../../utils/common-function";
+import { navigateToProfile } from "../../utils/common-function";
 
 const SingleFeed = ({ singleFeedData }) => {
   const init = {
@@ -37,7 +37,7 @@ const SingleFeed = ({ singleFeedData }) => {
               height="40px"
               className="profile-image me-2 cursor-pointer"
               onClick={(e) =>
-                NavigateToProfile(
+                navigateToProfile(
                   e,
                   navigate,
                   singleFeedData.snappy_username,
@@ -49,7 +49,7 @@ const SingleFeed = ({ singleFeedData }) => {
               <p
                 className="fw-bold mb-0 cursor-pointer profile__name"
                 onClick={(e) =>
-                  NavigateToProfile(
+                  navigateToProfile(
                     e,
                     navigate,
                     singleFeedData.snappy_username,

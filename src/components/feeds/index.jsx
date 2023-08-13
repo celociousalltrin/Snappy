@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import "./style.css";
 import { feedInfo } from "../../utils/common-data";
-import { NavigateToProfile } from "../../utils/common-function";
+import { navigateToProfile } from "../../utils/common-function";
 
 const Feeds = ({ feedData, type }) => {
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ const Feeds = ({ feedData, type }) => {
                   height="40px"
                   className="feed-profile-image"
                   onClick={(e) =>
-                    NavigateToProfile(e, navigate, obj.snappy_username, page_id)
+                    navigateToProfile(e, navigate, obj.snappy_username, page_id)
                   }
                 />
               </div>
@@ -48,7 +48,7 @@ const Feeds = ({ feedData, type }) => {
                   <p
                     className="fw-bold mb-1 profile_name"
                     onClick={(e) =>
-                      NavigateToProfile(
+                      navigateToProfile(
                         e,
                         navigate,
                         obj.snappy_username,
