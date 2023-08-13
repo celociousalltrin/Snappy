@@ -18,7 +18,7 @@ const AppTextArea = ({ placeholder, rows, cols, type, isNormalTextArea }) => {
     <div>
       <textarea
         ref={elementRef}
-        className={`${type === 1 ? "border mt-2" : ""} ${
+        className={`${type === 1 ? "border mt-2 ms-2 ms-md-0" : ""} ${
           isNormalTextArea ? "normal-text-area" : "app-text-area"
         }`}
         onChange={isNormalTextArea ? handleChange : handleAppTextAreaChange}

@@ -50,7 +50,7 @@ const SignUp = () => {
         opacity: isFinish ? 0 : 1,
       }}
     >
-      <div className="shadow p-3 bg-white rounded signup-parent-container text-center">
+      <div className="shadow p-3 mt-4 bg-white rounded signup-parent-container text-center">
         <h3 className="mb-4 mt-0 pt-0">Create Your Snappy Account</h3>
         <MultiStepFormSteps currentIndex={currentIndex} />
         {!(currentIndex === components.length) && (
