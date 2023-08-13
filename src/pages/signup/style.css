@@ -17,20 +17,6 @@
   bottom: 5%;
 }
 
-.signup-create-password-container {
-  padding: 1rem 2.5rem 1rem;
-}
-
-.signup-create-password-container > div > label {
-  margin-bottom: 0.5rem;
-  display: block;
-  text-align: start;
-  margin-left: 0.2rem;
-}
-.signup-create-password-container > div > div > input {
-  width: 300px !important;
-}
-
 .signup-edit-prof__camicon1 {
   color: white;
   background-color: #000;
