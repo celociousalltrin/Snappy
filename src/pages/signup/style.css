@@ -12,33 +12,9 @@
   overflow: hidden;
 }
 
-.signup-content-container {
-  display: inline-block;
-  max-width: 70%;
-  max-height: 63%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  margin: auto;
-  background-color: rgb(245, 245, 245);
-}
-
 .signup-button-container {
   position: absolute;
   bottom: 5%;
-}
-
-.signup-user-info-container > div:not(:nth-child(-n + 2)) {
-  margin-top: 1.3rem;
-}
-
-.signup-user-info-container > div > label {
-  display: block;
-  text-align: start;
-  margin-left: 0.3rem;
-}
-
-.signup-user-info-container > div > input {
-  width: 80%;
 }
 
 .signup-create-password-container {
@@ -106,6 +82,28 @@
   .signup-un-check-icon {
     padding: 0.5rem 1rem 0.5rem 1rem;
   }
+  .signup-content-container {
+    display: inline-block;
+    max-width: 70%;
+    max-height: 63%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: auto;
+    background-color: rgb(245, 245, 245);
+  }
+  .signup-user-info-container > div:not(:nth-child(-n + 2)) {
+    margin-top: 1.3rem;
+  }
+
+  .signup-user-info-container > div > label {
+    display: block;
+    text-align: start;
+    margin-left: 0.3rem;
+  }
+
+  .signup-user-info-container > div > input {
+    width: 80%;
+  }
 }
 
 @media (max-width: 767px) {
@@ -114,5 +112,26 @@
   }
   .signup-un-check-icon {
     padding: 0.3rem 0.65rem 0.3rem 0.65rem;
+  }
+  .signup-content-container {
+    display: inline-block;
+    max-height: 60%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: auto;
+    background-color: rgb(245, 245, 245);
+  }
+  .signup-user-info-container > div:not(:first-child) {
+    margin-top: 1.3rem;
+  }
+
+  .signup-user-info-container > div > label {
+    display: block;
+    text-align: start;
+    margin-left: 0.3rem;
+  }
+
+  .signup-user-info-container > div > input {
+    width: 100%;
   }
 }

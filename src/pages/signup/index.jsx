@@ -56,7 +56,7 @@ const SignUp = () => {
         {!(currentIndex === components.length) && (
           <AnimatePresence mode="wait" initial={false} custom={direction}>
             <motion.div
-              className="shadow-none p-4 pb-5 mb-5 mt-4 rounded signup-content-container"
+              className="shadow-none pt-4 ps-1 pe-3 p-md-4 pb-5 mb-5 mt-4 rounded signup-content-container"
               key={currentIndex}
               variants={signupFormVariants}
               initial="initial"
