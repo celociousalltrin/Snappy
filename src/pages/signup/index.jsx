@@ -65,7 +65,7 @@ const SignUp = () => {
               custom={direction}
               transition={{ duration: 0.7 }}
             >
-              <h4 className="mb-3">
+              <h4 className="mb-3 ms-1">
                 {
                   signupComponentHeader.find(
                     (obj) => obj.index === currentIndex

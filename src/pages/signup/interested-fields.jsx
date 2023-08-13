@@ -16,7 +16,7 @@ const InterestedFields = () => {
   };
 
   return (
-    <div className="row">
+    <div className="row ms-3 ms-md-0 m-auto">
       <p
         className={`${
           userInterest.length > 4 && "text-primary"
@@ -30,7 +30,7 @@ const InterestedFields = () => {
         and not more than 5 interest
       </p>
       {SignupInterestedFields.map((obj) => (
-        <div className="col-md-3">
+        <div className="col-md-4 col-lg-3">
           <div
             className={`shadow p-3 mb-5 rounded interest-single-container ${
               userInterest.includes(obj.id) && "bg-primary text-light"
