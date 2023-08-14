@@ -1,0 +1,52 @@
+.multi-step-form-container {
+  margin: auto;
+  width: 75%;
+  margin-top: 2%;
+  position: relative;
+}
+
+.multi-step-form-parent-container {
+  height: 90vh;
+  padding: 0;
+  background-color: rgb(245, 245, 245);
+  overflow: hidden;
+}
+
+.multi-step-form-button-container {
+  position: absolute;
+  bottom: 5%;
+}
+
+@media (max-width: 767px) {
+  .form-step-check-icon {
+    padding: 0.2rem 0.05rem 0.025rem;
+  }
+  .form-step-un-check-icon {
+    padding: 0.3rem 0.65rem 0.3rem 0.65rem;
+  }
+  .multi-step-form-content-container {
+    display: inline-block;
+    max-height: 60%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: auto;
+    background-color: rgb(245, 245, 245);
+  }
+}
+@media (min-width: 768px) {
+  .form-step-check-icon {
+    padding: 0.4rem 0.4rem 0.2rem;
+  }
+  .form-step-un-check-icon {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+  .multi-step-form-content-container {
+    display: inline-block;
+    max-width: 70%;
+    max-height: 63%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: auto;
+    background-color: rgb(245, 245, 245);
+  }
+}
