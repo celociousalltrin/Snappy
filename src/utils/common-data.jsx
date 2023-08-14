@@ -150,6 +150,12 @@ export const signupComponentHeader = [
   { index: 6, header: "Suggested Snappers you can connect" },
 ];
 
+export const ForgotPasswordHeader = [
+  { index: 0, header: "Email" },
+  { index: 1, header: "Verify Code" },
+  { index: 2, header: "Reset Password" },
+];
+
 export const SignupInterestedFields = [
   { id: 1, field: "Science" },
   { id: 2, field: "Technology" },
