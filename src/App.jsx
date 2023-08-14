@@ -12,6 +12,7 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
 import SignupSuccess from "./pages/signup-success";
+import ForgotPassword from "./pages/forgot-password";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signup-success" element={<SignupSuccess />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/:page_id" element={<Home />} />
         <Route path="/:page_id/:id" element={<Home />} />
         <Route path="/:page_id/:id/:sec_id" element={<Home />} />

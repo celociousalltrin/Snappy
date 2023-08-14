@@ -475,7 +475,7 @@ export const MockFriendsList = [
     name: "Antony",
     profile_img: mutual3,
     snappy_username: "antony76677",
-    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur enim rerum molestiae.",
+    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum voluptatum voluptates, culpa molestiae quam fugit laboriosam, non saepe veniam consequuntur vitae sapiente dicta.",
     connected: true,
   },
   {
@@ -499,7 +499,7 @@ export const MockFriendsList = [
     name: "Jenifer",
     profile_img: mutual4,
     snappy_username: "jenefier1213",
-    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt provident recusandae qui pariatur.",
+    bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum illo pariatur atque sit quaerat. Blanditiis at doloribus quisquam obcaecati?",
     connected: false,
   },
   {
@@ -507,7 +507,7 @@ export const MockFriendsList = [
     name: "Antony",
     profile_img: mutual3,
     snappy_username: "antony76677",
-    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur enim rerum molestiae.",
+    bio: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt aspernatur vitae veniam blanditiis culpa ab vero, assumenda rerum harum voluptates minus eveniet cupiditate illum exercitationem sint cum odit aliquam facere!",
     connected: true,
   },
   {

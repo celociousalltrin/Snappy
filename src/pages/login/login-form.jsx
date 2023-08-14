@@ -44,7 +44,10 @@ const LoginForm = () => {
             <Form.Control type="password" placeholder="Password" />
           </Form.Group>
         </div>
-        <p className="text-primary mt-0 login-forgot-password">
+        <p
+          className="text-primary mt-0 login-forgot-password"
+          onClick={() => navigate("/forgot-password")}
+        >
           Forgot Your Password ?
         </p>
         <button

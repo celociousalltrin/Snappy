@@ -52,7 +52,10 @@ const SignUp = () => {
     >
       <div className="shadow p-3 mt-4 bg-white rounded signup-parent-container text-center">
         <h3 className="mb-4 mt-0 pt-0">Create Your Snappy Account</h3>
-        <MultiStepFormSteps currentIndex={currentIndex} />
+        <MultiStepFormSteps
+          currentIndex={currentIndex}
+          componentLength={components.length}
+        />
         {!(currentIndex === components.length) && (
           <AnimatePresence mode="wait" initial={false} custom={direction}>
             <motion.div

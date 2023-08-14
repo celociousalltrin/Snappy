@@ -5,12 +5,12 @@ import { SignupStepContainervariants } from "../../utils/framer-variants";
 import { FramerCheckIcon } from "../../utils/framer-svgs";
 import { signupStepIconVariants } from "../../utils/framer-variants";
 
-const MultiStepFormSteps = ({ currentIndex }) => {
+const MultiStepFormSteps = ({ currentIndex, componentLength }) => {
   const activeSteps = (input) => {
     return currentIndex >= input;
   };
 
-  const customArray = useCustomArray(7);
+  const customArray = useCustomArray(componentLength);
 
   return (
     <div className="d-flex justify-content-between justify-content-md-around">
