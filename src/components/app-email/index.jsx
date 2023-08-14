@@ -1,6 +1,5 @@
 import { Form } from "react-bootstrap";
 import "./style.css";
-
 const AppEmail = ({ setIsNotRecieved, isVerifyCode }) => {
   return (
     <div className="ps-3 p-md-0 mb-0 mb-md-3 forgot-password-email-container">

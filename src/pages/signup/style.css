@@ -72,6 +72,13 @@
     right: -1%;
     color: rgb(13, 110, 253);
   }
+  .or-icon {
+    position: absolute;
+    padding: 0rem 0.7rem;
+    top: 71%;
+    right: 40%;
+    background-color: rgb(245, 245, 245);
+  }
 }
 
 @media (min-width: 768px) {
@@ -87,5 +94,12 @@
 
   .signup-user-info-container > div > input {
     width: 80%;
+  }
+  .or-icon {
+    position: absolute;
+    padding: 0rem 0.7rem;
+    top: 71%;
+    right: 50%;
+    background-color: rgb(245, 245, 245);
   }
 }
