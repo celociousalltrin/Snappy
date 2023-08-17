@@ -1,3 +1,5 @@
+import "./style.css";
+
 export const signupFormVariants = {
   initial: (direction) => ({
     x: direction === "next" ? "-100%" : "100%",
@@ -38,5 +40,28 @@ export const signupStepIconVariants = {
       duration: active ? 1 : 0.8,
       delay: active ? 0.7 : 0,
     },
+  }),
+};
+
+export const ListExpandVariants = {
+  hidden: {
+    height: "var(--content-height-hidden)",
+  },
+  visible: {
+    height: "auto",
+    transition: { duration: 0.7 },
+  },
+  exit: (isExpand) => ({
+    height: "var(--content-height-hidden)",
+    overflow: "hidden",
+    transition: { duration: isExpand ? 0 : 0.7 },
+  }),
+};
+
+export const ExpandVariants = {
+  visible: (isVisible) => ({
+    height: isVisible ? "auto" : "3.4rem",
+    overflow: "hidden",
+    transition: { duration: 0.5 },
   }),
 };

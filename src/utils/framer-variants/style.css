@@ -1,0 +1,16 @@
+:root {
+  --content-height-hidden-small: 5rem;
+  --content-height-hidden-large: 3rem;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --content-height-hidden: var(--content-height-hidden-small);
+  }
+}
+
+@media (min-width: 769px) {
+  :root {
+    --content-height-hidden: var(--content-height-hidden-large);
+  }
+}

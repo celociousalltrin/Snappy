@@ -3,3 +3,8 @@
   margin: 15px;
   background-color: antiquewhite;
 }
+
+.framer-demo {
+  height: 2rem;
+  overflow: hidden;
+}

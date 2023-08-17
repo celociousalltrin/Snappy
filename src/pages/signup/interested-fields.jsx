@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import { SignupInterestedFields } from "../../utils/common-data";
 import { AiOutlineDownCircle, AiOutlineUpCircle } from "react-icons/ai";
 import useToggleContent from "../../custom-hooks/useToggleContent";
+import AppExpand from "../../components/app-expand";
 
 const InterestedFields = () => {
   const [userInterest, setUserInterest] = useState([]);
   const { isShow, showLess, showMore } = useToggleContent();
-
+  const [showIcon, setShowIcon] = useState(true);
   const handleInterestAction = (input) => {
     if (userInterest.includes(input)) {
       setUserInterest(userInterest.filter((obj) => obj !== input));
@@ -29,26 +30,27 @@ const InterestedFields = () => {
         <span className="ms-1 fw-normal">Selected</span>
       </p>
       <div className="position-relative">
-        <p
-          className={`text-muted text-start fs-6 mb-4 ${
-            !isShow && "signup-content-expand"
-          }`}
-        >
-          To get a personalized feed in Snappy, you must select atleast 3
-          interest and not more than 5 interest
-          <span onClick={showLess} className="d-md-none">
-            {" "}
-            <AiOutlineUpCircle size={23} color="rgb(13, 110, 253)" />
-          </span>
-        </p>
-        {!isShow && (
-          <span
-            className="content-expand-interest-icon d-md-none"
-            onClick={showMore}
-          >
-            <AiOutlineDownCircle size={23} />
-          </span>
-        )}
+        <AppExpand setShowIcon={setShowIcon} isVisible={isShow}>
+          <p className="text-muted text-start fs-6 mb-4">
+            To get a personalized feed in Snappy, you must select atleast 3
+            interest and not more than 5 interest
+            <span onClick={showLess} className="d-md-none">
+              {" "}
+              {isShow && (
+                <AiOutlineUpCircle size={23} color="rgb(13, 110, 253)" />
+              )}
+            </span>
+          </p>
+
+          {!isShow && (
+            <span
+              className="content-expand-interest-icon d-md-none"
+              onClick={showMore}
+            >
+              {showIcon && <AiOutlineDownCircle size={23} />}
+            </span>
+          )}
+        </AppExpand>
       </div>
       {SignupInterestedFields.map((obj) => (
         <div className="col-md-4 col-lg-3">

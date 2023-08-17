@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { BiSolidChevronDown, BiSolidChevronUp } from "react-icons/bi";
 import { FaBookmark, FaRegBookmark, FaRegComment } from "react-icons/fa";
@@ -12,6 +12,7 @@ import {
   isToggleContent,
 } from "../../utils/common-function";
 import useListToggleContent from "../../custom-hooks/useListToggleContent";
+import AppListExpand from "../app-list-expand";
 
 const Feeds = ({ feedData, type }) => {
   const { listUniqueId, showLess, showMore } = useListToggleContent();
@@ -77,29 +78,31 @@ const Feeds = ({ feedData, type }) => {
                       "feeds-message-container"
                     }`}
                   >
-                    {isToggleContent(obj.snapp.message, 105) &&
-                    !listUniqueId.includes(obj.id) ? (
-                      <span>
-                        {sliceContent(obj.snapp.message, 105)}{" "}
-                        <BiSolidChevronDown
-                          color="rgb(13, 110, 253)"
-                          size={23}
-                          onClick={(e) => showMore(e, obj.id)}
-                        />{" "}
-                      </span>
-                    ) : (
-                      <span>
-                        {obj.snapp.message}
-                        {isToggleContent(obj.snapp.message, 105) && (
-                          <BiSolidChevronUp
+                    <AppListExpand isExpand={listUniqueId.includes(obj.id)}>
+                      {isToggleContent(obj.snapp.message, 105) &&
+                      !listUniqueId.includes(obj.id) ? (
+                        <span>
+                          {sliceContent(obj.snapp.message, 105)}{" "}
+                          <BiSolidChevronDown
                             color="rgb(13, 110, 253)"
-                            className="ms-2"
                             size={23}
-                            onClick={(e) => showLess(e, obj.id)}
-                          />
-                        )}
-                      </span>
-                    )}
+                            onClick={(e) => showMore(e, obj.id)}
+                          />{" "}
+                        </span>
+                      ) : (
+                        <span>
+                          {obj.snapp.message}
+                          {isToggleContent(obj.snapp.message, 105) && (
+                            <BiSolidChevronUp
+                              color="rgb(13, 110, 253)"
+                              className="ms-2"
+                              size={23}
+                              onClick={(e) => showLess(e, obj.id)}
+                            />
+                          )}
+                        </span>
+                      )}
+                    </AppListExpand>
                   </p>
                   <img
                     src={obj.snapp.image}

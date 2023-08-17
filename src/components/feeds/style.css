@@ -19,16 +19,3 @@
 .profile_name:hover {
   text-decoration: underline;
 }
-
-@media (min-width: 768px) {
-  .feeds-message-container {
-    height: 3rem;
-    overflow: hidden;
-  }
-}
-@media (max-width: 767px) {
-  .feeds-message-container {
-    height: 4.5rem;
-    overflow: hidden;
-  }
-}

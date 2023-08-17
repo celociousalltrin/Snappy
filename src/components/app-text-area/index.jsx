@@ -2,8 +2,6 @@ import React, { useRef } from "react";
 import "./style.css";
 
 const AppTextArea = ({ placeholder, rows, cols, type, isNormalTextArea }) => {
-  console.log("🚀 ~ file: index.jsx:5 ~ AppTextArea ~ cols:", cols);
-  console.log("🚀 ~ file: index.jsx:5 ~ AppTextArea ~ rows:", rows);
   const elementRef = useRef();
 
   const handleAppTextAreaChange = (e) => {

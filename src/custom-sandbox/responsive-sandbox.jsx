@@ -1,28 +1,61 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Offcanvas from "react-bootstrap/Offcanvas";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import { BsThreeDots } from "react-icons/bs";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
+import "./style.css";
 
 function BasicExample() {
-  const styleFn = (input) => {
-    switch (input) {
-      case 1:
-        return "text-primary fs-6 ";
-      case 2:
-        return "text-secondary";
-      default:
-        return "text-danger";
-    }
-  };
+  const [list, setList] = useState([]);
+  const [textValue, setTextValue] = useState("");
   return (
     <div>
-      <h1 className={styleFn(1)}>Hello world</h1>
+      <input
+        type="text"
+        onChange={(e) => setTextValue(e.target.value)}
+        value={textValue}
+      />
+
+      <button
+        onClick={() => {
+          setList([...list, textValue]);
+          setTextValue("");
+        }}
+        className="btn btn-success ms-4"
+      >
+        Add
+      </button>
+      <AnimatePresence>
+        {list.map((obj, i) => (
+          <AnimateComponent key={obj}>
+            <>
+              <p>{obj}</p>
+              <button
+                onClick={() => {
+                  setList(list.filter((o) => o != obj));
+                  setTextValue("");
+                }}
+                className="btn btn-danger"
+              >
+                Delete
+              </button>
+            </>
+          </AnimateComponent>
+        ))}
+      </AnimatePresence>
     </div>
   );
 }
+
+const AnimateComponent = (props) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, y: [-10, 0], transition: { duration: 1 } }}
+      exit={{ opacity: 0, x: [null, -100], transition: { duration: 2 } }}
+      key={props.key}
+    >
+      {props.children}
+    </motion.div>
+  );
+};
 
 export default BasicExample;

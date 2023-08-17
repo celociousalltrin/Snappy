@@ -10,4 +10,4 @@ const SandBox = () => {
   );
 };
 
-export default SandBox; 
+export default SandBox;

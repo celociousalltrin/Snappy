@@ -23,29 +23,29 @@
 //   //   },
 //   // };
 
-  // const parentVariants = {
-  //   animate: {
-  //     transition: {
-  //       staggerChildren: 1,
-  //       staggerDirection: -1,
-  //     },
-  //   },
-  // };
+// const parentVariants = {
+//   animate: {
+//     transition: {
+//       staggerChildren: 1,
+//       staggerDirection: -1,
+//     },
+//   },
+// };
 
-  // const childVariants = {
-  //   initial: {
-  //     opacity: 0,
-  //     y: -20,
-  //   },
-  //   animate: {
-  //     opacity: 1,
-  //     y: 0,
-  //   },
-  //   exit: {
-  //     opacity: 0,
-  //     y: -20,
-  //   },
-  // };
+// const childVariants = {
+//   initial: {
+//     opacity: 0,
+//     y: -20,
+//   },
+//   animate: {
+//     opacity: 1,
+//     y: 0,
+//   },
+//   exit: {
+//     opacity: 0,
+//     y: -20,
+//   },
+// };
 
 //   const items = ["Item 1", "Item 2", "Item 3"];
 
@@ -144,69 +144,30 @@ import { AnimatePresence, motion } from "framer-motion";
 import SandIcon from "./sandbox-customhooks";
 import CheckIcon from "./sandbox-customhooks";
 
-const components = [
-  "Component1",
-  "Component2",
-  "Component3",
-  "Component4",
-  "Component5",
-  "Component6",
-  "Component7",
-];
-
-const variants = {
-  enter: (direction) => {
-    return {
-      x: direction === "next" ? "-100%" : "100%",
-    };
-  },
-  visible: {
-    x: 0,
-  },
-  exit: (direction) => ({
-    x: direction === "next" ? "100%" : "-100%",
-    opacity: 0,
-  }),
-};
-
 const MyComponent = () => {
-  const [currentComponentIndex, setCurrentComponentIndex] = useState(0);
-  const [direction, setDirection] = useState("next");
-
-  const handleClickNext = () => {
-    setCurrentComponentIndex(
-      (prevIndex) => (prevIndex + 1) % components.length
-    );
-    setDirection("next");
+  const [move, setMove] = useState(false);
+  const myVariants = {
+    moveleft: {
+      x: 500,
+      transition: {
+        duration: 1,
+      },
+    },
+    moveRight: {
+      x: 100,
+      transition: {
+        duration: 1,
+      },
+    },
   };
-
-  const handleClickBack = () => {
-    setCurrentComponentIndex((prevIndex) =>
-      prevIndex === 0 ? components.length - 1 : prevIndex - 1
-    );
-    setDirection("back");
-  };
-
   return (
-    <div>
-      <AnimatePresence mode="wait" initial={false} custom={direction}>
-        <motion.div
-          key={currentComponentIndex}
-          custom={direction}
-          variants={variants}
-          initial="enter"
-          animate="visible"
-          exit="exit"
-        >
-          {/* Render your current component here, for example: */}
-          <div>{components[currentComponentIndex]}</div>
-        </motion.div>
-      </AnimatePresence>
-
-      <CheckIcon />
-      <button onClick={handleClickBack}>Back</button>
-      <button onClick={handleClickNext}>Next</button>
-    </div>
+    <motion.div
+      initial={false}
+      variants={myVariants}
+      animate={move ? "moveleft" : "moveRight"}
+      style={{ backgroundColor: "red", height: "10rem", width: "10rem" }}
+      onClick={() => setMove(!move)}
+    ></motion.div>
   );
 };
 
