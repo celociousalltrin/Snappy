@@ -29,14 +29,4 @@
   .signup-addfriend-button {
     font-size: x-small;
   }
-  .signup-friends-bio {
-    height: 3rem;
-    overflow: hidden;
-  }
-  .signup-friend-bio-icon {
-    position: absolute;
-    top: 55%;
-    right: 1.7%;
-    cursor: pointer;
-  }
 }

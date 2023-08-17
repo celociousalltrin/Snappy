@@ -71,13 +71,7 @@ const Feeds = ({ feedData, type }) => {
                 </div>
 
                 <div>
-                  <p
-                    className={`mb-2 ${
-                      isToggleContent(obj.snapp.message, 100) &&
-                      !listUniqueId.includes(obj.id) &&
-                      "feeds-message-container"
-                    }`}
-                  >
+                  <p className="mb-2">
                     <AppListExpand isExpand={listUniqueId.includes(obj.id)}>
                       {isToggleContent(obj.snapp.message, 105) &&
                       !listUniqueId.includes(obj.id) ? (

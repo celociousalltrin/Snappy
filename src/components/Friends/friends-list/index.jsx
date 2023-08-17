@@ -3,7 +3,9 @@ import AppInput from "../../app-input";
 import { AiOutlineDownCircle, AiOutlineUpCircle } from "react-icons/ai";
 import "./style.css";
 import useListToggleContent from "../../../custom-hooks/useListToggleContent";
-import { isToggleContent } from "../../../utils/common-function";
+import { isToggleContent, sliceContent } from "../../../utils/common-function";
+import { BiSolidChevronDown, BiSolidChevronUp } from "react-icons/bi";
+import AppListExpand from "../../app-list-expand";
 
 const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
   const { showMore, showLess, listUniqueId } = useListToggleContent();
@@ -44,10 +46,9 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
               />
             </div>
             <div
-              className={`${
-                isSignup
-                  ? "col-10 ms-md-4 ms-lg-2 ps-lg-3"
-                  : "col-10 ms-4 ps-4 ps-md-0 ps-lg-3"
+              className={`
+              col-10 ${
+                isSignup ? "ms-md-4 ms-lg-2" : "ms-4 ps-4 ps-md-0 ps-lg-3"
               }`}
             >
               <div className="d-flex justify-content-between mt-2">
@@ -79,36 +80,34 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
                   </button>
                 </div>
               </div>
-              <div className="position-relative">
-                <p
-                  className={`${
-                    isSignup && "mt-1 ms-4 ps-2 ps-md-0 ms-md-0 mt-md-0"
-                  } ${
-                    isToggleContent(obj.bio, 50) &&
-                    !listUniqueId.includes(index) &&
-                    "signup-friends-bio"
-                  }`}
-                >
-                  {obj.bio}{" "}
-                  {isSignup && isToggleContent(obj.bio, 50) && (
-                    <span
-                      onClick={(e) => showLess(e, index)}
-                      className="ms-1 d-md-none"
-                    >
-                      <AiOutlineUpCircle size={23} />
-                    </span>
-                  )}
-                </p>
-                {isSignup && isToggleContent(obj.bio, 50) && (
-                  <span
-                    className="signup-friend-bio-icon d-flex d-md-none"
-                    onClick={(e) => showMore(e, index)}
-                  >
-                    {!listUniqueId.includes(index) && (
-                      <AiOutlineDownCircle size={23} />
+              <div>
+                <p className="mb-2">
+                  <AppListExpand isExpand={listUniqueId.includes(index)}>
+                    {isToggleContent(obj.bio, 105) &&
+                    !listUniqueId.includes(index) ? (
+                      <span>
+                        {sliceContent(obj.bio, 105)}{" "}
+                        <BiSolidChevronDown
+                          color="rgb(13, 110, 253)"
+                          size={23}
+                          onClick={(e) => showMore(e, index)}
+                        />{" "}
+                      </span>
+                    ) : (
+                      <span>
+                        {obj.bio}
+                        {isToggleContent(obj.bio, 105) && (
+                          <BiSolidChevronUp
+                            color="rgb(13, 110, 253)"
+                            className="ms-2"
+                            size={23}
+                            onClick={(e) => showLess(e, index)}
+                          />
+                        )}
+                      </span>
                     )}
-                  </span>
-                )}
+                  </AppListExpand>
+                </p>
               </div>
             </div>
           </div>

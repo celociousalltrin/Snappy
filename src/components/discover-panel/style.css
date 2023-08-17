@@ -1,0 +1,7 @@
+.discover-container {
+  height: 95vh;
+  overflow: auto;
+  overflow-x: hidden;
+  position: sticky;
+  top: 0;
+}

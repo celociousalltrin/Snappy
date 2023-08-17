@@ -49,12 +49,13 @@ export const ListExpandVariants = {
   },
   visible: {
     height: "auto",
+    overflow: "hidden",
     transition: { duration: 0.7 },
   },
   exit: (isExpand) => ({
     height: "var(--content-height-hidden)",
     overflow: "hidden",
-    transition: { duration: isExpand ? 0 : 0.7 },
+    transition: { duration: isExpand ? 0.1 : 0.7 },
   }),
 };
 
