@@ -13,6 +13,7 @@ import {
 } from "../../utils/common-function";
 import useListToggleContent from "../../custom-hooks/useListToggleContent";
 import AppListExpand from "../app-list-expand";
+import AppToolTip from "../app-tooltip";
 
 const Feeds = ({ feedData, type }) => {
   const { listUniqueId, showLess, showMore } = useListToggleContent();
@@ -101,15 +102,22 @@ const Feeds = ({ feedData, type }) => {
                   </div>
                 )}
                 <div className="d-flex justify-content-around mt-2">
-                  <div>
-                    <AiOutlineLike size={20} /> <span>80</span>
-                  </div>
-                  <div>
-                    <FaRegComment size={20} /> <span>27</span>
-                  </div>
-                  <div>
-                    <FaRegBookmark size={20} />
-                  </div>
+                  <AppToolTip title="Like">
+                    <div>
+                      <AiOutlineLike size={20} /> <span>80</span>
+                    </div>
+                  </AppToolTip>
+
+                  <AppToolTip title="Comment">
+                    <div>
+                      <FaRegComment size={20} /> <span>27</span>
+                    </div>
+                  </AppToolTip>
+                  <AppToolTip title="BookMark">
+                    <div>
+                      <FaRegBookmark size={20} />
+                    </div>
+                  </AppToolTip>
                 </div>
               </div>
             </div>
