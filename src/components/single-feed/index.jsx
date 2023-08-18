@@ -10,6 +10,8 @@ import AppTextArea from "../app-text-area";
 import AppModal from "../app-modal";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { navigateToProfile } from "../../utils/common-function";
+import AppToolTip from "../app-tooltip";
+import AppFramerButton from "../app-framer-button";
 
 const SingleFeed = ({ singleFeedData }) => {
   const init = {
@@ -103,13 +105,21 @@ const SingleFeed = ({ singleFeedData }) => {
             </div>
             <div className="d-flex justify-content-around mt-3 pb-3 border-bottom">
               <div>
-                <AiOutlineLike size={20} /> <span>80</span>
+                <AppToolTip title="like">
+                  <AiOutlineLike size={20} className="cursor-pointer" />
+                </AppToolTip>
+                <span>80</span>
               </div>
               <div>
-                <FaRegComment size={20} /> <span>27</span>
+                <AppToolTip title="Comment">
+                  <FaRegComment size={20} className="cursor-pointer" />{" "}
+                </AppToolTip>
+                <span>27</span>
               </div>
               <div>
-                <FaRegBookmark size={20} />
+                <AppToolTip title="Bookmark">
+                  <FaRegBookmark size={20} className="cursor-pointer" />
+                </AppToolTip>
               </div>
             </div>
             <div className="mt-3">
@@ -128,9 +138,11 @@ const SingleFeed = ({ singleFeedData }) => {
                 />
               </div>
               <div className="d-flex justify-content-end mt-2 border-bottom pb-3">
-                <button className="btn btn-sm me-1 btn-primary rounded ">
-                  Add Comment
-                </button>
+                <AppFramerButton>
+                  <button className="btn btn-sm me-1 btn-primary rounded ">
+                    Add Comment
+                  </button>
+                </AppFramerButton>
               </div>
             </div>
             <div className="mt-2">
@@ -151,12 +163,14 @@ const SingleFeed = ({ singleFeedData }) => {
                         <p className="fw-bold">{obj.user_name}</p>
                         <p className="text-muted ms-2">{`@${obj.snapp_user_name}`}</p>
                         <p className="text-muted ms-2">{`.${obj.commented_at}`}</p>
-                        <FaReply
-                          size={20}
-                          className="ms-3 mt-1 cursor-pointer"
-                          color="#0d6efd"
-                          onClick={() => setShow(true)}
-                        />
+                        <AppToolTip title="Reply">
+                          <FaReply
+                            size={20}
+                            className="ms-3 mt-1 cursor-pointer"
+                            color="#0d6efd"
+                            onClick={() => setShow(true)}
+                          />
+                        </AppToolTip>
                       </div>
                       <p>{obj.msg}</p>
                     </div>

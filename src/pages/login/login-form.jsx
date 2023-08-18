@@ -4,6 +4,7 @@ import "./style.css";
 import Form from "react-bootstrap/Form";
 import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import AppFramerButton from "../../components/app-framer-button";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -24,10 +25,12 @@ const LoginForm = () => {
         <h4 className="fs-2">Welcome Back!</h4>
       </div>
       <div className="mt-4">
-        <button type="button" className="btn btn-primary p-2 login-button">
-          <FaGoogle className="me-2 mb-1" size={20} />{" "}
-          <span className="fs-5">Login with Google</span>
-        </button>
+        <AppFramerButton>
+          <button type="button" className="btn btn-primary p-2 login-button">
+            <FaGoogle className="me-2 mb-1" size={20} />{" "}
+            <span className="fs-5">Login with Google</span>
+          </button>
+        </AppFramerButton>
       </div>
       <div className="text-center mt-3">
         <p className="text-muted text-primary">
@@ -51,13 +54,15 @@ const LoginForm = () => {
         >
           Forgot Your Password ?
         </p>
-        <button
-          className="btn btn-dark p-2 pt-1 login-button"
-          type="button"
-          onClick={() => navigate("/home")}
-        >
-          <span className="fs-5">Log in</span>
-        </button>
+        <AppFramerButton>
+          <button
+            className="btn btn-dark p-2 pt-1 login-button"
+            type="button"
+            onClick={() => navigate("/home")}
+          >
+            <span className="fs-5">Log in</span>
+          </button>
+        </AppFramerButton>
       </div>
       <div className="mt-3 mb-5 login-signup-content">
         <p className="text-muted">

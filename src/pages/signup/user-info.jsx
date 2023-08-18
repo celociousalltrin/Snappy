@@ -2,16 +2,18 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import { FaGoogle } from "react-icons/fa";
 import "./style.css";
+import AppFramerButton from "../../components/app-framer-button";
 
 const UserInfoForm = () => {
   return (
     <div className="ms-0 ms-md-5">
       <div className="mb-1 position-relative">
-        <button className="btn btn-primary me-md-5 mb-2">
-          {" "}
-          <FaGoogle size={23} className="me-2" />
-          Signup with Google
-        </button>
+        <AppFramerButton>
+          <button className="btn btn-primary me-md-5 mb-2">
+            <FaGoogle size={23} className="me-2" />
+            Signup with Google
+          </button>
+        </AppFramerButton>
         <hr />
         <span className="or-icon fs-5">or</span>
       </div>

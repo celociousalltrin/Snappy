@@ -8,7 +8,7 @@ import { MockFriendsList } from "../../../utils/mock-common";
 const FindFriends = () => {
   return (
     <div>
-      <FriendsList MockFriendsList={MockFriendsList} />
+      <FriendsList MockFriendsList={MockFriendsList} isFriendList />
     </div>
   );
 };

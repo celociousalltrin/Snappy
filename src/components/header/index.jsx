@@ -8,7 +8,6 @@ import {
   FaUserFriends,
 } from "react-icons/fa";
 import { BsFillChatFill } from "react-icons/bs";
-import Dropdown from "react-bootstrap/Dropdown";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -18,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { bottomNavbarData, sideBarData } from "../../utils/common-data";
 
 import "./style.css";
+import AppToolTip from "../app-tooltip";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -67,7 +67,9 @@ const Header = () => {
                 eventKey="notification"
                 onClick={() => navigate("/notification")}
               >
-                <FaBell size="1.3rem" />
+                <AppToolTip title="Notification" position="bottom">
+                  <FaBell size="1.3rem" />
+                </AppToolTip>
               </Nav.Link>
               <NavDropdown
                 title="Hi Celocious"

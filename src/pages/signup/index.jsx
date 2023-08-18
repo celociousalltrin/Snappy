@@ -16,13 +16,13 @@ const SignUp = () => {
     <MultiStepForm
       componentsList={
         <div>
-          <SignupAddFriends />
           <UserInfoForm />
           <AppVerificationCode />
           <CreatePassword />
           <UploadProfilePicture />
           <UserBio />
           <InterestedFields />
+          <SignupAddFriends />
         </div>
       }
       formHeading="Create Snappy Account"

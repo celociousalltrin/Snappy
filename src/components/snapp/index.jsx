@@ -4,6 +4,8 @@ import "./style.css";
 
 import { FiImage } from "react-icons/fi";
 import AppTextArea from "../app-text-area";
+import AppToolTip from "../app-tooltip";
+import AppFramerButton from "../app-framer-button";
 
 const Snapp = () => {
   return (
@@ -20,17 +22,23 @@ const Snapp = () => {
       <div className="col-10">
         <AppTextArea placeholder="Share your Snapps" rows={1} />
         <div className="d-flex mt-1">
-          <FiImage
-            size={20}
-            onClick={() => alert("Image upload button is clkicked")}
-            className="cursor-pointer align-self-center"
-          />
-          <button
-            className="btn btn-primary rounded-pill ms-auto"
-            onClick={() => alert("Snapp is Added")}
-          >
-            Snapp
-          </button>
+          <AppToolTip title="Add Image" position="bottom">
+            <FiImage
+              size={20}
+              onClick={() => alert("Image upload button is clkicked")}
+              className="cursor-pointer align-self-center"
+            />
+          </AppToolTip>
+          <div className="ms-auto">
+            <AppFramerButton>
+              <button
+                className="btn btn-primary rounded-pill ms-auto"
+                onClick={() => alert("Snapp is Added")}
+              >
+                Snapp
+              </button>
+            </AppFramerButton>
+          </div>
         </div>
       </div>
     </div>

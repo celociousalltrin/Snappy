@@ -11,6 +11,7 @@
 
 .snapp-feed-data > p {
   font-weight: bolder;
+  color: rgb(13, 110, 253);
 }
 
 .snapp-feed-data > p:not(:first-child) {
@@ -21,9 +22,13 @@
 .snapp-feed-data > p > span {
   font-weight: normal;
   opacity: 1;
-  color: rgba(33, 37, 41, 0.75);
+
   margin-left: 0.25rem;
   cursor: pointer;
+}
+
+.snapp-feed-data > p > span:hover {
+  text-decoration: underline;
 }
 
 .comment-profile-data > p {

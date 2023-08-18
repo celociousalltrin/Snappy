@@ -18,6 +18,7 @@ import Form from "react-bootstrap/Form";
 import AppTextArea from "../app-text-area";
 
 import "./style.css";
+import AppFramerButton from "../app-framer-button";
 
 const Profile = () => {
   const { id, sec_id } = useParams();

@@ -4,9 +4,21 @@ import useListToggleContent from "../../../custom-hooks/useListToggleContent";
 import AppListExpand from "../../app-list-expand";
 
 import "./style.css";
+import AppFramerButton from "../../app-framer-button";
 
-const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
+const FriendsList = ({
+  MockFriendsList,
+  isMessage,
+  isSignup,
+  isFriendList,
+  isDiscoverFriend,
+  length,
+}) => {
   const { showMore, showLess, listUniqueId } = useListToggleContent();
+
+  const list = isDiscoverFriend
+    ? MockFriendsList.slice(0, length)
+    : MockFriendsList;
 
   return (
     <div>
@@ -16,7 +28,7 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
         </div>
       )}
       <div>
-        {MockFriendsList.map((obj, index) => (
+        {list.map((obj, index) => (
           <div
             className={`d-flex row ${
               isSignup
@@ -45,9 +57,13 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
             </div>
             <div
               className={`
-              col-10 ${
-                isSignup ? "ms-md-4 ms-lg-2" : "ms-4 ps-4 ps-md-0 ps-lg-3"
-              }`}
+               ${
+                 isSignup
+                   ? "col-10 ms-md-4 ms-lg-2"
+                   : isDiscoverFriend
+                   ? "col-9 ms-5"
+                   : "col-10 ms-4 ps-4 ps-md-0 ps-lg-3"
+               }`}
             >
               <div className="d-flex justify-content-between mt-2">
                 <div className={`${isSignup && "ms-4 ps-2 ms-md-0 ps-md-0"}`}>
@@ -58,42 +74,49 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
                   </p>
                 </div>
                 <div className="d-flex align-items-center">
-                  <button
-                    className={`${
-                      isSignup && "text-nowrap"
-                    } btn btn-sm btn-primary`}
-                  >
-                    <span className={`${isSignup && "d-none d-md-block"}`}>
-                      {" "}
-                      {isMessage ? "Send Message" : "Add Friend"}{" "}
-                    </span>
-
-                    <span
+                  <AppFramerButton>
+                    <button
                       className={`${
-                        isSignup && "signup-addfriend-button d-md-none"
-                      } ${isMessage && "d-none"}`}
+                        isSignup && "text-nowrap"
+                      } btn btn-sm btn-primary`}
                     >
-                      Add
-                    </span>
-                  </button>
+                      <span className={`${isSignup && "d-none d-md-block"}`}>
+                        {" "}
+                        {isMessage ? "Send Message" : "Add Friend"}{" "}
+                      </span>
+
+                      <span
+                        className={`${
+                          isSignup && "signup-addfriend-button d-md-none"
+                        } ${
+                          (isMessage || isFriendList || isDiscoverFriend) &&
+                          "d-none"
+                        }`}
+                      >
+                        Add
+                      </span>
+                    </button>
+                  </AppFramerButton>
                 </div>
               </div>
-              <div>
-                <p
-                  className={`mb-2 ${
-                    isSignup && "ms-4 mt-1 ps-1 ms-md-0 mt-md-0 p-md-0"
-                  }`}
-                >
-                  <AppListExpand
-                    content={obj.bio}
-                    contentId={index}
-                    isExpand={listUniqueId.includes(index)}
-                    showMore={showMore}
-                    showLess={showLess}
-                    isSignup={isSignup}
-                  />
-                </p>
-              </div>
+              {!isDiscoverFriend && (
+                <div>
+                  <p
+                    className={`mb-2 ${
+                      isSignup && "ms-4 mt-1 ps-1 ms-md-0 mt-md-0 p-md-0"
+                    }`}
+                  >
+                    <AppListExpand
+                      content={obj.bio}
+                      contentId={index}
+                      isExpand={listUniqueId.includes(index)}
+                      showMore={showMore}
+                      showLess={showLess}
+                      isSignup={isSignup}
+                    />
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         ))}

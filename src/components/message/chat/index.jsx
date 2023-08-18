@@ -11,6 +11,8 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import { BsThreeDots } from "react-icons/bs";
 
 import "./style.css";
+import AppFramerButton from "../../app-framer-button";
+import AppToolTip from "../../app-tooltip";
 
 const Chat = () => {
   const navigate = useNavigate();
@@ -125,16 +127,20 @@ const Chat = () => {
                 : `last seen at ${mockChatInfo.last_seen}`}
             </p>
           </div>
-          <div className="me-4 ms-auto d-none d-lg-block">
-            <button type="button" className="btn btn-sm btn-outline-dark">
-              Block
-            </button>
-            <button
-              type="button"
-              className="btn btn-sm  btn-outline-danger ms-3"
-            >
-              Remove Friend
-            </button>
+          <div className="me-4 ms-auto d-none d-lg-flex">
+            <AppFramerButton>
+              <button type="button" className="btn btn-sm btn-outline-dark">
+                Block
+              </button>
+            </AppFramerButton>
+            <AppFramerButton>
+              <button
+                type="button"
+                className="btn btn-sm  btn-outline-danger ms-3"
+              >
+                Remove Friend
+              </button>
+            </AppFramerButton>
           </div>
           <div className="d-lg-none mt-3">
             <DropdownButton variant="white" title={<BsThreeDots />}>

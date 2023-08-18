@@ -102,22 +102,23 @@ const Feeds = ({ feedData, type }) => {
                   </div>
                 )}
                 <div className="d-flex justify-content-around mt-2">
-                  <AppToolTip title="Like">
-                    <div>
-                      <AiOutlineLike size={20} /> <span>80</span>
-                    </div>
-                  </AppToolTip>
-
-                  <AppToolTip title="Comment">
-                    <div>
-                      <FaRegComment size={20} /> <span>27</span>
-                    </div>
-                  </AppToolTip>
-                  <AppToolTip title="BookMark">
-                    <div>
+                  <div>
+                    <AppToolTip title="Like">
+                      <AiOutlineLike size={20} />
+                    </AppToolTip>
+                    <span className="ms-1">80</span>
+                  </div>
+                  <div>
+                    <AppToolTip title="Comment">
+                      <FaRegComment size={20} />
+                    </AppToolTip>
+                    <span className="ms-1">27</span>
+                  </div>
+                  <div>
+                    <AppToolTip title="BookMark">
                       <FaRegBookmark size={20} />
-                    </div>
-                  </AppToolTip>
+                    </AppToolTip>
+                  </div>
                 </div>
               </div>
             </div>

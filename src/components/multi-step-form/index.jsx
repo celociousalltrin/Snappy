@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./style.css";
 import FormSteps from "./form-step";
+import AppFramerButton from "../app-framer-button";
 
 const MultiStepForm = ({
   componentsList,
@@ -62,42 +63,44 @@ const MultiStepForm = ({
               </motion.div>
             </AnimatePresence>
           )}
-          <div className="multi-step-form-button-container">
+          <div className="multi-step-form-button-container d-flex">
             {!isLastStep ? (
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                type="button"
-                onClick={next}
-                className="btn btn-primary ms-3 ps-3 pe-3"
-              >
-                Next
-              </motion.button>
+              <AppFramerButton hover={1.1} tap={0.9}>
+                <button
+                  type="button"
+                  onClick={next}
+                  className="btn btn-primary ms-3 ps-3 pe-3"
+                >
+                  Next
+                </button>
+              </AppFramerButton>
             ) : (
-              <button
-                type="button"
-                onClick={() => {
-                  next();
-                  setIsFinsish(true);
-                  setTimeout(() => {
-                    navigate(`/${onFinishRoute}`);
-                  }, 1000);
-                }}
-                className="btn btn-success ms-3"
-              >
-                Finish
-              </button>
+              <AppFramerButton hover={1.1} tap={0.9}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    next();
+                    setIsFinsish(true);
+                    setTimeout(() => {
+                      navigate(`/${onFinishRoute}`);
+                    }, 1000);
+                  }}
+                  className="btn btn-success ms-3"
+                >
+                  Finish
+                </button>
+              </AppFramerButton>
             )}
             {!isFirstStep && (
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                type="button"
-                onClick={previous}
-                className="btn btn-outline-dark ms-4 ps-3 pe-3"
-              >
-                Previous
-              </motion.button>
+              <AppFramerButton hover={1.1} tap={0.9}>
+                <button
+                  type="button"
+                  onClick={previous}
+                  className="btn btn-outline-dark ms-4 ps-3 pe-3"
+                >
+                  Previous
+                </button>
+              </AppFramerButton>
             )}
           </div>
         </div>
