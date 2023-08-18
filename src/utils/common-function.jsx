@@ -9,5 +9,5 @@ export const isToggleContent = (input, number) => {
 };
 
 export const sliceContent = (string, number) => {
-  return `${string.slice(0, number)}...`;
+  return `${string.slice(0, number)}.....`;
 };

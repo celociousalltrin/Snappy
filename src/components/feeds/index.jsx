@@ -12,8 +12,7 @@ import {
   isToggleContent,
 } from "../../utils/common-function";
 import useListToggleContent from "../../custom-hooks/useListToggleContent";
-import AppListExpand from "../app-framer-list-expand";
-import AppFramerListExpand from "../app-framer-list-expand";
+import AppListExpand from "../app-list-expand";
 
 const Feeds = ({ feedData, type }) => {
   const { listUniqueId, showLess, showMore } = useListToggleContent();
@@ -73,33 +72,13 @@ const Feeds = ({ feedData, type }) => {
 
                 <div>
                   <p className="mb-2">
-                    <AppFramerListExpand
+                    <AppListExpand
+                      content={obj.snapp.message}
+                      contentId={obj.id}
                       isExpand={listUniqueId.includes(obj.id)}
-                    >
-                      {isToggleContent(obj.snapp.message, 105) &&
-                      !listUniqueId.includes(obj.id) ? (
-                        <span>
-                          {sliceContent(obj.snapp.message, 105)}{" "}
-                          <BiSolidChevronDown
-                            color="rgb(13, 110, 253)"
-                            size={23}
-                            onClick={(e) => showMore(e, obj.id)}
-                          />{" "}
-                        </span>
-                      ) : (
-                        <span>
-                          {obj.snapp.message}
-                          {isToggleContent(obj.snapp.message, 105) && (
-                            <BiSolidChevronUp
-                              color="rgb(13, 110, 253)"
-                              className="ms-2"
-                              size={23}
-                              onClick={(e) => showLess(e, obj.id)}
-                            />
-                          )}
-                        </span>
-                      )}
-                    </AppFramerListExpand>
+                      showMore={showMore}
+                      showLess={showLess}
+                    />
                   </p>
                   <img
                     src={obj.snapp.image}
