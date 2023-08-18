@@ -3,7 +3,7 @@ import "./style.css";
 import { SignupInterestedFields } from "../../utils/common-data";
 import { AiOutlineDownCircle, AiOutlineUpCircle } from "react-icons/ai";
 import useToggleContent from "../../custom-hooks/useToggleContent";
-import AppExpand from "../../components/app-expand";
+import AppFramerExpand from "../../components/app-framer-expand";
 
 const InterestedFields = () => {
   const [userInterest, setUserInterest] = useState([]);
@@ -30,7 +30,7 @@ const InterestedFields = () => {
         <span className="ms-1 fw-normal">Selected</span>
       </p>
       <div className="position-relative">
-        <AppExpand setShowIcon={setShowIcon} isVisible={isShow}>
+        <AppFramerExpand setShowIcon={setShowIcon} isVisible={isShow}>
           <p className="text-muted text-start fs-6 mb-4">
             To get a personalized feed in Snappy, you must select atleast 3
             interest and not more than 5 interest
@@ -50,7 +50,7 @@ const InterestedFields = () => {
               {showIcon && <AiOutlineDownCircle size={23} />}
             </span>
           )}
-        </AppExpand>
+        </AppFramerExpand>
       </div>
       {SignupInterestedFields.map((obj) => (
         <div className="col-md-4 col-lg-3">

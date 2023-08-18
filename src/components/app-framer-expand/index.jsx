@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ExpandVariants } from "../../utils/framer-variants";
 
-const AppExpand = ({ isVisible, children, setShowIcon }) => {
+const AppFramerExpand = ({ isVisible, children, setShowIcon }) => {
   useEffect(() => {
     if (!isVisible) {
       setTimeout(() => {
@@ -24,4 +24,4 @@ const AppExpand = ({ isVisible, children, setShowIcon }) => {
   );
 };
 
-export default AppExpand;
+export default AppFramerExpand;

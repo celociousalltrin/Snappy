@@ -4,7 +4,7 @@ import { MockFriendsList } from "../../utils/mock-common";
 import "./style.css";
 import { AiOutlineDownCircle, AiOutlineUpCircle } from "react-icons/ai";
 import useToggleContent from "../../custom-hooks/useToggleContent";
-import AppExpand from "../../components/app-expand";
+import AppFramerExpand from "../../components/app-framer-expand";
 
 const SignupAddFriends = () => {
   const { isShow, showMore, showLess } = useToggleContent();
@@ -12,7 +12,7 @@ const SignupAddFriends = () => {
 
   return (
     <div className="text-start position-relative">
-      <AppExpand setShowIcon={setShowIcon} isVisible={isShow}>
+      <AppFramerExpand setShowIcon={setShowIcon} isVisible={isShow}>
         <p className="fs-6 text-muted mt-0 ms-3">
           When You Send Friend Request to SomeOne. If they accept then you will
           see their snaps in your feeds. You will also receive relevant
@@ -26,7 +26,7 @@ const SignupAddFriends = () => {
             {showIcon && <AiOutlineDownCircle size={23} />}
           </span>
         )}
-      </AppExpand>
+      </AppFramerExpand>
       <FriendsList MockFriendsList={MockFriendsList} isSignup />
     </div>
   );

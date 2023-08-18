@@ -12,7 +12,8 @@ import {
   isToggleContent,
 } from "../../utils/common-function";
 import useListToggleContent from "../../custom-hooks/useListToggleContent";
-import AppListExpand from "../app-list-expand";
+import AppListExpand from "../app-framer-list-expand";
+import AppFramerListExpand from "../app-framer-list-expand";
 
 const Feeds = ({ feedData, type }) => {
   const { listUniqueId, showLess, showMore } = useListToggleContent();
@@ -72,7 +73,9 @@ const Feeds = ({ feedData, type }) => {
 
                 <div>
                   <p className="mb-2">
-                    <AppListExpand isExpand={listUniqueId.includes(obj.id)}>
+                    <AppFramerListExpand
+                      isExpand={listUniqueId.includes(obj.id)}
+                    >
                       {isToggleContent(obj.snapp.message, 105) &&
                       !listUniqueId.includes(obj.id) ? (
                         <span>
@@ -96,7 +99,7 @@ const Feeds = ({ feedData, type }) => {
                           )}
                         </span>
                       )}
-                    </AppListExpand>
+                    </AppFramerListExpand>
                   </p>
                   <img
                     src={obj.snapp.image}

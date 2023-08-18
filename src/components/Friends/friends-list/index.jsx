@@ -5,7 +5,8 @@ import "./style.css";
 import useListToggleContent from "../../../custom-hooks/useListToggleContent";
 import { isToggleContent, sliceContent } from "../../../utils/common-function";
 import { BiSolidChevronDown, BiSolidChevronUp } from "react-icons/bi";
-import AppListExpand from "../../app-list-expand";
+import AppListExpand from "../../app-framer-list-expand";
+import AppFramerListExpand from "../../app-framer-list-expand";
 
 const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
   const { showMore, showLess, listUniqueId } = useListToggleContent();
@@ -94,7 +95,7 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
                     isSignup && "ms-4 mt-1 ps-1 ms-md-0 mt-md-0 p-md-0"
                   }`}
                 >
-                  <AppListExpand isExpand={listUniqueId.includes(index)}>
+                  <AppFramerListExpand isExpand={listUniqueId.includes(index)}>
                     {isToggleContent(
                       obj.bio,
                       isSignupMobileScreen() ? 55 : 105
@@ -126,7 +127,7 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
                         )}
                       </span>
                     )}
-                  </AppListExpand>
+                  </AppFramerListExpand>
                 </p>
               </div>
             </div>

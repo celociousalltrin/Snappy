@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import React from "react";
 import { ListExpandVariants } from "../../utils/framer-variants";
 
-const AppListExpand = ({ isExpand, children }) => {
+const AppFramerListExpand = ({ isExpand, children }) => {
   return (
     <AnimatePresence initial={false} custom={isExpand} mode="wait">
       <motion.div
@@ -19,4 +19,4 @@ const AppListExpand = ({ isExpand, children }) => {
   );
 };
 
-export default AppListExpand;
+export default AppFramerListExpand;
