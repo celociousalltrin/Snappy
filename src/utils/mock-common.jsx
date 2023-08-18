@@ -495,7 +495,7 @@ export const MockFriendsList = [
     name: "Jenifer",
     profile_img: mutual4,
     snappy_username: "jenefier1213",
-    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore dolorem, velit, maxime, sunt repellat sint ad molestiae modi similique vitae aut nihil sed debitis consequuntur.",
+    bio: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque autem temporibus necessitatibus dolor rem exercitationem, quos architecto aliquid laboriosam sed iste excepturi corrupti, quas ex ullam nulla error dolorum labore hic doloremque delectus, iure ipsum eius! Provident nisi nobis recusandae, sit optio deleniti voluptatem, esse sequi incidunt dolor corrupti cupiditate.",
     connected: false,
   },
   {

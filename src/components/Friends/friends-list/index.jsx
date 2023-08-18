@@ -10,6 +10,14 @@ import AppListExpand from "../../app-list-expand";
 const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
   const { showMore, showLess, listUniqueId } = useListToggleContent();
 
+  const isSignupMobileScreen = () => {
+    if (isSignup && window.innerWidth < 768) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div>
       {!isSignup && (
@@ -81,12 +89,21 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
                 </div>
               </div>
               <div>
-                <p className="mb-2">
+                <p
+                  className={`mb-2 ${
+                    isSignup && "ms-4 mt-1 ps-1 ms-md-0 mt-md-0 p-md-0"
+                  }`}
+                >
                   <AppListExpand isExpand={listUniqueId.includes(index)}>
-                    {isToggleContent(obj.bio, 105) &&
-                    !listUniqueId.includes(index) ? (
+                    {isToggleContent(
+                      obj.bio,
+                      isSignupMobileScreen() ? 55 : 105
+                    ) && !listUniqueId.includes(index) ? (
                       <span>
-                        {sliceContent(obj.bio, 105)}{" "}
+                        {sliceContent(
+                          obj.bio,
+                          isSignupMobileScreen() ? 55 : 105
+                        )}{" "}
                         <BiSolidChevronDown
                           color="rgb(13, 110, 253)"
                           size={23}
@@ -96,7 +113,10 @@ const FriendsList = ({ MockFriendsList, isMessage, isSignup }) => {
                     ) : (
                       <span>
                         {obj.bio}
-                        {isToggleContent(obj.bio, 105) && (
+                        {isToggleContent(
+                          obj.bio,
+                          isSignupMobileScreen() ? 55 : 105
+                        ) && (
                           <BiSolidChevronUp
                             color="rgb(13, 110, 253)"
                             className="ms-2"

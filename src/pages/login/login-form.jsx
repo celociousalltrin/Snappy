@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+
   return (
     <div className="mt-3">
       <div className="d-flex justify-content-center">
