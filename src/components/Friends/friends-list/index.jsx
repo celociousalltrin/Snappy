@@ -24,7 +24,7 @@ const FriendsList = ({
     <div>
       {!isSignup && (
         <div className="mb-4">
-          <AppInput isFriend />
+          <AppInput isFriend isDiscoverFriend />
         </div>
       )}
       <div>

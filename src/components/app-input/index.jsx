@@ -4,7 +4,7 @@ import { RiSendPlane2Fill } from "react-icons/ri";
 
 import "./style.css";
 
-const AppInput = ({ isFriend, isSendMessage }) => {
+const AppInput = ({ isFriend, isSendMessage, isDiscoverFriend }) => {
   const [searchText, setSearchText] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const handleKeyDown = (e) => {
@@ -28,7 +28,7 @@ const AppInput = ({ isFriend, isSendMessage }) => {
       <div
         className={`${
           isFocused ? "discover-search__focused" : "discover_container"
-        } ${isFriend && "col-8"}`}
+        } ${isFriend && "col-8"} ps-2`}
       >
         {!isSendMessage && <span>{<FaSearch />}</span>}
         <input
@@ -47,7 +47,9 @@ const AppInput = ({ isFriend, isSendMessage }) => {
           onFocus={handleFocus}
           onBlur={handleBlur}
           className={!isFocused && isSendMessage && "ms-3"}
-          style={{ width: isSendMessage ? "91%" : "" }}
+          style={{
+            width: isSendMessage ? "91%" : isDiscoverFriend ? "80%" : "",
+          }}
         />
       </div>
       {isFriend && (
