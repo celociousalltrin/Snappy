@@ -14,7 +14,7 @@ const MutualFriends = () => {
       <FriendsList
         MockFriendsList={MockFriendsList}
         isDiscoverFriend
-        length={4}
+        length={3}
       />
       <div className="pt-2 pb-1">
         <p
