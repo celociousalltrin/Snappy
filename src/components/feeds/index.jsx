@@ -14,6 +14,7 @@ import {
 import useListToggleContent from "../../custom-hooks/useListToggleContent";
 import AppListExpand from "../app-list-expand";
 import AppToolTip from "../app-tooltip";
+import AppPopover from "../app-popover";
 
 const Feeds = ({ feedData, type }) => {
   const { listUniqueId, showLess, showMore } = useListToggleContent();
@@ -54,19 +55,21 @@ const Feeds = ({ feedData, type }) => {
               </div>
               <div className="container">
                 <div className="d-flex">
-                  <p
-                    className="fw-bold mb-1 profile_name"
-                    onClick={(e) =>
-                      navigateToProfile(
-                        e,
-                        navigate,
-                        obj.snappy_username,
-                        page_id
-                      )
-                    }
-                  >
-                    {obj.name}
-                  </p>
+                  <AppPopover type={1}>
+                    <p
+                      className="fw-bold mb-1 profile_name"
+                      onClick={(e) =>
+                        navigateToProfile(
+                          e,
+                          navigate,
+                          obj.snappy_username,
+                          page_id
+                        )
+                      }
+                    >
+                      {obj.name}
+                    </p>
+                  </AppPopover>
                   <p className="text-muted ms-1 mb-1 ">{`@${obj.snappy_username}`}</p>
                   <p className="text-muted ms-1 mb-1">{`.${obj.snapped_at}`}</p>
                 </div>
