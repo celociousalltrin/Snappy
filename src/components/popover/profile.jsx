@@ -35,7 +35,7 @@ const ProfilePopover = ({ setOpenModal, setShow }) => {
         <div className="col-9 ms-4">
           <div className="d-flex">
             <p
-              className="fw-bold mb-0 popover-name"
+              className="fw-bold mb-0 popover-name "
               onClick={(e) =>
                 navigateToProfile(
                   e,
@@ -75,7 +75,7 @@ const ProfilePopover = ({ setOpenModal, setShow }) => {
                 Friends
               </span>
             </p>
-            <p className="mb-0 ms-2">
+            <p className="mb-0 ms-3">
               {MockProfilePopoverData.mutual_friends ? (
                 <>
                   {" "}
@@ -92,7 +92,7 @@ const ProfilePopover = ({ setOpenModal, setShow }) => {
                     }}
                   >
                     {" "}
-                    Mutual Friends
+                    Mutuals
                   </span>
                 </>
               ) : (
