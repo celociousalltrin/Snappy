@@ -19,6 +19,7 @@ import AppTextArea from "../app-text-area";
 
 import "./style.css";
 import AppFramerButton from "../app-framer-button";
+import AppModal from "../app-modal";
 
 const Profile = () => {
   const { id, sec_id } = useParams();
@@ -26,7 +27,16 @@ const Profile = () => {
   const { pathname, state } = useLocation();
   const [show, setShow] = useState(false);
 
-  const cond = "";
+  const init = {
+    show: false,
+    open_type: "",
+  };
+  const [openModal, setOpenModal] = useState(init);
+  const handleModelClose = () => {
+    setOpenModal(init);
+  };
+
+  const cond = "1";
   return (
     <div className="container">
       {id === "single-feed" || sec_id ? (
@@ -54,16 +64,12 @@ const Profile = () => {
             <img
               src={mockProfileInfo.banner_img}
               alt="banner_img"
-              width="100%"
-              height="200vh"
               className="banner_img"
             />
 
             <img
               src={mockProfileInfo.profile_img}
               alt="profile__img"
-              width="130px"
-              height="130px"
               className="profile_cover--img "
             />
           </div>
@@ -71,14 +77,19 @@ const Profile = () => {
             {cond ? (
               <div className="d-flex justify-content-end mt-3">
                 <button
-                  className="btn btn-outline-dark rounded-pill me-3"
+                  className="btn btn-outline-dark rounded-pill me-3 sm-btn-ctm"
                   type="button"
                 >
                   Send Message
                 </button>
-                <button className="btn btn-primary rounded-pill" type="button">
-                  Add Friend
-                </button>
+                <AppFramerButton>
+                  <button
+                    className="btn btn-primary rounded-pill sm-btn-ctm"
+                    type="button"
+                  >
+                    Add Friend
+                  </button>
+                </AppFramerButton>
               </div>
             ) : (
               <div className="d-flex justify-content-end">
@@ -98,9 +109,35 @@ const Profile = () => {
               <SlCalender />{" "}
               <span className="text-muted">{` Joined ${mockProfileInfo.created_at}`}</span>
             </div>
-            <p className="text-muted mt-2">
-              <span className="fw-bold">{mockProfileInfo.friends}</span> friends
-            </p>
+            <div className="d-flex">
+              <p className="mt-2">
+                <span className="fw-bold">{mockProfileInfo.friends}</span>{" "}
+                <span
+                  onClick={() => setOpenModal({ show: true, open_type: 4 })}
+                  className="profile-friends-info"
+                >
+                  friends
+                </span>
+              </p>
+              <p className="mt-2 ms-3">
+                {mockProfileInfo.mutual_friends ? (
+                  <>
+                    {" "}
+                    <span className="fw-bold">
+                      {mockProfileInfo.mutual_friends}
+                    </span>{" "}
+                    <span
+                      onClick={() => setOpenModal({ show: true, open_type: 5 })}
+                      className="profile-mutual-friends-info"
+                    >
+                      Mutual friends
+                    </span>{" "}
+                  </>
+                ) : (
+                  "No Mutuals"
+                )}
+              </p>
+            </div>
           </div>
           <div>
             <Tabs
@@ -122,6 +159,7 @@ const Profile = () => {
           </div>
         </>
       )}
+      <AppModal openModal={openModal} handleModelClose={handleModelClose} />
       <Modal
         show={show}
         onHide={() => setShow(false)}

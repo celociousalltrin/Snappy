@@ -8,7 +8,7 @@ const PageHeader = ({ page_id, id, title }) => {
   const navigate = useNavigate();
   return (
     <div className="fs-3 fw-bolder mb-2">
-      {id === "single-feed" ? (
+      {id === "single-feed" || (id === "profile" && page_id) ? (
         <div>
           <MdOutlineArrowBack
             size={22}

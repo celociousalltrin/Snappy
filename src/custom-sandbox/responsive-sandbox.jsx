@@ -2,60 +2,28 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import "./style.css";
+import { isToggleContent, sliceContent } from "../utils/common-function";
+import { MockProfilePopoverData } from "../utils/mock-common";
+import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 
 function BasicExample() {
-  const [list, setList] = useState([]);
-  const [textValue, setTextValue] = useState("");
+  const [display, setDisplay] = useState(false);
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Header as="h3">Popover right</Popover.Header>
+      <Popover.Body>
+        And here's some <strong>amazing</strong> content. It's very engaging.
+        right?
+      </Popover.Body>
+    </Popover>
+  );
   return (
     <div>
-      <input
-        type="text"
-        onChange={(e) => setTextValue(e.target.value)}
-        value={textValue}
-      />
-
-      <button
-        onClick={() => {
-          setList([...list, textValue]);
-          setTextValue("");
-        }}
-        className="btn btn-success ms-4"
-      >
-        Add
-      </button>
-      <AnimatePresence>
-        {list.map((obj, i) => (
-          <AnimateComponent key={obj}>
-            <>
-              <p>{obj}</p>
-              <button
-                onClick={() => {
-                  setList(list.filter((o) => o != obj));
-                  setTextValue("");
-                }}
-                className="btn btn-danger"
-              >
-                Delete
-              </button>
-            </>
-          </AnimateComponent>
-        ))}
-      </AnimatePresence>
+      <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+        <Button variant="success">Click me to see</Button>
+      </OverlayTrigger>
     </div>
   );
 }
-
-const AnimateComponent = (props) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1, y: [-10, 0], transition: { duration: 1 } }}
-      exit={{ opacity: 0, x: [null, -100], transition: { duration: 2 } }}
-      key={props.key}
-    >
-      {props.children}
-    </motion.div>
-  );
-};
 
 export default BasicExample;

@@ -406,65 +406,6 @@ export const singleFeedData = {
   ],
 };
 
-export const feedMetaDataList = [
-  {
-    id: 1,
-    name: "Jack",
-    profile_img: mutual1,
-    snappy_username: "jack111",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipisicing.",
-  },
-  {
-    id: 2,
-    name: "Aaron",
-    profile_img: mutual2,
-    snappy_username: "aaron63211",
-    bio: "Lorem ipsu!",
-  },
-  {
-    id: 3,
-    name: "Antony",
-    profile_img: mutual3,
-    snappy_username: "antony76677",
-    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur enim rerum molestiae.",
-  },
-  {
-    id: 4,
-    name: "Jenifer",
-    profile_img: mutual4,
-    snappy_username: "jenefier1213",
-    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt provident recusandae qui pariatur.",
-  },
-  {
-    id: 3,
-    name: "Antony",
-    profile_img: mutual3,
-    snappy_username: "antony76677",
-    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur enim rerum molestiae.",
-  },
-  {
-    id: 4,
-    name: "Jenifer",
-    profile_img: mutual4,
-    snappy_username: "jenefier1213",
-    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt provident recusandae qui pariatur.",
-  },
-  {
-    id: 3,
-    name: "Antony",
-    profile_img: mutual3,
-    snappy_username: "antony76677",
-    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur enim rerum molestiae.",
-  },
-  {
-    id: 4,
-    name: "Jenifer",
-    profile_img: mutual4,
-    snappy_username: "jenefier1213",
-    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt provident recusandae qui pariatur.",
-  },
-];
-
 export const MockFriendsList = [
   {
     id: 1,
@@ -531,6 +472,17 @@ export const MockFriendsList = [
     connected: false,
   },
 ];
+
+export const MockProfilePopoverData = {
+  id: 1,
+  name: "Jenifer",
+  profile_img: mutual4,
+  snappy_username: "jenefier1213",
+  friends: 84,
+  mutual_friends: 11,
+  bio: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque autem temporibus necessitatibus dolor rem exercitationem, quos architecto aliquid laboriosam sed iste excepturi corrupti, quas ex ullam nulla error dolorum labore hic doloremque delectus, iure ipsum eius! Provident nisi nobis recusandae, sit optio deleniti voluptatem, esse sequi incidunt dolor corrupti cupiditate.",
+  connected: false,
+};
 
 export const mockNotifications = [
   {
@@ -622,7 +574,8 @@ export const mockProfileInfo = {
   profile_img: mutual4,
   banner_img: mutual1,
   bio: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore, sunt?",
-  friends: 34,
+  friends: 84,
+  mutual_friends: 11,
   created_at: "24 july 2023",
   snapp_count: 39,
 };

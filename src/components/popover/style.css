@@ -1,0 +1,20 @@
+.popover-friends-hover:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.popover-profile-image {
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+}
+
+.popover-profile-image:hover {
+  border: 2px solid black;
+  cursor: pointer;
+}
+
+.popover-name:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

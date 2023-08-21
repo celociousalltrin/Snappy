@@ -90,6 +90,8 @@ export const modelOpenInfo = [
   { heading: "Liked by", type: 1 },
   { heading: "Commented by", type: 2 },
   { heading: "Bookmarked by", type: 3 },
+  { heading: "Friends", type: 4 },
+  { heading: "Mutual Friends", type: 5 },
 ];
 
 export const notificationInfo = [
