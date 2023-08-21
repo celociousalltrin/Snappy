@@ -5,6 +5,7 @@ import AppListExpand from "../../app-list-expand";
 
 import "./style.css";
 import AppFramerButton from "../../app-framer-button";
+import AppPopover from "../../app-popover";
 
 const FriendsList = ({
   MockFriendsList,
@@ -67,7 +68,12 @@ const FriendsList = ({
             >
               <div className="d-flex justify-content-between mt-2">
                 <div className={`${isSignup && "ms-4 ps-2 ms-md-0 ps-md-0"}`}>
-                  <p className="fw-bold mb-0">{obj.name}</p>
+                  <AppPopover
+                    type={1}
+                    isNoPopOver={isSignup || isDiscoverFriend}
+                  >
+                    <p className="fw-bold mb-0">{obj.name}</p>
+                  </AppPopover>
                   <p className="text-muted mb-0">
                     {" "}
                     {`@${obj.snappy_username}`}

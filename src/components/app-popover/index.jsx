@@ -5,7 +5,7 @@ import AppModal from "../app-modal";
 
 import "./style.css";
 
-const AppPopover = ({ children, type }) => {
+const AppPopover = ({ children, type, isNoPopOver }) => {
   const [show, setShow] = useState(false);
   const [openModal, setOpenModal] = useState({ show: false, open_type: "" });
   const [popPlacement, setPopPlacement] = useState("top");
@@ -40,22 +40,26 @@ const AppPopover = ({ children, type }) => {
 
   return (
     <>
-      <div onMouseLeave={() => setShow(false)}>
-        <OverlayTrigger
-          trigger={["hover", "focus"]}
-          placement={popPlacement}
-          show={show}
-          overlay={
-            <Popover className="custom-popover">
-              {popoverComponent(type)}
-            </Popover>
-          }
-        >
-          <span ref={elementRef} onMouseEnter={() => setShow(true)}>
-            {children}
-          </span>
-        </OverlayTrigger>
-      </div>
+      {!isNoPopOver ? (
+        <div onMouseLeave={() => setShow(false)}>
+          <OverlayTrigger
+            trigger={["hover", "focus"]}
+            placement={popPlacement}
+            show={show}
+            overlay={
+              <Popover className="custom-popover">
+                {popoverComponent(type)}
+              </Popover>
+            }
+          >
+            <span ref={elementRef} onMouseEnter={() => setShow(true)}>
+              {children}
+            </span>
+          </OverlayTrigger>
+        </div>
+      ) : (
+        <span>{children}</span>
+      )}
       {popoverModal(type)}
     </>
   );
