@@ -1,0 +1,5 @@
+.custom-popover {
+  --bs-popover-zindex: 1 !important;
+  --bs-popover-arrow-width: 5rem !important;
+  --bs-popover-arrow-height: 0.5rem !important;
+}

@@ -3,6 +3,8 @@ import { OverlayTrigger, Popover } from "react-bootstrap";
 import ProfilePopover from "../popover/profile";
 import AppModal from "../app-modal";
 
+import "./style.css";
+
 const AppPopover = ({ children, type }) => {
   const [show, setShow] = useState(false);
   const [openModal, setOpenModal] = useState({ show: false, open_type: "" });
@@ -20,15 +22,15 @@ const AppPopover = ({ children, type }) => {
     setOpenModal({ show: false, open_type: "" });
   };
 
-  const popoverComponent = () => {
-    switch (type) {
+  const popoverComponent = (input) => {
+    switch (input) {
       case 1:
         return <ProfilePopover setOpenModal={setOpenModal} setShow={setShow} />;
     }
   };
 
-  const popoverModal = () => {
-    switch (type) {
+  const popoverModal = (input) => {
+    switch (input) {
       case 1:
         return (
           <AppModal openModal={openModal} handleModelClose={handleModelClose} />
@@ -43,14 +45,18 @@ const AppPopover = ({ children, type }) => {
           trigger={["hover", "focus"]}
           placement={popPlacement}
           show={show}
-          overlay={<Popover>{popoverComponent()}</Popover>}
+          overlay={
+            <Popover className="custom-popover">
+              {popoverComponent(type)}
+            </Popover>
+          }
         >
           <span ref={elementRef} onMouseEnter={() => setShow(true)}>
             {children}
           </span>
         </OverlayTrigger>
       </div>
-      {popoverModal()}
+      {popoverModal(type)}
     </>
   );
 };
