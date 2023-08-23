@@ -6,6 +6,8 @@ import AppListExpand from "../../app-list-expand";
 import "./style.css";
 import AppFramerButton from "../../app-framer-button";
 import AppPopover from "../../app-popover";
+import { navigateToProfile } from "../../../utils/common-function";
+import { useNavigate, useParams } from "react-router-dom";
 
 const FriendsList = ({
   MockFriendsList,
@@ -16,6 +18,8 @@ const FriendsList = ({
   length,
 }) => {
   const { showMore, showLess, listUniqueId } = useListToggleContent();
+  const navigate = useNavigate();
+  const { page_id } = useParams();
 
   const list = isDiscoverFriend
     ? MockFriendsList.slice(0, length)
@@ -72,7 +76,23 @@ const FriendsList = ({
                     type={1}
                     isNoPopOver={isSignup || isDiscoverFriend}
                   >
-                    <p className="fw-bold mb-0">{obj.name}</p>
+                    <p
+                      className={`fw-bold mb-0 ${
+                        !isSignup ? "user-name-style" : ""
+                      }`}
+                      onClick={(e) =>
+                        !isSignup
+                          ? navigateToProfile(
+                              e,
+                              navigate,
+                              obj.snappy_username,
+                              page_id
+                            )
+                          : null
+                      }
+                    >
+                      {obj.name}
+                    </p>
                   </AppPopover>
                   <p className="text-muted mb-0">
                     {" "}

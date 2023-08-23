@@ -12,6 +12,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { navigateToProfile } from "../../utils/common-function";
 import AppToolTip from "../app-tooltip";
 import AppFramerButton from "../app-framer-button";
+import AppPopover from "../app-popover";
 
 const SingleFeed = ({ singleFeedData }) => {
   const init = {
@@ -160,7 +161,21 @@ const SingleFeed = ({ singleFeedData }) => {
                     </div>
                     <div>
                       <div className="d-flex comment-profile-data">
-                        <p className="fw-bold">{obj.user_name}</p>
+                        <AppPopover type={1}>
+                          <p
+                            className="fw-bold mb-0 user-name-style"
+                            onClick={(e) =>
+                              navigateToProfile(
+                                e,
+                                navigate,
+                                obj.snapp_user_name,
+                                page_id
+                              )
+                            }
+                          >
+                            {obj.user_name}
+                          </p>
+                        </AppPopover>
                         <p className="text-muted ms-2">{`@${obj.snapp_user_name}`}</p>
                         <p className="text-muted ms-2">{`.${obj.commented_at}`}</p>
                         <AppToolTip title="Reply">
@@ -190,7 +205,21 @@ const SingleFeed = ({ singleFeedData }) => {
                           </div>
                           <div>
                             <div className="d-flex comment-profile-data">
-                              <p className="fw-bold">{o.user_name}</p>
+                              <AppPopover type={1}>
+                                <p
+                                  className="fw-bold mb-0 user-name-style"
+                                  onClick={(e) =>
+                                    navigateToProfile(
+                                      e,
+                                      navigate,
+                                      o.snapp_user_name,
+                                      page_id
+                                    )
+                                  }
+                                >
+                                  {o.user_name}
+                                </p>
+                              </AppPopover>
                               <p className="text-muted ms-2">{`@${o.snapp_user_name}`}</p>
                               <p className="text-muted ms-2">{`.${o.commented_at}`}</p>
                             </div>

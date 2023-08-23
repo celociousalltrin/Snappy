@@ -6,11 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import "./style.css";
 import { feedInfo } from "../../utils/common-data";
-import {
-  navigateToProfile,
-  sliceContent,
-  isToggleContent,
-} from "../../utils/common-function";
+import { navigateToProfile } from "../../utils/common-function";
 import useListToggleContent from "../../custom-hooks/useListToggleContent";
 import AppListExpand from "../app-list-expand";
 import AppToolTip from "../app-tooltip";

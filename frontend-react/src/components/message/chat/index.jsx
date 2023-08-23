@@ -13,6 +13,7 @@ import { BsThreeDots } from "react-icons/bs";
 import "./style.css";
 import AppFramerButton from "../../app-framer-button";
 import AppToolTip from "../../app-tooltip";
+import AppPopover from "../../app-popover";
 
 const Chat = () => {
   const navigate = useNavigate();
@@ -58,14 +59,21 @@ const Chat = () => {
             </div>
             <div className="ms-4 ms-md-0 ms-lg-3 col-6 col-md-7 mt-2">
               <div className="d-flex">
-                <p
-                  className="fw-bold mb-1 cursor-pointer profile__name"
-                  onClick={(e) =>
-                    navigateToProfile(e, navigate, obj.users.user_name, page_id)
-                  }
-                >
-                  {obj.users.user_name}
-                </p>
+                <AppPopover type={1}>
+                  <p
+                    className="fw-bold mb-1 cursor-pointer profile__name"
+                    onClick={(e) =>
+                      navigateToProfile(
+                        e,
+                        navigate,
+                        obj.users.user_name,
+                        page_id
+                      )
+                    }
+                  >
+                    {obj.users.user_name}
+                  </p>
+                </AppPopover>
                 <p className="ms-2 mb-1 d-none d-md-block">{`@${obj.users.snappy_user_name}`}</p>
               </div>
               <div>

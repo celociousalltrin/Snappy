@@ -16,6 +16,14 @@ body {
   box-shadow: 0 0 0 0 !important;
 }
 
+.user-name-style:hover {
+  text-decoration: underline;
+}
+
+.user-name-style {
+  cursor: pointer;
+}
+
 @media (max-width: 767px) {
   .sm-btn-ctm {
     padding: 0.25rem 0.5rem !important;
