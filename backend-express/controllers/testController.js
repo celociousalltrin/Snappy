@@ -1,16 +1,20 @@
+const {
+  successResponse,
+  errorResponse,
+} = require("../helpers/responseHandler");
 const testModel = require("../models/testModel");
 
 var mongoose = require("mongoose");
+const { responseMessage } = require("../validation/responseMessage");
 
 exports.test_user_list = [
   async (req, res) => {
     try {
       var result = await testModel.find();
-      return res.send(result);
+      return successResponse(res, result);
     } catch (err) {
       console.log("🚀 ~ file: testController.js:60 ~ err:", err);
-      //throw error in json response with status 500.
-      res.send(err);
+      return errorResponse(res, responseMessage("ER999"));
     }
   },
 ];
@@ -20,13 +24,13 @@ exports.create_test_user = [
     try {
       const { body } = req;
       var info = new testModel(body);
-      await info.save();
+      const result = await info.save();
 
-      return res.send("It is created");
+      return res.json("It is created");
     } catch (err) {
       console.log("🚀 ~ file: testController.js:15 ~ err:", err);
       //throw error in json response with status 500.
-      return res.send(err);
+      return res.json(err);
     }
   },
 ];
@@ -41,10 +45,10 @@ exports.update_test_user = [
         .findOneAndUpdate({ _id: id }, { ...body }, { new: true })
         .exec();
 
-      return res.send(result);
+      return res.json(result);
     } catch (err) {
       //throw error in json response with status 500.
-      return res.send(err);
+      return res.json(err);
     }
   },
 ];
@@ -54,10 +58,9 @@ exports.get_single_test_user = [
     const { id } = req.params;
     try {
       const result = await testModel.findById(id);
-      res.send(result);
+      return successResponse(res, result, responseMessage("OK001"));
     } catch (err) {
-      res.send(err);
-      console.log("🚀 ~ file: testController.js:62 ~ async ~ err:", err);
+      return errorResponse(res, responseMessage("ER999"));
     }
   },
 ];
