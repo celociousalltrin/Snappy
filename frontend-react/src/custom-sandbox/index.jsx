@@ -4,11 +4,12 @@ import BasicExample from "./responsive-sandbox";
 import ImageOptimize from "./image-optimize";
 import Order from "./order";
 import MyAvatar from "./avatar";
+import ReduxDemo from "./redux-demo";
 
 const SandBox = () => {
   return (
     <div>
-      <ImageOptimize />
+      <ReduxDemo />
     </div>
   );
 };
