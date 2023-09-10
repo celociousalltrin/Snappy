@@ -21,37 +21,35 @@ const AppListExpand = ({
   };
 
   return (
-    <div>
-      <AppFramerListExpand isExpand={isExpand}>
-        {isToggleContent(content, isSignupMobileScreen() ? 55 : 105) &&
-        !isExpand ? (
-          <span>
-            {sliceContent(content, isSignupMobileScreen() ? 55 : 105)}{" "}
-            <AppToolTip title="Show More">
-              <BiSolidChevronDown
+    <AppFramerListExpand isExpand={isExpand}>
+      {isToggleContent(content, isSignupMobileScreen() ? 55 : 105) &&
+      !isExpand ? (
+        <span>
+          {sliceContent(content, isSignupMobileScreen() ? 55 : 105)}{" "}
+          <AppToolTip title="Show More">
+            <BiSolidChevronDown
+              color="rgb(13, 110, 253)"
+              size={23}
+              onClick={(e) => showMore(e, contentId)}
+            />{" "}
+          </AppToolTip>
+        </span>
+      ) : (
+        <span>
+          {content}
+          {isToggleContent(content, isSignupMobileScreen() ? 55 : 105) && (
+            <AppToolTip title="Hide">
+              <BiSolidChevronUp
                 color="rgb(13, 110, 253)"
+                className="ms-2"
                 size={23}
-                onClick={(e) => showMore(e, contentId)}
-              />{" "}
+                onClick={(e) => showLess(e, contentId)}
+              />
             </AppToolTip>
-          </span>
-        ) : (
-          <span>
-            {content}
-            {isToggleContent(content, isSignupMobileScreen() ? 55 : 105) && (
-              <AppToolTip title="Hide">
-                <BiSolidChevronUp
-                  color="rgb(13, 110, 253)"
-                  className="ms-2"
-                  size={23}
-                  onClick={(e) => showLess(e, contentId)}
-                />
-              </AppToolTip>
-            )}
-          </span>
-        )}
-      </AppFramerListExpand>
-    </div>
+          )}
+        </span>
+      )}
+    </AppFramerListExpand>
   );
 };
 
