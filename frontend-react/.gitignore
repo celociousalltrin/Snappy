@@ -23,9 +23,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-<<<<<<< HEAD
 .env
 .gitignore
 .node_modules
-=======
->>>>>>> parent of ca7c34c (changes)
