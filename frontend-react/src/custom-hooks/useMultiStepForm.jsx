@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const useMultiStepForm = ({ props }) => {
+const useMultiStepForm = ({ props: { children } }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState("next");
   const next = () => {
@@ -14,12 +14,12 @@ const useMultiStepForm = ({ props }) => {
   };
   return {
     currentIndex,
-    components: props.children,
-    currentComponent: props.children[currentIndex],
+    components: children,
+    currentComponent: children[currentIndex],
     next,
     previous,
     isFirstStep: currentIndex === 0,
-    isLastStep: currentIndex === props.children.length - 1,
+    isLastStep: currentIndex === children.length - 1,
     direction,
   };
 };

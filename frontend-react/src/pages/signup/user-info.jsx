@@ -8,6 +8,8 @@ import countries from "../../utils/countries.json";
 import ReactDatePicker from "react-datepicker";
 import PhoneInput from "react-phone-input-2";
 
+import * as Yup from "yup";
+
 const UserInfoForm = ({
   data: {
     first_name,
@@ -40,17 +42,22 @@ const UserInfoForm = ({
       </div>
       <div className="signup-user-info-container row">
         <div className="col-12 col-md-6">
-          <Form.Label>First Name </Form.Label>
+          <Form.Label>
+            First Name <span className="text-danger">*</span>
+          </Form.Label>
           <Form.Control
             type="text"
             placeholder="First Name"
             name="first_name"
             value={first_name}
             onChange={handleChange}
+            onBlur={(e) => console.log("asdqw", e)}
           />
         </div>
         <div className="col-12 col-md-6">
-          <Form.Label>Last Name </Form.Label>
+          <Form.Label>
+            Last Name <span className="text-danger">*</span>
+          </Form.Label>
           <Form.Control
             type="text"
             placeholder="Last Name"
@@ -60,7 +67,9 @@ const UserInfoForm = ({
           />
         </div>
         <div className="col-12 col-md-6">
-          <Form.Label>User Name</Form.Label>
+          <Form.Label>
+            User Name <span className="text-danger">*</span>
+          </Form.Label>
           <Form.Control
             type="text"
             placeholder="User Name"
@@ -75,7 +84,9 @@ const UserInfoForm = ({
           )}
         </div>
         <div className="col-12 col-md-6">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>
+            Email <span className="text-danger">*</span>
+          </Form.Label>
           <Form.Control
             type="email"
             placeholder="email"
@@ -85,7 +96,9 @@ const UserInfoForm = ({
           />
         </div>
         <div className="col-12 col-md-6">
-          <Form.Label>Phone Number</Form.Label>
+          <Form.Label>
+            Phone Number <span className="text-danger">*</span>
+          </Form.Label>
 
           <PhoneInput
             country={"in"}
@@ -95,7 +108,9 @@ const UserInfoForm = ({
           />
         </div>
         <div className="col-12 col-md-6">
-          <Form.Label>Date Of Birth</Form.Label>
+          <Form.Label>
+            Date Of Birth <span className="text-danger">*</span>
+          </Form.Label>
           <ReactDatePicker
             className="signup-date-picker"
             placeholderText="Date Of Birth"
@@ -108,7 +123,9 @@ const UserInfoForm = ({
           />
         </div>
         <div className="col-12 col-md-6">
-          <Form.Label>Country</Form.Label>
+          <Form.Label>
+            Country <span className="text-danger">*</span>
+          </Form.Label>
           <Select
             className="signup-select"
             placeholder="Select the Country..."
@@ -127,7 +144,9 @@ const UserInfoForm = ({
           />
         </div>
         <div className="col-12 col-md-6">
-          <Form.Label>State</Form.Label>
+          <Form.Label>
+            State <span className="text-danger">*</span>
+          </Form.Label>
           <Select
             className="signup-select"
             placeholder="Select the State..."
