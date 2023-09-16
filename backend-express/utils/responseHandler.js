@@ -1,7 +1,7 @@
 exports.successResponse = async (
   res,
-  data = null,
   responseDetails = {},
+  data = null,
   status = 200
 ) => {
   const responseFormat = {

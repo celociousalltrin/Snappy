@@ -42,7 +42,47 @@
   background-color: whitesmoke;
 }
 
+.signup-select {
+  width: 80%;
+  text-align: left;
+}
+
+.signup-date-picker {
+  width: 80%;
+  margin-right: 39%;
+  border-radius: 7px;
+  padding: 5px;
+  border: 1px solid #e2e1e0;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-tel-input .form-control {
+  padding: 0.3rem 3rem !important;
+  width: 80% !important;
+}
+
+.signup-user-name {
+  text-align: start;
+  margin: 0.2rem 0 0 0;
+  padding: 0;
+}
+
 @media (max-width: 767px) {
+  .signup-date-picker {
+    width: 100%;
+  }
+
+  .signup-select {
+    width: 100%;
+  }
+
+  .react-tel-input .form-control {
+    width: 100% !important;
+  }
+
   .signup-user-info-container > div:not(:first-child) {
     margin-top: 1.3rem;
   }
@@ -92,6 +132,7 @@
   .signup-user-info-container > div > input {
     width: 80%;
   }
+
   .or-icon {
     position: absolute;
     padding: 0rem 0.7rem;

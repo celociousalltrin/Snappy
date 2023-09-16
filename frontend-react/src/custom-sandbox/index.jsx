@@ -9,7 +9,7 @@ import ReduxDemo from "./redux-demo";
 const SandBox = () => {
   return (
     <div>
-      <ReduxDemo />
+      <ImageOptimize />
     </div>
   );
 };

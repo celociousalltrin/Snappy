@@ -5,9 +5,9 @@ exports.uploadImageService = async (dataURI) => {
   try {
     const data = await cloudinary.uploader.upload(dataURI, {
       resource_type: "image",
-      public_id: "new image",
     });
-    return data;
+
+    return resizeImageService(data);
   } catch (err) {
     console.log(
       "🚀 ~ file: cloudinary.js:5 ~ exports.uploadImageService= ~ err:",
@@ -18,13 +18,31 @@ exports.uploadImageService = async (dataURI) => {
 
 exports.deleteImageService = async (publicId) => {
   try {
-    const data = await cloudinary.uploader.destroy("new image", {
+    const data = await cloudinary.uploader.destroy(publicId, {
       resource_type: "image",
     });
     return data;
   } catch (err) {
     console.log(
       "🚀 ~ file: cloudinary.js:22 ~ exports.deleteImage ~ err:",
+      err
+    );
+  }
+};
+
+exports.resizeImageService = async (publicId, width, height) => {
+  try {
+    const resizedImageUrl = cloudinary.url(publicId, {
+      width,
+      height,
+      crop: "fill",
+      secure: true,
+    });
+
+    return resizedImageUrl;
+  } catch (err) {
+    console.log(
+      "🚀 ~ file: cloudinary.js:44 ~ exports.resizeImageService=async ~ err:",
       err
     );
   }

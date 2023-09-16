@@ -70,55 +70,6 @@ exports.get_single_test_user = [
   },
 ];
 
-const imageCache = new Map();
-
-exports.get_image_api = [
-  async (req, res) => {
-    const { image_url } = req.body;
-    try {
-      console.time("generateImageURL");
-
-      const imagePromises = [];
-      for (let i = 0; i < 10; i++) {
-        imagePromises.push(generateImageURL(image_url));
-      }
-
-      const result = await Promise.all(imagePromises);
-      console.timeEnd("generateImageURL");
-
-      res.status(200).send(result);
-    } catch (err) {
-      console.log("Error:", err);
-      res.status(500).send("Internal Server Error");
-    }
-  },
-];
-
-const generateImageURL = async (imageUrl) => {
-  try {
-    // Check if the image data is already in the cache
-    if (imageCache.has(imageUrl)) {
-      return imageCache.get(imageUrl);
-    }
-
-    const image = await loadImage(imageUrl);
-
-    const canvas = createCanvas(800, 800);
-    const context = canvas.getContext("2d");
-    context.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-    const imageData = canvas.toDataURL("image/jpeg", 0.9);
-
-    // Store the processed image data in the cache
-    imageCache.set(imageUrl, imageData);
-
-    return imageData;
-  } catch (error) {
-    console.log("Error:", error);
-    return null;
-  }
-};
-
 exports.upload_cloudinary_test = [
   async (req, res) => {
     try {
@@ -135,6 +86,10 @@ const cloudinaryFileUpload = async ({ buffer, mimetype }) => {
     const b64 = buffer.toString("base64");
     let dataURI = "data:" + mimetype + ";base64," + b64;
     const data = await uploadImageService(dataURI);
+    console.log(
+      "🚀 ~ file: testController.js:138 ~ cloudinaryFileUpload ~ data:",
+      data
+    );
     return data;
   } catch (err) {
     console.log(

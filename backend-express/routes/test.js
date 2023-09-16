@@ -8,7 +8,7 @@ const {
   get_single_test_user,
   update_test_user,
   test_user_list,
-  get_image_api,
+
   upload_cloudinary_test,
   delete_cloudinary_test,
 } = require("../controllers/testController");
@@ -16,7 +16,7 @@ const {
 router.route("/").get(test_user_list).post(create_test_user);
 
 router.route("/:id").get(get_single_test_user).put(update_test_user);
-router.route("/get-image-url").post(get_image_api);
+
 router
   .route("/upload-cloudinary-image")
   .post(multerMiddleware(), upload_cloudinary_test);

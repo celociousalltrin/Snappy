@@ -9,6 +9,13 @@ const ImageOptimize = () => {
 
   const [apiData, setAPiData] = useState([]);
 
+  const [cloudImage, setCloudImage] = useState();
+  const [resizeCloudImage, setResizeCloudImage] = useState();
+  console.log(
+    "🚀 ~ file: image-optimize.jsx:13 ~ ImageOptimize ~ cloudImage:",
+    cloudImage
+  );
+
   useEffect(() => {
     handleGenerateImage();
   }, []);
@@ -102,7 +109,6 @@ const ImageOptimize = () => {
   };
 
   const handleUploadCloudinary = async () => {
-    console.log("xxxxxxxxxx", urlimage);
     const formData = new FormData();
     formData.append("myFile", urlimage);
 
@@ -116,10 +122,15 @@ const ImageOptimize = () => {
         "http://localhost:5000/api/user/upload-cloudinary-image",
         requestOptions
       );
+
+      const result = await response.json();
       console.log(
-        "🚀 ~ file: image-optimize.jsx:109 ~ handleUploadCloudinary ~ response:",
-        response
+        "🚀 ~ file: image-optimize.jsx:126 ~ handleUploadCloudinary ~ result:",
+        result
       );
+
+      setCloudImage(result.orginal_image.secure_url);
+      setResizeCloudImage(result.resized_image);
     } catch (err) {
       console.log(
         "🚀 ~ file: image-optimize.jsx:102 ~ handleUploadCloudinary ~ err:",
@@ -167,6 +178,10 @@ const ImageOptimize = () => {
       </button>
       <input type="file" onChange={handleSelect} name="myFile" />
 
+      <h1>Orginalk Cloud Image</h1>
+      <img src={cloudImage} width={100} height={100} />
+      <h1>Resized Image</h1>
+      <img src={resizeCloudImage} width={100} height={100} />
       {newImage && <img src={newImage} alt="New Image" />}
       <canvas ref={canvasRef} style={{ display: "none" }} />
       {urlimage && <img src={urlimage} width={1000} height={300} />}
