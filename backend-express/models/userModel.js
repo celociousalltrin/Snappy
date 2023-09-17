@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
     state: { type: String, default: null },
     country: { type: String, default: null },
   },
+  password: { type: String, default: null },
   investor_image: { type: Object, default: null },
   about: { type: String, default: null },
   interest: [{ type: String, default: null }],
