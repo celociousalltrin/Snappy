@@ -7,9 +7,11 @@ import UploadProfilePicture from "./upload-profile-picture";
 import InterestedFields from "./interested-fields";
 import SignupAddFriends from "./signup-add-friends";
 import { signupComponentHeader } from "../../utils/common-data";
+import { useFormik } from "formik";
 
 import "./style.css";
 import MultiStepForm from "../../components/multi-step-form";
+import { signupSchema } from "../../utils/form-validation-schema";
 
 const SignUp = () => {
   const init = {
@@ -23,27 +25,36 @@ const SignUp = () => {
       state: "",
       country: "",
     },
+    new_password: "",
+    confirm_password: "",
     investor_image: {},
     about: "",
     interest: [],
   };
 
-  const [userData, setUserData] = useState(init);
-  console.log("🚀 ~ file: index.jsx:32 ~ SignUp ~ userData:", userData);
+  const formik = useFormik({
+    initialValues: init,
+    validationSchema: signupSchema,
+  });
 
-  const handleChange = ({ target: { name, value } }) => {
-    setUserData({ ...userData, [name]: value });
-  };
+  const {
+    new_password,
+    confirm_password,
+    investor_image,
+    about,
+    interest,
+    ...rest
+  } = formik.values;
 
   const handleSelectChange = ({ value, name }) => {
-    setUserData({
-      ...userData,
-      personal_address: { ...userData.personal_address, [name]: value },
+    formik.setValues({
+      ...formik.values,
+      personal_address: {
+        ...formik.values.personal_address,
+        [name]: value,
+        ...(name === "country" && { state: "" }),
+      },
     });
-  };
-
-  const handleCustomChange = (name, value) => {
-    setUserData({ ...userData, [name]: value });
   };
 
   return (
@@ -51,22 +62,33 @@ const SignUp = () => {
       componentsList={
         <div>
           <UserInfoForm
-            data={userData}
-            handleChange={handleChange}
+            data={rest}
+            handleChange={formik.handleChange}
             handleSelectChange={handleSelectChange}
-            handleCustomChange={handleCustomChange}
+            formik={formik}
           />
-          <AppVerificationCode data={userData} handleChange={handleChange} />
-          <CreatePassword data={userData} handleChange={handleChange} />
-          <UploadProfilePicture data={userData} handleChange={handleChange} />
-          <UserBio data={userData} handleChange={handleChange} />
-          <InterestedFields data={userData} handleChange={handleChange} />
-          <SignupAddFriends data={userData} handleChange={handleChange} />
+          <AppVerificationCode handleChange={formik.handleChange} />
+          <CreatePassword
+            data={{ new_password, confirm_password }}
+            handleChange={formik.handleChange}
+          />
+          <UploadProfilePicture
+            data={investor_image}
+            handleChange={formik.handleChange}
+          />
+          <UserBio data={about} handleChange={formik.handleChange} />
+          <InterestedFields
+            data={interest}
+            handleChange={formik.handleChange}
+          />
+          <SignupAddFriends handleChange={formik.handleChange} />
         </div>
       }
       formHeading="Create Snappy Account"
       headerData={signupComponentHeader}
       onFinishRoute="signup-success"
+      errors={formik.errors}
+      touched={formik.touched}
     />
   );
 };
