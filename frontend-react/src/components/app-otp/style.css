@@ -1,0 +1,16 @@
+.otp-input {
+  display: flex;
+  justify-content: center;
+}
+
+.otp-input > div {
+  margin: 1rem 0rem;
+  display: flex;
+  justify-content: center;
+}
+
+.otp-input > div > input {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  font-size: 1.5rem !important;
+}
