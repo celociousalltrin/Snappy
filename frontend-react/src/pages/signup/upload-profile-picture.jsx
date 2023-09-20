@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
-import mutual4 from "../../assets/mock-image/4mutual.jpg";
+import avatar from "../../assets/avatar/avatar-icon.png";
 import { TbCameraPlus } from "react-icons/tb";
+import AppImageCropper from "../../components/app-image-cropper";
+import { convertFileToDataURL } from "../../utils/common-function";
+import AppImageDialogueBox from "../../components/app-image-Dialogue-box";
 
-const UploadProfilePicture = () => {
+const UploadProfilePicture = ({ data, formik: { setFieldValue } }) => {
+  const [date, setDate] = useState(new Date());
+  const [investorImage, setInvestorImage] = useState();
+  const [selectedImageDataURL, setSelectedImageDataURL] = useState();
+  const [isOpenDialogueBox, setIsOpenDialogueBox] = useState(false);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+
+  const handleFileChange = async (e) => {
+    const selectedFile = e.target.files[0];
+    setDate(new Date());
+
+    if (selectedFile) {
+      // We can Create Like this but it does not support on every browser
+      // const imageURL = URL.createObjectURL(selectedFile);
+      const imageURL = await convertFileToDataURL(selectedFile);
+      setSelectedImageDataURL(imageURL);
+      setIsOpenDialogueBox(true);
+    }
+  };
+
   return (
     <div className="text-start p-4 pt-1 pb-0">
       <div>
@@ -12,18 +34,50 @@ const UploadProfilePicture = () => {
         </p>
         <div className="signup-edit-prof">
           <img
-            src={mutual4}
+            src={!investorImage ? avatar : investorImage}
             alt="profile-img"
             width="130px"
             height="130px"
             className="rounded-circle signup-edit-prof-img"
           />
-          <TbCameraPlus
-            size={50}
-            className="signup-edit-prof__camicon1  position-absolute start-50 top-50 translate-middle"
-          />
+
+          <div>
+            <label htmlFor="fileInput">
+              <TbCameraPlus
+                size={50}
+                className="signup-edit-prof__camicon1 position-absolute start-50 top-50 translate-middle"
+              />
+            </label>
+            <input
+              type="file"
+              id="fileInput"
+              key={date}
+              style={{ display: "none" }}
+              onChange={handleFileChange}
+              name="myFile"
+            />
+          </div>
         </div>
       </div>
+
+      <AppImageDialogueBox
+        imageCropperComp={
+          <AppImageCropper
+            image={selectedImageDataURL}
+            shape="round"
+            setCroppedAreaPixels={setCroppedAreaPixels}
+          />
+        }
+        show={isOpenDialogueBox}
+        setShow={setIsOpenDialogueBox}
+        setSelectedImageDataURL={setSelectedImageDataURL}
+        selectedImageDataURL={selectedImageDataURL}
+        croppedAreaPixels={croppedAreaPixels}
+        callback={(url) => {
+          setInvestorImage(url);
+          setFieldValue("investor_image", url);
+        }}
+      />
     </div>
   );
 };
