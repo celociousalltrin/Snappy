@@ -70,6 +70,10 @@
   padding: 0;
 }
 
+.invalid-feedback {
+  text-align: left;
+}
+
 @media (max-width: 767px) {
   .signup-date-picker {
     width: 100%;

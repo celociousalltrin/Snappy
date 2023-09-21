@@ -4,18 +4,22 @@ import { SignupInterestedFields } from "../../utils/common-data";
 import { AiOutlineDownCircle, AiOutlineUpCircle } from "react-icons/ai";
 import useToggleContent from "../../custom-hooks/useToggleContent";
 import AppFramerExpand from "../../components/app-framer-expand";
+import toast from "react-hot-toast";
 
-const InterestedFields = () => {
-  const [userInterest, setUserInterest] = useState([]);
+const InterestedFields = ({ data, formik: { setFieldValue } }) => {
   const { isShow, showLess, showMore } = useToggleContent();
   const [showIcon, setShowIcon] = useState(true);
+
   const handleInterestAction = (input) => {
-    if (userInterest.includes(input)) {
-      setUserInterest(userInterest.filter((obj) => obj !== input));
-    } else if (userInterest.length > 4) {
-      alert("You can Choose only 5 interest");
+    if (data.includes(input)) {
+      setFieldValue(
+        "interest",
+        data.filter((obj) => obj !== input)
+      );
+    } else if (data.length > 4) {
+      toast.error("You can Choose only 5 interest");
     } else {
-      setUserInterest([...userInterest, input]);
+      setFieldValue("interest", [...data, input]);
     }
   };
 
@@ -23,11 +27,10 @@ const InterestedFields = () => {
     <div className="row ms-3 ms-md-0 m-auto">
       <p
         className={`${
-          userInterest.length > 4 && "text-primary"
+          data.length > 4 && "text-primary"
         } fs-5 pb-1 mb-0 text-start fw-bold interest-selected-count`}
       >
-        {`${userInterest.length}/5`}{" "}
-        <span className="ms-1 fw-normal">Selected</span>
+        {`${data.length}/5`} <span className="ms-1 fw-normal">Selected</span>
       </p>
       <div className="position-relative">
         <AppFramerExpand setShowIcon={setShowIcon} isVisible={isShow}>
@@ -56,7 +59,7 @@ const InterestedFields = () => {
         <div className="col-md-4 col-lg-3">
           <div
             className={`shadow p-3 mb-5 rounded interest-single-container ${
-              userInterest.includes(obj.id) && "bg-primary text-light"
+              data.includes(obj.id) && "bg-primary text-light"
             }`}
             onClick={() => handleInterestAction(obj.id)}
           >

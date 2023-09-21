@@ -8,7 +8,6 @@ import AppImageDialogueBox from "../../components/app-image-Dialogue-box";
 
 const UploadProfilePicture = ({ data, formik: { setFieldValue } }) => {
   const [date, setDate] = useState(new Date());
-  const [investorImage, setInvestorImage] = useState();
   const [selectedImageDataURL, setSelectedImageDataURL] = useState();
   const [isOpenDialogueBox, setIsOpenDialogueBox] = useState(false);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
@@ -34,7 +33,7 @@ const UploadProfilePicture = ({ data, formik: { setFieldValue } }) => {
         </p>
         <div className="signup-edit-prof">
           <img
-            src={!investorImage ? avatar : investorImage}
+            src={!data ? avatar : data}
             alt="profile-img"
             width="130px"
             height="130px"
@@ -74,7 +73,6 @@ const UploadProfilePicture = ({ data, formik: { setFieldValue } }) => {
         selectedImageDataURL={selectedImageDataURL}
         croppedAreaPixels={croppedAreaPixels}
         callback={(url) => {
-          setInvestorImage(url);
           setFieldValue("investor_image", url);
         }}
       />

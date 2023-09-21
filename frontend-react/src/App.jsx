@@ -23,6 +23,12 @@ function App() {
             <Route path="/*" element={<AppRoutes />} />
           </Routes>
         </BrowserRouter>
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            duration: 2000,
+          }}
+        />
       </div>
     </>
   );

@@ -8,8 +8,6 @@ import countries from "../../utils/countries.json";
 import ReactDatePicker from "react-datepicker";
 import PhoneInput from "react-phone-input-2";
 
-import * as Yup from "yup";
-
 const UserInfoForm = ({
   data: {
     first_name,
@@ -22,7 +20,7 @@ const UserInfoForm = ({
   },
   handleChange,
   handleSelectChange,
-  handleCustomChange,
+  formik: { handleBlur, errors, touched, dirty, setFieldValue },
 }) => {
   const locateLocationbyCode = (code) => {
     return countries.find((o) => o.code3 === code);
@@ -51,8 +49,13 @@ const UserInfoForm = ({
             name="first_name"
             value={first_name}
             onChange={handleChange}
-            onBlur={(e) => console.log("asdqw", e)}
+            onBlur={handleBlur}
+            isValid={!errors.first_name && dirty}
+            isInvalid={!!errors.first_name && touched.first_name}
           />
+          <Form.Control.Feedback type="invalid">
+            {errors.first_name}
+          </Form.Control.Feedback>
         </div>
         <div className="col-12 col-md-6">
           <Form.Label>
@@ -64,7 +67,13 @@ const UserInfoForm = ({
             name="last_name"
             value={last_name}
             onChange={handleChange}
+            onBlur={handleBlur}
+            isValid={!errors.last_name && dirty}
+            isInvalid={!!errors.last_name && touched.last_name}
           />
+          <Form.Control.Feedback type="invalid">
+            {errors.last_name}
+          </Form.Control.Feedback>
         </div>
         <div className="col-12 col-md-6">
           <Form.Label>
@@ -76,12 +85,18 @@ const UserInfoForm = ({
             name="user_name"
             value={user_name}
             onChange={handleChange}
+            onBlur={handleBlur}
+            isValid={!errors.user_name && dirty}
+            isInvalid={!!errors.user_name && touched.user_name}
           />
           {user_name && (
             <p className="signup-user-name text-primary">{`@${user_name
               .toLowerCase()
               .replace(/\s+/g, "_")}`}</p>
           )}
+          <Form.Control.Feedback type="invalid">
+            {errors.user_name}
+          </Form.Control.Feedback>
         </div>
         <div className="col-12 col-md-6">
           <Form.Label>
@@ -93,7 +108,13 @@ const UserInfoForm = ({
             name="email"
             value={email}
             onChange={handleChange}
+            onBlur={handleBlur}
+            isValid={!errors.email && dirty}
+            isInvalid={!!errors.email && touched.email}
           />
+          <Form.Control.Feedback type="invalid">
+            {errors.email}
+          </Form.Control.Feedback>
         </div>
         <div className="col-12 col-md-6">
           <Form.Label>
@@ -103,8 +124,9 @@ const UserInfoForm = ({
           <PhoneInput
             country={"in"}
             value={phone_number}
-            onChange={(data) => handleCustomChange("phone_number", data)}
+            onChange={(data) => setFieldValue("phone_number", data)}
             countryCodeEditable={false}
+            enableSearch={true}
           />
         </div>
         <div className="col-12 col-md-6">
@@ -115,7 +137,7 @@ const UserInfoForm = ({
             className="signup-date-picker"
             placeholderText="Date Of Birth"
             selected={dob && new Date(dob)}
-            onChange={(date) => handleCustomChange("dob", date.toISOString())}
+            onChange={(date) => setFieldValue("dob", date.toISOString())}
             peekNextMonth
             showMonthDropdown
             showYearDropdown
@@ -135,11 +157,13 @@ const UserInfoForm = ({
                 value: personal_address?.country,
               }
             }
-            options={countries.map(({ name, code3 }) => ({
-              label: name,
-              value: code3,
-              name: "country",
-            }))}
+            options={countries
+              .filter((x) => x.states.length > 0)
+              .map(({ name, code3 }) => ({
+                label: name,
+                value: code3,
+                name: "country",
+              }))}
             onChange={handleSelectChange}
           />
         </div>

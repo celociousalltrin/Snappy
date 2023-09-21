@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./style.css";
 import heavyImage from "../assets/mock-image/sample_5184×3456.jpeg";
+import { convertFileToDataURL } from "../utils/common-function";
 
 const ImageOptimize = () => {
   const [newImage, setNewImage] = useState();
+  const [selectedImage, setSelectedImage] = useState();
 
   const [urlimage, setUrlImage] = useState();
 
@@ -11,10 +13,8 @@ const ImageOptimize = () => {
 
   const [cloudImage, setCloudImage] = useState();
   const [resizeCloudImage, setResizeCloudImage] = useState();
-  console.log(
-    "🚀 ~ file: image-optimize.jsx:13 ~ ImageOptimize ~ cloudImage:",
-    cloudImage
-  );
+
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     handleGenerateImage();
@@ -24,10 +24,15 @@ const ImageOptimize = () => {
 
   const handleSelect = async (e) => {
     const file = e.target.files[0];
+    console.log(e.target.files);
+    setDate(new Date());
+
+    const result = await convertFileToDataURL(file);
     console.log(
-      "🚀 ~ file: image-optimize.jsx:20 ~ handleSelect ~ file:",
-      file
+      "🚀 ~ file: image-optimize.jsx:27 ~ handleSelect ~ result:",
+      result
     );
+    setSelectedImage(result);
 
     if (file) {
       optimizeAndSetImage(file);
@@ -176,8 +181,11 @@ const ImageOptimize = () => {
       >
         Delte Asset
       </button>
-      <input type="file" onChange={handleSelect} name="myFile" />
-
+      <input type="file" onChange={handleSelect} name="myFile" key={date} />
+      <div className="mb-3">
+        <h1>Selected Image in Data URL format</h1>
+        <img src={selectedImage} width={300} height={300} />
+      </div>
       <h1>Orginalk Cloud Image</h1>
       <img src={cloudImage} width={100} height={100} />
       <h1>Resized Image</h1>

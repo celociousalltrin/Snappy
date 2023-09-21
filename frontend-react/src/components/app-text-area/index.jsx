@@ -1,15 +1,24 @@
 import React, { useRef } from "react";
+import { Form } from "react-bootstrap";
 import "./style.css";
 
-const AppTextArea = ({ placeholder, rows, cols, type, isNormalTextArea }) => {
+const AppTextArea = ({
+  placeholder,
+  rows,
+  cols,
+  value,
+  type,
+  isNormalTextArea,
+  handleChange,
+  name,
+  handleBlur,
+  errors,
+  touched,
+}) => {
   const elementRef = useRef();
 
   const handleAppTextAreaChange = (e) => {
     elementRef.current.style.height = `${e.target.scrollHeight}px`;
-  };
-
-  const handleChange = (e) => {
-    console.log(e);
   };
 
   return (
@@ -21,9 +30,17 @@ const AppTextArea = ({ placeholder, rows, cols, type, isNormalTextArea }) => {
         }`}
         onChange={isNormalTextArea ? handleChange : handleAppTextAreaChange}
         placeholder={placeholder}
+        value={value}
         rows={rows}
         cols={cols}
+        name={name}
+        onBlur={handleBlur}
       />
+      {touched && (
+        <p className="text-danger ms-2" style={{ textAlign: "start" }}>
+          {errors.about}
+        </p>
+      )}
     </div>
   );
 };

@@ -6,7 +6,7 @@ import { AiOutlineDownCircle, AiOutlineUpCircle } from "react-icons/ai";
 import useToggleContent from "../../custom-hooks/useToggleContent";
 import AppFramerExpand from "../../components/app-framer-expand";
 
-const SignupAddFriends = () => {
+const SignupAddFriends = ({ data, formik: { setFieldValue } }) => {
   const { isShow, showMore, showLess } = useToggleContent();
   const [showIcon, setShowIcon] = useState(true);
 
@@ -16,7 +16,7 @@ const SignupAddFriends = () => {
         <p className="fs-6 text-muted mt-0 ms-3">
           When You Send Friend Request to SomeOne. If they accept then you will
           see their snaps in your feeds. You will also receive relevant
-          recommendations. Atleast Add one Friend in your Snapp Community.
+          recommendations. Atleast Add 2 in your Snapp Community.
           <span className="d-md-none" onClick={showLess}>
             <AiOutlineUpCircle size={23} color="rgb(13, 110, 253)" />
           </span>
@@ -27,7 +27,11 @@ const SignupAddFriends = () => {
           </span>
         )}
       </AppFramerExpand>
-      <FriendsList MockFriendsList={MockFriendsList} isSignup />
+      <FriendsList
+        MockFriendsList={MockFriendsList}
+        isSignup
+        callback={(id) => setFieldValue("friends", [...data, id])}
+      />
     </div>
   );
 };

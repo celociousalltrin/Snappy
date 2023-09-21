@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import UserBio from "./user-bio";
 import UserInfoForm from "./user-info";
 import AppVerificationCode from "../../components/app-verification-code";
@@ -8,12 +8,10 @@ import InterestedFields from "./interested-fields";
 import SignupAddFriends from "./signup-add-friends";
 import { signupComponentHeader } from "../../utils/common-data";
 import { useFormik } from "formik";
-
-import "./style.css";
 import MultiStepForm from "../../components/multi-step-form";
 import { signupSchema } from "../../utils/form-validation-schema";
 
-const SignUp = () => {
+export const SignUp = () => {
   const [isVerified, setIsVerified] = useState(false);
 
   const init = {
@@ -29,10 +27,9 @@ const SignUp = () => {
     },
     new_password: "",
     confirm_password: "",
-    investor_image: "",
+    investor_image: {},
     about: "",
     interest: [],
-    friends: [],
   };
 
   const formik = useFormik({
@@ -41,7 +38,6 @@ const SignUp = () => {
   });
 
   const {
-    friends,
     new_password,
     confirm_password,
     investor_image,
@@ -72,10 +68,9 @@ const SignUp = () => {
             formik={formik}
           />
           <AppVerificationCode
-            email={rest.email}
+            email={rest}
             isValid={isVerified}
             setIsValid={setIsVerified}
-            formik={formik}
           />
           <CreatePassword
             data={{ new_password, confirm_password }}
@@ -87,13 +82,12 @@ const SignUp = () => {
             handleChange={formik.handleChange}
             formik={formik}
           />
-          <UserBio
-            data={about}
+          <UserBio data={about} handleChange={formik.handleChange} />
+          <InterestedFields
+            data={interest}
             handleChange={formik.handleChange}
-            formik={formik}
           />
-          <InterestedFields data={interest} formik={formik} />
-          <SignupAddFriends data={friends} formik={formik} />
+          <SignupAddFriends handleChange={formik.handleChange} />
         </div>
       }
       formHeading="Create Snappy Account"
@@ -101,10 +95,6 @@ const SignUp = () => {
       onFinishRoute="signup-success"
       errors={formik.errors}
       touched={formik.touched}
-      signupLastFormData={formik.values.friends}
-      isSignupForm
     />
   );
 };
-
-export default SignUp;

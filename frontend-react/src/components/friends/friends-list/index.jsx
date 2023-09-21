@@ -16,6 +16,7 @@ const FriendsList = ({
   isFriendList,
   isDiscoverFriend,
   length,
+  callback = () => {},
 }) => {
   const { showMore, showLess, listUniqueId } = useListToggleContent();
   const navigate = useNavigate();
@@ -105,6 +106,7 @@ const FriendsList = ({
                       className={`${
                         isSignup && "text-nowrap"
                       } btn btn-sm btn-primary`}
+                      onClick={() => callback(obj.id)}
                     >
                       <span className={`${isSignup && "d-none d-md-block"}`}>
                         {" "}

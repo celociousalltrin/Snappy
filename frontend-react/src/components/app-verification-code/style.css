@@ -6,10 +6,30 @@
   text-align: start;
 }
 
+.recieve-email {
+  text-align: end !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
 .verify-code-container > p:last-child:hover {
   text-decoration: underline;
 }
 
 .verify-code-container > p:not(:first-child) {
   margin-left: 0.2rem;
+}
+
+.verify-code-note {
+  text-align: start;
+}
+
+.verify-code-note > ul > li {
+  width: 30rem;
+}
+
+@media (max-width: 767px) {
+  .verify-code-note > ul > li {
+    width: 100%;
+  }
 }

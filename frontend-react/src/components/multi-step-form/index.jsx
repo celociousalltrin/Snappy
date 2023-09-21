@@ -8,12 +8,17 @@ import { useNavigate } from "react-router-dom";
 import "./style.css";
 import FormSteps from "./form-step";
 import AppFramerButton from "../app-framer-button";
+import toast from "react-hot-toast";
 
 const MultiStepForm = ({
   componentsList,
   formHeading,
   headerData,
   onFinishRoute,
+  errors,
+  touched,
+  signupLastFormData,
+  isSignupForm = false,
 }) => {
   const [isFinish, setIsFinsish] = useState(false);
   const {
@@ -25,8 +30,34 @@ const MultiStepForm = ({
     isFirstStep,
     isLastStep,
     direction,
-  } = useMultiStepForm(componentsList);
+  } = useMultiStepForm(componentsList, errors, touched);
+
   const navigate = useNavigate();
+
+  const signupFinish = () => {
+    if (signupLastFormData.length >= 2) {
+      next();
+      setIsFinsish(true);
+      setTimeout(() => {
+        navigate(`/${onFinishRoute}`);
+      }, 1000);
+    } else {
+      toast.error("Please Select Atleast Friends to Register in Snappy");
+    }
+  };
+
+  const formFinish = () => {
+    if (!Object.keys(signupLastFormData).length) {
+      next();
+      setIsFinsish(true);
+      toast.success("The password has been reset", { duration: 1000 });
+      setTimeout(() => {
+        navigate(`/${onFinishRoute}`);
+      }, 1000);
+    } else {
+      toast.error("Please complete this form to reset your password");
+    }
+  };
   return (
     <div>
       {" "}
@@ -78,30 +109,28 @@ const MultiStepForm = ({
               <AppFramerButton hover={1.1} tap={0.9}>
                 <button
                   type="button"
-                  onClick={() => {
-                    next();
-                    setIsFinsish(true);
-                    setTimeout(() => {
-                      navigate(`/${onFinishRoute}`);
-                    }, 1000);
-                  }}
+                  onClick={isSignupForm ? signupFinish : formFinish}
                   className="btn btn-success ms-3"
                 >
                   Finish
                 </button>
               </AppFramerButton>
             )}
-            {!isFirstStep && (
-              <AppFramerButton hover={1.1} tap={0.9}>
-                <button
-                  type="button"
-                  onClick={previous}
-                  className="btn btn-outline-dark ms-4 ps-3 pe-3"
-                >
-                  Previous
-                </button>
-              </AppFramerButton>
-            )}
+            {!isFirstStep &&
+              !(
+                componentsList.props.children[1].props.isValid &&
+                (currentIndex === 1 || currentIndex === 2)
+              ) && (
+                <AppFramerButton hover={1.1} tap={0.9}>
+                  <button
+                    type="button"
+                    onClick={previous}
+                    className="btn btn-outline-dark ms-4 ps-3 pe-3"
+                  >
+                    Previous
+                  </button>
+                </AppFramerButton>
+              )}
           </div>
         </div>
       </motion.div>

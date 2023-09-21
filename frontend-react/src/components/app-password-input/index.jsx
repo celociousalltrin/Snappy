@@ -9,7 +9,7 @@ const AppPasswordInput = (props) => {
     <div className="position-relative">
       <Form.Control
         {...props}
-        type={passwordDisplay ? "text" : props.type}
+        type={passwordDisplay ? "text" : "password"}
         onChange={props.onChange}
         className="mt-1"
       />

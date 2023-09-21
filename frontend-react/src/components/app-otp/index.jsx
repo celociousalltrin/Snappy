@@ -4,8 +4,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 import "./style.css";
 
-const AppOTP = () => {
-  const [otp, setOtp] = useState("");
+const AppOTP = ({ otp, setOtp }) => {
   const [view, setView] = useState(false);
 
   return (
