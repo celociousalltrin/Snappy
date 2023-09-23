@@ -2,6 +2,7 @@ const responseData = [
   { code: "OK001", message: "Snappy User is Created" },
   { code: "ER999", message: "Something went wrong" },
   { code: "ER001", message: "Requested Page not found" },
+  { code: "ER002", message: "UserName already Exists" },
 ];
 
 exports.responseMessage = (code) => {

@@ -1,13 +1,17 @@
 require("dotenv").config();
 var cloudinary = require("cloudinary").v2;
 
-exports.uploadImageService = async (dataURI) => {
+exports.uploadImageService = async (dataURI, isResize) => {
   try {
-    const data = await cloudinary.uploader.upload(dataURI, {
-      resource_type: "image",
-    });
+    const { public_id, secure_url } = await cloudinary.uploader.upload(
+      dataURI,
+      {
+        resource_type: "image",
+        folder: "Snappy",
+      }
+    );
 
-    return resizeImageService(data);
+    return isResize ? resizeImageService(public_id) : { public_id, secure_url };
   } catch (err) {
     console.log(
       "🚀 ~ file: cloudinary.js:5 ~ exports.uploadImageService= ~ err:",

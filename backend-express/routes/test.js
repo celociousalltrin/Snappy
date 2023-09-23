@@ -13,7 +13,7 @@ const {
   delete_cloudinary_test,
 } = require("../controllers/testController");
 
-router.route("/").get(test_user_list).post(create_test_user);
+// router.route("/").get(test_user_list).post(create_test_user);
 
 router.route("/:id").get(get_single_test_user).put(update_test_user);
 

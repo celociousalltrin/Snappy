@@ -29,7 +29,7 @@ const SignUp = () => {
     },
     new_password: "",
     confirm_password: "",
-    investor_image: "",
+    investor_data_url: "",
     about: "",
     interest: [],
     friends: [],
@@ -44,7 +44,7 @@ const SignUp = () => {
     friends,
     new_password,
     confirm_password,
-    investor_image,
+    investor_data_url,
     about,
     interest,
     ...rest
@@ -83,7 +83,7 @@ const SignUp = () => {
             formik={formik}
           />
           <UploadProfilePicture
-            data={investor_image}
+            data={investor_data_url}
             handleChange={formik.handleChange}
             formik={formik}
           />
@@ -103,6 +103,7 @@ const SignUp = () => {
       touched={formik.touched}
       signupLastFormData={formik.values.friends}
       isSignupForm
+      data={formik.values}
     />
   );
 };

@@ -7,7 +7,7 @@ var mongoose = require("mongoose");
 const { responseMessage } = require("../utils/responseMessage");
 const {
   userListService,
-  createUserService,
+  // createUserService,
   updateUserService,
   getSingleUserService,
 } = require("../services/testServices");
@@ -28,19 +28,19 @@ exports.test_user_list = [
   },
 ];
 
-exports.create_test_user = [
-  async (req, res) => {
-    try {
-      const { body } = req;
-      await createUserService(testModel, body);
-      return res.json("It is created");
-    } catch (err) {
-      console.log("🚀 ~ file: testController.js:38 ~ err:", err);
-      //throw error in json response with status 500.
-      return errorResponse(res, err);
-    }
-  },
-];
+// exports.create_test_user = [
+//   async (req, res) => {
+//     try {
+//       const { body } = req;
+//       await createUserService(testModel, body);
+//       return res.json("It is created");
+//     } catch (err) {
+//       console.log("🚀 ~ file: testController.js:38 ~ err:", err);
+//       //throw error in json response with status 500.
+//       return errorResponse(res, err);
+//     }
+//   },
+// ];
 
 exports.update_test_user = [
   async (req, res) => {

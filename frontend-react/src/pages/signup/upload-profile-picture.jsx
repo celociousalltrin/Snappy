@@ -73,7 +73,7 @@ const UploadProfilePicture = ({ data, formik: { setFieldValue } }) => {
         selectedImageDataURL={selectedImageDataURL}
         croppedAreaPixels={croppedAreaPixels}
         callback={(url) => {
-          setFieldValue("investor_image", url);
+          setFieldValue("investor_data_url", url);
         }}
       />
     </div>

@@ -9,6 +9,7 @@ import "./style.css";
 import FormSteps from "./form-step";
 import AppFramerButton from "../app-framer-button";
 import toast from "react-hot-toast";
+import { createInvestor } from "../../services/method";
 
 const MultiStepForm = ({
   componentsList,
@@ -19,6 +20,7 @@ const MultiStepForm = ({
   touched,
   signupLastFormData,
   isSignupForm = false,
+  data,
 }) => {
   const [isFinish, setIsFinsish] = useState(false);
   const {
@@ -34,15 +36,21 @@ const MultiStepForm = ({
 
   const navigate = useNavigate();
 
-  const signupFinish = () => {
-    if (signupLastFormData.length >= 2) {
-      next();
-      setIsFinsish(true);
-      setTimeout(() => {
-        navigate(`/${onFinishRoute}`);
-      }, 1000);
-    } else {
-      toast.error("Please Select Atleast Friends to Register in Snappy");
+  const signupFinish = async (signupData) => {
+    try {
+      if (signupLastFormData.length >= 2) {
+        const result = await createInvestor(signupData);
+        console.log("🚀 ~ file: index.jsx:42 ~ signupFinish ~ result:", result);
+        // next();
+        // setIsFinsish(true);
+        // setTimeout(() => {
+        //   navigate(`/${onFinishRoute}`);
+        // }, 1000);
+      } else {
+        toast.error("Please Select Atleast Friends to Register in Snappy");
+      }
+    } catch (err) {
+      console.log("🚀 ~ file: index.jsx:42 ~ signupFinish ~ err:", err);
     }
   };
 
@@ -109,7 +117,7 @@ const MultiStepForm = ({
               <AppFramerButton hover={1.1} tap={0.9}>
                 <button
                   type="button"
-                  onClick={isSignupForm ? signupFinish : formFinish}
+                  onClick={isSignupForm ? () => signupFinish(data) : formFinish}
                   className="btn btn-success ms-3"
                 >
                   Finish
