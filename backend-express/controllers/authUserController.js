@@ -1,10 +1,13 @@
 var express = require("express");
-const { createUserService } = require("../services/authUserService");
+const {
+  createUserService,
+  loginService,
+} = require("../services/authUserService");
 const { isUnique } = require("../services/validationService");
 
 const userModel = require("../models/userModel");
 const { responseMessage } = require("../utils/responseMessage");
-const { errorResponse } = require("../utils/responseHandler");
+const { errorResponse, successResponse } = require("../utils/responseHandler");
 
 exports.create_user = [
   async (req, res) => {
@@ -21,6 +24,18 @@ exports.create_user = [
       return res.json("It is created Successfully");
     } catch (err) {
       console.log("🚀 ~ file: auth-user.js:9 ~ async ~ err:", err);
+      return errorResponse(res, responseMessage("ER999"));
+    }
+  },
+];
+
+exports.login = [
+  async (req, res) => {
+    try {
+      const { body } = req;
+      await loginService(userModel, body, res);
+    } catch (err) {
+      console.log("🚀 ~ file: authUserController.js:34 ~ asyn ~ err:", err);
       return errorResponse(res, responseMessage("ER999"));
     }
   },
