@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import userReducer from "./slices/userSlice";
+import purgeStoredState from "redux-persist/es/purgeStoredState";
 
 const persistConfig = {
   key: "snappy_root",
@@ -15,3 +16,7 @@ export const store = configureStore({
     user: persistedReducer,
   },
 });
+
+export const purgeStore = () => {
+  purgeStoredState(persistConfig);
+};
