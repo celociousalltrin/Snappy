@@ -12,6 +12,7 @@ import { useFormik } from "formik";
 import "./style.css";
 import MultiStepForm from "../../components/multi-step-form";
 import { signupSchema } from "../../utils/form-validation-schema";
+import { multiStepFormValidationFunction } from "../../utils/common-function";
 
 const SignUp = () => {
   const [isVerified, setIsVerified] = useState(false);
@@ -61,6 +62,11 @@ const SignUp = () => {
     });
   };
 
+  const validationFunctionArray = multiStepFormValidationFunction({
+    name: "signup",
+    length: 7,
+  });
+
   return (
     <MultiStepForm
       componentsList={
@@ -83,12 +89,12 @@ const SignUp = () => {
             formik={formik}
           />
           <UploadProfilePicture
-            data={investor_data_url}
+            data={{ investor_data_url }}
             handleChange={formik.handleChange}
             formik={formik}
           />
           <UserBio
-            data={about}
+            data={{ about }}
             handleChange={formik.handleChange}
             formik={formik}
           />
@@ -101,9 +107,9 @@ const SignUp = () => {
       onFinishRoute="signup-success"
       errors={formik.errors}
       touched={formik.touched}
-      signupLastFormData={formik.values.friends}
       isSignupForm
       data={formik.values}
+      validationFunctionArray={validationFunctionArray}
     />
   );
 };

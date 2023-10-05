@@ -1,3 +1,16 @@
+import {
+  signupValid1,
+  signupValid2,
+  signupValid3,
+  signupValid4,
+  signupValid5,
+  signupValid6,
+  signupValid7,
+  forgotPasswordValid1,
+  forgotPasswordValid2,
+  forgotPasswordValid3,
+} from "../utils/multi-step-form-validation";
+
 export const navigateToProfile = (e, navigate, username, pageId) => {
   e.preventDefault();
   e.stopPropagation();
@@ -43,4 +56,47 @@ export const generateCroppedImageDataURL = (imageDataURL, cropedSize) => {
 
   const croppedImage = canvas.toDataURL("image/jpeg");
   return croppedImage;
+};
+
+const validationFunctions = {
+  signupValid1,
+  signupValid2,
+  signupValid3,
+  signupValid4,
+  signupValid5,
+  signupValid6,
+  signupValid7,
+  forgotPasswordValid1,
+  forgotPasswordValid2,
+  forgotPasswordValid3,
+};
+
+export const multiStepFormValidationFunction = ({ name, length }) => {
+  let result = [];
+
+  for (let i = 1; i <= length; i++) {
+    const valFunc = (num) => {
+      return (next, ...rest) =>
+        validationFunctions[`${name}Valid${num}`](next, rest);
+    };
+    result.push(valFunc(i));
+  }
+  return result;
+};
+
+export const isFormikError = (touched, errors) => {
+  return !!Object.keys(touched).filter((obj) => errors[obj] !== undefined)
+    .length;
+};
+
+export const isValidData = (data) => {
+  return Object.keys(data).every((o) => {
+    const value = data[o];
+
+    if (typeof value == "object") {
+      return isValidData(value);
+    } else {
+      return !!value;
+    }
+  });
 };

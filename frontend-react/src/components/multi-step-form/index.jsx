@@ -18,9 +18,9 @@ const MultiStepForm = ({
   onFinishRoute,
   errors,
   touched,
-  signupLastFormData,
   isSignupForm = false,
   data,
+  validationFunctionArray,
 }) => {
   const [isFinish, setIsFinsish] = useState(false);
   const {
@@ -32,39 +32,32 @@ const MultiStepForm = ({
     isFirstStep,
     isLastStep,
     direction,
-  } = useMultiStepForm(componentsList, errors, touched);
+    validationFunction,
+  } = useMultiStepForm(componentsList, validationFunctionArray);
 
   const navigate = useNavigate();
 
   const signupFinish = async (signupData) => {
     try {
-      if (signupLastFormData.length >= 2) {
-        const result = await createInvestor(signupData);
-        console.log("🚀 ~ file: index.jsx:42 ~ signupFinish ~ result:", result);
-        // next();
-        // setIsFinsish(true);
-        // setTimeout(() => {
-        //   navigate(`/${onFinishRoute}`);
-        // }, 1000);
-      } else {
-        toast.error("Please Select Atleast Friends to Register in Snappy");
-      }
+      const result = await createInvestor(signupData);
+      console.log("🚀 ~ file: index.jsx:42 ~ signupFinish ~ result:", result);
+      next();
+      setIsFinsish(true);
+      setTimeout(() => {
+        navigate(`/${onFinishRoute}`);
+      }, 1000);
     } catch (err) {
       console.log("🚀 ~ file: index.jsx:42 ~ signupFinish ~ err:", err);
     }
   };
 
   const formFinish = () => {
-    if (!Object.keys(signupLastFormData).length) {
-      next();
-      setIsFinsish(true);
-      toast.success("The password has been reset", { duration: 1000 });
-      setTimeout(() => {
-        navigate(`/${onFinishRoute}`);
-      }, 1000);
-    } else {
-      toast.error("Please complete this form to reset your password");
-    }
+    next();
+    setIsFinsish(true);
+    toast.success("The password has been reset", { duration: 1000 });
+    setTimeout(() => {
+      navigate(`/${onFinishRoute}`);
+    }, 1000);
   };
   return (
     <div>
@@ -107,7 +100,15 @@ const MultiStepForm = ({
               <AppFramerButton hover={1.1} tap={0.9}>
                 <button
                   type="button"
-                  onClick={next}
+                  onClick={() =>
+                    validationFunction(
+                      next,
+                      data,
+                      errors,
+                      touched,
+                      currentComponent.props
+                    )
+                  }
                   className="btn btn-primary ms-3 ps-3 pe-3"
                 >
                   Next
@@ -117,7 +118,15 @@ const MultiStepForm = ({
               <AppFramerButton hover={1.1} tap={0.9}>
                 <button
                   type="button"
-                  onClick={isSignupForm ? () => signupFinish(data) : formFinish}
+                  onClick={() =>
+                    validationFunction(
+                      isSignupForm ? signupFinish : formFinish,
+                      data,
+                      errors,
+                      touched,
+                      currentComponent.props
+                    )
+                  }
                   className="btn btn-success ms-3"
                 >
                   Finish

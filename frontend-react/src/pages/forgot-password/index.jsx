@@ -9,6 +9,7 @@ import "./style.css";
 import AppEmail from "../../components/app-email";
 import { useFormik } from "formik";
 import { ForgotPasswordSchema } from "../../utils/form-validation-schema";
+import { multiStepFormValidationFunction } from "../../utils/common-function";
 
 const ForgotPassword = () => {
   const init = {
@@ -21,6 +22,11 @@ const ForgotPassword = () => {
   const formik = useFormik({
     initialValues: init,
     validationSchema: ForgotPasswordSchema,
+  });
+
+  const validationFunctionArray = multiStepFormValidationFunction({
+    name: "forgotPassword",
+    length: 3,
   });
 
   return (
@@ -53,7 +59,8 @@ const ForgotPassword = () => {
       onFinishRoute="login"
       errors={formik.errors}
       touched={formik.touched}
-      signupLastFormData={formik.errors}
+      data={formik.values}
+      validationFunctionArray={validationFunctionArray}
     />
   );
 };
