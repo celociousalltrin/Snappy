@@ -1,15 +1,15 @@
 const jwt = require("jsonwebtoken");
 
-const generateAccessToken = (data) => {
-  return jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" });
+const generateAccessToken = (data, expiresIn = "15m") => {
+  return jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, { expiresIn });
 };
 
-const generateRefreshToken = (data) => {
-  return jwt.sign(data, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "12h" });
+const generateRefreshToken = (data, expiresIn) => {
+  return jwt.sign(data, process.env.REFRESH_TOKEN_SECRET, { expiresIn });
 };
 
-const assignRefreshTokeninCookie = (res, data) => {
-  res.cookie("refresh_token", generateRefreshToken(data), {
+const assignRefreshTokeninCookie = (res, data, expiresIn = "12h") => {
+  res.cookie("refresh_token", generateRefreshToken(data, expiresIn), {
     httpOnly: true,
     sameSite: "none",
     secure: true,
@@ -17,8 +17,27 @@ const assignRefreshTokeninCookie = (res, data) => {
   });
 };
 
+const tokenVerification = (err, decoded, token, req) => {
+  switch (err?.name) {
+    case "JsonWebTokenError":
+      return err?.name;
+    case "TokenExpiredError":
+      if (token === "accessToken") {
+        req.new_access_token = generateAccessToken({
+          user_email: decoded.user_email,
+        });
+      } else {
+        return { refresh_token_expired: true };
+      }
+      return { is_expired: true };
+    default:
+      return decoded;
+  }
+};
+
 module.exports = {
   generateAccessToken,
   generateRefreshToken,
   assignRefreshTokeninCookie,
+  tokenVerification,
 };

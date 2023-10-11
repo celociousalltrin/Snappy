@@ -12,9 +12,10 @@ const userSchema = new mongoose.Schema({
     country: { type: String, default: null },
   },
   password: { type: String, default: null },
-  investor_image: { type: Object, default: null },
+  user_image: { type: Object, default: null },
   about: { type: String, default: null },
   interest: [{ type: String, default: null }],
+  is_external_authenticated_user: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model("user", userSchema);
