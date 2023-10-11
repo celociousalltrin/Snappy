@@ -2,6 +2,8 @@ import axios from "axios";
 
 import { store } from "../redux/store";
 import { addNewAccesstoken } from "../redux/slices/userSlice";
+import { useNavigate } from "react-router-dom";
+import { TbSquareChevronsDownFilled } from "react-icons/tb";
 
 axios.defaults.baseURL = import.meta.env.VITE_REACT_APP_SERVER_API_URL;
 
@@ -13,7 +15,6 @@ axios.interceptors.request.use(
     if (!!userDetails.access_token)
       config.headers.Authorization = `Bearer ${userDetails.access_token}`;
 
-    config.headers.snappy_user_name = userDetails.user_name;
     config.withCredentials = true;
     return config;
   },
@@ -28,12 +29,15 @@ axios.interceptors.response.use(
     if (!!response.data.new_access_token) {
       store.dispatch(addNewAccesstoken(response.data.new_access_token));
     }
+
     document.body.classList.remove("loading-indicator");
     return response;
   },
   (error) => {
-    console.log("🚀 ~ file: axios-utils.jsx:30 ~ error:", error);
     document.body.classList.remove("loading-indicator");
+    if (error.response.status === 401) {
+      window.location.href = "http://127.0.0.1:5173/logout";
+    }
     return Promise.reject(error?.response);
   }
 );
