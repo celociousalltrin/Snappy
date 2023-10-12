@@ -33,10 +33,14 @@ router.get(
     failureRedirect: `${process.env.REACT_APP_URL}/signup?data=is_error`,
   }),
   (req, res) => {
-    const { email_verified, email } = req.user;
+    const { email_verified, email, is_existing_user } = req.user;
     if (email_verified) {
-      assignRefreshTokeninCookie(res, { user_email: email }, "1m");
-      res.redirect(`${process.env.REACT_APP_URL}/external-authenticate`);
+      assignRefreshTokeninCookie(res, { user_email: email }, "20m");
+      if (is_existing_user) {
+        res.redirect(`${process.env.REACT_APP_URL}/external-authenticate`);
+      } else {
+        res.redirect(`${process.env.REACT_APP_URL}/profile-completion`);
+      }
     }
   }
 );

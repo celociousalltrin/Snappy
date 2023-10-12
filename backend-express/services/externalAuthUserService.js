@@ -1,3 +1,4 @@
+const { findOneAndUpdate } = require("../models/userModel");
 const {
   assignRefreshTokeninCookie,
   generateAccessToken,
@@ -28,5 +29,20 @@ exports.loginExternalAuthenticatedUserService = async (db, res, req) => {
     res,
     responseDetails: responseMessage("OK002"),
     response_data: result,
+  });
+};
+
+exports.externalAuthenticatedUserProfileCompletionService = async (
+  db,
+  body,
+  res,
+  req
+) => {
+  const { user_email: email } = req;
+  await db.findOneAndUpdate({ email }, { ...body });
+
+  return successResponse({
+    res,
+    responseDetails: responseMessage("OK004"),
   });
 };

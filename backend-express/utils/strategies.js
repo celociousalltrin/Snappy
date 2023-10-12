@@ -15,14 +15,15 @@ const passportGoogleStartegy = new GoogleStrategy(
   async (accessToken, refreshToken, userInfo, cb) => {
     const { picture, email, email_verified } = userInfo._json;
     const isEmailExist = await isExist(userModel, "email", email);
-    if (!isEmailExist) {
+    if (isEmailExist) {
+      return cb(null, { email_verified, email, is_existing_user: true });
+    } else {
       await createExtrernalAuthenticatedUserService(userModel, {
         email,
         user_data_url: picture,
       });
+      return cb(null, { email_verified, email, is_existing_user: false });
     }
-
-    return cb(null, { email_verified, email });
 
     //? This return move towards the failure redirect
     // return cb(null, false);

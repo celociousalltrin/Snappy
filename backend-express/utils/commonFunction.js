@@ -24,7 +24,7 @@ const tokenVerification = (err, decoded, token, req) => {
     case "TokenExpiredError":
       if (token === "accessToken") {
         req.new_access_token = generateAccessToken({
-          user_email: decoded.user_email,
+          user_email: decoded?.user_email,
         });
       } else {
         return { refresh_token_expired: true };

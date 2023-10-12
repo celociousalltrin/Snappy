@@ -3,7 +3,7 @@ const {
   createUserService,
   loginService,
 } = require("../services/authUserService");
-const { isUnique } = require("../services/validationService");
+const { isExist } = require("../services/validationService");
 
 const userModel = require("../models/userModel");
 const { responseMessage } = require("../utils/responseMessage");
@@ -15,7 +15,7 @@ exports.create_user = [
       const { body } = req;
       const { user_name } = req.body;
 
-      const isUsernameExist = await isUnique(userModel, "user_name", user_name);
+      const isUsernameExist = await isExist(userModel, "user_name", user_name);
 
       if (isUsernameExist)
         return errorResponse(res, responseMessage("ER002"), 422);
