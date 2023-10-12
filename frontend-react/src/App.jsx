@@ -13,6 +13,8 @@ import Login from "./pages/login";
 import SignUp from "./pages/signup";
 import SignupSuccess from "./pages/signup-success";
 import ForgotPassword from "./pages/forgot-password";
+import ExternalAuthenticate from "./pages/external-authenticate";
+import ProfileCompletion from "./pages/profile-completion";
 
 function App() {
   return (
@@ -43,6 +45,11 @@ const AppRoutes = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signup-success" element={<SignupSuccess />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/profile-completion" element={<ProfileCompletion />} />
+        <Route
+          path="/external-authenticate"
+          element={<ExternalAuthenticate />}
+        />
         <Route path="/:page_id" element={<Home />} />
         <Route path="/:page_id/:id" element={<Home />} />
         <Route path="/:page_id/:id/:sec_id" element={<Home />} />

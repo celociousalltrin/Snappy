@@ -110,3 +110,47 @@ export const forgotPasswordValid3 = (finish, rest) => {
     finish();
   }
 };
+
+export const profileCompletionValid1 = async (next, rest) => {
+  const [data, errors, touched, componentProps] = rest;
+  if (
+    await userNameValidate({
+      user_name: data.user_name,
+    })
+  ) {
+    staticResponseMessage("FA001");
+  } else if (
+    isFormikError(touched, errors) ||
+    !isValidData(componentProps.data)
+  ) {
+    staticResponseMessage("FA002");
+  } else {
+    next();
+  }
+};
+
+export const profileCompletionValid2 = (next, rest) => {
+  const [data, errors, touched, componentProps] = rest;
+  if (isFormikError(touched, errors) || !isValidData(componentProps.data)) {
+    staticResponseMessage("FA002", 3000);
+  } else {
+    next();
+  }
+};
+export const profileCompletionValid3 = (next, rest) => {
+  const { data } = rest[3];
+
+  if (data.length > 2) {
+    next();
+  } else {
+    staticResponseMessage("FA005");
+  }
+};
+export const profileCompletionValid4 = async (finish, rest) => {
+  const [data, errors, touched, componentProps] = rest;
+  if (componentProps.data.length >= 2) {
+    await finish(data);
+  } else {
+    staticResponseMessage("FA006");
+  }
+};
