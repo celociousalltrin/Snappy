@@ -5,6 +5,7 @@ import {
   Route,
   useLocation,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Explore from "./pages/explore";
@@ -15,6 +16,8 @@ import SignupSuccess from "./pages/signup-success";
 import ForgotPassword from "./pages/forgot-password";
 import ExternalAuthenticate from "./pages/external-authenticate";
 import ProfileCompletion from "./pages/profile-completion";
+
+import { appRouter } from "./utils/common-data";
 
 function App() {
   return (
@@ -37,6 +40,8 @@ function App() {
 }
 
 const AppRoutes = () => {
+  const navigate = useNavigate();
+  appRouter.navigate = navigate;
   return (
     <>
       <Routes>

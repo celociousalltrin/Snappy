@@ -19,6 +19,11 @@ import imageUploadLogin from "../assets/login-images/image_upload_login.svg";
 import snappShareLogin from "../assets/login-images/snapp_share_login.svg";
 import socialCommunicateLogin from "../assets/login-images/social_communicate_login.svg";
 
+//*The useNavigate we can't use in axios interceptor, because useNaviagte only we can use with functional componetnt or
+//*custom hooks. To rectify that we are defining the variable here, and in app.jsx we are asigning useNvaiget to this variabel
+//*So. Now we can use this anywhere in our code.
+export const appRouter = { navigate: null };
+
 export const sideBarData = [
   { id: 1, name: "Home", icon: <FaHome />, route: "/home" },
   { id: 2, name: "Explore", icon: <FaSearch />, route: "/explore" },
@@ -30,7 +35,7 @@ export const sideBarData = [
   { id: 8, name: "Facts", icon: <FaNewspaper />, route: "/facts" },
   { id: 9, name: "Jokes", icon: <MdTheaterComedy />, route: "/jokes" },
   { id: 10, name: "Setting", icon: <FaCog />, route: "/setting" },
-  { id: 11, name: "Log Out", icon: <FaSignOutAlt />, route: "/login" },
+  { id: 11, name: "Log Out", icon: <FaSignOutAlt />, route: "/logout" },
 ];
 
 export const bottomNavbarData = [
@@ -83,6 +88,10 @@ export const page_info = [
   {
     id: "sandbox",
     title: "sandbox",
+  },
+  {
+    id: "logout",
+    title: "",
   },
 ];
 
@@ -150,6 +159,13 @@ export const signupComponentHeader = [
   { index: 4, header: "Describe Yourself" },
   { index: 5, header: "What are you interested in?" },
   { index: 6, header: "Suggested Snappers you can connect" },
+];
+
+export const profileCompletionHeader = [
+  { index: 0, header: "User Info" },
+  { index: 1, header: "Describe Yourself" },
+  { index: 2, header: "What are you interested in?" },
+  { index: 3, header: "Suggested Snappers you can connect" },
 ];
 
 export const ForgotPasswordHeader = [

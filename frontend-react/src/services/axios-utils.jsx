@@ -2,8 +2,7 @@ import axios from "axios";
 
 import { store } from "../redux/store";
 import { addNewAccesstoken } from "../redux/slices/userSlice";
-import { useNavigate } from "react-router-dom";
-import { TbSquareChevronsDownFilled } from "react-icons/tb";
+import { appRouter } from "../utils/common-data";
 
 axios.defaults.baseURL = import.meta.env.VITE_REACT_APP_SERVER_API_URL;
 
@@ -36,7 +35,7 @@ axios.interceptors.response.use(
   (error) => {
     document.body.classList.remove("loading-indicator");
     if (error.response.status === 401) {
-      window.location.href = "http://127.0.0.1:5173/logout";
+      appRouter.navigate("/logout");
     }
     return Promise.reject(error?.response);
   }
