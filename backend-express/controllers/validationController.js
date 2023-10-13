@@ -1,5 +1,5 @@
 const userModel = require("../models/userModel");
-const { isUnique } = require("../services/validationService");
+const { isExist } = require("../services/validationService");
 const { successResponse, errorResponse } = require("../utils/responseHandler");
 const { responseMessage } = require("../utils/responseMessage");
 
@@ -8,12 +8,12 @@ exports.signupFormUserNameValidation = [
     try {
       const { user_name } = req.body;
 
-      const isUsernameExist = await isUnique(userModel, "user_name", user_name);
+      const isUsernameExist = await isExist(userModel, "user_name", user_name);
 
-      return successResponse(res, responseMessage(), isUsernameExist);
+      return successResponse({ res, response_data: isUsernameExist });
     } catch (err) {
       console.log("🚀 ~ file: validationController.js:6 ~ err:", err);
-      return errorResponse(res, responseMessage("ER999"));
+      return errorResponse({ res, responseDetails: responseMessage("ER999") });
     }
   },
 ];

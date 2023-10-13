@@ -1,20 +1,31 @@
-const { findOneAndUpdate } = require("../models/userModel");
 const {
   assignRefreshTokeninCookie,
   generateAccessToken,
 } = require("../utils/commonFunction");
-const { successResponse } = require("../utils/responseHandler");
+const { successResponse, errorResponse } = require("../utils/responseHandler");
 const { responseMessage } = require("../utils/responseMessage");
 
 exports.loginExternalAuthenticatedUserService = async (db, res, req) => {
   const { user_email } = req;
+  console.log(
+    "🚀 ~ file: externalAuthUserService.js:10 ~ exports.loginExternalAuthenticatedUserService= ~ user_email:",
+    user_email
+  );
 
   const {
+    user_name,
     is_external_authenticated_user,
     user_image: { public_id },
   } = await db.findOne({
     email: user_email,
   });
+
+  if (!user_name) {
+    return errorResponse({
+      res,
+      status: 422,
+    });
+  }
 
   assignRefreshTokeninCookie(res, { user_email });
 

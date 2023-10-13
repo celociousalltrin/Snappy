@@ -8,10 +8,13 @@ exports.create_user = [
     const { body } = req;
     try {
       await createUserService(userModel, body);
-      return successResponse(res, responseMessage("OK001"));
+      return successResponse({
+        res,
+        responseDetails: responseMessage("OK001"),
+      });
     } catch (err) {
       console.log("🚀 ~ file: userController.js:13 ~ err:", err);
-      return errorResponse(res, responseMessage("ER999"));
+      return errorResponse({ res, responseDetails: responseMessage("ER999") });
     }
   },
 ];

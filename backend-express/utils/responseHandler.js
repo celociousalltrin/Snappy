@@ -1,19 +1,22 @@
-exports.successResponse = async (
+exports.successResponse = async ({
   res,
   responseDetails = {},
-  data = null,
-  status = 200
-) => {
+  response_data = null,
+  status = 200,
+  new_access_token = null,
+}) => {
   const responseFormat = {
     status: "SUCCESS",
-    data,
+    new_access_token,
+    response_data,
     message: responseDetails.message || null,
     code: responseDetails.code || null,
+    new_access_token,
   };
   return await res.status(status).json(responseFormat);
 };
 
-exports.errorResponse = async (res, responseDetails, status = 420) => {
+exports.errorResponse = async ({ res, responseDetails = {}, status = 420 }) => {
   const responseFormat = {
     status: "ERROR",
     message: responseDetails.message || null,
