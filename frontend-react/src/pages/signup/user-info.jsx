@@ -7,9 +7,18 @@ import Select from "react-select";
 import countries from "../../utils/countries.json";
 import ReactDatePicker from "react-datepicker";
 import PhoneInput from "react-phone-input-2";
+import { createGoogleuser } from "../../services/method";
+import axios from "axios";
+import { handleGoogleExternalAuth } from "../../utils/common-function";
 
 const UserInfoForm = ({
-  data: {
+  data,
+  handleChange,
+  handleSelectChange,
+  formik: { handleBlur, errors, touched, dirty, setFieldValue },
+  isProfileCompletion = false,
+}) => {
+  const {
     first_name,
     last_name,
     user_name,
@@ -17,27 +26,28 @@ const UserInfoForm = ({
     phone_number,
     dob,
     personal_address,
-  },
-  handleChange,
-  handleSelectChange,
-  formik: { handleBlur, errors, touched, dirty, setFieldValue },
-}) => {
+  } = data;
   const locateLocationbyCode = (code) => {
     return countries.find((o) => o.code3 === code);
   };
 
   return (
     <div className="ms-0 ms-md-5">
-      <div className="mb-1 position-relative">
-        <AppFramerButton>
-          <button className="btn btn-primary me-md-5 mb-2">
-            <FaGoogle size={23} className="me-2" />
-            Signup with Google
-          </button>
-        </AppFramerButton>
-        <hr />
-        <span className="or-icon fs-5">or</span>
-      </div>
+      {!isProfileCompletion && (
+        <div className="mb-1 position-relative">
+          <AppFramerButton>
+            <button
+              className="btn btn-primary me-md-5 mb-2"
+              onClick={handleGoogleExternalAuth}
+            >
+              <FaGoogle size={23} className="me-2" />
+              Signup with Google
+            </button>
+          </AppFramerButton>
+          <hr />
+          <span className="or-icon fs-5">or</span>
+        </div>
+      )}
       <div className="signup-user-info-container row">
         <div className="col-12 col-md-6">
           <Form.Label>
@@ -66,7 +76,9 @@ const UserInfoForm = ({
             placeholder="Last Name"
             name="last_name"
             value={last_name}
-            onChange={handleChange}
+            onChange={(e) => {
+              handleChange(e);
+            }}
             onBlur={handleBlur}
             isValid={!errors.last_name && dirty}
             isInvalid={!!errors.last_name && touched.last_name}
@@ -98,24 +110,26 @@ const UserInfoForm = ({
             {errors.user_name}
           </Form.Control.Feedback>
         </div>
-        <div className="col-12 col-md-6">
-          <Form.Label>
-            Email <span className="text-danger">*</span>
-          </Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            isValid={!errors.email && dirty}
-            isInvalid={!!errors.email && touched.email}
-          />
-          <Form.Control.Feedback type="invalid">
-            {errors.email}
-          </Form.Control.Feedback>
-        </div>
+        {!isProfileCompletion && (
+          <div className="col-12 col-md-6">
+            <Form.Label>
+              Email <span className="text-danger">*</span>
+            </Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="email"
+              name="email"
+              value={email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              isValid={!errors.email && dirty}
+              isInvalid={!!errors.email && touched.email}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.email}
+            </Form.Control.Feedback>
+          </div>
+        )}
         <div className="col-12 col-md-6">
           <Form.Label>
             Phone Number <span className="text-danger">*</span>

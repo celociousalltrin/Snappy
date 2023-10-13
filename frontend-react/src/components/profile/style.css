@@ -44,11 +44,11 @@
   left: 10%;
 }
 
-.profile-friends-info:hover {
+.profile-connectors-info:hover {
   text-decoration: underline;
   cursor: pointer;
 }
-.profile-mutual-friends-info:hover {
+.profile-alliances-info:hover {
   text-decoration: underline;
   cursor: pointer;
 }

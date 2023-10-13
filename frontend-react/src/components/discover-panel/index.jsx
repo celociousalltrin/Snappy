@@ -1,5 +1,5 @@
 import React from "react";
-import MutualFriends from "./mutual-friends";
+import AllianceList from "./alliance-list";
 import ExperimentalFeatures from "./experimental-features";
 import DiscoverSearch from "./discover-search";
 
@@ -9,7 +9,7 @@ const DiscoverPanel = () => {
   return (
     <div className="me-5 pe-3 ms-2 row discover-container">
       <DiscoverSearch />
-      <MutualFriends />
+      <AllianceList />
       <ExperimentalFeatures />
     </div>
   );

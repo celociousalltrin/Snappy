@@ -4,7 +4,7 @@ import { RiSendPlane2Fill } from "react-icons/ri";
 
 import "./style.css";
 
-const AppInput = ({ isFriend, isSendMessage, isDiscoverFriend }) => {
+const AppInput = ({ isConnector, isSendMessage, isDiscoverAlliance }) => {
   const [searchText, setSearchText] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const handleKeyDown = (e) => {
@@ -23,19 +23,21 @@ const AppInput = ({ isFriend, isSendMessage, isDiscoverFriend }) => {
   };
   return (
     <div
-      className={isFriend ? "ms-3 row " : isSendMessage && "position-relative"}
+      className={
+        isConnector ? "ms-3 row " : isSendMessage && "position-relative"
+      }
     >
       <div
         className={`${
           isFocused ? "discover-search__focused" : "discover_container"
-        } ${isFriend && "col-8"} ps-2`}
+        } ${isConnector && "col-8"} ps-2`}
       >
         {!isSendMessage && <span>{<FaSearch />}</span>}
         <input
           type="text"
           placeholder={
-            isFriend
-              ? "Search Friend"
+            isConnector
+              ? "Search Connector"
               : isSendMessage
               ? "Send Message"
               : "Search"
@@ -48,11 +50,11 @@ const AppInput = ({ isFriend, isSendMessage, isDiscoverFriend }) => {
           onBlur={handleBlur}
           className={!isFocused && isSendMessage && "ms-3"}
           style={{
-            width: isSendMessage ? "91%" : isDiscoverFriend ? "80%" : "",
+            width: isSendMessage ? "91%" : isDiscoverAlliance ? "80%" : "",
           }}
         />
       </div>
-      {isFriend && (
+      {isConnector && (
         <div className="col-2 d-flex align-self-center ms-1">
           <button className="btn btn-outline-secondary">Search</button>
         </div>

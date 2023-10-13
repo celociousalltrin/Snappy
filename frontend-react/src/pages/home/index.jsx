@@ -2,7 +2,7 @@ import { useLocation, useParams } from "react-router-dom";
 
 import React from "react";
 import Profile from "../../components/profile";
-import Friends from "../../components/friends";
+import Connectors from "../../components/connectors";
 import Page from "../../components/page";
 import HomePage from "../../components/home-page";
 import Message from "../../components/message";
@@ -13,6 +13,7 @@ import Explore from "../explore";
 import Jokes from "../../components/jokes";
 import Facts from "../../components/facts";
 import SandBox from "../../custom-sandbox";
+import Logout from "../../components/logout";
 
 const Home = () => {
   const { page_id } = useParams();
@@ -27,8 +28,8 @@ const Home = () => {
               return <Explore />;
             case "messages":
               return <Message />;
-            case "friends":
-              return <Friends />;
+            case "connectors":
+              return <Connectors />;
             case "notification":
               return <Notification />;
             case "bookmark":
@@ -43,6 +44,8 @@ const Home = () => {
               return <Setting />;
             case "sandbox":
               return <SandBox />;
+            case "logout":
+              return <Logout />;
             default:
               return "404 - Not Found";
           }

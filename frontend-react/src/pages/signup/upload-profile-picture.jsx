@@ -6,7 +6,10 @@ import AppImageCropper from "../../components/app-image-cropper";
 import { convertFileToDataURL } from "../../utils/common-function";
 import AppImageDialogueBox from "../../components/app-image-Dialogue-box";
 
-const UploadProfilePicture = ({ data, formik: { setFieldValue } }) => {
+const UploadProfilePicture = ({
+  data: { user_data_url },
+  formik: { setFieldValue },
+}) => {
   const [date, setDate] = useState(new Date());
   const [selectedImageDataURL, setSelectedImageDataURL] = useState();
   const [isOpenDialogueBox, setIsOpenDialogueBox] = useState(false);
@@ -33,7 +36,7 @@ const UploadProfilePicture = ({ data, formik: { setFieldValue } }) => {
         </p>
         <div className="signup-edit-prof">
           <img
-            src={!data ? avatar : data}
+            src={!user_data_url ? avatar : user_data_url}
             alt="profile-img"
             width="130px"
             height="130px"
@@ -73,7 +76,7 @@ const UploadProfilePicture = ({ data, formik: { setFieldValue } }) => {
         selectedImageDataURL={selectedImageDataURL}
         croppedAreaPixels={croppedAreaPixels}
         callback={(url) => {
-          setFieldValue("investor_data_url", url);
+          setFieldValue("user_data_url", url);
         }}
       />
     </div>

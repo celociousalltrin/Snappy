@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import FriendsList from "../../components/friends/friends-list";
-import { MockFriendsList } from "../../utils/mock-common";
+import ConnectorsList from "../../components/connectors/connectors-list";
+import { MockConnectorsList } from "../../utils/mock-common";
 import "./style.css";
 import { AiOutlineDownCircle, AiOutlineUpCircle } from "react-icons/ai";
 import useToggleContent from "../../custom-hooks/useToggleContent";
 import AppFramerExpand from "../../components/app-framer-expand";
 
-const SignupAddFriends = ({ data, formik: { setFieldValue } }) => {
+const SignupAddAlliances = ({ data, formik: { setFieldValue } }) => {
   const { isShow, showMore, showLess } = useToggleContent();
   const [showIcon, setShowIcon] = useState(true);
 
@@ -14,9 +14,9 @@ const SignupAddFriends = ({ data, formik: { setFieldValue } }) => {
     <div className="text-start position-relative">
       <AppFramerExpand setShowIcon={setShowIcon} isVisible={isShow}>
         <p className="fs-6 text-muted mt-0 ms-3">
-          When You Send Friend Request to SomeOne. If they accept then you will
-          see their snaps in your feeds. You will also receive relevant
-          recommendations. Atleast Add 2 in your Snapp Community.
+          When You Add Someone in Alliance you can see there feeds in your home.
+          You will also receive relevant recommendations. Atleast Add 2 in your
+          Snapp Community.
           <span className="d-md-none" onClick={showLess}>
             <AiOutlineUpCircle size={23} color="rgb(13, 110, 253)" />
           </span>
@@ -27,13 +27,13 @@ const SignupAddFriends = ({ data, formik: { setFieldValue } }) => {
           </span>
         )}
       </AppFramerExpand>
-      <FriendsList
-        MockFriendsList={MockFriendsList}
+      <ConnectorsList
+        MockConnectorsList={MockConnectorsList}
         isSignup
-        callback={(id) => setFieldValue("friends", [...data, id])}
+        callback={(id) => setFieldValue("alliances", [...data, id])}
       />
     </div>
   );
 };
 
-export default SignupAddFriends;
+export default SignupAddAlliances;

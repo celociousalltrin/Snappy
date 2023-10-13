@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import FeedForYou from "./feed-for-you";
-import FriendsFeed from "./friends-feed";
+import AlliancesFeed from "./alliances-feed";
 import { useParams } from "react-router-dom";
 import Snapp from "../snapp";
 
 import "./style.css";
 import SingleFeed from "../single-feed";
 import { singleFeedData } from "../../utils/mock-common";
+import { getFeed } from "../../services/method";
 
 const HomePage = () => {
   const { id } = useParams();
+
+  useEffect(() => {
+    getFeedData();
+  }, []);
+
+  const getFeedData = async () => {
+    try {
+      const result = await getFeed();
+    } catch (err) {
+      console.log("🚀 ~ file: index.jsx:24 ~ getFeedApi ~ err:", err);
+    }
+  };
   return (
     <>
       {id === "single-feed" ? (
@@ -27,9 +40,9 @@ const HomePage = () => {
             <Snapp />
             <FeedForYou />
           </Tab>
-          <Tab eventKey="friends-feed" title="Friends Feed">
+          <Tab eventKey="Alliances-feed" title="Alliances Feed">
             <Snapp />
-            <FriendsFeed />
+            <AlliancesFeed />
           </Tab>
         </Tabs>
       )}

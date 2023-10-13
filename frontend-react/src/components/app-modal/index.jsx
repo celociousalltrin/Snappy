@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { modelOpenInfo } from "../../utils/common-data";
-import { MockFriendsList } from "../../utils/mock-common";
+import { MockConnectorsList } from "../../utils/mock-common";
 
 import "./style.css";
-import FriendsList from "../friends/friends-list";
+import ConnectorsList from "../connectors/connectors-list";
 import { AiOutlineClose } from "react-icons/ai";
 
 const AppModal = ({ openModal, handleModelClose }) => {
@@ -37,7 +37,10 @@ const AppModal = ({ openModal, handleModelClose }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FriendsList MockFriendsList={MockFriendsList} isFriendList />
+          <ConnectorsList
+            MockConnectorsList={MockConnectorsList}
+            isAllianceList
+          />
         </Modal.Body>
       </Modal>
     </div>

@@ -9,6 +9,10 @@ import {
   forgotPasswordValid1,
   forgotPasswordValid2,
   forgotPasswordValid3,
+  profileCompletionValid1,
+  profileCompletionValid2,
+  profileCompletionValid3,
+  profileCompletionValid4,
 } from "../utils/multi-step-form-validation";
 
 export const navigateToProfile = (e, navigate, username, pageId) => {
@@ -69,6 +73,10 @@ const validationFunctions = {
   forgotPasswordValid1,
   forgotPasswordValid2,
   forgotPasswordValid3,
+  profileCompletionValid1,
+  profileCompletionValid2,
+  profileCompletionValid3,
+  profileCompletionValid4,
 };
 
 export const multiStepFormValidationFunction = ({ name, length }) => {
@@ -99,4 +107,11 @@ export const isValidData = (data) => {
       return !!value;
     }
   });
+};
+
+export const handleGoogleExternalAuth = () => {
+  window.open(
+    `${import.meta.env.VITE_REACT_APP_SERVER_API_URL}/auth/create-google-user`,
+    "_self"
+  );
 };

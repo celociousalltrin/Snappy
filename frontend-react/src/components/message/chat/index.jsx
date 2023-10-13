@@ -146,14 +146,14 @@ const Chat = () => {
                 type="button"
                 className="btn btn-sm  btn-outline-danger ms-3"
               >
-                Remove Friend
+                Remove Alliance
               </button>
             </AppFramerButton>
           </div>
           <div className="d-lg-none mt-3">
             <DropdownButton variant="white" title={<BsThreeDots />}>
               <Dropdown.Item as="button">Block</Dropdown.Item>
-              <Dropdown.Item as="button">Remove Friend</Dropdown.Item>
+              <Dropdown.Item as="button">Remove Alliance</Dropdown.Item>
             </DropdownButton>
           </div>
           <div>

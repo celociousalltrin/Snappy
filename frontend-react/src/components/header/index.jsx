@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import snappyLogo from "../../assets/logo-transparent.png";
-import {
-  FaBell,
-  FaCog,
-  FaSignOutAlt,
-  FaUserAlt,
-  FaUserFriends,
-} from "react-icons/fa";
+import { FaBell, FaCog, FaSignOutAlt, FaUserAlt } from "react-icons/fa";
 import { BsFillChatFill } from "react-icons/bs";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -86,7 +80,7 @@ const Header = () => {
                   <BsFillChatFill /> Messages
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item onClick={() => navigate("/login")}>
+                <NavDropdown.Item onClick={() => navigate("/logout")}>
                   <FaSignOutAlt /> Log Out
                 </NavDropdown.Item>
               </NavDropdown>
@@ -104,7 +98,7 @@ const Header = () => {
                 </p>
                 <p className="text-muted fs-6">@celo123</p>
                 <p className="text-muted  mt-2">
-                  <span className="fw-bold me-1 text-black">22</span>Friends
+                  <span className="fw-bold me-1 text-black">22</span>Fans
                 </p>
               </Offcanvas.Title>
             </Offcanvas.Header>

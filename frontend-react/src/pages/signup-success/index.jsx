@@ -2,11 +2,17 @@ import React from "react";
 import "./style.css";
 import { FramerCheckIcon } from "../../utils/framer-svgs";
 import { signupStepIconVariants } from "../../utils/framer-variants";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const SignupSuccess = () => {
   const navigate = useNavigate();
+
+  const { state } = useLocation();
+
+  const isExternalAuthenticatedUser =
+    state.previous_url === "/profile-completion";
+
   return (
     <div className="signup-success-parent-container ps-3 pe-3 ps-md-0 pe-md-0">
       <motion.div
@@ -31,9 +37,15 @@ const SignupSuccess = () => {
           Click here to{" "}
           <span
             className="text-decoration-underline text-primary cursor-pointer"
-            onClick={() => navigate("/login")}
+            onClick={() =>
+              navigate(
+                isExternalAuthenticatedUser
+                  ? "/external-authenticate"
+                  : "/login"
+              )
+            }
           >
-            Sign in
+            {isExternalAuthenticatedUser ? "Start Exploring" : "Sign in"}
           </span>
         </p>
       </motion.div>

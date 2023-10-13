@@ -28,7 +28,7 @@ export const sideBarData = [
   { id: 1, name: "Home", icon: <FaHome />, route: "/home" },
   { id: 2, name: "Explore", icon: <FaSearch />, route: "/explore" },
   { id: 3, name: "Messages", icon: <BsFillChatFill />, route: "/messages" },
-  { id: 4, name: "Friends", icon: <FaUserFriends />, route: "/friends" },
+  { id: 4, name: "Connectors", icon: <FaUserFriends />, route: "/connectors" },
   { id: 5, name: "Notifications", icon: <FaBell />, route: "/notification" },
   { id: 6, name: "Bookmarks", icon: <FaBookmark />, route: "/bookmark" },
   { id: 7, name: "Profile", icon: <FaUserAlt />, route: "/profile" },
@@ -58,8 +58,8 @@ export const page_info = [
     title: "Messages",
   },
   {
-    id: "friends",
-    title: "Friends",
+    id: "connectors",
+    title: "Connectors",
   },
   {
     id: "notification",
@@ -99,18 +99,16 @@ export const modelOpenInfo = [
   { heading: "Liked by", type: 1 },
   { heading: "Commented by", type: 2 },
   { heading: "Bookmarked by", type: 3 },
-  { heading: "Friends", type: 4 },
-  { heading: "Mutual Friends", type: 5 },
+  { heading: "Fans", type: 4 },
+  { heading: "Alliances", type: 5 },
 ];
 
 export const notificationInfo = [
   { type: 1, value: "Liked" },
   { type: 2, value: "Commented" },
   { type: 3, value: "Bookmarked" },
-  { type: 4, value: "Accepted" },
-  { type: 5, value: "Rejected" },
-  { type: 6, value: "Friend Request" },
-  { type: 7, value: "Profile Viewed" },
+  { type: 4, value: "Fan" },
+  { type: 5, value: "Profile Viewed" },
 ];
 
 export const feedInfo = [

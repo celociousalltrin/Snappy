@@ -10,6 +10,12 @@ export const createGoogleuser = () => axios.get("/auth/create-google-user");
 export const loginExternalAuthenticateUser = () =>
   axios.get("/external-auth/external-authenticate-login");
 
+export const externalAuthenticatedUserProfileCompletion = (props) =>
+  axios.post(
+    "external-auth/external-authenticated-user-profile-completion",
+    props
+  );
+
 // TEST APIS
 export const testRoute = () => axios.get("/auth/test-route");
 

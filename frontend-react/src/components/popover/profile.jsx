@@ -60,10 +60,10 @@ const ProfilePopover = ({ setOpenModal, setShow }) => {
                   navigateToProfile(e, navigate, obj.snappy_username, page_id)
                 }
               >
-                {MockProfilePopoverData.friends}
+                {MockProfilePopoverData.fans}
               </span>
               <span
-                className="popover-friends-hover"
+                className="popover-connectors-hover"
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
@@ -72,18 +72,18 @@ const ProfilePopover = ({ setOpenModal, setShow }) => {
                 }}
               >
                 {" "}
-                Friends
+                Fans
               </span>
             </p>
             <p className="mb-0 ms-3">
-              {MockProfilePopoverData.mutual_friends ? (
+              {MockProfilePopoverData.alliances ? (
                 <>
                   {" "}
                   <span className="fw-bold">
-                    {MockProfilePopoverData.mutual_friends}
+                    {MockProfilePopoverData.alliances}
                   </span>
                   <span
-                    className="popover-friends-hover"
+                    className="popover-connectors-hover"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
@@ -92,7 +92,7 @@ const ProfilePopover = ({ setOpenModal, setShow }) => {
                     }}
                   >
                     {" "}
-                    Mutuals
+                    Alliances
                   </span>
                 </>
               ) : (

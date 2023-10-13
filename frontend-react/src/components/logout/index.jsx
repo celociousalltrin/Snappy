@@ -4,8 +4,9 @@ import { logout } from "../../services/method";
 import { useDispatch } from "react-redux";
 import { logoutReducer } from "../../redux/slices/userSlice";
 import { responseMessage } from "../../utils/response-message";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { purgeStore } from "../../redux/store";
+
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -14,12 +15,19 @@ const Logout = () => {
     userLogout();
   }, []);
 
+  const { state } = useLocation();
+  console.log("🚀 ~ file: index.jsx:18 ~ Logout ~ state:", state);
+
   const userLogout = async () => {
     try {
       const response = await logout();
-      dispatch(logoutReducer);
+      dispatch(logoutReducer());
       purgeStore();
-      responseMessage(response.data.code);
+
+      responseMessage(
+        state?.is_authenticated_error ? "ER901" : response.data.code
+      );
+
       navigate("/login");
     } catch (err) {
       console.log("🚀 ~ file: index.jsx:12 ~ userLogout ~ err:", err);

@@ -11,37 +11,14 @@ const NotificationList = ({ list }) => {
   const displayNotificationButton = (type) => {
     if ([1, 2, 3].includes(type)) {
       return (
-        <button className="btn btn-sm btn-link mt-0 ms-0" type="button">
+        <button className="btn btn-sm btn-primary mt-2 ms-2" type="button">
           View
         </button>
       );
-    } else if (type === 4) {
-      return (
-        <button className="btn btn-sm btn-info mt-2 ms-2" type="button">
-          Send Hi
-        </button>
-      );
-    } else if (type === 5) {
-      return (
-        <button className="btn btn-sm btn-primary mt-2 ms-2" type="button">
-          Re-Send Request
-        </button>
-      );
-    } else if (type === 6) {
-      return (
-        <div className="mt-2 ms-2">
-          <button className="btn btn-sm btn-success" type="button">
-            Accept
-          </button>
-          <button className="btn btn-sm btn-secondary ms-3" type="button">
-            Reject
-          </button>
-        </div>
-      );
     } else {
       return (
-        <button className="btn btn-sm btn-primary mt-2 ms-2" type="button">
-          Add Friend
+        <button className="btn btn-sm btn-info mt-2 ms-2" type="button">
+          Send Greeting
         </button>
       );
     }
@@ -52,12 +29,8 @@ const NotificationList = ({ list }) => {
       msg = `${name} has ${
         notificationInfo.find((o) => o.type === type).value
       } your feed`;
-    } else if ([4, 5].includes(type)) {
-      msg = `${name} ${
-        notificationInfo.find((o) => o.type === type).value
-      } your Friend Request`;
-    } else if (type === 6) {
-      msg = `${name} sent you a ${
+    } else if ([4].includes(type)) {
+      msg = `${name} is your newest ${
         notificationInfo.find((o) => o.type === type).value
       }`;
     } else {
@@ -99,7 +72,7 @@ const NotificationList = ({ list }) => {
             <div className="ms-2">
               {notificationMessage(obj.type, obj.name)}
             </div>
-            <div>{displayNotificationButton(obj.type)}</div>
+            {obj.type !== 5 && <div>{displayNotificationButton(obj.type)}</div>}
           </div>
           <AiOutlineClose
             onClick={(e) => handleCloseNotification(e)}

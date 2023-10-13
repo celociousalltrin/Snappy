@@ -15,7 +15,7 @@ export const userSlice = createSlice({
     addNewAccesstoken: (state, { payload }) => {
       state.data.access_token = payload;
     },
-    logoutReducer: (state, { payload }) => {
+    logoutReducer: (state) => {
       state.data = initialState;
     },
     increament: (state, { payload: { number } }) => {

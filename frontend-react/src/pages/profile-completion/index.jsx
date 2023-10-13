@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { signupSchema } from "../../utils/form-validation-schema";
 import { multiStepFormValidationFunction } from "../../utils/common-function";
 import MultiStepForm from "../../components/multi-step-form";
@@ -7,7 +7,7 @@ import UserInfoForm from "../signup/user-info";
 import { profileCompletionHeader } from "../../utils/common-data";
 import UserBio from "../signup/user-bio";
 import InterestedFields from "../signup/interested-fields";
-import SignupAddFriends from "../signup/signup-add-friends";
+import SignupAddAlliances from "../signup/signup-add-alliances";
 
 const ProfileCompletion = () => {
   const init = {
@@ -22,7 +22,7 @@ const ProfileCompletion = () => {
     },
     about: "",
     interest: [],
-    friends: [],
+    alliances: [],
   };
 
   const formik = useFormik({
@@ -31,7 +31,7 @@ const ProfileCompletion = () => {
   });
 
   const {
-    friends,
+    alliances,
     new_password,
     confirm_password,
     user_data_url,
@@ -73,7 +73,7 @@ const ProfileCompletion = () => {
             formik={formik}
           />
           <InterestedFields data={interest} formik={formik} />
-          <SignupAddFriends data={friends} formik={formik} />
+          <SignupAddAlliances data={alliances} formik={formik} />
         </div>
       }
       formHeading="Snappy Profile Completion"

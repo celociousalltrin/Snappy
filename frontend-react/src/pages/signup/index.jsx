@@ -5,7 +5,7 @@ import AppVerificationCode from "../../components/app-verification-code";
 import CreatePassword from "./create-password";
 import UploadProfilePicture from "./upload-profile-picture";
 import InterestedFields from "./interested-fields";
-import SignupAddFriends from "./signup-add-friends";
+import SignupAddAlliances from "./signup-add-alliances";
 import { signupComponentHeader } from "../../utils/common-data";
 import { useFormik } from "formik";
 
@@ -30,10 +30,10 @@ const SignUp = () => {
     },
     new_password: "",
     confirm_password: "",
-    investor_data_url: "",
+    user_data_url: "",
     about: "",
     interest: [],
-    friends: [],
+    alliances: [],
   };
 
   const formik = useFormik({
@@ -42,10 +42,10 @@ const SignUp = () => {
   });
 
   const {
-    friends,
+    alliances,
     new_password,
     confirm_password,
-    investor_data_url,
+    user_data_url,
     about,
     interest,
     ...rest
@@ -89,7 +89,7 @@ const SignUp = () => {
             formik={formik}
           />
           <UploadProfilePicture
-            data={{ investor_data_url }}
+            data={{ user_data_url }}
             handleChange={formik.handleChange}
             formik={formik}
           />
@@ -99,7 +99,7 @@ const SignUp = () => {
             formik={formik}
           />
           <InterestedFields data={interest} formik={formik} />
-          <SignupAddFriends data={friends} formik={formik} />
+          <SignupAddAlliances data={alliances} formik={formik} />
         </div>
       }
       formHeading="Create Snappy Account"

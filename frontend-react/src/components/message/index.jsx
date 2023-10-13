@@ -2,7 +2,7 @@ import React from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Chat from "./chat";
-import SelectFriends from "./select-friends";
+import SelectConnectors from "./select-Connectors";
 
 import "./style.css";
 
@@ -18,8 +18,8 @@ const Message = () => {
         <Tab eventKey="message-chat" title="Chats">
           <Chat />
         </Tab>
-        <Tab eventKey="message-select-friend" title="Select Friends">
-          <SelectFriends />
+        <Tab eventKey="message-select-connectors" title="Select Connectors">
+          <SelectConnectors />
         </Tab>
       </Tabs>
     </div>

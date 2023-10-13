@@ -2,7 +2,7 @@ import React from "react";
 import Feeds from "../../feeds";
 import { feedData } from "../../../utils/mock-common";
 
-const FriendsFeed = () => {
+const AlliancesFeed = () => {
   return (
     <div>
       <Feeds feedData={feedData} />
@@ -10,4 +10,4 @@ const FriendsFeed = () => {
   );
 };
 
-export default FriendsFeed;
+export default AlliancesFeed;

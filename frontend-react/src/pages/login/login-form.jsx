@@ -12,6 +12,7 @@ import { login, testRoute } from "../../services/method";
 import { responseMessage } from "../../utils/response-message";
 import { useDispatch, useSelector } from "react-redux";
 import { userData } from "../../redux/slices/userSlice";
+import { handleGoogleExternalAuth } from "../../utils/common-function";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -57,7 +58,11 @@ const LoginForm = () => {
       </div>
       <div className="mt-4">
         <AppFramerButton>
-          <button type="button" className="btn btn-primary p-2 login-button">
+          <button
+            type="button"
+            className="btn btn-primary p-2 login-button"
+            onClick={handleGoogleExternalAuth}
+          >
             <FaGoogle className="me-2 mb-1" size={20} />{" "}
             <span className="fs-5">Login with Google</span>
           </button>

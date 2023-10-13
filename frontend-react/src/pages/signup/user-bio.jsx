@@ -2,7 +2,7 @@ import React from "react";
 import AppTextArea from "../../components/app-text-area";
 
 const UserBio = ({
-  data,
+  data: { about },
   handleChange,
   formik: { handleBlur, errors, touched },
 }) => {
@@ -21,7 +21,7 @@ const UserBio = ({
         handleBlur={handleBlur}
         errors={errors}
         touched={touched.about}
-        value={data}
+        value={about}
       />
     </div>
   );

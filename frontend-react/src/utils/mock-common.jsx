@@ -406,7 +406,7 @@ export const singleFeedData = {
   ],
 };
 
-export const MockFriendsList = [
+export const MockConnectorsList = [
   {
     id: 1,
     name: "Jack",
@@ -478,8 +478,8 @@ export const MockProfilePopoverData = {
   name: "Jenifer",
   profile_img: mutual4,
   snappy_username: "jenefier1213",
-  friends: 84,
-  mutual_friends: 11,
+  fans: 84,
+  alliances: 11,
   bio: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque autem temporibus necessitatibus dolor rem exercitationem, quos architecto aliquid laboriosam sed iste excepturi corrupti, quas ex ullam nulla error dolorum labore hic doloremque delectus, iure ipsum eius! Provident nisi nobis recusandae, sit optio deleniti voluptatem, esse sequi incidunt dolor corrupti cupiditate.",
   connected: false,
 };
@@ -540,7 +540,7 @@ export const mockNotifications = [
     name: "Jhansy",
     snappy_user_name: "jhansy543",
     profile_img: mutual1,
-    type: 6,
+    type: 4,
     feed_id: null,
     viewed: false,
     created_at: "9h",
@@ -550,7 +550,7 @@ export const mockNotifications = [
     name: "jhon",
     snappy_user_name: "john121",
     profile_img: mutual4,
-    type: 7,
+    type: 5,
     feed_id: "1993",
     viewed: false,
     created_at: "9 Aug",
@@ -574,8 +574,8 @@ export const mockProfileInfo = {
   profile_img: mutual4,
   banner_img: mutual1,
   bio: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore, sunt?",
-  friends: 84,
-  mutual_friends: 11,
+  fans: 84,
+  alliances: 11,
   created_at: "24 july 2023",
   snapp_count: 39,
 };

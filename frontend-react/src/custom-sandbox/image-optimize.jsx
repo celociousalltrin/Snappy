@@ -207,7 +207,7 @@ const ImageOptimize = () => {
                 src={obj}
                 width={50}
                 height={50}
-                className="friends_profile--img"
+                className="connectors_profile--img"
               />
             </div>
           ))}

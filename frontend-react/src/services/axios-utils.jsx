@@ -35,7 +35,12 @@ axios.interceptors.response.use(
   (error) => {
     document.body.classList.remove("loading-indicator");
     if (error.response.status === 401) {
-      appRouter.navigate("/logout");
+      appRouter.navigate("/logout", {
+        state: { is_authenticated_error: true },
+      });
+    }
+    if (error.response.status === 422) {
+      appRouter.navigate("/profile-completion");
     }
     return Promise.reject(error?.response);
   }

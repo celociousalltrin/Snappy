@@ -87,7 +87,7 @@ const Profile = () => {
                     className="btn btn-primary rounded-pill sm-btn-ctm"
                     type="button"
                   >
-                    Add Friend
+                    Add Alliance
                   </button>
                 </AppFramerButton>
               </div>
@@ -111,26 +111,26 @@ const Profile = () => {
             </div>
             <div className="d-flex">
               <p className="mt-2">
-                <span className="fw-bold">{mockProfileInfo.friends}</span>{" "}
+                <span className="fw-bold">{mockProfileInfo.fans}</span>{" "}
                 <span
                   onClick={() => setOpenModal({ show: true, open_type: 4 })}
-                  className="profile-friends-info"
+                  className="profile-connectors-info"
                 >
-                  friends
+                  Fans
                 </span>
               </p>
               <p className="mt-2 ms-3">
-                {mockProfileInfo.mutual_friends ? (
+                {mockProfileInfo.alliances ? (
                   <>
                     {" "}
                     <span className="fw-bold">
-                      {mockProfileInfo.mutual_friends}
+                      {mockProfileInfo.alliances}
                     </span>{" "}
                     <span
                       onClick={() => setOpenModal({ show: true, open_type: 5 })}
-                      className="profile-mutual-friends-info"
+                      className="profile-alliances-info"
                     >
-                      Mutual friends
+                      Alliances
                     </span>{" "}
                   </>
                 ) : (

@@ -9,12 +9,13 @@ import AppPopover from "../../app-popover";
 import { navigateToProfile } from "../../../utils/common-function";
 import { useNavigate, useParams } from "react-router-dom";
 
-const FriendsList = ({
-  MockFriendsList,
+const ConnectorsList = ({
+  MockConnectorsList,
   isMessage,
   isSignup,
-  isFriendList,
-  isDiscoverFriend,
+  isAllianceList,
+  isFansList,
+  isDiscoverAlliance,
   length,
   callback = () => {},
 }) => {
@@ -22,15 +23,15 @@ const FriendsList = ({
   const navigate = useNavigate();
   const { page_id } = useParams();
 
-  const list = isDiscoverFriend
-    ? MockFriendsList.slice(0, length)
-    : MockFriendsList;
+  const list = isDiscoverAlliance
+    ? MockConnectorsList.slice(0, length)
+    : MockConnectorsList;
 
   return (
     <div>
       {!isSignup && (
         <div className="mb-4">
-          <AppInput isFriend isDiscoverFriend />
+          <AppInput isConnector isDiscoverAlliance />
         </div>
       )}
       <div>
@@ -38,8 +39,8 @@ const FriendsList = ({
           <div
             className={`d-flex row ${
               isSignup
-                ? "signup-friends-list-container ms-0 shadow-sm mb-4 rounded"
-                : "friends-list-container"
+                ? "signup-connectors-list-container ms-0 shadow-sm mb-4 rounded"
+                : "connectors-list-container"
             }`}
             key={obj.id}
           >
@@ -51,8 +52,8 @@ const FriendsList = ({
                 height="50px"
                 className={`${
                   isSignup
-                    ? "signup-friends_profile--img mt-2 mt-md-3"
-                    : "friends_profile--img"
+                    ? "signup-connectors_profile--img mt-2 mt-md-3"
+                    : "connectors_profile--img"
                 }`}
                 style={
                   isMessage && obj.connected
@@ -66,7 +67,7 @@ const FriendsList = ({
                ${
                  isSignup
                    ? "col-10 ms-md-4 ms-lg-2"
-                   : isDiscoverFriend
+                   : isDiscoverAlliance
                    ? "col-9 ms-5"
                    : "col-10 ms-4 ps-4 ps-md-0 ps-lg-3"
                }`}
@@ -75,7 +76,7 @@ const FriendsList = ({
                 <div className={`${isSignup && "ms-4 ps-2 ms-md-0 ps-md-0"}`}>
                   <AppPopover
                     type={1}
-                    isNoPopOver={isSignup || isDiscoverFriend}
+                    isNoPopOver={isSignup || isDiscoverAlliance}
                   >
                     <p
                       className={`fw-bold mb-0 ${
@@ -110,14 +111,17 @@ const FriendsList = ({
                     >
                       <span className={`${isSignup && "d-none d-md-block"}`}>
                         {" "}
-                        {isMessage ? "Send Message" : "Add Friend"}{" "}
+                        {isMessage ? "Send Message" : "Add Connector"}{" "}
                       </span>
 
                       <span
                         className={`${
-                          isSignup && "signup-addfriend-button d-md-none"
+                          isSignup && "signup-addAlliance-button d-md-none"
                         } ${
-                          (isMessage || isFriendList || isDiscoverFriend) &&
+                          (isMessage ||
+                            isAllianceList ||
+                            isFansList ||
+                            isDiscoverAlliance) &&
                           "d-none"
                         }`}
                       >
@@ -127,7 +131,7 @@ const FriendsList = ({
                   </AppFramerButton>
                 </div>
               </div>
-              {!isDiscoverFriend && (
+              {!isDiscoverAlliance && (
                 <div>
                   <p
                     className={`mb-2 ${
@@ -153,4 +157,4 @@ const FriendsList = ({
   );
 };
 
-export default FriendsList;
+export default ConnectorsList;

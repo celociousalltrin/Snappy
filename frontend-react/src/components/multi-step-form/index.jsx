@@ -3,13 +3,17 @@ import React, { useEffect, useState } from "react";
 import useMultiStepForm from "../../custom-hooks/useMultiStepForm";
 import { AnimatePresence, motion } from "framer-motion";
 import { signupFormVariants } from "../../utils/framer-variants";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import "./style.css";
 import FormSteps from "./form-step";
 import AppFramerButton from "../app-framer-button";
 import toast from "react-hot-toast";
-import { createInvestor } from "../../services/method";
+import {
+  createInvestor,
+  externalAuthenticatedUserProfileCompletion,
+} from "../../services/method";
+import { responseMessage } from "../../utils/response-message";
 
 const MultiStepForm = ({
   componentsList,
@@ -21,8 +25,10 @@ const MultiStepForm = ({
   isSignupForm = false,
   data,
   validationFunctionArray,
+  isProfCompletion,
 }) => {
   const [isFinish, setIsFinsish] = useState(false);
+  const location = useLocation();
   const {
     currentIndex,
     components,
@@ -39,14 +45,18 @@ const MultiStepForm = ({
 
   const signupFinish = async (signupData) => {
     try {
-      const result = await createInvestor(signupData);
-      console.log("🚀 ~ file: index.jsx:42 ~ signupFinish ~ result:", result);
+      const result = (await isProfCompletion)
+        ? externalAuthenticatedUserProfileCompletion(signupData)
+        : createInvestor(signupData);
       next();
       setIsFinsish(true);
       setTimeout(() => {
-        navigate(`/${onFinishRoute}`);
+        navigate(`/${onFinishRoute}`, {
+          state: { previous_url: location.pathname },
+        });
       }, 1000);
     } catch (err) {
+      responseMessage(err.data.code);
       console.log("🚀 ~ file: index.jsx:42 ~ signupFinish ~ err:", err);
     }
   };
@@ -59,6 +69,7 @@ const MultiStepForm = ({
       navigate(`/${onFinishRoute}`);
     }, 1000);
   };
+
   return (
     <div>
       {" "}

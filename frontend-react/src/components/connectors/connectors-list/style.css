@@ -1,32 +1,32 @@
-.friends_profile--img {
+.connectors_profile--img {
   object-fit: cover;
   object-position: center;
   margin: 0.7rem;
   border-radius: 50%;
 }
 
-.signup-friends_profile--img {
+.signup-connectors_profile--img {
   object-fit: cover;
   object-position: center;
   border-radius: 50%;
 }
 
-.friends-list-container:hover {
+.connectors-list-container:hover {
   background-color: #f5f5f5;
   cursor: pointer;
 }
 
-.signup-friends-list-container {
+.signup-connectors-list-container {
   background-color: white;
 }
 
-.signup-friends-list-container:hover {
+.signup-connectors-list-container:hover {
   cursor: pointer;
   background-color: aliceblue;
 }
 
 @media (max-width: 767px) {
-  .signup-addfriend-button {
+  .signup-addAlliance-button {
     font-size: x-small;
   }
 }
