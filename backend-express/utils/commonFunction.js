@@ -35,9 +35,20 @@ const tokenVerification = (err, decoded, token, req) => {
   }
 };
 
+const otpLength = (len) => {
+  return parseInt("1" + "0".repeat(len));
+};
+
+const OtpGenerator = (length = 4) => {
+  return Math.floor(Math.random() * otpLength(length))
+    .toString()
+    .padStart(4, "0");
+};
+
 module.exports = {
   generateAccessToken,
   generateRefreshToken,
   assignRefreshTokeninCookie,
   tokenVerification,
+  OtpGenerator,
 };

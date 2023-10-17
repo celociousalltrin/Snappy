@@ -8,6 +8,7 @@ const {
   create_user,
   login,
   http_status_test_router,
+  createUserEmailVerification,
 } = require("../controllers/authUserController");
 const { assignRefreshTokeninCookie } = require("../utils/commonFunction");
 
@@ -47,5 +48,7 @@ router.get(
 // END
 
 router.post("/login", login);
+
+router.post("/create-user-email-verification", createUserEmailVerification);
 
 module.exports = router;

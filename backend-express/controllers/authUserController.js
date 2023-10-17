@@ -8,6 +8,11 @@ const { isExist } = require("../services/validationService");
 const userModel = require("../models/userModel");
 const { responseMessage } = require("../utils/responseMessage");
 const { errorResponse, successResponse } = require("../utils/responseHandler");
+const { sendEmailService } = require("../services/emailServices");
+const { OtpGenerator } = require("../utils/commonFunction");
+const {
+  createUserEmailVerificationMailOptions,
+} = require("../utils/nodeMailerMailOptions");
 
 exports.create_user = [
   async (req, res) => {
@@ -36,6 +41,24 @@ exports.login = [
       await loginService(userModel, body, res);
     } catch (err) {
       console.log("🚀 ~ file: authUserController.js:34 ~ asyn ~ err:", err);
+      return errorResponse(res, responseMessage("ER999"));
+    }
+  },
+];
+
+exports.createUserEmailVerification = [
+  async (req, res) => {
+    try {
+      const { email, name } = req.body;
+      const otp = OtpGenerator();
+      const mailOption = createUserEmailVerificationMailOptions(
+        otp,
+        email,
+        name
+      );
+      await sendEmailService(mailOption, res);
+    } catch (err) {
+      console.log("🚀 ~ file: authUserController.js:49 ~ err:", err);
       return errorResponse(res, responseMessage("ER999"));
     }
   },
