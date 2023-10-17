@@ -78,7 +78,7 @@ const SignUp = () => {
             formik={formik}
           />
           <AppVerificationCode
-            email={rest.email}
+            data={formik.values}
             isValid={isVerified}
             setIsValid={setIsVerified}
             formik={formik}

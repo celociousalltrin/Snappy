@@ -10,7 +10,7 @@ import FormSteps from "./form-step";
 import AppFramerButton from "../app-framer-button";
 import toast from "react-hot-toast";
 import {
-  createInvestor,
+  createUser,
   externalAuthenticatedUserProfileCompletion,
 } from "../../services/method";
 import { responseMessage } from "../../utils/response-message";
@@ -47,7 +47,7 @@ const MultiStepForm = ({
     try {
       const result = (await isProfCompletion)
         ? externalAuthenticatedUserProfileCompletion(signupData)
-        : createInvestor(signupData);
+        : createUser(signupData);
       next();
       setIsFinsish(true);
       setTimeout(() => {

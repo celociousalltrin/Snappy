@@ -1,9 +1,12 @@
 import axios from "./axios-utils";
 
 //Auth APIS
-export const createInvestor = (props) => axios.post("/auth/create-user", props);
+export const createUser = (props) => axios.post("/auth/create-user", props);
 
 export const login = (props) => axios.post("/auth/login", props);
+
+export const createUserEmailVerification = (props) =>
+  axios.post("/auth/create-user-email-verification", props);
 
 export const createGoogleuser = () => axios.get("/auth/create-google-user");
 

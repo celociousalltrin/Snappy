@@ -34,12 +34,12 @@ const ForgotPassword = () => {
       componentsList={
         <div>
           <AppEmail
-            data={formik.values.email}
+            data={formik.values}
             handleChange={formik.handleChange}
             formik={formik}
           />
           <AppVerificationCode
-            email={formik.values.email}
+            data={formik.values}
             isValid={isVerified}
             setIsValid={setIsVerified}
             formik={formik}

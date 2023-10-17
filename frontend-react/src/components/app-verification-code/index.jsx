@@ -8,8 +8,10 @@ import { FramerCheckIcon } from "../../utils/framer-svgs";
 import { signupStepIconVariants } from "../../utils/framer-variants";
 import AppTimer from "../app-timer";
 import toast from "react-hot-toast";
+import { responseMessage } from "../../utils/response-message";
+import { createUserEmailVerification } from "../../services/method";
 
-const AppVerificationCode = ({ isValid, setIsValid, email, formik }) => {
+const AppVerificationCode = ({ isValid, setIsValid, data, formik }) => {
   const [isNotRecieved, setIsNotRecieved] = useState(false);
   const [generateCode, setGenerateCode] = useState(false);
   const [isOTPExpired, setIsOTPExpired] = useState(false);
@@ -34,15 +36,38 @@ const AppVerificationCode = ({ isValid, setIsValid, email, formik }) => {
     );
   };
 
+  const handleGenerateVerifyCode = async (input) => {
+    const { email, first_name, last_name } = input;
+    try {
+      const response = await createUserEmailVerification({
+        email,
+        name: `${first_name} ${last_name}`,
+      });
+      console.log(
+        "🚀 ~ file: index.jsx:50 ~ handleGenerateVerifyCode ~ response:",
+        response
+      );
+      responseMessage(response.data.code);
+      setGenerateCode(true);
+    } catch (err) {
+      console.log(
+        "🚀 ~ file: index.jsx:41 ~ handleGenerateVerifyCode ~ err:",
+        err
+      );
+      responseMessage(err?.data?.code);
+    }
+  };
+
   return (
     <>
       {isNotRecieved ? (
         <AppEmail
           isVerifyCode
           setIsNotRecieved={setIsNotRecieved}
-          data={email}
+          data={data}
           handleChange={(e) => formik.setFieldValue("email", e.target.value)}
           formik={formik}
+          GenerateVerifyCode={handleGenerateVerifyCode}
         />
       ) : (
         <>
@@ -50,7 +75,7 @@ const AppVerificationCode = ({ isValid, setIsValid, email, formik }) => {
             <div className="verify-code">
               <button
                 className="btn btn-primary"
-                onClick={() => setGenerateCode(true)}
+                onClick={() => handleGenerateVerifyCode(data)}
               >
                 Generate Code
               </button>
@@ -62,7 +87,7 @@ const AppVerificationCode = ({ isValid, setIsValid, email, formik }) => {
               <p className="text-muted fs-6 mb-2">
                 {" "}
                 Enter it below to verify{" "}
-                <span className="fw-bold">{email}</span>
+                <span className="fw-bold">{data.email}</span>
               </p>
               {!isValid ? (
                 <>

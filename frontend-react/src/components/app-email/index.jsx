@@ -1,5 +1,6 @@
 import { Form } from "react-bootstrap";
 import "./style.css";
+import { responseMessage } from "../../utils/response-message";
 
 const AppEmail = ({
   setIsNotRecieved,
@@ -7,7 +8,20 @@ const AppEmail = ({
   data,
   handleChange,
   formik: { handleBlur, touched, errors, dirty },
+  GenerateVerifyCode,
 }) => {
+  const handleGenerateEmailCode = async (input) => {
+    try {
+      await GenerateVerifyCode(input);
+      setIsNotRecieved(false);
+    } catch (err) {
+      console.log(
+        "🚀 ~ file: index.jsx:17 ~ handleGenerateEmailCode ~ err:",
+        err
+      );
+      responseMessage(err?.data?.code);
+    }
+  };
   return (
     <div className="ps-3 p-md-0 mb-0 mb-md-3 forgot-password-email-container">
       <p className="text-muted mb-3">
@@ -20,7 +34,7 @@ const AppEmail = ({
         type="email"
         placeholder="email"
         name="email"
-        value={data}
+        value={data.email}
         onChange={handleChange}
         onBlur={handleBlur}
         isValid={!errors.email && dirty}
@@ -32,7 +46,7 @@ const AppEmail = ({
       {isVerifyCode && (
         <button
           className="btn btn-sm btn-dark mt-3"
-          onClick={() => setIsNotRecieved(false)}
+          onClick={() => handleGenerateEmailCode(data)}
         >
           Generate Code
         </button>
