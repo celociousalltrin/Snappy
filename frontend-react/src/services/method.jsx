@@ -5,8 +5,11 @@ export const createUser = (props) => axios.post("/auth/create-user", props);
 
 export const login = (props) => axios.post("/auth/login", props);
 
-export const createUserEmailVerification = (props) =>
-  axios.post("/auth/create-user-email-verification", props);
+export const generateEmailVerificationOTP = (props) =>
+  axios.post("/auth/generate-email-verification-otp", props);
+
+export const verifyEmailVerificationOTP = (props) =>
+  axios.post("/auth/verify-email-verification-OTP", props);
 
 export const createGoogleuser = () => axios.get("/auth/create-google-user");
 

@@ -43,6 +43,7 @@ const ForgotPassword = () => {
             isValid={isVerified}
             setIsValid={setIsVerified}
             formik={formik}
+            issued_for={"forgotpassword"}
           />
           <CreatePassword
             data={{

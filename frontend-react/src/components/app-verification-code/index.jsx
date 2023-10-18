@@ -9,9 +9,18 @@ import { signupStepIconVariants } from "../../utils/framer-variants";
 import AppTimer from "../app-timer";
 import toast from "react-hot-toast";
 import { responseMessage } from "../../utils/response-message";
-import { createUserEmailVerification } from "../../services/method";
+import {
+  generateEmailVerificationOTP,
+  verifyEmailVerificationOTP,
+} from "../../services/method";
 
-const AppVerificationCode = ({ isValid, setIsValid, data, formik }) => {
+const AppVerificationCode = ({
+  isValid,
+  setIsValid,
+  data,
+  formik,
+  issued_for,
+}) => {
   const [isNotRecieved, setIsNotRecieved] = useState(false);
   const [generateCode, setGenerateCode] = useState(false);
   const [isOTPExpired, setIsOTPExpired] = useState(false);
@@ -39,22 +48,40 @@ const AppVerificationCode = ({ isValid, setIsValid, data, formik }) => {
   const handleGenerateVerifyCode = async (input) => {
     const { email, first_name, last_name } = input;
     try {
-      const response = await createUserEmailVerification({
+      const response = await generateEmailVerificationOTP({
         email,
         name: `${first_name} ${last_name}`,
+        issued_for,
       });
-      console.log(
-        "🚀 ~ file: index.jsx:50 ~ handleGenerateVerifyCode ~ response:",
-        response
-      );
       responseMessage(response.data.code);
       setGenerateCode(true);
+      setIsOTPExpired(false);
+      setOtp("");
     } catch (err) {
       console.log(
         "🚀 ~ file: index.jsx:41 ~ handleGenerateVerifyCode ~ err:",
         err
       );
       responseMessage(err?.data?.code);
+    }
+  };
+
+  const handleVerifyOTP = async (input) => {
+    try {
+      const {
+        data: {
+          response_data: { is_otp_verified },
+          code,
+        },
+      } = await verifyEmailVerificationOTP(input);
+
+      if (is_otp_verified) {
+        setIsValid(true);
+        responseMessage(code);
+      }
+    } catch (err) {
+      console.log("🚀 ~ file: index.jsx:66 ~ handleVerifyOTP ~ err:", err);
+      responseMessage(err.data.code, 3000);
     }
   };
 
@@ -69,6 +96,21 @@ const AppVerificationCode = ({ isValid, setIsValid, data, formik }) => {
           formik={formik}
           GenerateVerifyCode={handleGenerateVerifyCode}
         />
+      ) : isValid ? (
+        <div>
+          <span className="rounded-circle signup-success-check-icon">
+            <FramerCheckIcon
+              variants={signupStepIconVariants}
+              color="white"
+              width="70"
+              height="90"
+              iconwidth="2.5"
+              isActive
+            />
+          </span>
+          <h5 className="text-success">Verified</h5>
+          <p className="text-muted">To proceed, click the Next button.</p>
+        </div>
       ) : (
         <>
           {!generateCode ? (
@@ -89,55 +131,36 @@ const AppVerificationCode = ({ isValid, setIsValid, data, formik }) => {
                 Enter it below to verify{" "}
                 <span className="fw-bold">{data.email}</span>
               </p>
-              {!isValid ? (
-                <>
-                  {" "}
-                  <AppOTP otp={otp} setOtp={setOtp} />
-                  <AppTimer
-                    minutes={5}
-                    callback={(isExpired) => setIsOTPExpired(isExpired)}
-                  />
-                  <p
-                    className="fs-6 text-primary mb-0 mt-1 cursor-pointer recieve-email"
-                    onClick={() => setIsNotRecieved(true)}
-                  >
-                    Didn't receive an email?
-                  </p>
-                  <button
-                    className="btn btn-success mt-3"
-                    onClick={() => {
-                      if (otp.length === 4) {
-                        setIsValid(true);
-                      } else {
-                        toast.error(
-                          otp.length >= 1
-                            ? "Enter the all the OTP code "
-                            : "Enter OTP"
-                        );
-                      }
-                    }}
-                  >
-                    Verify Code
-                  </button>{" "}
-                </>
-              ) : (
-                <div>
-                  <span className="rounded-circle signup-success-check-icon">
-                    <FramerCheckIcon
-                      variants={signupStepIconVariants}
-                      color="white"
-                      width="70"
-                      height="90"
-                      iconwidth="2.5"
-                      isActive
-                    />
-                  </span>
-                  <h5 className="text-success">Verified</h5>
-                  <p className="text-muted">
-                    To proceed, click the Next button.
-                  </p>
-                </div>
-              )}
+              <>
+                {" "}
+                <AppOTP otp={otp} setOtp={setOtp} />
+                <AppTimer
+                  minutes={5}
+                  callback={(isExpired) => setIsOTPExpired(isExpired)}
+                />
+                <p
+                  className="fs-6 text-primary mb-0 mt-1 cursor-pointer recieve-email"
+                  onClick={() => setIsNotRecieved(true)}
+                >
+                  Didn't receive an email?
+                </p>
+                <button
+                  className="btn btn-success mt-3"
+                  onClick={() => {
+                    if (otp.length === 4) {
+                      handleVerifyOTP({ issued_for, email: data.email, otp });
+                    } else {
+                      toast.error(
+                        otp.length >= 1
+                          ? "Enter the all the OTP code "
+                          : "Enter OTP"
+                      );
+                    }
+                  }}
+                >
+                  Verify Code
+                </button>{" "}
+              </>
             </div>
           ) : (
             <>
@@ -148,7 +171,9 @@ const AppVerificationCode = ({ isValid, setIsValid, data, formik }) => {
               </p>
               <button
                 className="btn btn-outline-primary"
-                onClick={() => setIsOTPExpired(false)}
+                onClick={() => {
+                  handleGenerateVerifyCode(data);
+                }}
               >
                 Regenerate Code
               </button>

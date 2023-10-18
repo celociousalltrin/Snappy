@@ -82,6 +82,7 @@ const SignUp = () => {
             isValid={isVerified}
             setIsValid={setIsVerified}
             formik={formik}
+            issued_for={"signup"}
           />
           <CreatePassword
             data={{ new_password, confirm_password }}
