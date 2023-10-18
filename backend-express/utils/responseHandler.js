@@ -11,7 +11,6 @@ exports.successResponse = async ({
     response_data,
     message: responseDetails.message || null,
     code: responseDetails.code || null,
-    new_access_token,
   };
   return await res.status(status).json(responseFormat);
 };

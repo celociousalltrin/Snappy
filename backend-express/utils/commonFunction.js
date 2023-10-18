@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 const generateAccessToken = (data, expiresIn = "15m") => {
   return jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, { expiresIn });
@@ -45,10 +46,40 @@ const OtpGenerator = (length = 4) => {
     .padStart(4, "0");
 };
 
+const dataHashing = (data) => {
+  const saltRounds = 10;
+  const salt = bcrypt.genSaltSync(saltRounds);
+  const hash = bcrypt.hashSync(data, salt);
+  return hash;
+};
+
+const dateInMilliseconds = (number, format = "minutes") => {
+  switch (format) {
+    case "seconds":
+      return number * 1000;
+    case "minutes":
+      return number * 60 * 1000;
+    case "hours":
+      return number * 60 * 60 * 1000;
+    case "days":
+      return number * 24 * 60 * 60 * 1000;
+    case "weeks":
+      return number * 7 * 24 * 60 * 60 * 1000;
+    case "months":
+      return number * 30 * 24 * 60 * 60 * 1000;
+    case "years":
+      return number * 365 * 24 * 60 * 60 * 1000;
+    default:
+      0;
+  }
+};
+
 module.exports = {
   generateAccessToken,
   generateRefreshToken,
   assignRefreshTokeninCookie,
   tokenVerification,
   OtpGenerator,
+  dataHashing,
+  dateInMilliseconds,
 };

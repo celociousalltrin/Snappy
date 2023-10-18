@@ -1,13 +1,13 @@
-const { createUserEmailVerificationTemplate } = require("./htmlTemplates");
+const { emailVerificationTemplate } = require("./htmlTemplates");
 
-const createUserEmailVerificationMailOptions = (code, email, name) => {
+const emailVerificationMailOptions = (code, email, name) => {
   return {
     to: email,
     subject: `${code} is your Snappy Confirmation Code`,
-    html: createUserEmailVerificationTemplate({ code, name }),
+    html: emailVerificationTemplate({ code, name }),
   };
 };
 
 module.exports = {
-  createUserEmailVerificationMailOptions,
+  emailVerificationMailOptions,
 };

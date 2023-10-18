@@ -1,4 +1,4 @@
-const createUserEmailVerificationTemplate = ({ code, name }) => {
+const emailVerificationTemplate = ({ code, name }) => {
   return `<div>
     <h2 style="color: blue;">Email Verification for Snappy Registration</h2>
     <p>Hey <b>${name}</b>,</p>
@@ -9,4 +9,4 @@ const createUserEmailVerificationTemplate = ({ code, name }) => {
     </div>`;
 };
 
-module.exports = { createUserEmailVerificationTemplate };
+module.exports = { emailVerificationTemplate };

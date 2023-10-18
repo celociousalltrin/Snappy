@@ -6,16 +6,8 @@ const bcrypt = require("bcryptjs");
 const {
   generateAccessToken,
   assignRefreshTokeninCookie,
-  tokenVerification,
+  dataHashing,
 } = require("../utils/commonFunction.js");
-
-const passwordHashing = (password) => {
-  const saltRounds = 10;
-  const salt = bcrypt.genSaltSync(saltRounds);
-  const hash = bcrypt.hashSync(password, salt);
-
-  return hash;
-};
 
 exports.createUserService = async (db, userData) => {
   try {
@@ -23,7 +15,7 @@ exports.createUserService = async (db, userData) => {
       userData;
     const cloudinaryImage = await uploadImageService(user_data_url);
 
-    const hassedPassword = passwordHashing(confirm_password);
+    const hassedPassword = dataHashing(confirm_password);
 
     const newUser = await db({
       ...rest,
@@ -77,6 +69,10 @@ exports.loginService = async (db, userData, res) => {
     } = getUser;
 
     const hash = bcrypt.compareSync(password, getUser.password);
+    console.log(
+      "🚀 ~ file: authUserService.js:80 ~ exports.loginService= ~ hash:",
+      hash
+    );
 
     if (!hash) return errorResponse(res, responseMessage("ER004"), 404);
 
