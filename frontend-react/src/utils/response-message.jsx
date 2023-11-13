@@ -16,7 +16,8 @@ const responseData = [
   },
   {
     code: "OK005",
-    message: "Verification Code is sent to your email address",
+    message:
+      "Verification Code is sent to your email address.Check your mail Inbox or Spam",
   },
   {
     code: "OK006",

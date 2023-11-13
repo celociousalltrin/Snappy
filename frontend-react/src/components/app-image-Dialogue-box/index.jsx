@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { generateCroppedImageDataURL } from "../../utils/common-function";
-
-import "./style.css";
 import AppFramerButton from "../app-framer-button";
 import toast from "react-hot-toast";
+
+import "./style.css";
+import AppImageCropper from "../app-image-cropper";
+
 const AppImageDialogueBox = ({
-  imageCropperComp,
   show,
   setShow,
   selectedImageDataURL,
   setSelectedImageDataURL,
-  croppedAreaPixels,
   callback = () => {},
+  isProfile,
 }) => {
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+
   const handleClose = () => {
     setShow(false);
     setSelectedImageDataURL("");
@@ -30,7 +33,13 @@ const AppImageDialogueBox = ({
     <div>
       <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton></Modal.Header>
-        <Modal.Body>{imageCropperComp}</Modal.Body>
+        <Modal.Body>
+          <AppImageCropper
+            image={selectedImageDataURL}
+            setCroppedAreaPixels={setCroppedAreaPixels}
+            {...(isProfile && { shape: "round" })}
+          />
+        </Modal.Body>
         <Modal.Footer>
           <AppFramerButton hover={1.1} tap={0.9}>
             <button

@@ -14,9 +14,9 @@ import { getFeed } from "../../services/method";
 const HomePage = () => {
   const { id } = useParams();
 
-  useEffect(() => {
-    getFeedData();
-  }, []);
+  // useEffect(() => {
+  //   getFeedData();
+  // }, []);
 
   const getFeedData = async () => {
     try {

@@ -53,7 +53,7 @@ const AppVerificationCode = ({
         name: `${first_name} ${last_name}`,
         issued_for,
       });
-      responseMessage(response.data.code);
+      responseMessage(response.data.code, 6000);
       setGenerateCode(true);
       setIsOTPExpired(false);
       setOtp("");

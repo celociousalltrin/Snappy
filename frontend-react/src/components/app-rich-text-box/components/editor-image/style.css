@@ -1,0 +1,43 @@
+.editor-image {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 10%;
+}
+
+.editor-imgage-container {
+  position: relative;
+}
+
+.editor-image-close-button {
+  position: absolute;
+  top: -9%;
+  left: 16%;
+  color: red;
+}
+
+.editor-image-view-button {
+  position: absolute;
+  top: 43%;
+  left: 6%;
+}
+
+.editor-image-close-button:hover {
+  color: brown;
+}
+
+.editor-image:hover {
+  opacity: 0.5;
+}
+
+@media (max-width: 767px) {
+  .editor-image-close-button {
+    position: absolute;
+    top: -5%;
+    left: 30%;
+  }
+  .editor-image-view-button {
+    position: absolute;
+    top: 43%;
+    left: 12%;
+  }
+}

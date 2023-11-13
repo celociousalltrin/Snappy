@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "./style.css";
 import avatar from "../../assets/avatar/avatar-icon.png";
 import { TbCameraPlus } from "react-icons/tb";
-import AppImageCropper from "../../components/app-image-cropper";
 import { convertFileToDataURL } from "../../utils/common-function";
 import AppImageDialogueBox from "../../components/app-image-Dialogue-box";
+
+import "./style.css";
 
 const UploadProfilePicture = ({
   data: { user_data_url },
@@ -13,7 +13,6 @@ const UploadProfilePicture = ({
   const [date, setDate] = useState(new Date());
   const [selectedImageDataURL, setSelectedImageDataURL] = useState();
   const [isOpenDialogueBox, setIsOpenDialogueBox] = useState(false);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
   const handleFileChange = async (e) => {
     const selectedFile = e.target.files[0];
@@ -63,21 +62,14 @@ const UploadProfilePicture = ({
       </div>
 
       <AppImageDialogueBox
-        imageCropperComp={
-          <AppImageCropper
-            image={selectedImageDataURL}
-            shape="round"
-            setCroppedAreaPixels={setCroppedAreaPixels}
-          />
-        }
         show={isOpenDialogueBox}
         setShow={setIsOpenDialogueBox}
         setSelectedImageDataURL={setSelectedImageDataURL}
         selectedImageDataURL={selectedImageDataURL}
-        croppedAreaPixels={croppedAreaPixels}
         callback={(url) => {
           setFieldValue("user_data_url", url);
         }}
+        isProfile
       />
     </div>
   );
