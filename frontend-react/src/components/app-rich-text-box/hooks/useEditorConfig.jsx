@@ -16,19 +16,21 @@ export default function useEditorConfig(
 
   editor.isVoid = (element) => {
     return (
-      ["image", "mention", "hashtag"].includes(element.type) || isVoid(element)
+      ["image", "mention", "hashtag", "emoji"].includes(element.type) ||
+      isVoid(element)
     );
   };
 
   editor.isInline = (element) => {
-    return ["mention", "hashtag"].includes(element.type)
+    return ["mention", "hashtag", "emoji"].includes(element.type)
       ? true
       : isInline(element);
   };
 
   editor.markableVoid = (element) => {
     return (
-      ["mention", "hashtag"].includes(element.type) || markableVoid(element)
+      ["mention", "hashtag", "emoji"].includes(element.type) ||
+      markableVoid(element)
     );
   };
 
@@ -63,6 +65,8 @@ function renderElement(props) {
       return (
         <span style={{ color: "rgb(56, 167, 242)" }}>#{element.character}</span>
       );
+    case "emoji":
+      return <span>{element.character}</span>;
     default:
       return <DefaultElement {...props} />;
   }
@@ -78,9 +82,9 @@ function renderLeaf(props) {
     el = <strong>{el}</strong>;
   }
 
-  if (leaf.code) {
-    el = <code>{el}</code>;
-  }
+  // if (leaf.code) {
+  //   el = <code>{el}</code>;
+  // }
   if (leaf.italic) {
     el = <em>{el}</em>;
   }
@@ -89,21 +93,21 @@ function renderLeaf(props) {
     el = <u>{el}</u>;
   }
 
-  if (leaf.keyboard) {
-    el = <kbd>{el}</kbd>;
-  }
+  // if (leaf.keyboard) {
+  //   el = <kbd>{el}</kbd>;
+  // }
 
-  if (leaf.codeOutput) {
-    el = <samp>{el}</samp>;
-  }
+  // if (leaf.codeOutput) {
+  //   el = <samp>{el}</samp>;
+  // }
 
-  if (leaf.fontSize) {
-    el = <span style={{ fontSize: "5rem" }}>{el}</span>;
-  }
+  // if (leaf.fontSize) {
+  //   el = <span style={{ fontSize: "5rem" }}>{el}</span>;
+  // }
 
-  if (leaf.fontColor) {
-    el = <span style={{ color: "red" }}>{el}</span>;
-  }
+  // if (leaf.fontColor) {
+  //   el = <span style={{ color: "red" }}>{el}</span>;
+  // }
 
   return <span {...attributes}>{el}</span>;
 }
@@ -125,24 +129,24 @@ const KeyBindings = {
       handleApplyStyles("italic");
       return;
     }
-    if (isHotkey("mod+c", event)) {
-      handleApplyStyles("code");
-      return;
-    }
+    // if (isHotkey("mod+c", event)) {
+    //   handleApplyStyles("code");
+    //   return;
+    // }
     if (isHotkey("mod+u", event)) {
       handleApplyStyles("underline");
       return;
     }
-    if (isHotkey("mod+k", event)) {
-      event.preventDefault();
-      handleApplyStyles("keyboard");
-      return;
-    }
-    if (isHotkey("mod+o", event)) {
-      event.preventDefault();
-      handleApplyStyles("codeOutput");
-      return;
-    }
+    // if (isHotkey("mod+k", event)) {
+    //   event.preventDefault();
+    //   handleApplyStyles("keyboard");
+    //   return;
+    // }
+    // if (isHotkey("mod+o", event)) {
+    //   event.preventDefault();
+    //   handleApplyStyles("codeOutput");
+    //   return;
+    // }
     if (
       customNodeData &&
       customNodeData.customNode.type === "hashtag" &&

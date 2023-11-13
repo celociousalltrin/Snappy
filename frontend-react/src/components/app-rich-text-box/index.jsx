@@ -5,14 +5,21 @@ import { createEditor } from "slate";
 import { withHistory } from "slate-history";
 
 import useEditorConfig from "./hooks/useEditorConfig";
-import Toolbar from "./components/toolbar";
 
-import { editorCustomNode, toggleStyle } from "./utils/editorFunction";
+import {
+  editorCustomNode,
+  editorInitialValidator,
+  toggleStyle,
+} from "./utils/editorFunction";
 import { useRichTextStyle } from "./hooks/useRichTextStyle";
 import useEditorSelection from "./hooks/useEditorSelection";
 import EditorPopover from "./components/editor-popover";
 import { createPortal } from "react-dom";
 import { useEditorMention } from "./hooks/useEditorMention";
+
+import "./style.css";
+import AppFramerButton from "../app-framer-button";
+import RichTextToolbar from "./components/toolbar";
 
 const AppRichTextBox = ({ data, onChange }) => {
   const editor = useMemo(() => withReact(withHistory(createEditor())), []);
@@ -57,18 +64,31 @@ const AppRichTextBox = ({ data, onChange }) => {
   return (
     <div>
       <Slate editor={editor} initialValue={data} onChange={handleChange}>
-        <Toolbar
+        <RichTextToolbar
           activeStyles={activeStyles}
           handleApplyStyles={handleApplyStyles}
           editor={editor}
           selectedTextStyle={selectedTextStyle}
         />
+
         <Editable
+          placeholder="Share your Snapps"
           renderElement={renderElement}
           renderLeaf={renderLeaf}
           onKeyDown={onKeyDown}
           onSelect={() => getSelectedStyle(editor, data)}
         />
+        <div className="d-flex justify-content-end">
+          <AppFramerButton>
+            <button
+              className="btn btn-primary mt-1 mb-1 cursor-pointer"
+              disabled={!editorInitialValidator(data, 5)}
+            >
+              Snapp
+            </button>
+          </AppFramerButton>
+        </div>
+
         {customNodeData &&
           customNodeData.customNode.type === "mention" &&
           customNodeData.customNode.text?.length > 0 && (

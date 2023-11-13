@@ -11,9 +11,6 @@ import { persistStore } from "redux-persist";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-// Bootstrap Icons Css
-import "bootstrap-icons/font/bootstrap-icons.css";
-
 //DatePicker Css
 import "react-datepicker/dist/react-datepicker.css";
 

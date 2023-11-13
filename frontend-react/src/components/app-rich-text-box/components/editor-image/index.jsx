@@ -82,13 +82,13 @@ const EditorImage = ({ attributes, children, element }) => {
               className="editor-image"
             />
             <AiFillCloseCircle
-              size={25}
+              size={20}
               className="editor-image-close-button cursor-pointer"
               onClick={handleDeleteImage}
             />
 
             <AiFillEye
-              size={35}
+              size={27}
               className="editor-image-view-button cursor-pointer"
               onClick={(e) => handleOpenEditorImage(e, element.url)}
             />

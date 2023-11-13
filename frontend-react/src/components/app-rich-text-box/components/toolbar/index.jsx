@@ -1,27 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { getIconForButton } from "../../utils/editorFunction";
+import { editorCustomNode, getIconForButton } from "../../utils/editorFunction";
 import { useSlateStatic } from "slate-react";
 
+import customimg from "../../../../assets/mock-image/1mutual.jpg";
 import "./style.css";
 import ToolBarButton from "./toolbar-components/button";
 import ToolBarDropDown from "./toolbar-components/drop-down";
 import { Element, Transforms } from "slate";
-import { TbCameraPlus } from "react-icons/tb";
 import AppImageDialogueBox from "../../../app-image-Dialogue-box";
 import { convertFileToDataURL } from "../../../../utils/common-function";
+import Picker from "emoji-picker-react";
 
-const CHARACTER_STYLES = [
-  "bold",
-  "italic",
-  "underline",
-  "code",
-  "keyboard",
-  "codeOutput",
-  "fontSize",
-  "fontColor",
-];
+const CHARACTER_STYLES = ["bold", "italic", "underline", "image", "emoji"];
 
-const Toolbar = ({
+const RichTextToolbar = ({
   activeStyles,
   handleApplyStyles,
   editor,
@@ -31,6 +23,7 @@ const Toolbar = ({
   const [selectedImageDataURL, setSelectedImageDataURL] = useState();
 
   const [isOpenDialogueBox, setIsOpenDialogueBox] = useState(false);
+  const [showPicker, setShowPicker] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
 
   const handleImageUpload = (img) => {
@@ -43,6 +36,7 @@ const Toolbar = ({
       },
       { at: editor.selection }
     );
+    Transforms.move(editor);
   };
 
   useEffect(() => {
@@ -64,30 +58,53 @@ const Toolbar = ({
     }
   };
 
+  const handleSelectEmoji = (data) => {
+    if (editor.selection) {
+      Transforms.select(editor, editor.selection);
+      Transforms.insertNodes(editor, {
+        type: "emoji",
+        character: data.emoji,
+        children: [{ text: "" }],
+      });
+      Transforms.move(editor);
+      setShowPicker(false);
+    }
+  };
+
   return (
-    <div>
-      {" "}
-      <div className="toolbar">
-        <ToolBarDropDown selectedTextStyle={selectedTextStyle} />
+    <div className="row mb-1">
+      <div className="col-3">
+        <img
+          src={customimg}
+          className="editor-user-profile"
+          width="50px"
+          height="50px"
+        />
+      </div>
+      <div className="editor-toolbar col-9">
+        {/* <ToolBarDropDown selectedTextStyle={selectedTextStyle} /> */}
         {CHARACTER_STYLES.map((style) => (
           <ToolBarButton
             key={style}
-            icon={<i className={`bi ${getIconForButton(style)}`} />}
+            icon={getIconForButton(style)}
             activeStyles={activeStyles}
             onMouseDown={(e) => {
               e.preventDefault();
               handleApplyStyles(style);
+              //This is does because state is updated asynchronously
+              if (activeStyles.includes("emoji")) {
+                setShowPicker(false);
+              } else if (style === "emoji") {
+                setShowPicker(true);
+              }
             }}
             buttonStyleName={style}
           />
         ))}
         <div>
-          <label htmlFor="fileInput">
-            <TbCameraPlus size={50} />
-          </label>
           <input
             type="file"
-            id="fileInput"
+            id="editor-image-upload"
             key={date}
             style={{ display: "none" }}
             onChange={handleFileChange}
@@ -95,6 +112,12 @@ const Toolbar = ({
           />
         </div>
       </div>
+      {showPicker && (
+        <Picker
+          pickerStyle={{ width: "100%" }}
+          onEmojiClick={handleSelectEmoji}
+        />
+      )}
       <AppImageDialogueBox
         show={isOpenDialogueBox}
         setShow={setIsOpenDialogueBox}
@@ -108,4 +131,4 @@ const Toolbar = ({
   );
 };
 
-export default Toolbar;
+export default RichTextToolbar;

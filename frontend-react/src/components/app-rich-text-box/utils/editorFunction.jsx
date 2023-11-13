@@ -1,29 +1,27 @@
 import { Editor, Element, Node, Range, Transforms } from "slate";
+import {
+  AiOutlineBold,
+  AiOutlineItalic,
+  AiOutlineUnderline,
+} from "react-icons/ai";
+
+import { TfiLayoutWidthDefaultAlt } from "react-icons/tfi";
+import { BsEmojiSmile, BsFillImageFill } from "react-icons/bs";
 
 export const getIconForButton = (style) => {
   switch (style) {
     case "bold":
-      return "bi-type-bold";
+      return <AiOutlineBold />;
     case "italic":
-      return "bi-type-italic";
-    case "code":
-      return "bi-code-slash";
+      return <AiOutlineItalic />;
     case "underline":
-      return "bi-type-underline";
+      return <AiOutlineUnderline />;
     case "image":
-      return "bi-file-image";
-    case "link":
-      return "bi-link-45deg";
-    case "keyboard":
-      return "bi bi-keyboard";
-    case "codeOutput":
-      return "bi bi-file-arrow-up";
-    case "fontSize":
-      return "bi bi-file-earmark-font";
-    case "fontColor":
-      return "bi bi-palette";
+      return <BsFillImageFill />;
+    case "emoji":
+      return <BsEmojiSmile />;
     default:
-      return "bi-link-45deg";
+      return <TfiLayoutWidthDefaultAlt />;
   }
 };
 
@@ -165,5 +163,13 @@ export const editorCustomNode = (editor) => {
     if (node) {
       return { range: beforeRange, customNode: node };
     }
+  }
+};
+
+export const editorInitialValidator = (data, number) => {
+  if (data.length > 1 || data[0].children[0].text.length > number) {
+    return true;
+  } else {
+    return false;
   }
 };

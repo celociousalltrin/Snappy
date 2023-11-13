@@ -1,6 +1,6 @@
 .editor-image {
-  width: 7rem;
-  height: 7rem;
+  width: 5rem;
+  height: 5rem;
   border-radius: 10%;
 }
 
@@ -11,18 +11,18 @@
 .editor-image-close-button {
   position: absolute;
   top: -9%;
-  left: 16%;
-  color: red;
+  left: 12%;
+  color: brown;
 }
 
 .editor-image-view-button {
   position: absolute;
   top: 43%;
-  left: 6%;
+  left: 4%;
 }
 
 .editor-image-close-button:hover {
-  color: brown;
+  color: red;
 }
 
 .editor-image:hover {
@@ -32,12 +32,12 @@
 @media (max-width: 767px) {
   .editor-image-close-button {
     position: absolute;
-    top: -5%;
-    left: 30%;
+    top: -9.5%;
+    left: 20.5%;
   }
   .editor-image-view-button {
     position: absolute;
     top: 43%;
-    left: 12%;
+    left: 8.5%;
   }
 }
