@@ -6,11 +6,7 @@ import { withHistory } from "slate-history";
 
 import useEditorConfig from "./hooks/useEditorConfig";
 
-import {
-  editorCustomNode,
-  editorInitialValidator,
-  toggleStyle,
-} from "./utils/editorFunction";
+import { editorCustomNode, toggleStyle } from "./utils/editorFunction";
 import { useRichTextStyle } from "./hooks/useRichTextStyle";
 import useEditorSelection from "./hooks/useEditorSelection";
 import EditorPopover from "./components/editor-popover";
@@ -18,13 +14,21 @@ import { createPortal } from "react-dom";
 import { useEditorMention } from "./hooks/useEditorMention";
 
 import "./style.css";
-import AppFramerButton from "../app-framer-button";
-import RichTextToolbar from "./components/toolbar";
 
-const AppRichTextBox = ({ data, onChange }) => {
+import RichTextToolbar from "./components/toolbar";
+import { useNavigate } from "react-router-dom";
+
+const AppRichTextBox = ({
+  data,
+  onChange,
+  editorElements,
+  isToolbarIcon,
+  customComponent,
+}) => {
   const editor = useMemo(() => withReact(withHistory(createEditor())), []);
 
   const [customNodeData, setCustomNodeData] = useState(null);
+  const navigate = useNavigate();
 
   const { mentionIndex, mentionUserList, handleMentionKeyDown } =
     useEditorMention(customNodeData);
@@ -49,7 +53,8 @@ const AppRichTextBox = ({ data, onChange }) => {
     handleApplyStyles,
     customNodeData,
     setCustomNodeData,
-    handleMentionKeyDown
+    handleMentionKeyDown,
+    editorElements
   );
 
   const handleChange = useCallback(
@@ -65,31 +70,25 @@ const AppRichTextBox = ({ data, onChange }) => {
     <div>
       <Slate editor={editor} initialValue={data} onChange={handleChange}>
         <RichTextToolbar
+          editorElements={editorElements}
           activeStyles={activeStyles}
           handleApplyStyles={handleApplyStyles}
           editor={editor}
           selectedTextStyle={selectedTextStyle}
+          isToolbarIcon={isToolbarIcon}
+          customComponent={customComponent}
         />
 
         <Editable
           placeholder="Share your Snapps"
-          renderElement={renderElement}
+          renderElement={(eldata) => renderElement(eldata, navigate)}
           renderLeaf={renderLeaf}
           onKeyDown={onKeyDown}
           onSelect={() => getSelectedStyle(editor, data)}
         />
-        <div className="d-flex justify-content-end">
-          <AppFramerButton>
-            <button
-              className="btn btn-primary mt-1 mb-1 cursor-pointer"
-              disabled={!editorInitialValidator(data, 5)}
-            >
-              Snapp
-            </button>
-          </AppFramerButton>
-        </div>
 
-        {customNodeData &&
+        {editorElements.includes("mention") &&
+          customNodeData &&
           customNodeData.customNode.type === "mention" &&
           customNodeData.customNode.text?.length > 0 && (
             <Portal>

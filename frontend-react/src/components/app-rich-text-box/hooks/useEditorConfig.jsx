@@ -1,35 +1,47 @@
 import { useCallback } from "react";
 import { DefaultElement } from "slate-react";
 import isHotkey from "is-hotkey";
-import { insertCustomNode, renderTextElement } from "../utils/editorFunction";
+import {
+  editorKeyBinding,
+  insertCustomNode,
+  renderTextElement,
+} from "../utils/editorFunction";
 import EditorImage from "../components/editor-image";
-import { useNavigate } from "react-router-dom";
+import { customKeybindings } from "../utils/editorData";
 
 export default function useEditorConfig(
   editor,
   handleApplyStyles,
   customNodeData,
   setCustomNodeData,
-  handleMentionKeyDown
+  handleMentionKeyDown,
+  editorElements
 ) {
   const { isVoid, isInline, markableVoid } = editor;
 
   editor.isVoid = (element) => {
     return (
-      ["image", "mention", "hashtag", "emoji"].includes(element.type) ||
-      isVoid(element)
+      [
+        "image",
+        "mention",
+        "hashtag",
+        "emoji",
+        "link",
+        "table",
+        "video",
+      ].includes(element.type) || isVoid(element)
     );
   };
 
   editor.isInline = (element) => {
-    return ["mention", "hashtag", "emoji"].includes(element.type)
+    return ["mention", "hashtag", "emoji", "link"].includes(element.type)
       ? true
       : isInline(element);
   };
 
   editor.markableVoid = (element) => {
     return (
-      ["mention", "hashtag", "emoji"].includes(element.type) ||
+      ["mention", "hashtag", "emoji", "link"].includes(element.type) ||
       markableVoid(element)
     );
   };
@@ -42,14 +54,15 @@ export default function useEditorConfig(
         handleApplyStyles,
         customNodeData,
         setCustomNodeData,
-        handleMentionKeyDown
+        handleMentionKeyDown,
+        editorElements
       ),
     [editor, customNodeData]
   );
   return { renderElement, renderLeaf, onKeyDown };
 }
 
-function renderElement(props) {
+function renderElement(props, navigate) {
   const { element, children, attributes } = props;
 
   switch (element.type) {
@@ -67,6 +80,15 @@ function renderElement(props) {
       );
     case "emoji":
       return <span>{element.character}</span>;
+    case "link":
+      return (
+        <span
+          onClick={() => window.open(element.url, "_blank")}
+          className="text-primary cursor-pointer text-decoration-underline"
+        >
+          {element.character}
+        </span>
+      );
     default:
       return <DefaultElement {...props} />;
   }
@@ -75,16 +97,14 @@ function renderElement(props) {
 function renderLeaf(props) {
   const { attributes, children, leaf } = props;
 
-  const navigate = useNavigate();
-
   let el = <>{children}</>;
   if (leaf.bold) {
     el = <strong>{el}</strong>;
   }
 
-  // if (leaf.code) {
-  //   el = <code>{el}</code>;
-  // }
+  if (leaf.code) {
+    el = <code>{el}</code>;
+  }
   if (leaf.italic) {
     el = <em>{el}</em>;
   }
@@ -93,21 +113,16 @@ function renderLeaf(props) {
     el = <u>{el}</u>;
   }
 
-  // if (leaf.keyboard) {
-  //   el = <kbd>{el}</kbd>;
-  // }
+  if (leaf.keyboard) {
+    el = <kbd>{el}</kbd>;
+  }
 
-  // if (leaf.codeOutput) {
-  //   el = <samp>{el}</samp>;
-  // }
-
-  // if (leaf.fontSize) {
-  //   el = <span style={{ fontSize: "5rem" }}>{el}</span>;
-  // }
-
-  // if (leaf.fontColor) {
-  //   el = <span style={{ color: "red" }}>{el}</span>;
-  // }
+  if (leaf.code) {
+    el = <pre>{el}</pre>;
+  }
+  if (leaf.codeOutput) {
+    el = <samp>{el}</samp>;
+  }
 
   return <span {...attributes}>{el}</span>;
 }
@@ -119,35 +134,20 @@ const KeyBindings = {
     handleApplyStyles,
     customNodeData,
     setCustomNodeData,
-    handleMentionKeyDown
+    handleMentionKeyDown,
+    editorElements
   ) => {
-    if (isHotkey("mod+b", event)) {
-      handleApplyStyles("bold");
-      return;
-    }
-    if (isHotkey("mod+i", event)) {
-      handleApplyStyles("italic");
-      return;
-    }
-    // if (isHotkey("mod+c", event)) {
-    //   handleApplyStyles("code");
-    //   return;
-    // }
-    if (isHotkey("mod+u", event)) {
-      handleApplyStyles("underline");
-      return;
-    }
-    // if (isHotkey("mod+k", event)) {
-    //   event.preventDefault();
-    //   handleApplyStyles("keyboard");
-    //   return;
-    // }
-    // if (isHotkey("mod+o", event)) {
-    //   event.preventDefault();
-    //   handleApplyStyles("codeOutput");
-    //   return;
-    // }
+    customKeybindings
+      .filter((x) => editorElements.includes(Object.keys(x)[0]))
+      .map((o) => {
+        if (isHotkey(editorKeyBinding(o), event)) {
+          event.preventDefault();
+          handleApplyStyles(Object.keys(o)[0]);
+          return;
+        }
+      });
     if (
+      editorElements.includes("hashtag") &&
       customNodeData &&
       customNodeData.customNode.type === "hashtag" &&
       isHotkey("space", event)
@@ -156,9 +156,13 @@ const KeyBindings = {
       setCustomNodeData(null);
       return;
     }
-    if (customNodeData && customNodeData.customNode.type === "mention") {
-      // mentionKeyDown(event, editor, customNodeData);
+    if (
+      editorElements.includes("mention") &&
+      customNodeData &&
+      customNodeData.customNode.type === "mention"
+    ) {
       handleMentionKeyDown(event, editor, customNodeData, setCustomNodeData);
+      return;
     }
   },
 };

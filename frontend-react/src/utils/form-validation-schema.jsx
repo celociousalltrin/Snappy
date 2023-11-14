@@ -52,3 +52,8 @@ export const loginSchema = yup.object().shape({
   email: emailSchema,
   password: passwordSchema,
 });
+
+export const editorLinkSchema = yup.object().shape({
+  editor_link_text: yup.string().required("It is required"),
+  editor_link: yup.string().url("Invalid Url").required("It is required"),
+});

@@ -3,25 +3,27 @@ import { mockMentionUsers } from "../../../utils/mock-common";
 import { Transforms } from "slate";
 import { insertCustomNode } from "../utils/editorFunction";
 
-export const useEditorMention = (customData) => {
+export const useEditorMention = (customNodeData) => {
   const [mentionIndex, setMentionIndex] = useState(0);
 
   const [mentionUserList, setMentionUserList] = useState([]);
 
   useEffect(() => {
     if (
-      customData &&
-      customData.customNode.type === "mention" &&
-      customData.customNode.text?.length > 0
+      customNodeData &&
+      customNodeData.customNode.type === "mention" &&
+      customNodeData.customNode.text?.length > 0
     ) {
       const mentionUser = mockMentionUsers
         .filter((c) =>
-          c.toLowerCase().startsWith(customData.customNode.text.toLowerCase())
+          c
+            .toLowerCase()
+            .startsWith(customNodeData.customNode.text.toLowerCase())
         )
         .slice(0, 10);
       setMentionUserList(mentionUser);
     }
-  }, [customData?.customNode?.text]);
+  }, [customNodeData?.customNode?.text]);
 
   const handleMentionKeyDown = (
     event,

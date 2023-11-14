@@ -3,6 +3,7 @@ import {
   AiOutlineBold,
   AiOutlineItalic,
   AiOutlineUnderline,
+  AiOutlineLink,
 } from "react-icons/ai";
 
 import { TfiLayoutWidthDefaultAlt } from "react-icons/tfi";
@@ -20,6 +21,8 @@ export const getIconForButton = (style) => {
       return <BsFillImageFill />;
     case "emoji":
       return <BsEmojiSmile />;
+    case "link":
+      return <AiOutlineLink />;
     default:
       return <TfiLayoutWidthDefaultAlt />;
   }
@@ -171,5 +174,13 @@ export const editorInitialValidator = (data, number) => {
     return true;
   } else {
     return false;
+  }
+};
+
+export const editorKeyBinding = (o) => {
+  if (o?.additionalKey) {
+    return `mod+${o.additionalKey}+${Object.values(o)[0]}`;
+  } else {
+    return `mod+${Object.values(o)[0]}`;
   }
 };

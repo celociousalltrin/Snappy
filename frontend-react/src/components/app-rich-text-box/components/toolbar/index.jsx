@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { editorCustomNode, getIconForButton } from "../../utils/editorFunction";
 import { useSlateStatic } from "slate-react";
 
@@ -10,20 +10,27 @@ import { Element, Transforms } from "slate";
 import AppImageDialogueBox from "../../../app-image-Dialogue-box";
 import { convertFileToDataURL } from "../../../../utils/common-function";
 import Picker from "emoji-picker-react";
-
-const CHARACTER_STYLES = ["bold", "italic", "underline", "image", "emoji"];
+import AppComponentPopover from "../../../app-component-popover";
+import EditorLink from "../editor-link";
+import { toolbarButtons } from "../../utils/editorData";
 
 const RichTextToolbar = ({
+  editorElements,
   activeStyles,
   handleApplyStyles,
   editor,
   selectedTextStyle,
+  isToolbarIcon,
+  customComponent,
 }) => {
+  const target = useRef(null);
   const [date, setDate] = useState(new Date());
   const [selectedImageDataURL, setSelectedImageDataURL] = useState();
 
   const [isOpenDialogueBox, setIsOpenDialogueBox] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
+  const [showPopover, setShowPopover] = useState(false);
+
   const [imgUrl, setImgUrl] = useState("");
 
   const handleImageUpload = (img) => {
@@ -73,34 +80,40 @@ const RichTextToolbar = ({
 
   return (
     <div className="row mb-1">
-      <div className="col-3">
-        <img
-          src={customimg}
-          className="editor-user-profile"
-          width="50px"
-          height="50px"
-        />
-      </div>
-      <div className="editor-toolbar col-9">
+      {isToolbarIcon && <div className="col-2">{customComponent}</div>}
+      <div className={`editor-toolbar ${isToolbarIcon ? "col-10" : "col-12"}`}>
         {/* <ToolBarDropDown selectedTextStyle={selectedTextStyle} /> */}
-        {CHARACTER_STYLES.map((style) => (
-          <ToolBarButton
-            key={style}
-            icon={getIconForButton(style)}
-            activeStyles={activeStyles}
-            onMouseDown={(e) => {
-              e.preventDefault();
-              handleApplyStyles(style);
-              //This is does because state is updated asynchronously
-              if (activeStyles.includes("emoji")) {
-                setShowPicker(false);
-              } else if (style === "emoji") {
-                setShowPicker(true);
-              }
-            }}
-            buttonStyleName={style}
-          />
-        ))}
+
+        {toolbarButtons
+          .filter((x) => editorElements.includes(Object.keys(x)[0]))
+          .map((o) => (
+            <ToolBarButton
+              key={Object.keys(o)[0]}
+              icon={Object.values(o)[0]}
+              activeStyles={activeStyles}
+              showPopover={showPopover}
+              setShowPopover={setShowPopover}
+              handleApplyStyles={handleApplyStyles}
+              target={target}
+              onMouseDown={(e) => {
+                e.preventDefault();
+                handleApplyStyles(Object.keys(o)[0]);
+                //This is does because state is updated asynchronously
+                if (activeStyles.includes("emoji")) {
+                  setShowPicker(false);
+                } else if (Object.keys(o)[0] === "emoji") {
+                  setShowPicker(true);
+                }
+
+                if (activeStyles.includes("link")) {
+                  setShowPopover(false);
+                } else if (Object.keys(o)[0] === "link") {
+                  setShowPopover(true);
+                }
+              }}
+              buttonStyleName={Object.keys(o)[0]}
+            />
+          ))}
         <div>
           <input
             type="file"
@@ -126,6 +139,18 @@ const RichTextToolbar = ({
         callback={(url) => {
           setImgUrl(url);
         }}
+      />
+      <AppComponentPopover
+        component={
+          <EditorLink
+            setShowPopover={setShowPopover}
+            handleApplyStyles={handleApplyStyles}
+          />
+        }
+        show={showPopover}
+        target={target.current}
+        isHeader
+        title="Add Link"
       />
     </div>
   );
