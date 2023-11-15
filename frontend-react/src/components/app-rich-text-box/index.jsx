@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Editable, Slate, withReact } from "slate-react";
-import { IoImage } from "react-icons/io5";
 import { createEditor } from "slate";
 import { withHistory } from "slate-history";
 
@@ -13,8 +12,11 @@ import {
   editorTextlength,
   toggleStyle,
 } from "./utils/editorFunction";
-import { editorValidatorIcons } from "./utils/editorData";
-import { useRichTextStyle } from "./hooks/useRichTextStyle";
+import {
+  editorDialogueToolbarButtons,
+  editorValidatorIcons,
+} from "./utils/editorData";
+import { useEditorToolbarActive } from "./hooks/useEditorToolbarActive";
 import useEditorSelection from "./hooks/useEditorSelection";
 import EditorPopover from "./components/editor-popover";
 import { createPortal } from "react-dom";
@@ -39,18 +41,33 @@ const AppRichTextBox = ({
 }) => {
   console.log("🚀 ~ file: index.jsx:36 ~ data:", data);
   const editor = useMemo(() => withReact(withHistory(createEditor())), []);
-  const [textLength, setTextLength] = useState(0);
 
   const [customNodeData, setCustomNodeData] = useState(null);
+  const [textLength, setTextLength] = useState(0);
+
   const navigate = useNavigate();
+
+  const dialogueToolbarButtons = editorElements.filter((o) =>
+    editorDialogueToolbarButtons.includes(o)
+  );
+
+  const { setActiveStyles, activeStyles, currentStyle, handleApplyStyles } =
+    useEditorToolbarActive(dialogueToolbarButtons);
 
   const { mentionIndex, mentionUserList, handleMentionKeyDown } =
     useEditorMention(customNodeData);
+
+  const { renderElement, renderLeaf, onEditorKeyDown } = useEditorConfig(
+    editor,
+    handleApplyStyles,
+    customNodeData,
+    setCustomNodeData,
+    handleMentionKeyDown,
+    editorElements
+  );
+
   const { selectedActiveStyles, getSelectedStyle, selectedTextStyle } =
     useEditorSelection();
-
-  const { setActiveStyles, activeStyles, currentStyle, handleApplyStyles } =
-    useRichTextStyle();
 
   useEffect(() => {
     if (!!selectedActiveStyles) {
@@ -61,15 +78,6 @@ const AppRichTextBox = ({
   useEffect(() => {
     toggleStyle(editor, currentStyle, activeStyles);
   }, [activeStyles]);
-
-  const { renderElement, renderLeaf, onKeyDown } = useEditorConfig(
-    editor,
-    handleApplyStyles,
-    customNodeData,
-    setCustomNodeData,
-    handleMentionKeyDown,
-    editorElements
-  );
 
   const handleChange = useCallback(
     (document) => {
@@ -85,11 +93,11 @@ const AppRichTextBox = ({
     <div>
       <Slate editor={editor} initialValue={data} onChange={handleChange}>
         <RichTextToolbar
+          editor={editor}
           editorElements={editorElements}
           activeStyles={activeStyles}
-          handleApplyStyles={handleApplyStyles}
-          editor={editor}
           selectedTextStyle={selectedTextStyle}
+          handleApplyStyles={handleApplyStyles}
           isToolbarIcon={isToolbarIcon}
           toolbarCustomComponent={toolbarCustomComponent}
         />
@@ -98,7 +106,7 @@ const AppRichTextBox = ({
           placeholder="Share your Snapps"
           renderElement={(eldata) => renderElement(eldata, navigate)}
           renderLeaf={renderLeaf}
-          onKeyDown={onKeyDown}
+          onKeyDown={onEditorKeyDown}
           onSelect={() => getSelectedStyle(editor, data)}
         />
 

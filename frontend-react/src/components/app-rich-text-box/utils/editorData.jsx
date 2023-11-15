@@ -9,6 +9,14 @@ import { FaCode, FaRegKeyboard } from "react-icons/fa";
 import { IoImage } from "react-icons/io5";
 import { LuFileOutput } from "react-icons/lu";
 
+export const editorInitialValue = [
+  {
+    type: "text",
+    level: 7,
+    children: [{ text: "" }],
+  },
+];
+
 export const toolbarButtons = [
   { bold: <AiOutlineBold /> },
   { italic: <AiOutlineItalic /> },
@@ -31,3 +39,5 @@ export const customKeybindings = [
 ];
 
 export const editorValidatorIcons = [{ name: "image", icon: <IoImage /> }];
+
+export const editorDialogueToolbarButtons = ["image", "emoji", "link"];

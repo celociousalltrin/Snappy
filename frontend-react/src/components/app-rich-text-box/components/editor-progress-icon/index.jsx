@@ -20,18 +20,18 @@ const EditorProgressIcon = ({
   const editorProgressStyle = (num) => {
     let customStyle = { position: "absolute", top: "19%" };
     if (num < 10) {
-      customStyle = { ...customStyle, right: "9%" };
+      customStyle = { ...customStyle, right: "35%" };
     } else if (num >= 10 && num <= 99) {
-      customStyle = { ...customStyle, right: "7.7%" };
+      customStyle = { ...customStyle, right: "25%" };
     } else {
-      customStyle = { ...customStyle, right: "6.2%" };
+      customStyle = { ...customStyle, right: "20%" };
     }
     return customStyle;
   };
 
   return (
     <div className="editor-progress-container me-2 ms-2">
-      <svg style={{ height: "2.5rem", width: "2rem" }}>
+      <svg style={{ height: "2.5rem", width: "2.5rem" }}>
         <circle
           cx="50%"
           cy="21"
@@ -42,7 +42,7 @@ const EditorProgressIcon = ({
         />
         <circle
           cx="79"
-          cy="40%"
+          cy="50%"
           r={(iconSize - outerStrokeWidth) / 2}
           fill="transparent"
           stroke={

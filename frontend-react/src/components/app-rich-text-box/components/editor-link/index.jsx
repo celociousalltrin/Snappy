@@ -3,7 +3,6 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import { editorLinkSchema } from "../../../../utils/form-validation-schema";
 import { useSlateStatic } from "slate-react";
-import { useRichTextStyle } from "../../hooks/useRichTextStyle";
 import { Transforms } from "slate";
 
 const EditorLink = ({ setShowPopover, handleApplyStyles }) => {

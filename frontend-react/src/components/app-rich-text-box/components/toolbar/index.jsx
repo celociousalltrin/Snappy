@@ -12,7 +12,10 @@ import { convertFileToDataURL } from "../../../../utils/common-function";
 import Picker from "emoji-picker-react";
 import AppComponentPopover from "../../../app-component-popover";
 import EditorLink from "../editor-link";
-import { toolbarButtons } from "../../utils/editorData";
+import {
+  editorDialogueToolbarButtons,
+  toolbarButtons,
+} from "../../utils/editorData";
 
 const RichTextToolbar = ({
   editorElements,
@@ -23,15 +26,22 @@ const RichTextToolbar = ({
   isToolbarIcon,
   toolbarCustomComponent,
 }) => {
-  const target = useRef(null);
-  const [date, setDate] = useState(new Date());
-  const [selectedImageDataURL, setSelectedImageDataURL] = useState();
-
   const [isOpenDialogueBox, setIsOpenDialogueBox] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
   const [showPopover, setShowPopover] = useState(false);
 
+  const [selectedImageDataURL, setSelectedImageDataURL] = useState();
   const [imgUrl, setImgUrl] = useState("");
+
+  const [date, setDate] = useState(new Date());
+
+  const target = useRef(null);
+
+  useEffect(() => {
+    if (imgUrl) {
+      handleImageUpload(imgUrl);
+    }
+  }, [imgUrl]);
 
   const handleImageUpload = (img) => {
     Transforms.insertNodes(
@@ -44,13 +54,8 @@ const RichTextToolbar = ({
       { at: editor.selection }
     );
     Transforms.move(editor);
+    handleApplyStyles("image");
   };
-
-  useEffect(() => {
-    if (imgUrl) {
-      handleImageUpload(imgUrl);
-    }
-  }, [imgUrl]);
 
   const handleFileChange = async (e) => {
     const selectedFile = e.target.files[0];
@@ -75,6 +80,7 @@ const RichTextToolbar = ({
       });
       Transforms.move(editor);
       setShowPicker(false);
+      handleApplyStyles("emoji");
     }
   };
 

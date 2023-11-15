@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import AppRichTextBox from "../app-rich-text-box";
-import { ExampleDocument } from "../app-rich-text-box/utils/example";
 
 import customimg from "../../assets/mock-image/1mutual.jpg";
 
 import "./style.css";
+import { editorInitialValue } from "../app-rich-text-box/utils/editorData";
 
 const Snapp = () => {
-  const [document, setDocument] = useState(ExampleDocument);
+  const [document, setDocument] = useState(editorInitialValue);
 
   return (
     <div className="d-flex row border border-1 rounded pb-2 ms-1 me-1 mb-4">

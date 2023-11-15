@@ -46,7 +46,7 @@ export default function useEditorConfig(
     );
   };
 
-  const onKeyDown = useCallback(
+  const onEditorKeyDown = useCallback(
     (event) =>
       KeyBindings.onKeyDown(
         event,
@@ -59,7 +59,7 @@ export default function useEditorConfig(
       ),
     [editor, customNodeData]
   );
-  return { renderElement, renderLeaf, onKeyDown };
+  return { renderElement, renderLeaf, onEditorKeyDown };
 }
 
 function renderElement(props, navigate) {
