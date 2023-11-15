@@ -6,6 +6,7 @@ import {
 } from "react-icons/ai";
 import { BsEmojiSmile, BsFillImageFill } from "react-icons/bs";
 import { FaCode, FaRegKeyboard } from "react-icons/fa";
+import { IoImage } from "react-icons/io5";
 import { LuFileOutput } from "react-icons/lu";
 
 export const toolbarButtons = [
@@ -28,3 +29,5 @@ export const customKeybindings = [
   { code: "c", additionalKey: "alt" },
   { codeOutput: "s", additionalKey: "alt" },
 ];
+
+export const editorValidatorIcons = [{ name: "image", icon: <IoImage /> }];

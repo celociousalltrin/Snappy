@@ -21,7 +21,7 @@ const RichTextToolbar = ({
   editor,
   selectedTextStyle,
   isToolbarIcon,
-  customComponent,
+  toolbarCustomComponent,
 }) => {
   const target = useRef(null);
   const [date, setDate] = useState(new Date());
@@ -80,7 +80,7 @@ const RichTextToolbar = ({
 
   return (
     <div className="row mb-1">
-      {isToolbarIcon && <div className="col-2">{customComponent}</div>}
+      {isToolbarIcon && <div className="col-2">{toolbarCustomComponent}</div>}
       <div className={`editor-toolbar ${isToolbarIcon ? "col-10" : "col-12"}`}>
         {/* <ToolBarDropDown selectedTextStyle={selectedTextStyle} /> */}
 

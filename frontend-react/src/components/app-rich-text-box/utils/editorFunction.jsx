@@ -184,3 +184,22 @@ export const editorKeyBinding = (o) => {
     return `mod+${Object.values(o)[0]}`;
   }
 };
+
+export const editorTextlength = (data) => {
+  return data
+    .filter((o) => o.type === "text")
+    .reduce(
+      (acc, curr) =>
+        (acc += curr.children.reduce((acc, curr) => {
+          if (!curr?.type) {
+            acc += curr.text.length;
+          }
+          return acc;
+        }, 0)),
+      0
+    );
+};
+
+export const editorBlockElemntsvalidate = (data, elementName, number) => {
+  return data.filter((o) => o.type === elementName)?.length < number;
+};

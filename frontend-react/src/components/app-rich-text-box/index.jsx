@@ -1,12 +1,19 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Editable, Slate, withReact } from "slate-react";
-
+import { IoImage } from "react-icons/io5";
 import { createEditor } from "slate";
 import { withHistory } from "slate-history";
 
 import useEditorConfig from "./hooks/useEditorConfig";
 
-import { editorCustomNode, toggleStyle } from "./utils/editorFunction";
+import {
+  editorBlockElemntsvalidate,
+  editorCustomNode,
+  editorInitialValidator,
+  editorTextlength,
+  toggleStyle,
+} from "./utils/editorFunction";
+import { editorValidatorIcons } from "./utils/editorData";
 import { useRichTextStyle } from "./hooks/useRichTextStyle";
 import useEditorSelection from "./hooks/useEditorSelection";
 import EditorPopover from "./components/editor-popover";
@@ -17,15 +24,22 @@ import "./style.css";
 
 import RichTextToolbar from "./components/toolbar";
 import { useNavigate } from "react-router-dom";
+import AppFramerButton from "../app-framer-button";
+import EditorProgressIcon from "./components/editor-progress-icon";
 
 const AppRichTextBox = ({
   data,
   onChange,
+  generateTextname,
   editorElements,
   isToolbarIcon,
-  customComponent,
+  toolbarCustomComponent,
+  isValidator,
+  validatorIcons,
 }) => {
+  console.log("🚀 ~ file: index.jsx:36 ~ data:", data);
   const editor = useMemo(() => withReact(withHistory(createEditor())), []);
+  const [textLength, setTextLength] = useState(0);
 
   const [customNodeData, setCustomNodeData] = useState(null);
   const navigate = useNavigate();
@@ -62,6 +76,7 @@ const AppRichTextBox = ({
       const nodeData = editorCustomNode(editor);
       setCustomNodeData(nodeData);
       onChange(document);
+      setTextLength(editorTextlength(document));
     },
     [editor.selection, onChange]
   );
@@ -76,7 +91,7 @@ const AppRichTextBox = ({
           editor={editor}
           selectedTextStyle={selectedTextStyle}
           isToolbarIcon={isToolbarIcon}
-          customComponent={customComponent}
+          toolbarCustomComponent={toolbarCustomComponent}
         />
 
         <Editable
@@ -101,6 +116,44 @@ const AppRichTextBox = ({
             </Portal>
           )}
       </Slate>
+      <div className="d-flex justify-content-end">
+        {isValidator &&
+          !!editorValidatorIcons.length &&
+          editorValidatorIcons
+            .filter((o) => validatorIcons.map((o) => o.name).includes(o.name))
+            .map((x) => {
+              const { name, length } = validatorIcons.find(
+                (oo) => oo.name === x.name
+              );
+              return (
+                <span
+                  style={{
+                    color: editorBlockElemntsvalidate(data, name, length)
+                      ? "rgb(216, 216, 216)"
+                      : "rgb(220, 53, 69)",
+                    fontSize: "1.6rem",
+                  }}
+                >
+                  {x.icon}
+                </span>
+              );
+            })}
+
+        <EditorProgressIcon
+          textLength={textLength}
+          maxTextLength={100}
+          outerStrokeWidth={3}
+          iconSize={25}
+        />
+        <AppFramerButton>
+          <button
+            className="btn btn-primary mb-1 cursor-pointer"
+            disabled={!editorInitialValidator(data, 5)}
+          >
+            {generateTextname}
+          </button>
+        </AppFramerButton>
+      </div>
     </div>
   );
 };
