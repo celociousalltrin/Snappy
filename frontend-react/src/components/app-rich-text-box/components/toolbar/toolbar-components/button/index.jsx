@@ -1,5 +1,10 @@
 import React from "react";
 import AppToolTip from "../../../../../app-tooltip";
+import {
+  editorBlockElementsvalidate,
+  findIconValidator,
+} from "../../../../utils/editorFunction";
+
 import "./style.css";
 
 const ToolBarButton = (props) => {
@@ -12,6 +17,8 @@ const ToolBarButton = (props) => {
     setShowPopover,
     handleApplyStyles,
     target,
+    validatorIcons,
+    editor: { children },
     ...otherProps
   } = props;
 
@@ -24,6 +31,15 @@ const ToolBarButton = (props) => {
     }
   };
 
+  const isIconDisable = (data, icons, iconName) => {
+    const validateIcon = findIconValidator(icons, iconName);
+    if (!!validateIcon) {
+      return !editorBlockElementsvalidate(data, iconName, validateIcon.length);
+    } else {
+      return false;
+    }
+  };
+
   return (
     <>
       <AppToolTip title={buttonStyleName}>
@@ -31,12 +47,15 @@ const ToolBarButton = (props) => {
           <button
             ref={buttonStyleName === "link" ? target : null}
             className={
-              activeStyles.includes(buttonStyleName)
+              isIconDisable(children, validatorIcons, buttonStyleName)
+                ? "editor-toolbar-button-disabled m-md-2 m-2"
+                : activeStyles.includes(buttonStyleName)
                 ? "editor-toolbar-active-style m-md-2 m-2"
                 : "editor-toolbar-button m-md-2 m-2"
             }
             {...otherProps}
             onClick={() => handleOpenFileUpload(buttonStyleName)}
+            disabled={isIconDisable(children, validatorIcons, buttonStyleName)}
           >
             {icon}
           </button>

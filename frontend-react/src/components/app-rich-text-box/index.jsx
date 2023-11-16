@@ -6,10 +6,12 @@ import { withHistory } from "slate-history";
 import useEditorConfig from "./hooks/useEditorConfig";
 
 import {
-  editorBlockElemntsvalidate,
+  editorBlockElementsvalidate,
   editorCustomNode,
   editorInitialValidator,
   editorTextlength,
+  editorValidatorMessage,
+  findIconValidator,
   toggleStyle,
 } from "./utils/editorFunction";
 import {
@@ -18,7 +20,7 @@ import {
 } from "./utils/editorData";
 import { useEditorToolbarActive } from "./hooks/useEditorToolbarActive";
 import useEditorSelection from "./hooks/useEditorSelection";
-import EditorPopover from "./components/editor-popover";
+import EditorInlineBlockPopover from "./components/editor-inline-block-popover";
 import { createPortal } from "react-dom";
 import { useEditorMention } from "./hooks/useEditorMention";
 
@@ -28,6 +30,7 @@ import RichTextToolbar from "./components/toolbar";
 import { useNavigate } from "react-router-dom";
 import AppFramerButton from "../app-framer-button";
 import EditorProgressIcon from "./components/editor-progress-icon";
+import AppToolTip from "../app-tooltip";
 
 const AppRichTextBox = ({
   data,
@@ -38,8 +41,8 @@ const AppRichTextBox = ({
   toolbarCustomComponent,
   isValidator,
   validatorIcons,
+  progressIcon,
 }) => {
-  console.log("🚀 ~ file: index.jsx:36 ~ data:", data);
   const editor = useMemo(() => withReact(withHistory(createEditor())), []);
 
   const [customNodeData, setCustomNodeData] = useState(null);
@@ -100,6 +103,8 @@ const AppRichTextBox = ({
           handleApplyStyles={handleApplyStyles}
           isToolbarIcon={isToolbarIcon}
           toolbarCustomComponent={toolbarCustomComponent}
+          validatorIcons={validatorIcons}
+          dialogueToolbarButtons={dialogueToolbarButtons}
         />
 
         <Editable
@@ -110,12 +115,13 @@ const AppRichTextBox = ({
           onSelect={() => getSelectedStyle(editor, data)}
         />
 
-        {editorElements.includes("mention") &&
+        {!!mentionUserList.length &&
+          editorElements.includes("mention") &&
           customNodeData &&
           customNodeData.customNode.type === "mention" &&
           customNodeData.customNode.text?.length > 0 && (
             <Portal>
-              <EditorPopover
+              <EditorInlineBlockPopover
                 customNodeData={customNodeData}
                 editor={editor}
                 mentionUsers={mentionUserList}
@@ -130,29 +136,41 @@ const AppRichTextBox = ({
           editorValidatorIcons
             .filter((o) => validatorIcons.map((o) => o.name).includes(o.name))
             .map((x) => {
-              const { name, length } = validatorIcons.find(
-                (oo) => oo.name === x.name
+              const { name, length } = findIconValidator(
+                validatorIcons,
+                x.name
               );
+
               return (
-                <span
-                  style={{
-                    color: editorBlockElemntsvalidate(data, name, length)
-                      ? "rgb(216, 216, 216)"
-                      : "rgb(220, 53, 69)",
-                    fontSize: "1.6rem",
-                  }}
+                <AppToolTip
+                  title={editorValidatorMessage(name, length)}
+                  position={"bottom"}
                 >
-                  {x.icon}
-                </span>
+                  <span
+                    style={{
+                      color: editorBlockElementsvalidate(data, name, length)
+                        ? "rgb(216, 216, 216)"
+                        : "rgb(220, 53, 69)",
+                      fontSize: "1.6rem",
+                    }}
+                  >
+                    {x.icon}
+                  </span>
+                </AppToolTip>
               );
             })}
 
-        <EditorProgressIcon
-          textLength={textLength}
-          maxTextLength={100}
-          outerStrokeWidth={3}
-          iconSize={25}
-        />
+        <AppToolTip
+          title={editorValidatorMessage("text", progressIcon.length)}
+          position={"bottom"}
+        >
+          <EditorProgressIcon
+            textLength={textLength}
+            maxTextLength={progressIcon.length}
+            outerStrokeWidth={progressIcon.width}
+            iconSize={progressIcon.size}
+          />
+        </AppToolTip>
         <AppFramerButton>
           <button
             className="btn btn-primary mb-1 cursor-pointer"

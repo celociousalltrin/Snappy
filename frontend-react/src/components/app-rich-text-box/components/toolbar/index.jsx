@@ -12,19 +12,18 @@ import { convertFileToDataURL } from "../../../../utils/common-function";
 import Picker from "emoji-picker-react";
 import AppComponentPopover from "../../../app-component-popover";
 import EditorLink from "../editor-link";
-import {
-  editorDialogueToolbarButtons,
-  toolbarButtons,
-} from "../../utils/editorData";
+import { toolbarButtons } from "../../utils/editorData";
 
 const RichTextToolbar = ({
+  editor,
   editorElements,
   activeStyles,
   handleApplyStyles,
-  editor,
   selectedTextStyle,
   isToolbarIcon,
   toolbarCustomComponent,
+  validatorIcons,
+  dialogueToolbarButtons,
 }) => {
   const [isOpenDialogueBox, setIsOpenDialogueBox] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
@@ -55,6 +54,7 @@ const RichTextToolbar = ({
     );
     Transforms.move(editor);
     handleApplyStyles("image");
+    setImgUrl("");
   };
 
   const handleFileChange = async (e) => {
@@ -84,6 +84,25 @@ const RichTextToolbar = ({
     }
   };
 
+  const handleToolbarDown = (e, button) => {
+    e.preventDefault();
+    handleApplyStyles(Object.keys(button)[0]);
+
+    //This is does because state is updated asynchronously.
+    //So checking condition vice versa
+    if (activeStyles.includes("emoji")) {
+      setShowPicker(false);
+    } else if (Object.keys(button)[0] === "emoji") {
+      setShowPicker(true);
+    }
+
+    if (activeStyles.includes("link")) {
+      setShowPopover(false);
+    } else if (Object.keys(button)[0] === "link") {
+      setShowPopover(true);
+    }
+  };
+
   return (
     <div className="row mb-1">
       {isToolbarIcon && <div className="col-2">{toolbarCustomComponent}</div>}
@@ -94,6 +113,7 @@ const RichTextToolbar = ({
           .filter((x) => editorElements.includes(Object.keys(x)[0]))
           .map((o) => (
             <ToolBarButton
+              editor={editor}
               key={Object.keys(o)[0]}
               icon={Object.values(o)[0]}
               activeStyles={activeStyles}
@@ -101,22 +121,8 @@ const RichTextToolbar = ({
               setShowPopover={setShowPopover}
               handleApplyStyles={handleApplyStyles}
               target={target}
-              onMouseDown={(e) => {
-                e.preventDefault();
-                handleApplyStyles(Object.keys(o)[0]);
-                //This is does because state is updated asynchronously
-                if (activeStyles.includes("emoji")) {
-                  setShowPicker(false);
-                } else if (Object.keys(o)[0] === "emoji") {
-                  setShowPicker(true);
-                }
-
-                if (activeStyles.includes("link")) {
-                  setShowPopover(false);
-                } else if (Object.keys(o)[0] === "link") {
-                  setShowPopover(true);
-                }
-              }}
+              validatorIcons={validatorIcons}
+              onMouseDown={(e) => handleToolbarDown(e, o)}
               buttonStyleName={Object.keys(o)[0]}
             />
           ))}

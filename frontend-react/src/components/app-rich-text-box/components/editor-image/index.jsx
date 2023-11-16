@@ -8,11 +8,13 @@ import "./style.css";
 import AppImageDialogueBox from "../../../app-image-Dialogue-box";
 import { useEffect } from "react";
 import AppToolTip from "../../../app-tooltip";
+import toast from "react-hot-toast";
 
 const EditorImage = ({ attributes, children, element }) => {
   const [selectedImageDataURL, setSelectedImageDataURL] = useState();
   const [isOpenDialogueBox, setIsOpenDialogueBox] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
+  console.log("🚀 ~ file: index.jsx:17 ~ EditorImage ~ imgUrl:", imgUrl);
 
   const editor = useSlateStatic();
   const path = ReactEditor.findPath(editor, element);
@@ -31,7 +33,7 @@ const EditorImage = ({ attributes, children, element }) => {
       );
       setImgUrl("");
     }
-  }, [imgUrl]);
+  }, [imgUrl, editor]);
 
   // const moveBlock = (fromIndex, toIndex) => {
   //   const [nodeToMove] = Editor.nodes(editor, {

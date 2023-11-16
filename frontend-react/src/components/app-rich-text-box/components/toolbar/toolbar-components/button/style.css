@@ -27,3 +27,12 @@
   padding: 0.1rem 0.4rem 0.3rem;
   border-radius: 8px;
 }
+
+.editor-toolbar-button-disabled {
+  color: grey;
+  background-color: rgb(168, 168, 168);
+  font-size: small;
+  border: 1px solid grey;
+  padding: 0.1rem 0.4rem 0.3rem;
+  border-radius: 8px;
+}

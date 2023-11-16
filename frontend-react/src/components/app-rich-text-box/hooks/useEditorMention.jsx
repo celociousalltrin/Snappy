@@ -46,16 +46,21 @@ export const useEditorMention = (customNodeData) => {
         break;
       case "Enter":
         event.preventDefault();
-        Transforms.select(editor, customData.range);
-        insertCustomNode(editor, {
-          ...customData,
-          customNode: {
-            ...customData.customNode,
-            text: mentionUserList[mentionIndex],
-          },
+
+        setMentionIndex((prev) => {
+          Transforms.select(editor, customData.range);
+          insertCustomNode(editor, {
+            ...customData,
+            customNode: {
+              ...customData.customNode,
+              text: mentionUserList[prev],
+            },
+          });
+
+          setCustomNodeData(null);
+          return 0;
         });
-        setMentionIndex(0);
-        setCustomNodeData(null);
+
         break;
       case "Escape":
         event.preventDefault();

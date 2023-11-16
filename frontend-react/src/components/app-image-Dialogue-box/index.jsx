@@ -24,6 +24,7 @@ const AppImageDialogueBox = ({
 
   const handleGenerateCroppedImage = (crop, imageURL) => {
     const result = generateCroppedImageDataURL(imageURL, crop);
+
     callback(result);
     handleClose();
     toast.success("Image Uploaded Successfully");

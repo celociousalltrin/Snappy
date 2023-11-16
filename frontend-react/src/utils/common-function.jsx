@@ -115,3 +115,71 @@ export const handleGoogleExternalAuth = () => {
     "_self"
   );
 };
+
+export const numberToWord = (number) => {
+  if (number < 1 || number > 999) {
+    return "Number out of range (1-999)";
+  }
+
+  const ones = [
+    "",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+  ];
+  const teens = [
+    "",
+    "eleven",
+    "twelve",
+    "thirteen",
+    "fourteen",
+    "fifteen",
+    "sixteen",
+    "seventeen",
+    "eighteen",
+    "nineteen",
+  ];
+  const tens = [
+    "",
+    "ten",
+    "twenty",
+    "thirty",
+    "forty",
+    "fifty",
+    "sixty",
+    "seventy",
+    "eighty",
+    "ninety",
+  ];
+
+  if (number === 0) {
+    return "zero";
+  }
+
+  let word = "";
+
+  if (number >= 100) {
+    word += ones[Math.floor(number / 100)] + " hundred ";
+    number %= 100;
+  }
+
+  if (number >= 20) {
+    word += tens[Math.floor(number / 10)] + " ";
+    number %= 10;
+  } else if (number >= 11) {
+    word += teens[number - 10] + " ";
+    number = 0;
+  }
+
+  if (number > 0) {
+    word += ones[number] + " ";
+  }
+
+  return word.trim();
+};

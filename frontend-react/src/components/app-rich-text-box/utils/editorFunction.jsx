@@ -4,10 +4,12 @@ import {
   AiOutlineItalic,
   AiOutlineUnderline,
   AiOutlineLink,
+  AiOutlineConsoleSql,
 } from "react-icons/ai";
 
 import { TfiLayoutWidthDefaultAlt } from "react-icons/tfi";
 import { BsEmojiSmile, BsFillImageFill } from "react-icons/bs";
+import { numberToWord } from "../../../utils/common-function";
 
 export const getIconForButton = (style) => {
   switch (style) {
@@ -154,6 +156,7 @@ const findAdditionalNode = (editorText) => {
 };
 export const editorCustomNode = (editor) => {
   const { selection } = editor;
+
   if (selection && Range.isCollapsed(selection)) {
     const [start] = Range.edges(selection);
     const wordBefore = Editor.before(editor, start, { unit: "word" });
@@ -200,6 +203,22 @@ export const editorTextlength = (data) => {
     );
 };
 
-export const editorBlockElemntsvalidate = (data, elementName, number) => {
+export const editorBlockElementsvalidate = (data, elementName, number) => {
   return data.filter((o) => o.type === elementName)?.length < number;
+};
+
+export const findIconValidator = (validatorIcons, iconName) => {
+  return validatorIcons.find((o) => o.name === iconName);
+};
+
+export const editorValidatorMessage = (name, length) => {
+  const customLength = length >= 10 ? length : numberToWord(length);
+  switch (name) {
+    case "image":
+      return `You can add only ${customLength} image to Snapp.`;
+    case "text":
+      return `when creating a snapp, you can enter ${customLength} text`;
+    default:
+      return "";
+  }
 };

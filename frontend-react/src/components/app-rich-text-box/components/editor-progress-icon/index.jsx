@@ -20,9 +20,9 @@ const EditorProgressIcon = ({
   const editorProgressStyle = (num) => {
     let customStyle = { position: "absolute", top: "19%" };
     if (num < 10) {
-      customStyle = { ...customStyle, right: "35%" };
+      customStyle = { ...customStyle, right: "38%" };
     } else if (num >= 10 && num <= 99) {
-      customStyle = { ...customStyle, right: "25%" };
+      customStyle = { ...customStyle, right: "28%" };
     } else {
       customStyle = { ...customStyle, right: "20%" };
     }
