@@ -9,20 +9,20 @@ import Snapp from "../snapp";
 import "./style.css";
 import SingleFeed from "../single-feed";
 import { singleFeedData } from "../../utils/mock-common";
-import { getFeed } from "../../services/method";
+import { getSnapp } from "../../services/method";
 
 const HomePage = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    getFeedData();
+    getSnappData();
   }, []);
 
-  const getFeedData = async () => {
+  const getSnappData = async () => {
     try {
-      const result = await getFeed();
+      const result = await getSnapp();
     } catch (err) {
-      console.log("🚀 ~ file: index.jsx:24 ~ getFeedApi ~ err:", err);
+      console.log("🚀 ~ file: index.jsx:25 ~ getSnappData ~ err:", err);
     }
   };
   return (

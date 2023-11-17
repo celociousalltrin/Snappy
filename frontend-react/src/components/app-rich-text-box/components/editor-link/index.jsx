@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { editorLinkSchema } from "../../../../utils/form-validation-schema";
 import { useSlateStatic } from "slate-react";
 import { Transforms } from "slate";
-import toast from "react-hot-toast";
+import { staticResponseMessage } from "../../../../utils/static-response-message";
 
 const EditorLink = ({ setShowPopover, handleApplyStyles }) => {
   const editor = useSlateStatic();
@@ -27,9 +27,7 @@ const EditorLink = ({ setShowPopover, handleApplyStyles }) => {
       handleApplyStyles("link");
       setShowPopover(false);
     } else {
-      toast.error("Please Select in Editor where you need to add link", {
-        duration: 3000,
-      });
+      staticResponseMessage("FA007", 3000);
     }
   };
 

@@ -7,12 +7,13 @@ import AppOTP from "../app-otp";
 import { FramerCheckIcon } from "../../utils/framer-svgs";
 import { signupStepIconVariants } from "../../utils/framer-variants";
 import AppTimer from "../app-timer";
-import toast from "react-hot-toast";
+
 import { responseMessage } from "../../utils/response-message";
 import {
   generateEmailVerificationOTP,
   verifyEmailVerificationOTP,
 } from "../../services/method";
+import { staticResponseMessage } from "../../utils/static-response-message";
 
 const AppVerificationCode = ({
   isValid,
@@ -150,10 +151,8 @@ const AppVerificationCode = ({
                     if (otp.length === 4) {
                       handleVerifyOTP({ issued_for, email: data.email, otp });
                     } else {
-                      toast.error(
-                        otp.length >= 1
-                          ? "Enter the all the OTP code "
-                          : "Enter OTP"
+                      staticResponseMessage(
+                        otp.length >= 1 ? "FA008" : "FA009"
                       );
                     }
                   }}

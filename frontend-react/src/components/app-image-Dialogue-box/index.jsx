@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { generateCroppedImageDataURL } from "../../utils/common-function";
 import AppFramerButton from "../app-framer-button";
-import toast from "react-hot-toast";
 
 import "./style.css";
 import AppImageCropper from "../app-image-cropper";
+import { staticResponseMessage } from "../../utils/static-response-message";
 
 const AppImageDialogueBox = ({
   show,
@@ -27,7 +27,7 @@ const AppImageDialogueBox = ({
 
     callback(result);
     handleClose();
-    toast.success("Image Uploaded Successfully");
+    staticResponseMessage("SUCC001");
   };
 
   return (

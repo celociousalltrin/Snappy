@@ -23,6 +23,18 @@ const responseData = [
     code: "OK006",
     message: "The OTP is Verified",
   },
+  {
+    code: "OK007",
+    message: "Your Snapp has been Created",
+  },
+  {
+    code: "OK008",
+    message: "You have been Connected",
+  },
+  {
+    code: "OK009",
+    message: "Your COnnection has been removed",
+  },
   { code: "ER999", message: "Something went wrong" },
   { code: "ER001", message: "Requested Page not found" },
   { code: "ER002", message: "UserName already Exists" },
@@ -41,7 +53,11 @@ const responseData = [
     message:
       "Oops! It looks like you entered the wrong OTP. Please verify your email or request a new",
   },
-
+  {
+    code: "ER008",
+    message:
+      "Oops! You have reached your snap limit. However, you can create a new Snapp by deleting the existing Snapp.",
+  },
   { code: "ER901", message: "Please Autheticate" },
 ];
 

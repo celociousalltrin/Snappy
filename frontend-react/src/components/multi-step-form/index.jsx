@@ -8,12 +8,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./style.css";
 import FormSteps from "./form-step";
 import AppFramerButton from "../app-framer-button";
-import toast from "react-hot-toast";
 import {
   createUser,
   externalAuthenticatedUserProfileCompletion,
 } from "../../services/method";
 import { responseMessage } from "../../utils/response-message";
+import { staticResponseMessage } from "../../utils/static-response-message";
 
 const MultiStepForm = ({
   componentsList,
@@ -64,7 +64,7 @@ const MultiStepForm = ({
   const formFinish = () => {
     next();
     setIsFinsish(true);
-    toast.success("The password has been reset", { duration: 1000 });
+    staticResponseMessage("SUCC002", 1000);
     setTimeout(() => {
       navigate(`/${onFinishRoute}`);
     }, 1000);

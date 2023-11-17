@@ -3,7 +3,11 @@ import toast from "react-hot-toast";
 const staticResponseData = [
   {
     code: "SUCC001",
-    message: "Sample for the static error response message",
+    message: "Image Uploaded Successfully",
+  },
+  {
+    code: "SUCC002",
+    message: "The password has been reset",
   },
   {
     code: "FA001",
@@ -28,6 +32,22 @@ const staticResponseData = [
   {
     code: "FA006",
     message: "Please Select Follow 2 Snappers to Register in Snappy",
+  },
+  {
+    code: "FA007",
+    message: "Please Select in Editor where you need to add link",
+  },
+  {
+    code: "FA008",
+    message: "Enter the all the OTP code ",
+  },
+  {
+    code: "FA009",
+    message: "Enter OTP",
+  },
+  {
+    code: "FA010",
+    message: "You can Choose only 5 interest",
   },
 ];
 

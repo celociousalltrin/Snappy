@@ -25,8 +25,9 @@ export const externalAuthenticatedUserProfileCompletion = (props) =>
 // TEST APIS
 export const testRoute = () => axios.get("/auth/test-route");
 
-// FEED APIS
-export const getFeed = () => axios.get("/feed");
+// SNAPP APIS
+export const getSnapp = () => axios.get("/snapp");
+export const createSnapp = (props) => axios.post("/snapp", props);
 
 // LOGOUT APIS
 export const logout = () => axios.get("/logout");

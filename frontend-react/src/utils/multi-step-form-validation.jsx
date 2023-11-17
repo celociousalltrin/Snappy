@@ -1,4 +1,3 @@
-import toast from "react-hot-toast";
 import { validateUserName } from "../services/method";
 import { isFormikError, isValidData } from "./common-function";
 import { staticResponseMessage } from "./static-response-message";

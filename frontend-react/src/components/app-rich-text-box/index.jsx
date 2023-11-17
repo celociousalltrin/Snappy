@@ -12,6 +12,7 @@ import {
   editorTextlength,
   editorValidatorMessage,
   findIconValidator,
+  resetEditor,
   toggleStyle,
 } from "./utils/editorFunction";
 import {
@@ -35,13 +36,14 @@ import AppToolTip from "../app-tooltip";
 const AppRichTextBox = ({
   data,
   onChange,
-  generateTextname,
+  postDataName,
   editorElements,
   isToolbarIcon,
   toolbarCustomComponent,
   isValidator,
   validatorIcons,
   progressIcon,
+  handlePostData,
 }) => {
   const editor = useMemo(() => withReact(withHistory(createEditor())), []);
 
@@ -175,8 +177,12 @@ const AppRichTextBox = ({
           <button
             className="btn btn-primary mb-1 cursor-pointer"
             disabled={!editorInitialValidator(data, 5)}
+            onClick={async () => {
+              await handlePostData();
+              resetEditor(editor);
+            }}
           >
-            {generateTextname}
+            {postDataName}
           </button>
         </AppFramerButton>
       </div>

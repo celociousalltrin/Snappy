@@ -4,7 +4,8 @@ import { SignupInterestedFields } from "../../utils/common-data";
 import { AiOutlineDownCircle, AiOutlineUpCircle } from "react-icons/ai";
 import useToggleContent from "../../custom-hooks/useToggleContent";
 import AppFramerExpand from "../../components/app-framer-expand";
-import toast from "react-hot-toast";
+
+import { staticResponseMessage } from "../../utils/static-response-message";
 
 const InterestedFields = ({ data, formik: { setFieldValue } }) => {
   const { isShow, showLess, showMore } = useToggleContent();
@@ -17,7 +18,7 @@ const InterestedFields = ({ data, formik: { setFieldValue } }) => {
         data.filter((obj) => obj !== input)
       );
     } else if (data.length > 4) {
-      toast.error("You can Choose only 5 interest");
+      staticResponseMessage("FA010");
     } else {
       setFieldValue("interest", [...data, input]);
     }

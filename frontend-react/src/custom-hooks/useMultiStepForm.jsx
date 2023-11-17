@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import toast from "react-hot-toast";
-import { validateUserName } from "../services/method";
 
 const useMultiStepForm = ({ props: { children } }, validationFunctionArray) => {
   const [currentIndex, setCurrentIndex] = useState(0);

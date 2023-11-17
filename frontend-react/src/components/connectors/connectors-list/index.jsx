@@ -111,7 +111,7 @@ const ConnectorsList = ({
                     >
                       <span className={`${isSignup && "d-none d-md-block"}`}>
                         {" "}
-                        {isMessage ? "Send Message" : "Add Connector"}{" "}
+                        {isMessage ? "Send Message" : "Add Alliance"}{" "}
                       </span>
 
                       <span

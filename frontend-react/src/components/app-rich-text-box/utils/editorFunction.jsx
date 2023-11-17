@@ -10,6 +10,8 @@ import {
 import { TfiLayoutWidthDefaultAlt } from "react-icons/tfi";
 import { BsEmojiSmile, BsFillImageFill } from "react-icons/bs";
 import { numberToWord } from "../../../utils/common-function";
+import { useSlateStatic } from "slate-react";
+import { editorInitialValue } from "./editorData";
 
 export const getIconForButton = (style) => {
   switch (style) {
@@ -221,4 +223,13 @@ export const editorValidatorMessage = (name, length) => {
     default:
       return "";
   }
+};
+
+export const resetEditor = (editor) => {
+  Transforms.delete(editor, {
+    at: {
+      anchor: Editor.start(editor, []),
+      focus: Editor.end(editor, []),
+    },
+  });
 };
