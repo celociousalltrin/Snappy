@@ -8,6 +8,10 @@ import AppFramerButton from "../../app-framer-button";
 import AppPopover from "../../app-popover";
 import { navigateToProfile } from "../../../utils/common-function";
 import { useNavigate, useParams } from "react-router-dom";
+import {
+  signupCreateConnector,
+  signupDeleteConnector,
+} from "../../../services/method";
 
 const ConnectorsList = ({
   MockConnectorsList,
@@ -18,6 +22,7 @@ const ConnectorsList = ({
   isDiscoverAlliance,
   length,
   callback = () => {},
+  signupConnectedUsers,
 }) => {
   const { showMore, showLess, listUniqueId } = useListToggleContent();
   const navigate = useNavigate();
@@ -46,7 +51,7 @@ const ConnectorsList = ({
           >
             <div className="col-1">
               <img
-                src={obj.profile_img}
+                src={obj.user_image?.secure_url}
                 alt="profile_image"
                 width="50px"
                 height="50px"
@@ -62,6 +67,7 @@ const ConnectorsList = ({
                 }
               />
             </div>
+
             <div
               className={`
                ${
@@ -93,26 +99,36 @@ const ConnectorsList = ({
                           : null
                       }
                     >
-                      {obj.name}
+                      {`${obj.first_name} ${obj.last_name}`}
                     </p>
                   </AppPopover>
                   <p className="text-muted mb-0">
                     {" "}
-                    {`@${obj.snappy_username}`}
+                    {`@${obj.user_name.toLowerCase().replace(/\s+/g, "_")}`}
                   </p>
                 </div>
                 <div className="d-flex align-items-center">
                   <AppFramerButton>
                     <button
-                      className={`${
-                        isSignup && "text-nowrap"
-                      } btn btn-sm btn-primary`}
-                      onClick={() => callback(obj.id)}
+                      className={`${isSignup && "text-nowrap"} ${
+                        signupConnectedUsers?.includes(obj._id)
+                          ? "btn btn-sm btn-danger"
+                          : "btn btn-sm btn-primary"
+                      }`}
+                      onClick={() => {
+                        callback(obj._id);
+                      }}
                     >
-                      <span className={`${isSignup && "d-none d-md-block"}`}>
-                        {" "}
-                        {isMessage ? "Send Message" : "Add Alliance"}{" "}
-                      </span>
+                      {signupConnectedUsers?.includes(obj._id) ? (
+                        <span className={`${isSignup && "d-none d-md-block"}`}>
+                          {isMessage ? "Send Message" : "Remove Alliance"}{" "}
+                        </span>
+                      ) : (
+                        <span className={`${isSignup && "d-none d-md-block"}`}>
+                          {" "}
+                          {isMessage ? "Send Message" : "Add Alliance"}{" "}
+                        </span>
+                      )}
 
                       <span
                         className={`${
@@ -139,7 +155,7 @@ const ConnectorsList = ({
                     }`}
                   >
                     <AppListExpand
-                      content={obj.bio}
+                      content={obj.about}
                       contentId={index}
                       isExpand={listUniqueId.includes(index)}
                       showMore={showMore}

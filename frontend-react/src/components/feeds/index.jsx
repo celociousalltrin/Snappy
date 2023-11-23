@@ -11,6 +11,7 @@ import useListToggleContent from "../../custom-hooks/useListToggleContent";
 import AppListExpand from "../app-list-expand";
 import AppToolTip from "../app-tooltip";
 import AppPopover from "../app-popover";
+import { EditorMockD } from "../../utils/mock-common";
 
 const Feeds = ({ feedData, type }) => {
   const { listUniqueId, showLess, showMore } = useListToggleContent();
@@ -51,7 +52,7 @@ const Feeds = ({ feedData, type }) => {
               </div>
               <div className="container">
                 <div className="d-flex">
-                  <AppPopover type={1}>
+                  {/* <AppPopover type={1}>
                     <p
                       className="fw-bold mb-1 profile_name"
                       onClick={(e) =>
@@ -65,7 +66,7 @@ const Feeds = ({ feedData, type }) => {
                     >
                       {obj.name}
                     </p>
-                  </AppPopover>
+                  </AppPopover> */}
                   <p className="text-muted ms-1 mb-1 ">{`@${obj.snappy_username}`}</p>
                   <p className="text-muted ms-1 mb-1">{`.${obj.snapped_at}`}</p>
                 </div>
@@ -73,7 +74,7 @@ const Feeds = ({ feedData, type }) => {
                 <div>
                   <p className="mb-2">
                     <AppListExpand
-                      content={obj.snapp.message}
+                      content={EditorMockD}
                       contentId={obj.id}
                       isExpand={listUniqueId.includes(obj.id)}
                       showMore={showMore}

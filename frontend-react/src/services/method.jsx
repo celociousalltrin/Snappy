@@ -29,6 +29,16 @@ export const testRoute = () => axios.get("/auth/test-route");
 export const getSnapp = () => axios.get("/snapp");
 export const createSnapp = (props) => axios.post("/snapp", props);
 
+// CONNECTORS APIS
+export const getSignupConnectorsList = () =>
+  axios.get("/auth/signup-connector");
+
+export const signupCreateConnector = (props) =>
+  axios.post("/auth/signup-connector", props);
+
+export const signupDeleteConnector = ({ alliance_id, fan_id }) =>
+  axios.delete(`/auth/signup-connector/${alliance_id}/${fan_id}`);
+
 // LOGOUT APIS
 export const logout = () => axios.get("/logout");
 

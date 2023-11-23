@@ -3,7 +3,7 @@ const {
   createUserService,
   loginService,
 } = require("../services/authUserService");
-const { isExist } = require("../services/validationService");
+const { isValid } = require("../services/validationService");
 
 const userModel = require("../models/userModel");
 const { responseMessage } = require("../utils/responseMessage");
@@ -17,6 +17,12 @@ const {
   createOTPService,
   verifyOTPService,
 } = require("../services/OTPService");
+const {
+  getConnectorListService,
+  createConnectorService,
+  deleteConnectorService,
+} = require("../services/connectorService");
+const connectorModel = require("../models/connectorModel");
 
 exports.create_user = [
   async (req, res) => {
@@ -24,16 +30,25 @@ exports.create_user = [
       const { body } = req;
       const { user_name } = req.body;
 
-      const isUsernameExist = await isExist(userModel, "user_name", user_name);
+      const isUsernameExist = await isValid(userModel, "user_name", user_name);
 
-      if (isUsernameExist)
+      if (isUsernameExist) {
         return errorResponse({
           res,
           responseDetails: responseMessage("ER002"),
           status: 422,
         });
+      }
 
-      await createUserService(userModel, body);
+      const userId = await createUserService(userModel, body);
+
+      await connectorModel.insertMany(
+        body.alliances.map((o) => ({
+          alliance_id: o,
+          fan_id: userId,
+        }))
+      );
+
       return res.json("It is created Successfully");
     } catch (err) {
       console.log("🚀 ~ file: auth-user.js:9 ~ async ~ err:", err);
@@ -49,7 +64,7 @@ exports.login = [
       await loginService(userModel, body, res);
     } catch (err) {
       console.log("🚀 ~ file: authUserController.js:34 ~ asyn ~ err:", err);
-      return errorResponse(res, responseMessage("ER999"));
+      return errorResponse({ res, responseDetails: responseMessage("ER999") });
     }
   },
 ];
@@ -67,7 +82,7 @@ exports.generateEmailVerificationOTP = [
       });
     } catch (err) {
       console.log("🚀 ~ file: authUserController.js:49 ~ err:", err);
-      return errorResponse(res, responseMessage("ER999"));
+      return errorResponse({ res, responseDetails: responseMessage("ER999") });
     }
   },
 ];
@@ -79,6 +94,45 @@ exports.verifyEmailVerificationOTP = [
     } catch (err) {
       console.log("🚀 ~ file: authUserController.js:76 ~ err:", err);
       return errorResponse({ res, responseDetails: responseMessage("ER999") });
+    }
+  },
+];
+
+exports.getSignUpConnectorsList = [
+  async (req, res) => {
+    try {
+      await getConnectorListService({
+        db: userModel,
+        res,
+      });
+    } catch (err) {
+      console.log("🚀 ~ file: authUserController.js:76 ~ err:", err);
+      return errorResponse({ res, responseDetails: responseMessage("ER999") });
+    }
+  },
+];
+
+exports.createSignupConnector = [
+  async (req, res) => {
+    try {
+      await createConnectorService(connectorModel, req.body, res);
+    } catch (err) {
+      console.log("🚀 ~ file: connectorController.js:8 ~ async ~ err:", err);
+    }
+  },
+];
+
+exports.deleteSignupConnector = [
+  async (req, res) => {
+    const { alliance_id, fan_id } = req.params;
+    try {
+      await deleteConnectorService(
+        connectorModel,
+        { alliance_id, fan_id },
+        res
+      );
+    } catch (err) {
+      console.log("🚀 ~ file: connectorController.js:19 ~ err:", err);
     }
   },
 ];

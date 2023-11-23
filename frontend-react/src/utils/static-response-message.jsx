@@ -19,7 +19,7 @@ const staticResponseData = [
   },
   {
     code: "FA003",
-    message: "Enter OTP to Move Next Step",
+    message: "Enter and Verify OTP to Move Next Step",
   },
   {
     code: "FA004",
@@ -48,6 +48,10 @@ const staticResponseData = [
   {
     code: "FA010",
     message: "You can Choose only 5 interest",
+  },
+  {
+    code: "FA011",
+    message: "To proceed, You must create Description about 15 characters",
   },
 ];
 

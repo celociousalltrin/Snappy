@@ -26,7 +26,7 @@ exports.sendEmailService = async (
       "🚀 ~ file: emailServices.js:35 ~ exports.sendEmail= ~ err:",
       err
     );
-    return errorResponse(res, responseMessage("ER999"));
+    return errorResponse({ res, responseDetails: responseMessage("ER999") });
   }
 };
 
@@ -48,6 +48,6 @@ const transPorterResponseFunction = ({ err, res }) => {
       "🚀 ~ file: emailServices.js:34 ~ transPorterResponseFunction ~ err:",
       err
     );
-    return errorResponse(res, responseMessage("ER999"));
+    return errorResponse({ res, responseDetails: responseMessage("ER999") });
   }
 };

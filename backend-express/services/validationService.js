@@ -1,13 +1,13 @@
-exports.isExist = async (db, fieldName, value) => {
+exports.isValid = async (db, fieldName, value, length = 1) => {
   try {
     const exists = await db.find({
       [fieldName]: value,
     });
 
-    return exists.length > 0;
+    return exists.length >= length;
   } catch (err) {
     console.log(
-      "🚀 ~ file: validationService.js:9 ~ exports.isExist= ~ err:",
+      "🚀 ~ file: validationService.js:9 ~ exports.isValid= ~ err:",
       err
     );
   }

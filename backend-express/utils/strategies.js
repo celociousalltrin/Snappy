@@ -1,5 +1,5 @@
 const passport = require("passport");
-const { isExist } = require("../services/validationService");
+const { isValid } = require("../services/validationService");
 const userModel = require("../models/userModel");
 const {
   createExtrernalAuthenticatedUserService,
@@ -14,7 +14,7 @@ const passportGoogleStartegy = new GoogleStrategy(
   },
   async (accessToken, refreshToken, userInfo, cb) => {
     const { picture, email, email_verified } = userInfo._json;
-    const isEmailExist = await isExist(userModel, "email", email);
+    const isEmailExist = await isValid(userModel, "email", email);
     if (isEmailExist) {
       return cb(null, { email_verified, email, is_existing_user: true });
     } else {

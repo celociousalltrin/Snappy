@@ -8,6 +8,7 @@ import { profileCompletionHeader } from "../../utils/common-data";
 import UserBio from "../signup/user-bio";
 import InterestedFields from "../signup/interested-fields";
 import SignupAddAlliances from "../signup/signup-add-alliances";
+import { editorInitialValue } from "../../components/app-rich-text-box/utils/editorData";
 
 const ProfileCompletion = () => {
   const init = {
@@ -20,7 +21,7 @@ const ProfileCompletion = () => {
       state: "",
       country: "",
     },
-    about: "",
+    about: editorInitialValue,
     interest: [],
     alliances: [],
   };
@@ -67,11 +68,7 @@ const ProfileCompletion = () => {
             formik={formik}
             isProfileCompletion
           />
-          <UserBio
-            data={{ about }}
-            handleChange={formik.handleChange}
-            formik={formik}
-          />
+          <UserBio data={{ about }} setFieldValue={formik.setFieldValue} />
           <InterestedFields data={interest} formik={formik} />
           <SignupAddAlliances data={alliances} formik={formik} />
         </div>

@@ -13,7 +13,10 @@ exports.createUserService = async (db, userData) => {
   try {
     const { user_name, confirm_password, user_data_url, friends, ...rest } =
       userData;
-    const cloudinaryImage = await uploadImageService(user_data_url);
+    const cloudinaryImage = await uploadImageService({
+      data_uri: user_data_url,
+      sub_folder: "user",
+    });
 
     const hassedPassword = dataHashing(confirm_password);
 
@@ -23,7 +26,9 @@ exports.createUserService = async (db, userData) => {
       password: hassedPassword,
       user_name,
     });
-    await newUser.save();
+    const { _id } = await newUser.save();
+
+    return _id;
   } catch (err) {
     console.log(
       "🚀 ~ file: userService.js:5 ~ exports.createUserService= ~ err:",
@@ -35,7 +40,10 @@ exports.createUserService = async (db, userData) => {
 
 exports.createExtrernalAuthenticatedUserService = async (db, userData) => {
   try {
-    const cloudinaryImage = await uploadImageService(userData.user_data_url);
+    const cloudinaryImage = await uploadImageService({
+      data_uri: userData.user_data_url,
+      sub_folder: "user",
+    });
     const newUser = await db({
       ...userData,
       user_image: cloudinaryImage,
@@ -57,7 +65,12 @@ exports.loginService = async (db, userData, res) => {
       email,
     });
 
-    if (!getUser) return errorResponse(res, responseMessage("ER003"), 404);
+    if (!getUser)
+      return errorResponse({
+        res,
+        responseDetails: responseMessage("ER003"),
+        status: 404,
+      });
 
     const {
       email: user_email,
@@ -69,12 +82,13 @@ exports.loginService = async (db, userData, res) => {
     } = getUser;
 
     const hash = bcrypt.compareSync(password, getUser.password);
-    console.log(
-      "🚀 ~ file: authUserService.js:80 ~ exports.loginService= ~ hash:",
-      hash
-    );
 
-    if (!hash) return errorResponse(res, responseMessage("ER004"), 404);
+    if (!hash)
+      return errorResponse({
+        res,
+        responseDetails: responseMessage("ER004"),
+        status: 404,
+      });
 
     assignRefreshTokeninCookie(res, { user_email });
 

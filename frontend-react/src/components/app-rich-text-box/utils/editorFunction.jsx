@@ -210,7 +210,7 @@ export const editorBlockElementsvalidate = (data, elementName, number) => {
 };
 
 export const findIconValidator = (validatorIcons, iconName) => {
-  return validatorIcons.find((o) => o.name === iconName);
+  return validatorIcons && validatorIcons.find((o) => o.name === iconName);
 };
 
 export const editorValidatorMessage = (name, length) => {

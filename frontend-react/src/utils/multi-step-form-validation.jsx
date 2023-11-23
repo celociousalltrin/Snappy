@@ -1,3 +1,4 @@
+import { editorTextlength } from "../components/app-rich-text-box/utils/editorFunction";
 import { validateUserName } from "../services/method";
 import { isFormikError, isValidData } from "./common-function";
 import { staticResponseMessage } from "./static-response-message";
@@ -60,13 +61,15 @@ export const signupValid4 = (next, rest) => {
   }
 };
 export const signupValid5 = (next, rest) => {
-  const [data, errors, touched, componentProps] = rest;
-  if (isFormikError(touched, errors) || !isValidData(componentProps.data)) {
-    staticResponseMessage("FA002", 3000);
-  } else {
+  const { data } = rest[3];
+
+  if (editorTextlength(data.about) > 15) {
     next();
+  } else {
+    staticResponseMessage("FA011", 3000);
   }
 };
+
 export const signupValid6 = (next, rest) => {
   const { data } = rest[3];
 
@@ -129,13 +132,15 @@ export const profileCompletionValid1 = async (next, rest) => {
 };
 
 export const profileCompletionValid2 = (next, rest) => {
-  const [data, errors, touched, componentProps] = rest;
-  if (isFormikError(touched, errors) || !isValidData(componentProps.data)) {
-    staticResponseMessage("FA002", 3000);
-  } else {
+  const { data } = rest[3];
+
+  if (editorTextlength(data.about) > 15) {
     next();
+  } else {
+    staticResponseMessage("FA011", 3000);
   }
 };
+
 export const profileCompletionValid3 = (next, rest) => {
   const { data } = rest[3];
 

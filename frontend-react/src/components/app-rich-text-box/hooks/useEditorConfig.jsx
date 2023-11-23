@@ -62,7 +62,7 @@ export default function useEditorConfig(
   return { renderElement, renderLeaf, onEditorKeyDown };
 }
 
-function renderElement(props, navigate) {
+export const renderElement = (props, navigate) => {
   const { element, children, attributes } = props;
 
   switch (element.type) {
@@ -72,11 +72,27 @@ function renderElement(props, navigate) {
       return <EditorImage {...props} />;
     case "mention":
       return (
-        <span style={{ color: "rgb(38, 114, 165)" }}>@{element.character}</span>
+        <span
+          style={{ color: "rgb(38, 114, 165)" }}
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(`/profile/${element.character}`);
+          }}
+        >
+          @{element.character}
+        </span>
       );
     case "hashtag":
       return (
-        <span style={{ color: "rgb(56, 167, 242)" }}>#{element.character}</span>
+        <span
+          style={{ color: "rgb(56, 167, 242)" }}
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(`/search?q=${element.character}=hashtag_click`);
+          }}
+        >
+          #{element.character}
+        </span>
       );
     case "emoji":
       return <span>{element.character}</span>;
@@ -92,9 +108,9 @@ function renderElement(props, navigate) {
     default:
       return <DefaultElement {...props} />;
   }
-}
+};
 
-function renderLeaf(props) {
+export const renderLeaf = (props) => {
   const { attributes, children, leaf } = props;
 
   let el = <>{children}</>;
@@ -125,7 +141,7 @@ function renderLeaf(props) {
   }
 
   return <span {...attributes}>{el}</span>;
-}
+};
 
 const KeyBindings = {
   onKeyDown: (

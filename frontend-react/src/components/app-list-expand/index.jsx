@@ -3,6 +3,9 @@ import AppFramerListExpand from "../app-framer-list-expand";
 import { isToggleContent, sliceContent } from "../../utils/common-function";
 import { BiSolidChevronDown, BiSolidChevronUp } from "react-icons/bi";
 import AppToolTip from "../app-tooltip";
+import ReadOnlyRichTextBox from "../app-rich-text-box/read-only-rich-text-box";
+
+import "./style.css";
 
 const AppListExpand = ({
   content,
@@ -21,34 +24,40 @@ const AppListExpand = ({
   };
 
   return (
-    <div>
+    <div className="app-list-container">
       <AppFramerListExpand isExpand={isExpand}>
         {isToggleContent(content, isSignupMobileScreen() ? 55 : 105) &&
         !isExpand ? (
-          <span>
-            {sliceContent(content, isSignupMobileScreen() ? 55 : 105)}{" "}
-            <AppToolTip title="Show More">
-              <BiSolidChevronDown
-                color="rgb(13, 110, 253)"
-                size={23}
-                onClick={(e) => showMore(e, contentId)}
-              />{" "}
-            </AppToolTip>
-          </span>
-        ) : (
-          <span>
-            {content}
-            {isToggleContent(content, isSignupMobileScreen() ? 55 : 105) && (
-              <AppToolTip title="Hide">
-                <BiSolidChevronUp
+          <div>
+            <ReadOnlyRichTextBox
+              value={sliceContent(content, isSignupMobileScreen() ? 55 : 100)}
+            />
+            <div className="app-list-down-icon">
+              <AppToolTip title="Show More">
+                <BiSolidChevronDown
                   color="rgb(13, 110, 253)"
-                  className="ms-2"
                   size={23}
-                  onClick={(e) => showLess(e, contentId)}
-                />
+                  onClick={(e) => showMore(e, contentId)}
+                />{" "}
               </AppToolTip>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <ReadOnlyRichTextBox value={content} />
+            {isToggleContent(content, isSignupMobileScreen() ? 55 : 105) && (
+              <div className="app-list-up-icon">
+                <AppToolTip title="Hide">
+                  <BiSolidChevronUp
+                    color="rgb(13, 110, 253)"
+                    className="ms-2"
+                    size={23}
+                    onClick={(e) => showLess(e, contentId)}
+                  />
+                </AppToolTip>
+              </div>
             )}
-          </span>
+          </div>
         )}
       </AppFramerListExpand>
     </div>

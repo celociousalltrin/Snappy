@@ -5,10 +5,30 @@ import "./style.css";
 import { AiOutlineDownCircle, AiOutlineUpCircle } from "react-icons/ai";
 import useToggleContent from "../../custom-hooks/useToggleContent";
 import AppFramerExpand from "../../components/app-framer-expand";
+import { getSignupConnectorsList } from "../../services/method";
+import { responseMessage } from "../../utils/response-message";
 
 const SignupAddAlliances = ({ data, formik: { setFieldValue } }) => {
   const { isShow, showMore, showLess } = useToggleContent();
   const [showIcon, setShowIcon] = useState(true);
+  const [connectorList, setConnectorList] = useState([]);
+
+  useEffect(() => {
+    getConnectorList();
+  }, []);
+
+  const getConnectorList = async () => {
+    try {
+      const response = await getSignupConnectorsList();
+      setConnectorList(response.data.response_data);
+    } catch (err) {
+      console.log(
+        "🚀 ~ file: signup-add-alliances.jsx:22 ~ getConnectorList ~ err:",
+        err
+      );
+      responseMessage(err.data.code);
+    }
+  };
 
   return (
     <div className="text-start position-relative">
@@ -28,9 +48,19 @@ const SignupAddAlliances = ({ data, formik: { setFieldValue } }) => {
         )}
       </AppFramerExpand>
       <ConnectorsList
-        MockConnectorsList={MockConnectorsList}
+        MockConnectorsList={connectorList}
         isSignup
-        callback={(id) => setFieldValue("alliances", [...data, id])}
+        callback={(id) => {
+          if (data.includes(id)) {
+            setFieldValue(
+              "alliances",
+              data.filter((o) => o != id)
+            );
+          } else {
+            setFieldValue("alliances", [...data, id]);
+          }
+        }}
+        signupConnectedUsers={data}
       />
     </div>
   );

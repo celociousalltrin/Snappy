@@ -1,3 +1,4 @@
+import { editorTextlength } from "../components/app-rich-text-box/utils/editorFunction";
 import {
   signupValid1,
   signupValid2,
@@ -22,11 +23,63 @@ export const navigateToProfile = (e, navigate, username, pageId) => {
 };
 
 export const isToggleContent = (input, number) => {
-  return input.length > number;
+  return editorTextlength(input) > number;
 };
 
-export const sliceContent = (string, number) => {
-  return `${string.slice(0, number)}.....`;
+const sliceEditorContent = (data, number) => {
+  if (data[0].children[0].text.length > number) {
+    return [
+      {
+        type: "text",
+        level: 7,
+        children: [{ text: data[0].children[0].text.slice(0, number) }],
+      },
+    ];
+  } else {
+    const result = data.reduce(
+      ({ length, resData }, current) => {
+        //inlineResult
+        const inlineResult = current.children.reduce(
+          ({ inlineLength, inlineData, len }, curr) => {
+            if (!curr?.type) {
+              inlineLength += curr.text.length;
+            }
+
+            if (inlineLength < number - length) {
+              if (!curr?.type) {
+                len += curr.text.length;
+              }
+              inlineData = [...inlineData, curr];
+            }
+            return { inlineLength, inlineData, len };
+          },
+          { inlineLength: 0, inlineData: [], len: 0 }
+        );
+
+        length += inlineResult.len;
+
+        if (length < number) {
+          resData = [
+            ...resData,
+            { ...current, children: inlineResult.inlineData },
+          ];
+        }
+        return { length, resData };
+      },
+      { length: 0, resData: [] }
+    );
+    console.log(
+      "🚀 ~ file: common-function.jsx:71 ~ sliceEditorContent ~ result:",
+      result
+    );
+
+    const index = result.resData.findIndex((obj) => obj.children.length === 0);
+    return result.resData.slice(0, index);
+  }
+};
+
+export const sliceContent = (input, number) => {
+  return sliceEditorContent(input, number);
 };
 
 export const convertFileToDataURL = (file) => {
@@ -82,10 +135,12 @@ const validationFunctions = {
 export const multiStepFormValidationFunction = ({ name, length }) => {
   let result = [];
 
+  //Recursive Approach
   for (let i = 1; i <= length; i++) {
     const valFunc = (num) => {
-      return (next, ...rest) =>
-        validationFunctions[`${name}Valid${num}`](next, rest);
+      return (next, ...rest) => {
+        return validationFunctions[`${name}Valid${num}`](next, rest);
+      };
     };
     result.push(valFunc(i));
   }

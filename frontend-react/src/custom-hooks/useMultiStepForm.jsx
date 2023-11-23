@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
-const useMultiStepForm = ({ props: { children } }, validationFunctionArray) => {
+const useMultiStepForm = (
+  { props: { children } },
+  validationFunctionArray = []
+) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const [direction, setDirection] = useState("next");

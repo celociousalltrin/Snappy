@@ -24,6 +24,8 @@ const RichTextToolbar = ({
   toolbarCustomComponent,
   validatorIcons,
   dialogueToolbarButtons,
+  normalToolbarButtons,
+  invisibleToolbarButtons,
 }) => {
   const [isOpenDialogueBox, setIsOpenDialogueBox] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
@@ -100,13 +102,26 @@ const RichTextToolbar = ({
       setShowPopover(false);
     } else if (Object.keys(button)[0] === "link") {
       setShowPopover(true);
+      s;
     }
+  };
+
+  const isLargeToolbar = () => {
+    return (
+      normalToolbarButtons &&
+      invisibleToolbarButtons &&
+      normalToolbarButtons.length + dialogueToolbarButtons.length >= 4
+    );
   };
 
   return (
     <div className="row mb-1">
       {isToolbarIcon && <div className="col-2">{toolbarCustomComponent}</div>}
-      <div className={`editor-toolbar ${isToolbarIcon ? "col-10" : "col-12"}`}>
+      <div
+        className={`${
+          isLargeToolbar() ? "editor-toolbar-large" : "editor-toolbar-small"
+        } ${isToolbarIcon ? "col-10" : "col-12"}`}
+      >
         {/* <ToolBarDropDown selectedTextStyle={selectedTextStyle} /> */}
 
         {toolbarButtons

@@ -406,70 +406,439 @@ export const singleFeedData = {
   ],
 };
 
+// export const MockConnectorsList = [
+//   {
+//     id: 1,
+//     name: "Jack",
+//     profile_img: mutual1,
+//     snappy_username: "jack111",
+//     bio: "Lorem ipsum dolor sit amet, consectetur adipisicing.",
+//     connected: true,
+//   },
+//   {
+//     id: 2,
+//     name: "Aaron",
+//     profile_img: mutual2,
+//     snappy_username: "aaron63211",
+//     bio: "Lorem ipsu!",
+//     connected: false,
+//   },
+//   {
+//     id: 3,
+//     name: "Antony",
+//     profile_img: mutual3,
+//     snappy_username: "antony76677",
+//     bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum voluptatum voluptates, culpa molestiae quam fugit laboriosam, non saepe veniam consequuntur vitae sapiente dicta.",
+//     connected: true,
+//   },
+//   {
+//     id: 4,
+//     name: "Jenifer",
+//     profile_img: mutual4,
+//     snappy_username: "jenefier1213",
+//     bio: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque autem temporibus necessitatibus dolor rem exercitationem, quos architecto aliquid laboriosam sed iste excepturi corrupti, quas ex ullam nulla error dolorum labore hic doloremque delectus, iure ipsum eius! Provident nisi nobis recusandae, sit optio deleniti voluptatem, esse sequi incidunt dolor corrupti cupiditate.",
+//     connected: false,
+//   },
+//   {
+//     id: 5,
+//     name: "Antony",
+//     profile_img: mutual3,
+//     snappy_username: "antony76677",
+//     bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur enim rerum molestiae.",
+//     connected: true,
+//   },
+//   {
+//     id: 6,
+//     name: "Jenifer",
+//     profile_img: mutual4,
+//     snappy_username: "jenefier1213",
+//     bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum illo pariatur atque sit quaerat. Blanditiis at doloribus quisquam obcaecati?",
+//     connected: false,
+//   },
+//   {
+//     id: 7,
+//     name: "Antony",
+//     profile_img: mutual3,
+//     snappy_username: "antony76677",
+//     bio: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque autem temporibus necessitatibus dolor rem exercitationem, quos architecto aliquid laboriosam sed iste excepturi corrupti, quas ex ullam nulla error dolorum labore hic doloremque delectus, iure ipsum eius! Provident nisi nobis recusandae, sit optio deleniti voluptatem, esse sequi incidunt dolor corrupti cupiditate.",
+//     connected: true,
+//   },
+//   {
+//     id: 8,
+//     name: "Jenifer",
+//     profile_img: mutual4,
+//     snappy_username: "jenefier1213",
+//     bio: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit eos voluptates, odit veritatis mollitia debitis! Voluptates, tenetur, id vero, eius nesciunt reprehenderit eum ullam amet nobis quas sunt eveniet exercitationem nulla doloribus dolor officia tempore.",
+//     connected: false,
+//   },
+// ];
+
+export const mockReadOnlyEditor = [
+  {
+    type: "text",
+    level: 7,
+    children: [
+      {
+        text: "sadasdasdasd ",
+      },
+      {
+        type: "hashtag",
+        character: "sddasasd",
+        children: [
+          {
+            text: "",
+          },
+        ],
+      },
+      {
+        text: " ",
+      },
+      {
+        type: "mention",
+        character: "Sabine Wren",
+        children: [
+          {
+            text: "",
+          },
+        ],
+      },
+      {
+        text: " ",
+      },
+      {
+        text: "sadasd ",
+        bold: true,
+      },
+      {
+        text: "asdasdsa ",
+        italic: true,
+      },
+      {
+        italic: true,
+        text: "asdasd  ",
+        underline: true,
+      },
+      {
+        type: "emoji",
+        character: "😅",
+        children: [
+          {
+            text: "",
+          },
+        ],
+      },
+      {
+        text: " ",
+        italic: true,
+        underline: true,
+      },
+      {
+        type: "link",
+        character: "asdas",
+        url: "http://127.0.0.1:5173/",
+        children: [
+          {
+            text: "",
+          },
+        ],
+      },
+      {
+        text: "",
+      },
+    ],
+  },
+];
+
+export const EditorMockD = [
+  {
+    type: "text",
+    level: 7,
+    children: [
+      {
+        text: "Hello all ",
+      },
+      {
+        type: "emoji",
+        character: "🙂",
+        children: [
+          {
+            text: "",
+          },
+        ],
+      },
+      {
+        text: ". How",
+      },
+      {
+        text: " all are Doing",
+        italic: true,
+      },
+      {
+        text: "? ",
+      },
+      {
+        text: "Today ",
+        bold: true,
+      },
+      {
+        text: "is the",
+      },
+      {
+        text: " ",
+        underline: true,
+      },
+      {
+        text: "best day in my life",
+        bold: true,
+        underline: true,
+      },
+      {
+        text: " ",
+        underline: true,
+      },
+      {
+        type: "emoji",
+        character: "💯",
+        children: [
+          {
+            text: "",
+          },
+        ],
+      },
+      {
+        text: ". Because I am going to create my own Data Model.",
+      },
+      {
+        type: "link",
+        character: "My custom link I am providing",
+        url: "http://127.0.0.1:5173/",
+        children: [
+          {
+            text: "",
+          },
+        ],
+      },
+      {
+        text: ".",
+      },
+    ],
+  },
+  {
+    type: "text",
+    level: 7,
+    children: [
+      {
+        text: "And I am going to tell you ",
+      },
+      {
+        type: "emoji",
+        character: "🙂",
+        children: [
+          {
+            text: "",
+          },
+        ],
+      },
+      {
+        text: "some Tips",
+        bold: true,
+        italic: true,
+      },
+      {
+        text: " . ",
+      },
+      {
+        type: "link",
+        character: "adqwed",
+        url: "http://127.0.0.1:5173/",
+        children: [
+          {
+            text: "",
+          },
+        ],
+      },
+      {
+        text: "How you can be succeed in the life. And How you can ",
+      },
+      {
+        text: "accept the happening",
+        underline: true,
+      },
+      {
+        text: ".",
+      },
+    ],
+  },
+  {
+    type: "text",
+    level: 7,
+    children: [
+      {
+        text: "Then How can ",
+      },
+      {
+        type: "emoji",
+        character: "😘",
+        children: [
+          {
+            text: "",
+          },
+        ],
+      },
+      {
+        text: " you move your life toward the goal what ypu reallty needs tp accept. This is what you need to focus alway because we all need to be success in life.",
+      },
+    ],
+  },
+];
+
 export const MockConnectorsList = [
   {
-    id: 1,
-    name: "Jack",
-    profile_img: mutual1,
-    snappy_username: "jack111",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipisicing.",
-    connected: true,
+    personal_address: {
+      state: "TN",
+      country: "IND",
+    },
+    _id: "6558b3cbcf3abe872e55912c",
+    first_name: "Celocious",
+    last_name: "Altrin",
+    user_name: "celo all15",
+    email: "celociousalltrinmf@gmail.com",
+    dob: "1999-12-14T18:30:00.000Z",
+    phone_number: "918939401189",
+    password: null,
+    user_image: {
+      public_id: "Snappy/user/ishgi8yxcpg4yxjb2rvp",
+      secure_url:
+        "https://res.cloudinary.com/dcbw3cocz/image/upload/v1700312011/Snappy/user/ishgi8yxcpg4yxjb2rvp.png",
+    },
+    about: [
+      {
+        type: "text",
+        level: 7,
+        children: [
+          {
+            text: "Working on My Dreams ",
+          },
+          {
+            type: "emoji",
+            character: "💯",
+            children: [
+              {
+                text: "",
+              },
+            ],
+          },
+          {
+            text: " ",
+          },
+          {
+            type: "hashtag",
+            character: "snappy",
+            children: [
+              {
+                text: "",
+              },
+            ],
+          },
+          {
+            text: " ",
+          },
+        ],
+      },
+    ],
+    interest: [2, 5, 3, 12, 8],
+    is_external_authenticated_user: true,
+    __v: 0,
   },
   {
-    id: 2,
-    name: "Aaron",
-    profile_img: mutual2,
-    snappy_username: "aaron63211",
-    bio: "Lorem ipsu!",
-    connected: false,
+    personal_address: {
+      state: "NY",
+      country: "USA",
+    },
+    _id: "6558cbaa5a256f8389a4bc8b",
+    first_name: "Maxwell",
+    last_name: "M",
+    user_name: "max1",
+    email: "maxwell@gmail.com",
+    dob: "1996-11-19T18:30:00.000Z",
+    phone_number: "134567890",
+    password: "$2a$10$hYpbenZBIMxIH9QfvcdBZ.MSNYiaB7SCBMzPrmGXqkS6vpM6j44LK",
+    user_image: {
+      public_id: "Snappy/user/ry99ruiy1sly3chzia2f",
+      secure_url:
+        "https://res.cloudinary.com/dcbw3cocz/image/upload/v1700318122/Snappy/user/ry99ruiy1sly3chzia2f.jpg",
+    },
+    about: [
+      {
+        type: "text",
+        level: 7,
+        children: [
+          {
+            text: "Trust the Process ",
+          },
+          {
+            type: "emoji",
+            character: "💯",
+            children: [
+              {
+                text: "",
+              },
+            ],
+          },
+          {
+            text: " ",
+          },
+          {
+            type: "hashtag",
+            character: "trust",
+            children: [
+              {
+                text: "",
+              },
+            ],
+          },
+          {
+            text: " ",
+          },
+        ],
+      },
+    ],
+    interest: [19, 14, 13, 15, 20],
+    is_external_authenticated_user: false,
+    __v: 0,
   },
   {
-    id: 3,
-    name: "Antony",
-    profile_img: mutual3,
-    snappy_username: "antony76677",
-    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum voluptatum voluptates, culpa molestiae quam fugit laboriosam, non saepe veniam consequuntur vitae sapiente dicta.",
-    connected: true,
-  },
-  {
-    id: 4,
-    name: "Jenifer",
-    profile_img: mutual4,
-    snappy_username: "jenefier1213",
-    bio: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque autem temporibus necessitatibus dolor rem exercitationem, quos architecto aliquid laboriosam sed iste excepturi corrupti, quas ex ullam nulla error dolorum labore hic doloremque delectus, iure ipsum eius! Provident nisi nobis recusandae, sit optio deleniti voluptatem, esse sequi incidunt dolor corrupti cupiditate.",
-    connected: false,
-  },
-  {
-    id: 5,
-    name: "Antony",
-    profile_img: mutual3,
-    snappy_username: "antony76677",
-    bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur enim rerum molestiae.",
-    connected: true,
-  },
-  {
-    id: 6,
-    name: "Jenifer",
-    profile_img: mutual4,
-    snappy_username: "jenefier1213",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum illo pariatur atque sit quaerat. Blanditiis at doloribus quisquam obcaecati?",
-    connected: false,
-  },
-  {
-    id: 7,
-    name: "Antony",
-    profile_img: mutual3,
-    snappy_username: "antony76677",
-    bio: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque autem temporibus necessitatibus dolor rem exercitationem, quos architecto aliquid laboriosam sed iste excepturi corrupti, quas ex ullam nulla error dolorum labore hic doloremque delectus, iure ipsum eius! Provident nisi nobis recusandae, sit optio deleniti voluptatem, esse sequi incidunt dolor corrupti cupiditate.",
-    connected: true,
-  },
-  {
-    id: 8,
-    name: "Jenifer",
-    profile_img: mutual4,
-    snappy_username: "jenefier1213",
-    bio: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit eos voluptates, odit veritatis mollitia debitis! Voluptates, tenetur, id vero, eius nesciunt reprehenderit eum ullam amet nobis quas sunt eveniet exercitationem nulla doloribus dolor officia tempore.",
-    connected: false,
+    personal_address: {
+      state: "GBN",
+      country: "GBR",
+    },
+    _id: "6558d4639b091e4cf807b955",
+    first_name: "maddy",
+    last_name: "m",
+    user_name: "mad maddy10",
+    email: "maddy@gmail.com",
+    dob: "1995-09-19T18:30:00.000Z",
+    phone_number: "4423456",
+    password: "$2a$10$vwUiHhCW22Q0EHyYe0Rk3ecrMwLeJCltamEqjJ.huqV7mlzDYFUWe",
+    user_image: {
+      public_id: "Snappy/user/yk0l0lsjba1podkwfeuq",
+      secure_url:
+        "https://res.cloudinary.com/dcbw3cocz/image/upload/v1700320354/Snappy/user/yk0l0lsjba1podkwfeuq.jpg",
+    },
+    about: [
+      {
+        type: "text",
+        level: 7,
+        children: [
+          {
+            text: "\"🌟 Explorer of life's adventures | ☕ Coffee enthusiast | 📚 Professional daydreamer | 🎶 Music addict | ✨ Turning ordinary into extraordinary | 280 characters can't capture my awesomeness!\"",
+          },
+        ],
+      },
+    ],
+    interest: [6, 7, 8, 9, 13],
+    is_external_authenticated_user: false,
+    __v: 0,
   },
 ];
 

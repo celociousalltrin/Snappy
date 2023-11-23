@@ -10,6 +10,9 @@ const {
   http_status_test_router,
   generateEmailVerificationOTP,
   verifyEmailVerificationOTP,
+  getSignUpConnectorsList,
+  createSignupConnector,
+  deleteSignupConnector,
 } = require("../controllers/authUserController");
 const { assignRefreshTokeninCookie } = require("../utils/commonFunction");
 
@@ -52,5 +55,11 @@ router.post("/login", login);
 
 router.post("/generate-email-verification-otp", generateEmailVerificationOTP);
 router.post("/verify-email-verification-OTP", verifyEmailVerificationOTP);
+router
+  .route("/signup-connector")
+  .get(getSignUpConnectorsList)
+  .post(createSignupConnector);
+
+router.delete("/signup-connector/:alliance_id/:fan_id", deleteSignupConnector);
 
 module.exports = router;

@@ -1,27 +1,19 @@
-import React from "react";
-import AppTextArea from "../../components/app-text-area";
+import React, { useState } from "react";
+import AppRichTextBox from "../../components/app-rich-text-box";
 
-const UserBio = ({
-  data: { about },
-  handleChange,
-  formik: { handleBlur, errors, touched },
-}) => {
+const UserBio = ({ data: { about }, setFieldValue }) => {
   return (
     <div>
-      <p className="text-muted mb-0">
+      <p className="text-muted mb-3">
         What makes you special? Don't think too hard, just have fun with it
       </p>
-      <AppTextArea
-        rows={3}
-        cols={60}
-        isNormalTextArea
-        type={1}
-        handleChange={handleChange}
-        name="about"
-        handleBlur={handleBlur}
-        errors={errors}
-        touched={touched.about}
-        value={about}
+
+      <AppRichTextBox
+        data={about}
+        onChange={(data) => setFieldValue("about", data)}
+        postDataName="Snapp"
+        editorElements={["emoji", "link", "hashtag"]}
+        progressIcon={{ length: 280, size: 25, width: 3 }}
       />
     </div>
   );

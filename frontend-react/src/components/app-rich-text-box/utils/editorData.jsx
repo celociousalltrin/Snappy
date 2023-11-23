@@ -41,3 +41,5 @@ export const customKeybindings = [
 export const editorValidatorIcons = [{ name: "image", icon: <IoImage /> }];
 
 export const editorDialogueToolbarButtons = ["image", "emoji", "link"];
+
+export const invisibleToolbarIcons = ["mention", "hashtag"];

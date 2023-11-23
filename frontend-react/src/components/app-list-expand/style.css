@@ -1,0 +1,9 @@
+.app-list-container {
+  position: relative;
+}
+
+.app-list-down-icon {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+}

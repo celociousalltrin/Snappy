@@ -7,8 +7,6 @@ import "./style.css";
 import { editorInitialValue } from "../app-rich-text-box/utils/editorData";
 import { createSnapp } from "../../services/method";
 import { responseMessage } from "../../utils/response-message";
-import { resetEditor } from "../app-rich-text-box/utils/editorFunction";
-import { useSlateStatic } from "slate-react";
 
 const Snapp = () => {
   const [document, setDocument] = useState(editorInitialValue);
@@ -43,7 +41,7 @@ const Snapp = () => {
         toolbarCustomComponent={<EditorToolbarImageIcon />}
         isValidator
         validatorIcons={[{ name: "image", length: 1 }]}
-        progressIcon={{ length: 300, size: 25, width: 3 }}
+        progressIcon={{ length: 1000, size: 25, width: 3 }}
         handlePostData={handleSnapp}
       />
     </div>

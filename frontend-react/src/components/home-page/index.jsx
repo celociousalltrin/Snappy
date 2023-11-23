@@ -15,7 +15,7 @@ const HomePage = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    getSnappData();
+    // getSnappData();
   }, []);
 
   const getSnappData = async () => {

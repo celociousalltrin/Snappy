@@ -23,7 +23,7 @@ export const signupSchema = yup.object().shape({
     .string()
     .trim()
     .min(4, "User Name must be at least 4 characters")
-    .max(12, "User Name cannot exceed 12 characters")
+    .max(15, "User Name cannot exceed 12 characters")
     .required("User Name is required"),
   email: emailSchema,
   new_password: passwordSchema,
@@ -31,12 +31,6 @@ export const signupSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("new_password"), null], "Password must match")
     .required("Required"),
-  about: yup
-    .string()
-    .trim()
-    .min(20, "It must be at least 20 characters")
-    .max(300, "It cannot exceed 300 characters")
-    .required("It is required"),
 });
 
 export const ForgotPasswordSchema = yup.object().shape({

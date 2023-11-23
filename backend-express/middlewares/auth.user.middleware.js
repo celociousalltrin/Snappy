@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const { errorResponse } = require("../utils/responseHandler");
 const { responseMessage } = require("../utils/responseMessage");
 const { tokenVerification } = require("../utils/commonFunction");
+const userModel = require("../models/userModel");
 
 module.exports = async (req, res, next) => {
   try {
@@ -48,6 +49,12 @@ module.exports = async (req, res, next) => {
         status: 401,
       });
     }
+
+    const { _id } = await userModel.findOne({
+      email: refreshTokenVerify.user_email,
+    });
+
+    req.user_id = _id;
 
     next();
   } catch (err) {

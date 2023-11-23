@@ -32,7 +32,7 @@ exports.createOTPService = async ({
     }
   } catch (err) {
     console.log("🚀 ~ file: OTPService.js:6 ~ exports.createOTP= ~ err:", err);
-    return errorResponse(res, responseMessage("ER999"));
+    return errorResponse({ res, responseDetails: responseMessage("ER999") });
   }
 };
 

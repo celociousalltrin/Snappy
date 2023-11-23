@@ -18,6 +18,7 @@ import {
 import {
   editorDialogueToolbarButtons,
   editorValidatorIcons,
+  invisibleToolbarIcons,
 } from "./utils/editorData";
 import { useEditorToolbarActive } from "./hooks/useEditorToolbarActive";
 import useEditorSelection from "./hooks/useEditorSelection";
@@ -52,12 +53,30 @@ const AppRichTextBox = ({
 
   const navigate = useNavigate();
 
-  const dialogueToolbarButtons = editorElements.filter((o) =>
-    editorDialogueToolbarButtons.includes(o)
-  );
+  const {
+    dialogue_toolbar_buttons = null,
+    normal_toolbar_buttons = null,
+    invisible_toolbar_buttons = null,
+  } = (editorElements &&
+    editorElements.reduce((acc, curr) => {
+      const isDialoguButton = editorDialogueToolbarButtons.includes(curr);
+      const isInvisbleButtons = invisibleToolbarIcons.includes(curr);
+      const key = isInvisbleButtons
+        ? "invisible_toolbar_buttons"
+        : isDialoguButton
+        ? "dialogue_toolbar_buttons"
+        : "normal_toolbar_buttons";
+      if (!acc[key]) {
+        acc[key] = [curr];
+      } else {
+        acc[key].push(curr);
+      }
+      return acc;
+    }, {})) ||
+  {};
 
   const { setActiveStyles, activeStyles, currentStyle, handleApplyStyles } =
-    useEditorToolbarActive(dialogueToolbarButtons);
+    useEditorToolbarActive(dialogue_toolbar_buttons);
 
   const { mentionIndex, mentionUserList, handleMentionKeyDown } =
     useEditorMention(customNodeData);
@@ -106,12 +125,14 @@ const AppRichTextBox = ({
           isToolbarIcon={isToolbarIcon}
           toolbarCustomComponent={toolbarCustomComponent}
           validatorIcons={validatorIcons}
-          dialogueToolbarButtons={dialogueToolbarButtons}
+          dialogueToolbarButtons={dialogue_toolbar_buttons}
+          normalToolbarButtons={normal_toolbar_buttons}
+          invisibleToolbarButtons={invisible_toolbar_buttons}
         />
 
         <Editable
           placeholder="Share your Snapps"
-          renderElement={(eldata) => renderElement(eldata, navigate)}
+          renderElement={(elementdata) => renderElement(elementdata, navigate)}
           renderLeaf={renderLeaf}
           onKeyDown={onEditorKeyDown}
           onSelect={() => getSelectedStyle(editor, data)}
