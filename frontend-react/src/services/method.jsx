@@ -22,22 +22,41 @@ export const externalAuthenticatedUserProfileCompletion = (props) =>
     props
   );
 
+export const getSignupConnectorsList = () =>
+  axios.get("/auth/signup-connector");
+
 // TEST APIS
 export const testRoute = () => axios.get("/auth/test-route");
 
 // SNAPP APIS
-export const getSnapp = () => axios.get("/snapp");
+export const getSnapps = (type) => axios.get(`/snapp/${type}`);
 export const createSnapp = (props) => axios.post("/snapp", props);
 
+// LIKE APIS
+export const createLike = (props) => axios.post("/like", props);
+export const deleteLike = (id) => axios.delete(`/like/${id}`);
+
+// BOOKMARK APIS
+export const createBookmark = (props) => axios.post("/bookmark", props);
+export const deleteBookmark = (id) => axios.delete(`/bookmark/${id}`);
+
+// COMMENT APIS
+export const createComment = (props) => axios.post("/comment", props);
+export const replyComment = (props) => axios.put("/comment", props);
+
 // CONNECTORS APIS
-export const getSignupConnectorsList = () =>
-  axios.get("/auth/signup-connector");
 
-export const signupCreateConnector = (props) =>
-  axios.post("/auth/signup-connector", props);
+export const createConnector = (props) => axios.post("/connector", props);
 
-export const signupDeleteConnector = ({ alliance_id, fan_id }) =>
-  axios.delete(`/auth/signup-connector/${alliance_id}/${fan_id}`);
+export const getAllianceConnectorList = () =>
+  axios.get("/connector/alliance-list");
+
+export const getFanConnectorList = () => axios.get("/connector/fan-list");
+
+export const getConnectorList = () => axios.get("/connector/list");
+
+export const removeConnector = (alliance_id) =>
+  axios.delete(`/connector/${alliance_id}`);
 
 // LOGOUT APIS
 export const logout = () => axios.get("/logout");

@@ -68,10 +68,6 @@ const sliceEditorContent = (data, number) => {
       },
       { length: 0, resData: [] }
     );
-    console.log(
-      "🚀 ~ file: common-function.jsx:71 ~ sliceEditorContent ~ result:",
-      result
-    );
 
     const index = result.resData.findIndex((obj) => obj.children.length === 0);
     return result.resData.slice(0, index);

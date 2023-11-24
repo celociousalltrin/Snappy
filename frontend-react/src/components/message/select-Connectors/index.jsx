@@ -7,7 +7,7 @@ import "./style.css";
 const SelectConnectors = () => {
   return (
     <div>
-      <ConnectorsList MockConnectorsList={MockConnectorsList} isMessage />
+      <ConnectorsList connecteduserList={MockConnectorsList} isMessage />
     </div>
   );
 };

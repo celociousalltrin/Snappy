@@ -38,7 +38,7 @@ const AppModal = ({ openModal, handleModelClose }) => {
         </Modal.Header>
         <Modal.Body>
           <ConnectorsList
-            MockConnectorsList={MockConnectorsList}
+            connecteduserList={MockConnectorsList}
             isAllianceList
           />
         </Modal.Body>

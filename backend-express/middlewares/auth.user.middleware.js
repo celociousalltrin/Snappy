@@ -50,11 +50,11 @@ module.exports = async (req, res, next) => {
       });
     }
 
-    const { _id } = await userModel.findOne({
+    const userDetails = await userModel.findOne({
       email: refreshTokenVerify.user_email,
     });
 
-    req.user_id = _id;
+    req.userDetails = userDetails;
 
     next();
   } catch (err) {

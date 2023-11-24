@@ -1,16 +1,30 @@
+const connectorModel = require("../models/connectorModel");
 const snappModal = require("../models/snappModal");
-const { createSnappService } = require("../services/snappService");
+const {
+  createSnappService,
+  getSnappBasedOnConnectorsService,
+} = require("../services/snappService");
 const { isValid } = require("../services/validationService");
 const { successResponse, errorResponse } = require("../utils/responseHandler");
 const { responseMessage } = require("../utils/responseMessage");
 
-exports.get_snapp = [
+exports.get_snapps = [
   async (req, res) => {
+    const { _id } = req.userDetails;
+    const { type } = req.params;
+    console.log("🚀 ~ file: snappController.js:15 ~ type:", typeof type);
     try {
+      let result;
+      if (type === "connectors") {
+        result = await getSnappBasedOnConnectorsService(connectorModel, _id);
+      } else {
+        result = await snappModal.find({ user_id: { $ne: _id } });
+      }
+
       return successResponse({
         res,
         new_access_token: req.new_access_token,
-        response_data: { name: "SADasdas" },
+        response_data: result,
       });
     } catch (err) {
       console.log("🚀 ~ file: snappController.js:12 ~ err:", err);

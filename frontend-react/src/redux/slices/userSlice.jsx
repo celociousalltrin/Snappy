@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   data: {},
   count: 0,
+  isConnectorChnaged: false,
 };
 
 export const userSlice = createSlice({
@@ -18,6 +19,11 @@ export const userSlice = createSlice({
     logoutReducer: (state) => {
       state.data = initialState;
     },
+
+    connectorChanged: (state, { payload }) => {
+      state.isConnectorChnaged = payload;
+    },
+
     increament: (state, { payload: { number } }) => {
       state.count += number;
     },
@@ -32,6 +38,7 @@ export const {
   decrement,
   userData,
   logoutReducer,
+  connectorChanged,
   addNewAccesstoken,
 } = userSlice.actions;
 

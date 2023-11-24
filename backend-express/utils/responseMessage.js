@@ -31,9 +31,32 @@ const responseData = [
   },
   {
     code: "OK009",
-    message: "Your COnnection has been removed",
+    message: "Your Connection has been removed",
   },
-
+  {
+    code: "OK010",
+    message: "Liked the snapp",
+  },
+  {
+    code: "OK011",
+    message: "your like has been removed",
+  },
+  {
+    code: "OK012",
+    message: "Comment is added to the snapp",
+  },
+  {
+    code: "OK013",
+    message: "Added to your Bookmarks",
+  },
+  {
+    code: "OK014",
+    message: "Removed from your Bookmarks",
+  },
+  {
+    code: "OK015",
+    message: "Your reply is added",
+  },
   { code: "ER999", message: "Something went wrong" },
   { code: "ER001", message: "Requested Page not found" },
   { code: "ER002", message: "UserName already Exists" },

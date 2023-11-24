@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 const { findOneAndDelete } = require("../models/connectorModel");
 const { successResponse, errorResponse } = require("../utils/responseHandler");
 const { responseMessage } = require("../utils/responseMessage");
+const userModel = require("../models/userModel");
 
 exports.createConnectorService = async (db, connectorData, res) => {
   try {
@@ -27,7 +28,7 @@ exports.deleteConnectorService = async (db, { alliance_id, fan_id }, res) => {
 
     return successResponse({
       res,
-      responseDetails: responseMessage("OK008"),
+      responseDetails: responseMessage("OK009"),
     });
   } catch (err) {
     console.log(
@@ -38,7 +39,34 @@ exports.deleteConnectorService = async (db, { alliance_id, fan_id }, res) => {
   }
 };
 
-exports.getConnectorListService = async ({ db, id, res }) => {
+const connectorListProject = [
+  {
+    $unwind: {
+      path: "$connectorList",
+      preserveNullAndEmptyArrays: true,
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      first_name: "$connectorList.first_name",
+      last_name: "$connectorList.last_name",
+      user_image: "$connectorList.user_image",
+      user_name: "$connectorList.user_name",
+      about: "$connectorList.about",
+    },
+  },
+];
+
+exports.getConnectorListService = async ({ db, id, res, type }) => {
+  console.log(
+    "🚀 ~ file: connectorService.js:61 ~ exports.getConnectorListService= ~ type:",
+    type
+  );
+  console.log(
+    "🚀 ~ file: connectorService.js:61 ~ exports.getConnectorListService= ~ id:",
+    id
+  );
   try {
     let result;
 
@@ -46,14 +74,34 @@ exports.getConnectorListService = async ({ db, id, res }) => {
       result = await db.aggregate([
         {
           $match: {
-            fan_id: new mongoose.Types.ObjectId(id),
+            $or: [
+              {
+                alliance_id: { $eq: new mongoose.Types.ObjectId(id) },
+                type: 3,
+              },
+              {
+                fan_id: { $eq: new mongoose.Types.ObjectId(id) },
+                type: { $ne: 3 },
+              },
+            ],
+          },
+        },
+        {
+          $sort: {
+            createdAt: 1,
           },
         },
         {
           $group: {
             _id: "$fan_id",
-            alliance_ids: {
-              $push: "$alliance_id",
+            ids: {
+              $push: {
+                $cond: {
+                  if: { $eq: [type, 3] },
+                  then: "$fan_id",
+                  else: "$alliance_id",
+                },
+              },
             },
           },
         },
@@ -61,25 +109,47 @@ exports.getConnectorListService = async ({ db, id, res }) => {
           $lookup: {
             from: "users",
             let: {
-              id: "$alliance_ids",
+              id: "$ids",
             },
             pipeline: [
               {
                 $match: {
                   _id: { $ne: new mongoose.Types.ObjectId(id) },
+                  $expr: {
+                    $cond: {
+                      if: { $eq: [type, 1] },
+                      then: { $not: { $in: ["$_id", "$$id"] } },
+                      else: { $in: ["$_id", "$$id"] },
+                    },
+                  },
                 },
               },
             ],
-            as: "connectorsList",
+            as: "connectorList",
+          },
+        },
+        {
+          $unwind: {
+            path: "$connectorList",
+            preserveNullAndEmptyArrays: true,
           },
         },
         {
           $project: {
             _id: 0,
-            connectorsList: 1,
+            _id: "$connectorList._id",
+            first_name: "$connectorList.first_name",
+            last_name: "$connectorList.last_name",
+            user_image: "$connectorList.user_image",
+            user_name: "$connectorList.user_name",
+            about: "$connectorList.about",
           },
         },
       ]);
+
+      if (type === 1 && !result.length) {
+        result = await userModel.find({ _id: { $ne: id } });
+      }
     } else {
       result = await db.find({});
     }

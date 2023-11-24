@@ -1,7 +1,8 @@
 var express = require("express");
-const { get_snapp, create_snapp } = require("../controllers/snappController");
+const { get_snapps, create_snapp } = require("../controllers/snappController");
 var router = express.Router();
 
-router.route("/").get(get_snapp).post(create_snapp);
+router.get("/:type", get_snapps);
+router.post("/", create_snapp);
 
 module.exports = router;

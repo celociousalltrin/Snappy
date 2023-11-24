@@ -48,7 +48,7 @@ const SignupAddAlliances = ({ data, formik: { setFieldValue } }) => {
         )}
       </AppFramerExpand>
       <ConnectorsList
-        MockConnectorsList={connectorList}
+        connecteduserList={connectorList}
         isSignup
         callback={(id) => {
           if (data.includes(id)) {
