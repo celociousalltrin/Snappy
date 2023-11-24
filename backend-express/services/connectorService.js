@@ -49,6 +49,7 @@ const connectorListProject = [
   {
     $project: {
       _id: 0,
+      _id: "$connectorList._id",
       first_name: "$connectorList.first_name",
       last_name: "$connectorList.last_name",
       user_image: "$connectorList.user_image",
@@ -58,42 +59,33 @@ const connectorListProject = [
   },
 ];
 
+const connectorMatchFunction = (type, id) => {
+  if (type === 3) {
+    return { alliance_id: new mongoose.Types.ObjectId(id) };
+  } else {
+    return { fan_id: new mongoose.Types.ObjectId(id) };
+  }
+};
+
 exports.getConnectorListService = async ({ db, id, res, type }) => {
-  console.log(
-    "🚀 ~ file: connectorService.js:61 ~ exports.getConnectorListService= ~ type:",
-    type
-  );
-  console.log(
-    "🚀 ~ file: connectorService.js:61 ~ exports.getConnectorListService= ~ id:",
-    id
-  );
   try {
     let result;
 
     if (id) {
       result = await db.aggregate([
         {
-          $match: {
-            $or: [
-              {
-                alliance_id: { $eq: new mongoose.Types.ObjectId(id) },
-                type: 3,
-              },
-              {
-                fan_id: { $eq: new mongoose.Types.ObjectId(id) },
-                type: { $ne: 3 },
-              },
-            ],
-          },
+          $match: connectorMatchFunction(type, id),
         },
-        {
-          $sort: {
-            createdAt: 1,
-          },
-        },
+
         {
           $group: {
-            _id: "$fan_id",
+            _id: {
+              $cond: {
+                if: { $eq: [type, 3] },
+                then: "$alliance_id",
+                else: "$fan_id",
+              },
+            },
             ids: {
               $push: {
                 $cond: {
@@ -128,23 +120,7 @@ exports.getConnectorListService = async ({ db, id, res, type }) => {
             as: "connectorList",
           },
         },
-        {
-          $unwind: {
-            path: "$connectorList",
-            preserveNullAndEmptyArrays: true,
-          },
-        },
-        {
-          $project: {
-            _id: 0,
-            _id: "$connectorList._id",
-            first_name: "$connectorList.first_name",
-            last_name: "$connectorList.last_name",
-            user_image: "$connectorList.user_image",
-            user_name: "$connectorList.user_name",
-            about: "$connectorList.about",
-          },
-        },
+        ...connectorListProject,
       ]);
 
       if (type === 1 && !result.length) {
