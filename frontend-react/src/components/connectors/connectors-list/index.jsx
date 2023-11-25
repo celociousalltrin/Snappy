@@ -28,7 +28,6 @@ const ConnectorsList = ({
   callback = () => {},
   signupConnectedUsers,
   allianceCB = () => {},
-  fansCB = () => {},
   isConnectorList,
 }) => {
   const { showMore, showLess, listUniqueId } = useListToggleContent();
@@ -49,7 +48,6 @@ const ConnectorsList = ({
       const response = await createConnector({ alliance_id: id });
       dispatch(connectorChanged(!isConnectorChnaged));
       responseMessage(response.data.code);
-      fansCB(id);
       setConnectorsIDs((prev) => [...prev, id]);
     } catch (err) {
       console.log(

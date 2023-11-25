@@ -24,11 +24,7 @@ const FansList = ({ activeTab }) => {
   }, [activeTab]);
   return (
     <div>
-      <ConnectorsList
-        connecteduserList={list}
-        isFansList
-        fansCB={(id) => setList((prev) => prev.filter((o) => o._id !== id))}
-      />
+      <ConnectorsList connecteduserList={list} isFansList />
     </div>
   );
 };
