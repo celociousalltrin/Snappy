@@ -2,6 +2,13 @@ var mongoose = require("mongoose");
 const { errorResponse, successResponse } = require("../utils/responseHandler");
 const { responseMessage } = require("../utils/responseMessage");
 const { uploadImageService } = require("./cloudinary");
+const {
+  snappBookmarks,
+  snappDetails,
+  snappLikes,
+  snappMetaCount,
+  snappReplyUserData,
+} = require("../utils/mongoCommonQuery");
 
 exports.createSnappService = async (db, snappData, res) => {
   try {
@@ -50,7 +57,7 @@ exports.getSnappBasedOnConnectorsService = async (db, id) => {
       },
       {
         $lookup: {
-          from: "users",
+          from: "snapps",
           let: {
             id: "$allianceIDs",
           },
@@ -58,25 +65,126 @@ exports.getSnappBasedOnConnectorsService = async (db, id) => {
             {
               $match: {
                 $expr: {
-                  $in: ["$_id", "$$id"],
+                  $in: ["$user_id", "$$id"],
                 },
               },
             },
+            {
+              $sort: {
+                createdAt: -1,
+              },
+            },
+            ...snappDetails,
+
+            ...snappLikes,
+            ...snappBookmarks,
           ],
-          as: "usersList",
+          as: "snappList",
         },
       },
       {
         $project: {
-          usersList: 1,
+          snappList: 1,
           _id: 0,
         },
       },
     ]);
-    return result[0].usersList;
+    return result.length > 0 ? result[0].snappList : [];
   } catch (err) {
     console.log(
       "🚀 ~ file: snappService.js:38 ~ exports.getSnappBasedOnConnectorsService= ~ err:",
+      err
+    );
+  }
+};
+
+exports.getSingleSnappService = async (db, snappId, userId) => {
+  try {
+    const result = await db.aggregate([
+      {
+        $match: {
+          _id: new mongoose.Types.ObjectId(snappId),
+        },
+      },
+      ...snappDetails,
+      ...snappMetaCount("likes", "likes_count"),
+      ...snappMetaCount("comments", "comments_count"),
+      ...snappMetaCount("bookmarks", "bookmarks_count"),
+      {
+        $lookup: {
+          from: "comments",
+          let: {
+            id: "$_id",
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $eq: ["$snapp_id", "$$id"],
+                },
+              },
+            },
+            {
+              $addFields: {
+                customSort: {
+                  $cond: {
+                    if: { $eq: [userId, "$user_id"] },
+                    then: 0,
+                    else: 1,
+                  },
+                },
+              },
+            },
+            {
+              $sort: {
+                customSort: 1,
+                createdAt: -1,
+              },
+            },
+            ...snappDetails,
+            ...snappReplyUserData,
+            {
+              $project: {
+                customSort: 0,
+              },
+            },
+          ],
+          as: "snapp_comments",
+        },
+      },
+    ]);
+    return !!result.length ? result[0] : {};
+  } catch (err) {
+    console.log(
+      "🚀 ~ file: snappService.js:198 ~ exports.getSIngleSnappService= ~ err:",
+      err
+    );
+  }
+};
+
+exports.getSnapps = async (db, id) => {
+  try {
+    const result = await db.aggregate([
+      {
+        $match: {
+          user_id: {
+            $ne: id,
+          },
+        },
+      },
+      {
+        $sort: {
+          createdAt: -1,
+        },
+      },
+      ...snappDetails,
+      ...snappLikes,
+      ...snappBookmarks,
+    ]);
+    return result;
+  } catch (err) {
+    console.log(
+      "🚀 ~ file: snappService.js:113 ~ exports.getSnapps= ~ err:",
       err
     );
   }

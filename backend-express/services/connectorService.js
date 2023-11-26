@@ -3,11 +3,22 @@ const { findOneAndDelete } = require("../models/connectorModel");
 const { successResponse, errorResponse } = require("../utils/responseHandler");
 const { responseMessage } = require("../utils/responseMessage");
 const userModel = require("../models/userModel");
+const { createNotificationService } = require("./notificationService");
+const notificationModel = require("../models/notificationModel");
 
 exports.createConnectorService = async (db, connectorData, res) => {
   try {
     const newConnection = await db(connectorData);
     const result = await newConnection.save();
+
+    const notificationData = {
+      from_id: connectorData.fan_id,
+      to_id: connectorData.alliance_id,
+      notify_type: 4,
+      is_connection_notify: true,
+    };
+
+    await createNotificationService(notificationModel, notificationData);
 
     return successResponse({
       res,

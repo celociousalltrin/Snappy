@@ -8,6 +8,7 @@ var snappRouter = require("./snapp");
 var likeRouter = require("./like");
 var bookmarkRouter = require("./bookmark");
 var commentRouter = require("./comment");
+var notificationRouter = require("./notification");
 var connectorRouter = require("./connector");
 var logoutRouter = require("../routes/logout");
 var externalAuthUserRouter = require("../routes/external-auth-user");
@@ -32,6 +33,7 @@ router.use("/like", authUserMiddleware, likeRouter);
 router.use("/bookmark", authUserMiddleware, bookmarkRouter);
 router.use("/connector", authUserMiddleware, connectorRouter);
 router.use("/comment", authUserMiddleware, commentRouter);
+router.use("/notification", authUserMiddleware, notificationRouter);
 router.use("/logout", logoutRouter);
 
 module.exports = router;

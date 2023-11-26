@@ -39,8 +39,8 @@ const Profile = () => {
   const cond = "1";
   return (
     <div className="container">
-      {id === "single-feed" || sec_id ? (
-        <SingleFeed singleFeedData={singleFeedData} />
+      {id ? (
+        <SingleFeed />
       ) : (
         <>
           <div className="d-flex">

@@ -12,10 +12,6 @@ const AllianceList = () => {
   const [list, setList] = useState([]);
 
   const { isConnectorChnaged } = useSelector((state) => state.user);
-  console.log(
-    "🚀 ~ file: index.jsx:15 ~ AllianceList ~ isConnectorChnaged:",
-    isConnectorChnaged
-  );
 
   const getConnectorData = async () => {
     try {

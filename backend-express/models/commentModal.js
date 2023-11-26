@@ -9,7 +9,7 @@ const commentSchema = new mongoose.Schema(
       {
         reply_user_id: { type: mongoose.Types.ObjectId, default: null },
         reply_comment: { type: String, default: null },
-        replied_at: { type: Date, default: null },
+        replied_at: { type: Date, default: Date.now },
       },
     ],
   },

@@ -6,7 +6,10 @@ import AppListExpand from "../../app-list-expand";
 import "./style.css";
 import AppFramerButton from "../../app-framer-button";
 import AppPopover from "../../app-popover";
-import { navigateToProfile } from "../../../utils/common-function";
+import {
+  displayUserName,
+  navigateToProfile,
+} from "../../../utils/common-function";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { responseMessage } from "../../../utils/response-message";
@@ -152,8 +155,7 @@ const ConnectorsList = ({
                       </p>
                       {/* </AppPopover> */}
                       <p className="text-muted mb-0">
-                        {" "}
-                        {`@${obj.user_name.toLowerCase().replace(/\s+/g, "_")}`}
+                        {displayUserName(obj.user_name)}
                       </p>
                     </div>
                     <div className="d-flex align-items-center">

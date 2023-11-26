@@ -55,6 +55,30 @@ const responseData = [
     code: "OK014",
     message: "Removed from your Bookmarks",
   },
+  {
+    code: "OK015",
+    message: "Your reply is added",
+  },
+  {
+    code: "OK016",
+    message: "Notification is created",
+  },
+  {
+    code: "OK017",
+    message: "Notification is readed",
+  },
+  {
+    code: "OK018",
+    message: "Notification is Cleared",
+  },
+  {
+    code: "OK019",
+    message: "Notification is fetched",
+  },
+  {
+    code: "OK020",
+    message: "Notification is removed",
+  },
   { code: "ER999", message: "Something went wrong" },
   { code: "ER001", message: "Requested Page not found" },
   { code: "ER002", message: "UserName already Exists" },

@@ -31,14 +31,15 @@ export const testRoute = () => axios.get("/auth/test-route");
 // SNAPP APIS
 export const getSnapps = (type) => axios.get(`/snapp/${type}`);
 export const createSnapp = (props) => axios.post("/snapp", props);
+export const getSingleSnapp = (id) => axios.get(`/snapp/single-snapp/${id}`);
 
 // LIKE APIS
 export const createLike = (props) => axios.post("/like", props);
-export const deleteLike = (id) => axios.delete(`/like/${id}`);
+export const removeLike = (id) => axios.delete(`/like/${id}`);
 
 // BOOKMARK APIS
 export const createBookmark = (props) => axios.post("/bookmark", props);
-export const deleteBookmark = (id) => axios.delete(`/bookmark/${id}`);
+export const removeBookmark = (id) => axios.delete(`/bookmark/${id}`);
 
 // COMMENT APIS
 export const createComment = (props) => axios.post("/comment", props);
@@ -57,6 +58,24 @@ export const getConnectorList = () => axios.get("/connector/list");
 
 export const removeConnector = (alliance_id) =>
   axios.delete(`/connector/${alliance_id}`);
+
+// NOTIFICATION APIS
+export const createNotification = (props) => axios.post("/notification", props);
+
+export const readNotification = (props) => axios.put("/notification", props);
+
+export const clearAllNotification = (props) =>
+  axios.delete("/notification", {
+    params: {
+      ids: props.join(","),
+    },
+  });
+
+export const clearSingleNotification = (id) =>
+  axios.delete(`/notification/${id}`);
+
+export const getNotificationList = (notify) =>
+  axios.get(`/notification/${notify}`);
 
 // LOGOUT APIS
 export const logout = () => axios.get("/logout");

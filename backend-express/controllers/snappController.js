@@ -1,8 +1,11 @@
 const connectorModel = require("../models/connectorModel");
 const snappModal = require("../models/snappModal");
+
 const {
   createSnappService,
   getSnappBasedOnConnectorsService,
+  getSnapps,
+  getSingleSnappService,
 } = require("../services/snappService");
 const { isValid } = require("../services/validationService");
 const { successResponse, errorResponse } = require("../utils/responseHandler");
@@ -12,13 +15,13 @@ exports.get_snapps = [
   async (req, res) => {
     const { _id } = req.userDetails;
     const { type } = req.params;
-    console.log("🚀 ~ file: snappController.js:15 ~ type:", typeof type);
+
     try {
       let result;
       if (type === "connectors") {
         result = await getSnappBasedOnConnectorsService(connectorModel, _id);
       } else {
-        result = await snappModal.find({ user_id: { $ne: _id } });
+        result = await getSnapps(snappModal, _id);
       }
 
       return successResponse({
@@ -28,21 +31,38 @@ exports.get_snapps = [
       });
     } catch (err) {
       console.log("🚀 ~ file: snappController.js:12 ~ err:", err);
+      return errorResponse({ res, responseDetails: responseMessage("ER999") });
     }
   },
 ];
 
+exports.get_single_snapp = [
+  async (req, res) => {
+    const { snapp_id } = req.params;
+    const { _id } = req.userDetails;
+    try {
+      const result = await getSingleSnappService(snappModal, snapp_id, _id);
+
+      return successResponse({
+        res,
+        new_access_token: req.new_access_token,
+        response_data: result,
+      });
+    } catch (err) {
+      console.log("🚀 ~ file: snappController.js:45 ~ err:", err);
+      return errorResponse({ res, responseDetails: responseMessage("ER999") });
+    }
+  },
+];
 exports.create_snapp = [
   async (req, res) => {
     try {
-      const { body, user_id } = req;
+      const {
+        body,
+        userDetails: { _id },
+      } = req;
 
-      const isSnappLimitReached = await isValid(
-        snappModal,
-        "user_id",
-        user_id,
-        3
-      );
+      const isSnappLimitReached = await isValid(snappModal, "user_id", _id, 3);
 
       if (isSnappLimitReached) {
         return errorResponse({
@@ -56,7 +76,7 @@ exports.create_snapp = [
       const feedData = body.filter((o) => o.type !== "image");
 
       const snappData = {
-        id: user_id,
+        id: _id,
         data: feedData,
         ...(url && { image_url: url }),
       };

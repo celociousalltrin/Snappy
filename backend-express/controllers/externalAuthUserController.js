@@ -1,6 +1,6 @@
 const userModel = require("../models/userModel");
 const { responseMessage } = require("../utils/responseMessage");
-const { errorResponse } = require("../utils/responseHandler");
+const { errorResponse, successResponse } = require("../utils/responseHandler");
 const {
   loginExternalAuthenticatedUserService,
   externalAuthenticatedUserProfileCompletionService,
@@ -35,6 +35,10 @@ exports.externalAuthenticatedUserProfileCompletion = [
           fan_id: userId,
         }))
       );
+      return successResponse({
+        res,
+        responseDetails: responseMessage("OK004"),
+      });
     } catch (err) {
       console.log("🚀 ~ file: externalAuthUserController.js:24 ~ err:", err);
       return errorResponse({ res, responseDetails: responseMessage("ER999") });

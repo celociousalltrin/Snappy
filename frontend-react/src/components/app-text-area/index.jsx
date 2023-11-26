@@ -14,11 +14,13 @@ const AppTextArea = ({
   handleBlur,
   errors,
   touched,
+  cb = () => {},
 }) => {
   const elementRef = useRef();
 
   const handleAppTextAreaChange = (e) => {
     elementRef.current.style.height = `${e.target.scrollHeight}px`;
+    cb(e.target.value);
   };
 
   return (
