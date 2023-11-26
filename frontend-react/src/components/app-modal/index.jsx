@@ -6,9 +6,29 @@ import { MockConnectorsList } from "../../utils/mock-common";
 import "./style.css";
 import ConnectorsList from "../connectors/connectors-list";
 import { AiOutlineClose } from "react-icons/ai";
+import { responseMessage } from "../../utils/response-message";
+import { getFavouritifyConnectorList } from "../../services/method";
 
 const AppModal = ({ openModal, handleModelClose }) => {
-  const { open_type, show } = openModal;
+  const { open_type, show, snapp_id } = openModal;
+
+  const [list, setlist] = useState([]);
+
+  const getList = async (id, type) => {
+    try {
+      const response = await getFavouritifyConnectorList(id, type);
+      setlist(response.data.response_data);
+    } catch (err) {
+      responseMessage(err.data.code);
+      console.log("🚀 ~ file: index.jsx:17 ~ getList ~ err:", err);
+    }
+  };
+
+  useEffect(() => {
+    if (show) {
+      getList(snapp_id, open_type);
+    }
+  }, [open_type]);
 
   return (
     <div>
@@ -38,8 +58,9 @@ const AppModal = ({ openModal, handleModelClose }) => {
         </Modal.Header>
         <Modal.Body>
           <ConnectorsList
-            connecteduserList={MockConnectorsList}
-            isAllianceList
+            connecteduserList={list.userData || []}
+            allianceIds={list.alianceIds}
+            isConnectorList
           />
         </Modal.Body>
       </Modal>

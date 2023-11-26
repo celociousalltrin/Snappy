@@ -30,6 +30,7 @@ const SingleFeed = () => {
   const init = {
     show: false,
     open_type: "",
+    snapp_id: "",
   };
   const [singleFeedData, setSingleFeedData] = useState({});
 
@@ -170,13 +171,15 @@ const SingleFeed = () => {
                       showLess={showLess}
                     />
                   </p>
-                  <img
-                    src={singleFeedData.snapp_image.secure_url}
-                    alt="pic-img"
-                    width="100%"
-                    height="60%"
-                    className="rounded"
-                  />
+                  {singleFeedData?.snapp_image && (
+                    <img
+                      src={singleFeedData.snapp_image.secure_url}
+                      alt="pic-img"
+                      width="100%"
+                      height="60%"
+                      className="rounded"
+                    />
+                  )}
                   <p className="mt-3 text-muted">
                     {customTimeAgo(singleFeedData.createdAt)}
                   </p>
@@ -185,7 +188,13 @@ const SingleFeed = () => {
                   <p>
                     {singleFeedData.likes_count?.count}
                     <span
-                      onClick={() => setOpenModal({ show: true, open_type: 1 })}
+                      onClick={() =>
+                        setOpenModal({
+                          show: true,
+                          open_type: 1,
+                          snapp_id: singleFeedData._id,
+                        })
+                      }
                     >
                       Likes
                     </span>
@@ -194,7 +203,13 @@ const SingleFeed = () => {
                   <p>
                     {singleFeedData.comments_count?.count}
                     <span
-                      onClick={() => setOpenModal({ show: true, open_type: 2 })}
+                      onClick={() =>
+                        setOpenModal({
+                          show: true,
+                          open_type: 2,
+                          snapp_id: singleFeedData._id,
+                        })
+                      }
                     >
                       Comments
                     </span>
@@ -202,7 +217,13 @@ const SingleFeed = () => {
                   <p>
                     {singleFeedData.bookmarks_count?.count}
                     <span
-                      onClick={() => setOpenModal({ show: true, open_type: 3 })}
+                      onClick={() =>
+                        setOpenModal({
+                          show: true,
+                          open_type: 3,
+                          snapp_id: singleFeedData._id,
+                        })
+                      }
                     >
                       Bookmarks
                     </span>

@@ -224,6 +224,17 @@ export const customTimeAgo = (input) => {
     }
   return time;
 };
+
+export const formatDate = (input) => {
+  const date = new Date(input);
+  const formattedDate = date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  return formattedDate;
+};
+
 export const numberToWord = (number) => {
   if (number < 1 || number > 999) {
     return "Number out of range (1-999)";

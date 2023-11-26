@@ -1,4 +1,5 @@
 const connectorModel = require("../models/connectorModel");
+
 const snappModal = require("../models/snappModal");
 
 const {
@@ -6,8 +7,15 @@ const {
   getSnappBasedOnConnectorsService,
   getSnapps,
   getSingleSnappService,
+  getUserBasedFavouritifySnappsService,
+  getUserSnappsService,
 } = require("../services/snappService");
 const { isValid } = require("../services/validationService");
+const {
+  snappLikes,
+  snappBookmarks,
+  getDbBasedOnType,
+} = require("../utils/mongoCommonQuery");
 const { successResponse, errorResponse } = require("../utils/responseHandler");
 const { responseMessage } = require("../utils/responseMessage");
 
@@ -36,6 +44,44 @@ exports.get_snapps = [
   },
 ];
 
+exports.getUserBasedFavouritifySnapps = [
+  async (req, res) => {
+    const { _id } = req.userDetails;
+    const { type } = req.params;
+    try {
+      const result = await getUserBasedFavouritifySnappsService(
+        getDbBasedOnType(parseInt(type)),
+        _id
+      );
+      return successResponse({
+        res,
+        new_access_token: req.new_access_token,
+        response_data: result,
+      });
+    } catch (err) {
+      console.log("🚀 ~ file: snappController.js:44 ~ err:", err);
+      return errorResponse({ res, responseDetails: responseMessage("ER999") });
+    }
+  },
+];
+
+exports.getUserSnapps = [
+  async (req, res) => {
+    const { _id } = req.userDetails;
+    try {
+      const result = getUserSnappsService(snappModal, _id);
+      return successResponse({
+        res,
+        new_access_token: req.new_access_token,
+        response_data: result,
+      });
+    } catch (err) {
+      console.log("🚀 ~ file: snappController.js:44 ~ err:", err);
+      return errorResponse({ res, responseDetails: responseMessage("ER999") });
+    }
+  },
+];
+
 exports.get_single_snapp = [
   async (req, res) => {
     const { snapp_id } = req.params;
@@ -54,6 +100,7 @@ exports.get_single_snapp = [
     }
   },
 ];
+
 exports.create_snapp = [
   async (req, res) => {
     try {

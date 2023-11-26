@@ -11,6 +11,7 @@ import { feedInfo } from "../../utils/common-data";
 import {
   customTimeAgo,
   displayUserName,
+  formatDate,
   navigateToProfile,
 } from "../../utils/common-function";
 import useListToggleContent from "../../custom-hooks/useListToggleContent";
@@ -27,37 +28,42 @@ import {
 import { responseMessage } from "../../utils/response-message";
 
 const Feeds = ({ feedData, type }) => {
+  const { id } = useParams();
   const [snappLikes, setSnappLikes] = useState([]);
   const [snappBookmarks, setSnappBookmarks] = useState([]);
+  const [list, setList] = useState([]);
 
   useEffect(() => {
+    setList(feedData);
     setSnappLikes(
       feedData.filter((x) => !!x?.likes).map((o) => o.likes.snapp_id)
     );
     setSnappBookmarks(
       feedData.filter((x) => !!x.bookmarks).map((o) => o.bookmarks.snapp_id)
     );
-  }, [feedData]);
+  }, [feedData, id]);
   const { listUniqueId, showLess, showMore } = useListToggleContent();
   const navigate = useNavigate();
   const { page_id } = useParams();
 
-  const feedmetaData = (input) => {
+  const feedmetaData = (input, value) => {
     const feedMeta = feedInfo.find((obj) => obj.type === input);
     return (
       <div className="d-flex mb-2">
         {feedMeta.icon}
-        <p className="mb-1 text-muted fw-bold">{`${feedMeta.value} on 23 july 2022`}</p>
+        <p className="mb-1 text-muted fw-bold">{`${
+          feedMeta.value
+        } on ${formatDate(value)}`}</p>
       </div>
     );
   };
 
-  const handleAddFavouritify = async (e, snapp_id, api, type) => {
+  const handleAddFavouritify = async (e, snapp_id, api, favouritifyName) => {
     e.stopPropagation();
     e.preventDefault();
     try {
       const response = await api({ snapp_id });
-      if (type === "like") {
+      if (favouritifyName === "like") {
         setSnappLikes((prev) => [...prev, snapp_id]);
       } else {
         setSnappBookmarks((prev) => [...prev, snapp_id]);
@@ -69,12 +75,24 @@ const Feeds = ({ feedData, type }) => {
     }
   };
 
-  const handleRemoveFavouritify = async (e, snapp_id, api, type) => {
+  const handleRemoveFavouritify = async (
+    e,
+    snapp_id,
+    api,
+    favouritifyName,
+    favouritifyType
+  ) => {
     e.stopPropagation();
     e.preventDefault();
     try {
       const response = await api(snapp_id);
-      if (type === "like") {
+      if (
+        (favouritifyName === "bookmark" && favouritifyType === 3) ||
+        (favouritifyName === "like" && favouritifyType === 1)
+      ) {
+        setList((prev) => prev.filter((xx) => xx._id !== snapp_id));
+      }
+      if (favouritifyName === "like") {
         setSnappLikes((prev) => prev.filter((x) => x !== snapp_id));
       } else {
         setSnappBookmarks((prev) => prev.filter((x) => x !== snapp_id));
@@ -88,14 +106,14 @@ const Feeds = ({ feedData, type }) => {
 
   return (
     <div>
-      {feedData &&
-        feedData.map((obj) => (
+      {list &&
+        list.map((obj) => (
           <div key={`fd_data${obj._id}`} className="mb-4">
             <div
               className="feed-container rounded cursor-pointer"
               onClick={() => navigate(obj._id)}
             >
-              {type && feedmetaData(type)}
+              {/* {type && feedmetaData(type, obj.bookmarks.createdAt)} */}
               <div className="d-flex">
                 <div>
                   <img
@@ -198,7 +216,8 @@ const Feeds = ({ feedData, type }) => {
                                 e,
                                 obj._id,
                                 removeLike,
-                                "like"
+                                "like",
+                                type
                               )
                             }
                           />
@@ -240,7 +259,8 @@ const Feeds = ({ feedData, type }) => {
                                 e,
                                 obj._id,
                                 removeBookmark,
-                                "bookmark"
+                                "bookmark",
+                                type
                               )
                             }
                           />

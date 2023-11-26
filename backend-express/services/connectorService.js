@@ -5,6 +5,10 @@ const { responseMessage } = require("../utils/responseMessage");
 const userModel = require("../models/userModel");
 const { createNotificationService } = require("./notificationService");
 const notificationModel = require("../models/notificationModel");
+const {
+  connectorListProject,
+  connectorMatchFunction,
+} = require("../utils/mongoCommonQuery");
 
 exports.createConnectorService = async (db, connectorData, res) => {
   try {
@@ -47,34 +51,6 @@ exports.deleteConnectorService = async (db, { alliance_id, fan_id }, res) => {
       err
     );
     return errorResponse({ res, responseDetails: responseMessage("ER999") });
-  }
-};
-
-const connectorListProject = [
-  {
-    $unwind: {
-      path: "$connectorList",
-      preserveNullAndEmptyArrays: true,
-    },
-  },
-  {
-    $project: {
-      _id: 0,
-      _id: "$connectorList._id",
-      first_name: "$connectorList.first_name",
-      last_name: "$connectorList.last_name",
-      user_image: "$connectorList.user_image",
-      user_name: "$connectorList.user_name",
-      about: "$connectorList.about",
-    },
-  },
-];
-
-const connectorMatchFunction = (type, id) => {
-  if (type === 3) {
-    return { alliance_id: new mongoose.Types.ObjectId(id) };
-  } else {
-    return { fan_id: new mongoose.Types.ObjectId(id) };
   }
 };
 
@@ -148,6 +124,74 @@ exports.getConnectorListService = async ({ db, id, res, type }) => {
   } catch (err) {
     console.log(
       "🚀 ~ file: connectorService.js:91 ~ exports.getConnectorListService= ~ err:",
+      err
+    );
+    return errorResponse({ res, responseDetails: responseMessage("ER999") });
+  }
+};
+
+exports.getConnectorFavouritifyService = async ({ db, id, userId, res }) => {
+  try {
+    const result = await db.aggregate([
+      {
+        $match: {
+          snapp_id: new mongoose.Types.ObjectId(id),
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          let: {
+            id: "$user_id",
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $eq: ["$_id", "$$id"],
+                },
+              },
+            },
+            {
+              $project: {
+                first_name: 1,
+                last_name: 1,
+                user_name: 1,
+                user_image: 1,
+                about: 1,
+              },
+            },
+          ],
+          as: "userData",
+        },
+      },
+      {
+        $lookup: {
+          from: "connectors",
+          let: {
+            id: userId,
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $eq: ["$fan_id", "$$id"],
+                },
+              },
+            },
+          ],
+          as: "alianceIds",
+        },
+      },
+    ]);
+
+    return successResponse({
+      res,
+      response_data: result.length > 0 ? result[0] : [],
+    });
+  } catch (err) {
+    console.log(
+      "🚀 ~ file: connectorService.js:137 ~ exports.getConnectorFavouritify= ~ err:",
       err
     );
     return errorResponse({ res, responseDetails: responseMessage("ER999") });

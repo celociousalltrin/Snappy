@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   mockEditProfileInfo,
   mockProfileInfo,
@@ -20,9 +20,14 @@ import AppTextArea from "../app-text-area";
 import "./style.css";
 import AppFramerButton from "../app-framer-button";
 import AppModal from "../app-modal";
+import { responseMessage } from "../../utils/response-message";
+import { getUserFavouritifySnapp, getUserSnapps } from "../../services/method";
 
 const Profile = () => {
   const { id, sec_id } = useParams();
+  const [activeTab, setActiveTab] = useState("snapp");
+  const [list, setList] = useState([]);
+  console.log("🚀 ~ file: index.jsx:30 ~ Profile ~ list:", list);
   const navigate = useNavigate();
   const { pathname, state } = useLocation();
   const [show, setShow] = useState(false);
@@ -36,7 +41,28 @@ const Profile = () => {
     setOpenModal(init);
   };
 
-  const cond = "1";
+  const getList = async ({ api, type }) => {
+    try {
+      let response;
+      if (!!type) {
+        response = await api(type);
+      } else {
+        response = await api();
+      }
+      setList(response.data.response_data);
+    } catch (err) {
+      console.log("🚀 ~ file: index.jsx:45 ~ getList ~ err:", err);
+      responseMessage(err.data.code);
+    }
+  };
+  useEffect(() => {
+    getList({
+      api: activeTab === "snapp" ? getUserSnapps : getUserFavouritifySnapp,
+      type: activeTab === "likes" ? 1 : activeTab === "comments" ? 2 : 0,
+    });
+  }, [activeTab]);
+
+  const cond = 0;
   return (
     <div className="container">
       {id ? (
@@ -145,15 +171,16 @@ const Profile = () => {
               justify="true"
               variant="underline"
               className="profile-container mb-4"
+              onSelect={(key) => setActiveTab(key)}
             >
               <Tab eventKey="snapp" title="Snapps">
-                <Feeds feedData={mockSnappInfo} />
+                <Feeds feedData={list} />
               </Tab>
               <Tab eventKey="likes" title="Likes">
-                <Feeds feedData={mockSnappInfo} type={1} />
+                <Feeds feedData={list} type={1} />
               </Tab>
               <Tab eventKey="comments" title="Comments">
-                <Feeds feedData={mockSnappInfo} type={2} />
+                <Feeds feedData={list} type={2} />
               </Tab>
             </Tabs>
           </div>

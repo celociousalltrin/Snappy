@@ -32,6 +32,9 @@ export const testRoute = () => axios.get("/auth/test-route");
 export const getSnapps = (type) => axios.get(`/snapp/${type}`);
 export const createSnapp = (props) => axios.post("/snapp", props);
 export const getSingleSnapp = (id) => axios.get(`/snapp/single-snapp/${id}`);
+export const getUserFavouritifySnapp = (type) =>
+  axios.get(`/snapp/user-snapps-favouritify/${type}`);
+export const getUserSnapps = () => axios.get("/snapp/user-snapps");
 
 // LIKE APIS
 export const createLike = (props) => axios.post("/like", props);
@@ -58,6 +61,9 @@ export const getConnectorList = () => axios.get("/connector/list");
 
 export const removeConnector = (alliance_id) =>
   axios.delete(`/connector/${alliance_id}`);
+
+export const getFavouritifyConnectorList = (snappId, type) =>
+  axios.get(`/connector/favouritify-connector-list/${snappId}/${type}`);
 
 // NOTIFICATION APIS
 export const createNotification = (props) => axios.post("/notification", props);

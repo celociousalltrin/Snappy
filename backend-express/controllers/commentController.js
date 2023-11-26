@@ -14,7 +14,7 @@ const { responseMessage } = require("../utils/responseMessage");
 const { default: mongoose } = require("mongoose");
 
 const {
-  snappDetails,
+  snappUserDetails,
   snappReplyUserData,
 } = require("../utils/mongoCommonQuery");
 
@@ -35,7 +35,7 @@ exports.createComment = [
             _id: new mongoose.Types.ObjectId(createdComment._id),
           },
         },
-        ...snappDetails,
+        ...snappUserDetails,
       ]);
 
       const { user_id } = await snappModal.findById(req.body.snapp_id);

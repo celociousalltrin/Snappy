@@ -1,10 +1,15 @@
+const bookmarkModel = require("../models/bookmarkModel");
+const commentModal = require("../models/commentModal");
 const connectorModel = require("../models/connectorModel");
+const likedModel = require("../models/likedModel");
 const userModel = require("../models/userModel");
 const {
   createConnectorService,
   deleteConnectorService,
   getConnectorListService,
+  getConnectorFavouritifyService,
 } = require("../services/connectorService");
+const { getDbBasedOnType } = require("../utils/mongoCommonQuery");
 
 exports.createConnector = [
   async (req, res) => {
@@ -85,6 +90,25 @@ exports.getConnectorFanList = [
       });
     } catch (err) {
       console.log("🚀 ~ file: connectorController.js:41 ~ err:", err);
+    }
+  },
+];
+
+exports.getConnectorBasedOnFavouritify = [
+  async (req, res) => {
+    const { snapp_id, type } = req.params;
+
+    const { _id } = req.userDetails;
+
+    try {
+      await getConnectorFavouritifyService({
+        db: getDbBasedOnType(parseInt(type)),
+        id: snapp_id,
+        userId: _id,
+        res,
+      });
+    } catch (err) {
+      console.log("🚀 ~ file: connectorController.js:98 ~ err:", err);
     }
   },
 ];

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppInput from "../../app-input";
 import useListToggleContent from "../../../custom-hooks/useListToggleContent";
 import AppListExpand from "../../app-list-expand";
@@ -32,9 +32,16 @@ const ConnectorsList = ({
   signupConnectedUsers,
   allianceCB = () => {},
   isConnectorList,
+  allianceIds,
 }) => {
   const { showMore, showLess, listUniqueId } = useListToggleContent();
   const [connectorsIDs, setConnectorsIDs] = useState([]);
+
+  useEffect(() => {
+    if (!!allianceIds) {
+      setConnectorsIDs(allianceIds.map((o) => o.alliance_id));
+    }
+  }, [allianceIds]);
 
   const dispatch = useDispatch();
   const { isConnectorChnaged } = useSelector((state) => state.user);

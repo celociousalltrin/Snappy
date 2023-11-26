@@ -1,3 +1,19 @@
+const { default: mongoose } = require("mongoose");
+const likedModel = require("../models/likedModel");
+const commentModal = require("../models/commentModal");
+const bookmarkModel = require("../models/bookmarkModel");
+
+exports.getDbBasedOnType = (type) => {
+  switch (type) {
+    case 1:
+      return likedModel;
+    case 2:
+      return commentModal;
+    case 3:
+      return bookmarkModel;
+  }
+};
+
 exports.snappUserRequired = {
   _id: 0,
   first_name: 1,
@@ -6,7 +22,7 @@ exports.snappUserRequired = {
   user_image: 1,
 };
 
-exports.snappDetails = [
+exports.snappUserDetails = [
   {
     $lookup: {
       from: "users",
@@ -62,6 +78,7 @@ exports.snappLikes = [
           $project: {
             _id: 0,
             snapp_id: 1,
+            createdAt: 1,
           },
         },
       ],
@@ -95,6 +112,7 @@ exports.snappBookmarks = [
           $project: {
             _id: 0,
             snapp_id: 1,
+            createdAt: 1,
           },
         },
       ],
@@ -207,4 +225,32 @@ exports.snappMetaCount = (collectionName, stagename) => {
       },
     },
   ];
+};
+
+exports.connectorListProject = [
+  {
+    $unwind: {
+      path: "$connectorList",
+      preserveNullAndEmptyArrays: true,
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      _id: "$connectorList._id",
+      first_name: "$connectorList.first_name",
+      last_name: "$connectorList.last_name",
+      user_image: "$connectorList.user_image",
+      user_name: "$connectorList.user_name",
+      about: "$connectorList.about",
+    },
+  },
+];
+
+exports.connectorMatchFunction = (type, id) => {
+  if (type === 3) {
+    return { alliance_id: new mongoose.Types.ObjectId(id) };
+  } else {
+    return { fan_id: new mongoose.Types.ObjectId(id) };
+  }
 };
