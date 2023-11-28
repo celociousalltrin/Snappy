@@ -39,6 +39,7 @@ import AppImageDialogueBox from "../app-image-Dialogue-box";
 import { useSelector } from "react-redux";
 import { staticResponseMessage } from "../../utils/static-response-message";
 import { Instagram } from "react-content-loader";
+import toast from "react-hot-toast";
 
 const Profile = () => {
   const { page_id, id, sec_id } = useParams();
@@ -137,13 +138,31 @@ const Profile = () => {
   }, [sec_id]);
   const cond = 0;
 
+  // const handleUpdateProfile = async () => {
+  //   try {
+  //     const response = await updateUserDetails(tempUserData);
+  //     setUserData(({ counts }) => ({ ...response.data.response_data, counts }));
+  //     setShow(false);
+  //     responseMessage(response.data.code);
+  //     setTempUserData({});
+  //   } catch (err) {
+  //     responseMessage(err.data.code);
+  //   }
+  // };
+
   const handleUpdateProfile = async () => {
     try {
-      const response = await updateUserDetails(tempUserData);
+      const promise = updateUserDetails(tempUserData);
+      const loadingToast = toast.promise(promise, {
+        loading: "Updating profile...",
+      });
+
+      const response = await promise;
       setUserData(({ counts }) => ({ ...response.data.response_data, counts }));
       setShow(false);
-      responseMessage(response.data.code);
       setTempUserData({});
+      responseMessage(response.data.code);
+      loadingToast.resolve();
     } catch (err) {
       responseMessage(err.data.code);
     }
