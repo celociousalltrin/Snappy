@@ -7,7 +7,7 @@ import { responseMessage } from "../../utils/response-message";
 import { getUserFavouritifySnapp } from "../../services/method";
 
 const Bookmark = () => {
-  const { id } = useParams();
+  const { id, page_id } = useParams();
   const [list, setList] = useState([]);
 
   const getList = async () => {
@@ -24,7 +24,15 @@ const Bookmark = () => {
     getList();
   }, []);
 
-  return <div>{id ? <SingleFeed /> : <Feeds feedData={list} type={3} />}</div>;
+  return (
+    <div>
+      {id && id !== "user" ? (
+        <SingleFeed />
+      ) : (
+        <Feeds feedData={list} type={3} />
+      )}
+    </div>
+  );
 };
 
 export default Bookmark;

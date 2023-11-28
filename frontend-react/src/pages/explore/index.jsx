@@ -7,7 +7,7 @@ import { responseMessage } from "../../utils/response-message";
 import { getSnapps } from "../../services/method";
 
 const Explore = () => {
-  const { id } = useParams();
+  const { page_id, id } = useParams();
 
   const [feedList, setFeedList] = useState([]);
 
@@ -24,7 +24,11 @@ const Explore = () => {
       responseMessage(err.data.code);
     }
   };
-  return <div>{id ? <SingleFeed /> : <Feeds feedData={feedList} />}</div>;
+  return (
+    <div>
+      {id && id !== "user" ? <SingleFeed /> : <Feeds feedData={feedList} />}
+    </div>
+  );
 };
 
 export default Explore;

@@ -26,8 +26,8 @@ const Home = () => {
               return <HomePage />;
             case "explore":
               return <Explore />;
-            case "messages":
-              return <Message />;
+            // case "messages":
+            //   return <Message />;
             case "connectors":
               return <Connectors />;
             case "notification":

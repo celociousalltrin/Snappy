@@ -149,12 +149,7 @@ const ConnectorsList = ({
                         }`}
                         onClick={(e) =>
                           !isSignup
-                            ? navigateToProfile(
-                                e,
-                                navigate,
-                                obj.snappy_username,
-                                page_id
-                              )
+                            ? navigateToProfile(e, navigate, obj._id, page_id)
                             : null
                         }
                       >

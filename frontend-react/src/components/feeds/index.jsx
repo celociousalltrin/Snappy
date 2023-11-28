@@ -18,7 +18,7 @@ import useListToggleContent from "../../custom-hooks/useListToggleContent";
 import AppListExpand from "../app-list-expand";
 import AppToolTip from "../app-tooltip";
 import AppPopover from "../app-popover";
-import { EditorMockD } from "../../utils/mock-common";
+
 import {
   createBookmark,
   createLike,
@@ -113,7 +113,17 @@ const Feeds = ({ feedData, type }) => {
               className="feed-container rounded cursor-pointer"
               onClick={() => navigate(obj._id)}
             >
-              {/* {type && feedmetaData(type, obj.bookmarks.createdAt)} */}
+              {type &&
+                feedmetaData(
+                  type,
+                  obj[
+                    type === 1
+                      ? "likes"
+                      : type === 2
+                      ? "commentData"
+                      : "bookmarks"
+                  ]?.createdAt
+                )}
               <div className="d-flex">
                 <div>
                   <img
@@ -123,12 +133,7 @@ const Feeds = ({ feedData, type }) => {
                     height="40px"
                     className="feed-profile-image"
                     onClick={(e) =>
-                      navigateToProfile(
-                        e,
-                        navigate,
-                        displayUserName(obj.userData.user_name),
-                        page_id
-                      )
+                      navigateToProfile(e, navigate, obj.user_id, page_id)
                     }
                   />
                 </div>
@@ -137,14 +142,11 @@ const Feeds = ({ feedData, type }) => {
                     {/* <AppPopover type={1}> */}
                     <p
                       className="fw-bold mb-1 profile_name"
-                      onClick={(e) =>
-                        navigateToProfile(
-                          e,
-                          navigate,
-                          obj.snappy_username,
-                          page_id
-                        )
-                      }
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        navigateToProfile(e, navigate, obj.user_id, page_id);
+                      }}
                     >
                       {`${obj.userData.first_name} ${obj.userData.last_name}`}
                     </p>
@@ -183,10 +185,7 @@ const Feeds = ({ feedData, type }) => {
                       className="mt-2 rounded p-2 pb-0"
                     >
                       <p className="fw-bold fs-6 mb-0">Comment:</p>
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Dignissimos, nisi.
-                      </p>
+                      <p className="pb-2">{obj?.commentData?.comment}</p>
                     </div>
                   )}
                   <div className="d-flex justify-content-around mt-2">
@@ -223,13 +222,13 @@ const Feeds = ({ feedData, type }) => {
                           />
                         )}
                       </AppToolTip>
-                      <span className="ms-1">80</span>
+                      <span className="ms-1">{obj?.likes_count?.count}</span>
                     </div>
                     <div>
                       <AppToolTip title="Comment">
                         <FaRegComment size={20} />
                       </AppToolTip>
-                      <span className="ms-1">27</span>
+                      <span className="ms-1">{obj?.comments_count?.count}</span>
                     </div>
                     <div>
                       <AppToolTip

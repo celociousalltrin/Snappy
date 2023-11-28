@@ -75,9 +75,19 @@ const responseData = [
     code: "OK019",
     message: "Notification is fetched",
   },
+
   {
     code: "OK020",
     message: "Notification is removed",
+  },
+  {
+    code: "OK021",
+    message: "User Details Updated",
+  },
+  {
+    code: "OK022",
+    message:
+      "User Password has been Changed. You have been redirected to login screen",
   },
   { code: "ER999", message: "Something went wrong" },
   { code: "ER001", message: "Requested Page not found" },
@@ -101,6 +111,10 @@ const responseData = [
     code: "ER008",
     message:
       "Oops! You have reached your snap limit. However, you can create a new Snapp by deleting the existing Snapp.",
+  },
+  {
+    code: "ER009",
+    message: "Your old Password is Wrong",
   },
   { code: "ER901", message: "Please Autheticate" },
 ];

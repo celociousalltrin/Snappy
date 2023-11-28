@@ -16,10 +16,10 @@ import {
   profileCompletionValid4,
 } from "../utils/multi-step-form-validation";
 
-export const navigateToProfile = (e, navigate, username, pageId) => {
+export const navigateToProfile = (e, navigate, userId, pageId) => {
   e.preventDefault();
   e.stopPropagation();
-  navigate(`/profile/${username}`, { state: { from: pageId } });
+  navigate(`/profile/user/${userId}`, { state: { from: pageId } });
 };
 
 export const isToggleContent = (input, number) => {

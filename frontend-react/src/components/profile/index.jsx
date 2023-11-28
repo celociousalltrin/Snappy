@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   mockEditProfileInfo,
   mockProfileInfo,
@@ -21,20 +21,62 @@ import "./style.css";
 import AppFramerButton from "../app-framer-button";
 import AppModal from "../app-modal";
 import { responseMessage } from "../../utils/response-message";
-import { getUserFavouritifySnapp, getUserSnapps } from "../../services/method";
+import {
+  getAllianceConnectorList,
+  getFanConnectorList,
+  getUserDetails,
+  getUserFavouritifySnapp,
+  getUserSnapps,
+  updateUserDetails,
+} from "../../services/method";
+import {
+  convertFileToDataURL,
+  displayUserName,
+  formatDate,
+} from "../../utils/common-function";
+import ReactDatePicker from "react-datepicker";
+import AppImageDialogueBox from "../app-image-Dialogue-box";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
-  const { id, sec_id } = useParams();
+  const { page_id, id, sec_id } = useParams();
   const [activeTab, setActiveTab] = useState("snapp");
   const [list, setList] = useState([]);
-  console.log("🚀 ~ file: index.jsx:30 ~ Profile ~ list:", list);
+  const [userData, setUserData] = useState({});
+  const [tempUserData, setTempUserData] = useState({});
+
+  const { user_id } = useSelector((state) => state.user.data);
+
   const navigate = useNavigate();
   const { pathname, state } = useLocation();
   const [show, setShow] = useState(false);
+  const [isOpenDialogueBox, setIsOpenDialogueBox] = useState(false);
+  const [selectedImageDataURL, setSelectedImageDataURL] = useState();
+  const [date, setDate] = useState(new Date());
+  const [isBannerImage, setIsBannerImage] = useState(false);
+
+  const handleFileChange = async (e, shape) => {
+    const selectedFile = e.target.files[0];
+    setDate(new Date());
+
+    if (selectedFile) {
+      // We can Create Like this but it does not support on every browser
+      // const imageURL = URL.createObjectURL(selectedFile);
+      const imageURL = await convertFileToDataURL(selectedFile);
+      setSelectedImageDataURL(imageURL);
+      setIsOpenDialogueBox(true);
+      if (shape === "round") {
+        setIsBannerImage(false);
+      } else {
+        setIsBannerImage(true);
+      }
+    }
+  };
 
   const init = {
     show: false,
     open_type: "",
+    snapp_id: "",
   };
   const [openModal, setOpenModal] = useState(init);
   const handleModelClose = () => {
@@ -55,6 +97,7 @@ const Profile = () => {
       responseMessage(err.data.code);
     }
   };
+
   useEffect(() => {
     getList({
       api: activeTab === "snapp" ? getUserSnapps : getUserFavouritifySnapp,
@@ -62,209 +105,397 @@ const Profile = () => {
     });
   }, [activeTab]);
 
+  const getUserData = async (id) => {
+    try {
+      const result = await getUserDetails(id);
+      setUserData(result.data.response_data);
+    } catch (err) {
+      console.log("🚀 ~ file: index.jsx:71 ~ getUserDetails ~ err:", err);
+      responseMessage(err.data.code);
+    }
+  };
+
+  useEffect(() => {
+    getUserData(sec_id ? sec_id : user_id);
+  }, []);
   const cond = 0;
+
+  const handleUpdateProfile = async () => {
+    try {
+      const response = await updateUserDetails(tempUserData);
+      setUserData(({ counts }) => ({ ...response.data.response_data, counts }));
+      setShow(false);
+      responseMessage(response.data.code);
+      setTempUserData({});
+    } catch (err) {
+      responseMessage(err.data.code);
+    }
+  };
+
+  const handleChangeProfile = ({ value, date, url, name }) => {
+    console.log("🚀 ~ file: index.jsx:135 ~ handleChangeProfile ~ name:", name);
+    if (name === "first_name" || name == "last_name") {
+      setTempUserData((prev) => ({ ...prev, [name]: value }));
+    } else if (name === "dob") {
+      setTempUserData((prev) => ({ ...prev, [name]: date }));
+    } else {
+      if (isBannerImage) {
+        setTempUserData((prev) => ({ ...prev, user_banner_image_uri: url }));
+      } else {
+        setTempUserData((prev) => ({ ...prev, user_image_uri: url }));
+      }
+    }
+  };
   return (
     <div className="container">
-      {id ? (
+      {id && id !== "user" ? (
         <SingleFeed />
       ) : (
-        <>
-          <div className="d-flex">
-            <MdOutlineArrowBack
-              size={20}
-              className="me-4 mt-3 cursor-pointer"
-              onClick={() =>
-                navigate(
-                  state
-                    ? `/${state.from}`
-                    : pathname.substring(0, pathname.indexOf("/", 1))
-                )
-              }
-            />
-            <div>
-              <h4 className="fw-bold mb-0">{mockProfileInfo.name}</h4>
-              <p>{`${mockProfileInfo.snapp_count} Snapp`}</p>
+        userData &&
+        Object.keys(userData).length > 0 && (
+          <>
+            <div className="d-flex">
+              <MdOutlineArrowBack
+                size={20}
+                className="me-4 mt-3 cursor-pointer"
+                onClick={() =>
+                  navigate(
+                    state
+                      ? `/${state.from}`
+                      : pathname.substring(0, pathname.indexOf("/", 1))
+                  )
+                }
+              />
+              <div>
+                <h4 className="fw-bold mb-0">{`${userData.first_name} ${userData.last_name}`}</h4>
+                <p>{`${userData.counts.snapp_count} Snapps`}</p>
+              </div>
             </div>
-          </div>
-          <div className="image-container">
-            <img
-              src={mockProfileInfo.banner_img}
-              alt="banner_img"
-              className="banner_img"
-            />
-
-            <img
-              src={mockProfileInfo.profile_img}
-              alt="profile__img"
-              className="profile_cover--img "
-            />
-          </div>
-          <div>
-            {cond ? (
-              <div className="d-flex justify-content-end mt-3">
-                <button
-                  className="btn btn-outline-dark rounded-pill me-3 sm-btn-ctm"
-                  type="button"
-                >
-                  Send Message
-                </button>
-                <AppFramerButton>
+            <div className="image-container">
+              {userData.user_banner_image ? (
+                <img
+                  src={userData.user_banner_image.secure_url}
+                  alt="banner_img"
+                  className="banner_img"
+                />
+              ) : (
+                <div className="banner-no-img"></div>
+              )}
+              <img
+                src={userData.user_image.secure_url}
+                alt="profile__img"
+                className="profile_cover--img "
+              />
+            </div>
+            <div>
+              {cond ? (
+                <div className="d-flex justify-content-end mt-3">
                   <button
-                    className="btn btn-primary rounded-pill sm-btn-ctm"
+                    className="btn btn-outline-dark rounded-pill me-3 sm-btn-ctm"
                     type="button"
                   >
-                    Add Alliance
+                    Send Message
                   </button>
-                </AppFramerButton>
-              </div>
-            ) : (
-              <div className="d-flex justify-content-end">
-                <button
-                  className="btn btn-outline-secondary rounded-pill mt-3"
-                  onClick={() => setShow(true)}
-                >
-                  Edit Profile
-                </button>
-              </div>
-            )}
-          </div>
-          <div className="mt-4 ms-2">
-            <h4 className="fw-bold mb-0">{mockProfileInfo.name}</h4>
-            <p className="text-muted">{`@${mockProfileInfo.snapp_user_name}`}</p>
-            <div>
-              <SlCalender />{" "}
-              <span className="text-muted">{` Joined ${mockProfileInfo.created_at}`}</span>
-            </div>
-            <div className="d-flex">
-              <p className="mt-2">
-                <span className="fw-bold">{mockProfileInfo.fans}</span>{" "}
-                <span
-                  onClick={() => setOpenModal({ show: true, open_type: 4 })}
-                  className="profile-connectors-info"
-                >
-                  Fans
-                </span>
-              </p>
-              <p className="mt-2 ms-3">
-                {mockProfileInfo.alliances ? (
-                  <>
-                    {" "}
-                    <span className="fw-bold">
-                      {mockProfileInfo.alliances}
-                    </span>{" "}
-                    <span
-                      onClick={() => setOpenModal({ show: true, open_type: 5 })}
-                      className="profile-alliances-info"
+                  <AppFramerButton>
+                    <button
+                      className="btn btn-primary rounded-pill sm-btn-ctm"
+                      type="button"
                     >
-                      Alliances
-                    </span>{" "}
-                  </>
-                ) : (
-                  "No Mutuals"
-                )}
+                      Add Alliance
+                    </button>
+                  </AppFramerButton>
+                </div>
+              ) : (
+                !sec_id && (
+                  <div className="d-flex justify-content-end">
+                    <button
+                      className="btn btn-outline-secondary rounded-pill mt-3"
+                      onClick={() => setShow(true)}
+                    >
+                      Edit Profile
+                    </button>
+                  </div>
+                )
+              )}
+            </div>
+            <div className={`mt-4 ms-2 ${sec_id && "pt-5"}`}>
+              <h4 className="fw-bold mb-0">{`${userData.first_name} ${userData.last_name}`}</h4>
+              <p className="text-muted">
+                {displayUserName(userData.user_name)}
               </p>
+              <div>
+                <SlCalender />{" "}
+                <span className="text-muted">{` Joined ${formatDate(
+                  userData?.createdAt
+                )}`}</span>
+              </div>
+              <div className="d-flex">
+                <p className="mt-2">
+                  <span className="fw-bold">{userData.counts.total_fans}</span>{" "}
+                  <span
+                    onClick={() =>
+                      setOpenModal({
+                        show: true,
+                        open_type: 4,
+                        snapp_id: sec_id ? sec_id : user_id,
+                      })
+                    }
+                    className="profile-connectors-info"
+                  >
+                    Fans
+                  </span>
+                </p>
+                <p className="mt-2 ms-3">
+                  {mockProfileInfo.alliances ? (
+                    <>
+                      {" "}
+                      <span className="fw-bold">
+                        {userData.counts.total_alliance}
+                      </span>{" "}
+                      <span
+                        onClick={() =>
+                          setOpenModal({
+                            show: true,
+                            open_type: 5,
+                            snapp_id: sec_id ? sec_id : user_id,
+                          })
+                        }
+                        className="profile-alliances-info"
+                      >
+                        Alliances
+                      </span>{" "}
+                    </>
+                  ) : (
+                    "No Mutuals"
+                  )}
+                </p>
+              </div>
             </div>
-          </div>
-          <div>
-            <Tabs
-              defaultActiveKey="snapp"
-              justify="true"
-              variant="underline"
-              className="profile-container mb-4"
-              onSelect={(key) => setActiveTab(key)}
-            >
-              <Tab eventKey="snapp" title="Snapps">
-                <Feeds feedData={list} />
-              </Tab>
-              <Tab eventKey="likes" title="Likes">
-                <Feeds feedData={list} type={1} />
-              </Tab>
-              <Tab eventKey="comments" title="Comments">
-                <Feeds feedData={list} type={2} />
-              </Tab>
-            </Tabs>
-          </div>
-        </>
+            <div>
+              <Tabs
+                defaultActiveKey="snapp"
+                justify="true"
+                variant="underline"
+                className="profile-container mb-4"
+                onSelect={(key) => setActiveTab(key)}
+              >
+                <Tab eventKey="snapp" title="Snapps">
+                  <Feeds feedData={list} />
+                </Tab>
+                <Tab eventKey="likes" title="Likes">
+                  <Feeds feedData={list} type={1} />
+                </Tab>
+                <Tab eventKey="comments" title="Comments">
+                  <Feeds feedData={list} type={2} />
+                </Tab>
+              </Tabs>
+            </div>
+          </>
+        )
       )}
-      <AppModal openModal={openModal} handleModelClose={handleModelClose} />
-      <Modal
-        show={show}
-        onHide={() => setShow(false)}
-        backdrop="static"
-        keyboard={false}
-        size="lg"
-        scrollable={true}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Profile</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div>
-            <div className="mb-5">
-              <div className="position-relative">
+      <AppModal
+        openModal={openModal}
+        handleModelClose={handleModelClose}
+        isProfile
+        userId={sec_id ? sec_id : user_id}
+        api={
+          openModal.open_type === 4
+            ? getFanConnectorList
+            : getAllianceConnectorList
+        }
+      />
+      {userData && (
+        <Modal
+          show={show}
+          onHide={() => {
+            setShow(false);
+            setTempUserData({});
+          }}
+          backdrop="static"
+          keyboard={false}
+          size="lg"
+          scrollable={true}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Profile</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div>
+              <div className="mb-5">
                 <div className="position-relative">
-                  <img
-                    src={mockEditProfileInfo.banner_img}
-                    alt="banner_img"
-                    width="100%"
-                    height="200vh"
-                    className="banner_img"
-                  />
-                  <TbCameraPlus
-                    size={45}
-                    className="edit-profile__camicon position-absolute top-50 start-50 translate-middle"
-                  />
+                  <div className="position-relative">
+                    {userData?.user_banner_image ||
+                    tempUserData?.user_banner_image_uri ? (
+                      <img
+                        src={
+                          tempUserData?.user_banner_image_uri
+                            ? tempUserData?.user_banner_image_uri
+                            : userData?.user_banner_image?.secure_url
+                        }
+                        alt="banner_img"
+                        width="100%"
+                        height="200vh"
+                        className="banner_img"
+                      />
+                    ) : (
+                      <div className="banner-no-img"></div>
+                    )}
+                    <label htmlFor="fileInput1">
+                      <TbCameraPlus
+                        size={45}
+                        className="edit-profile__camicon position-absolute top-50 start-50 translate-middle"
+                      />
+                    </label>
+                    <input
+                      type="file"
+                      id="fileInput1"
+                      key={date}
+                      style={{ display: "none" }}
+                      onChange={(e) => handleFileChange(e, "rect")}
+                      name="myFile"
+                    />
+                  </div>
+                </div>
+                <div className="position-absolute edit-prof-container">
+                  <div className="edit-prof">
+                    <img
+                      src={
+                        tempUserData?.user_image_uri
+                          ? tempUserData?.user_image_uri
+                          : userData?.user_image?.secure_url
+                      }
+                      alt="profile-img"
+                      width="130px"
+                      height="130px"
+                      className="rounded-circle edit-profile-img"
+                    />
+                    <label htmlFor="fileInput">
+                      <TbCameraPlus
+                        size={50}
+                        className="edit-profile__camicon1 position-absolute start-50 top-50 translate-middle"
+                      />
+                    </label>
+                    <input
+                      type="file"
+                      id="fileInput"
+                      key={date}
+                      style={{ display: "none" }}
+                      onChange={(e) => handleFileChange(e, "round")}
+                      name="myFile"
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="position-absolute edit-prof-container">
-                <div className="edit-prof">
-                  <img
-                    src={mockEditProfileInfo.profile_img}
-                    alt="profile-img"
-                    width="130px"
-                    height="130px"
-                    className="rounded-circle edit-profile-img"
-                  />
-                  <TbCameraPlus
-                    size={50}
-                    className="edit-profile__camicon1 position-absolute start-50 top-50 translate-middle"
-                  />
+
+              <div className="mt-5 p-3 row">
+                <div className="col-12 col-md-6">
+                  <Form.Group className="mb-3">
+                    <Form.Label>
+                      First Name <span className="text-danger">*</span>
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="First Name"
+                      name="first_name"
+                      value={
+                        tempUserData?.first_name
+                          ? tempUserData?.first_name
+                          : userData.first_name
+                      }
+                      onChange={(e) =>
+                        handleChangeProfile({
+                          value: e.target.value,
+                          name: e.target.name,
+                        })
+                      }
+                    />
+                  </Form.Group>
+                </div>
+                <div className="col-12 col-md-6">
+                  <Form.Group className="mb-3">
+                    <Form.Label>
+                      Last Name <span className="text-danger">*</span>
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Last Name"
+                      name="last_name"
+                      value={
+                        tempUserData?.last_name
+                          ? tempUserData?.last_name
+                          : userData.last_name
+                      }
+                      onChange={(e) =>
+                        handleChangeProfile({
+                          value: e.target.value,
+                          name: e.target.name,
+                        })
+                      }
+                    />
+                  </Form.Group>
+                </div>
+                <div className="col-12 col-md-6">
+                  <Form.Group className="mb-3 mt-2">
+                    <Form.Label>Birth Date</Form.Label>
+                    <ReactDatePicker
+                      className="signup-date-picker"
+                      placeholderText="Date Of Birth"
+                      selected={
+                        tempUserData?.dob
+                          ? new Date(tempUserData?.dob)
+                          : new Date(userData.dob)
+                      }
+                      // onChange={(date) =>
+                      //   setFieldValue("dob", date.toISOString())
+                      // }
+                      onChange={(date) =>
+                        handleChangeProfile({
+                          date: date.toISOString(),
+                          name: "dob",
+                        })
+                      }
+                      peekNextMonth
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
+                    />
+                  </Form.Group>
                 </div>
               </div>
             </div>
-            <div className="mt-5 pt-3">
-              <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="text" placeholder="Name" />
-              </Form.Group>
-
-              <label>Bio</label>
-              <AppTextArea
-                placeholder="Add Your Bio"
-                rows="1"
-                cols="80"
-                type={1}
-              />
-
-              <Form.Group className="mb-3 mt-2">
-                <Form.Label>Birth Date</Form.Label>
-                <Form.Control type="text" placeholder="DOB" />
-              </Form.Group>
-            </div>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <button className="btn btn-danger" onClick={() => setShow(false)}>
-            Close
-          </button>
-          <button
-            className="btn btn-primary ms-3"
-            onClick={() => setShow(false)}
-          >
-            Save Changes
-          </button>
-        </Modal.Footer>
-      </Modal>
+          </Modal.Body>
+          <Modal.Footer>
+            <button
+              className="btn btn-danger"
+              onClick={() => {
+                setShow(false);
+                setTempUserData({});
+              }}
+            >
+              Close
+            </button>
+            <button
+              className="btn btn-primary ms-3"
+              onClick={handleUpdateProfile}
+            >
+              Save Changes
+            </button>
+          </Modal.Footer>
+        </Modal>
+      )}
+      <AppImageDialogueBox
+        show={isOpenDialogueBox}
+        setShow={setIsOpenDialogueBox}
+        setSelectedImageDataURL={setSelectedImageDataURL}
+        selectedImageDataURL={selectedImageDataURL}
+        callback={(url) => {
+          // setFieldValue("user_data_url", url);
+          handleChangeProfile({ url: url });
+        }}
+        isProfile={isBannerImage ? false : true}
+        width={isBannerImage && 16}
+        height={isBannerImage && 9}
+      />
     </div>
   );
 };

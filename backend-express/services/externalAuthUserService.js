@@ -13,6 +13,7 @@ exports.loginExternalAuthenticatedUserService = async (db, res, req) => {
       user_name,
       is_external_authenticated_user,
       user_image: { public_id },
+      _id,
     } = await db.findOne({
       email: user_email,
     });
@@ -30,6 +31,7 @@ exports.loginExternalAuthenticatedUserService = async (db, res, req) => {
       user_name: "",
       user_email,
       public_id,
+      user_id: _id,
       is_external_authenticated_user,
       access_token: generateAccessToken({ user_email }),
     };

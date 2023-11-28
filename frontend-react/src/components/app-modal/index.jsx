@@ -9,14 +9,20 @@ import { AiOutlineClose } from "react-icons/ai";
 import { responseMessage } from "../../utils/response-message";
 import { getFavouritifyConnectorList } from "../../services/method";
 
-const AppModal = ({ openModal, handleModelClose }) => {
+const AppModal = ({ openModal, handleModelClose, api, isProfile, userId }) => {
   const { open_type, show, snapp_id } = openModal;
 
   const [list, setlist] = useState([]);
 
   const getList = async (id, type) => {
     try {
-      const response = await getFavouritifyConnectorList(id, type);
+      let response;
+      if (isProfile) {
+        response = await api(userId);
+      } else {
+        response = await getFavouritifyConnectorList(id, type);
+      }
+
       setlist(response.data.response_data);
     } catch (err) {
       responseMessage(err.data.code);
@@ -57,11 +63,19 @@ const AppModal = ({ openModal, handleModelClose }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ConnectorsList
-            connecteduserList={list.userData || []}
-            allianceIds={list.alianceIds}
-            isConnectorList
-          />
+          {isProfile ? (
+            <ConnectorsList
+              connecteduserList={list}
+              isFansList={open_type === 4 ? true : false}
+              isAllianceList={open_type === 5 ? true : false}
+            />
+          ) : (
+            <ConnectorsList
+              connecteduserList={list.userData || []}
+              allianceIds={list.alianceIds}
+              isConnectorList
+            />
+          )}
         </Modal.Body>
       </Modal>
     </div>

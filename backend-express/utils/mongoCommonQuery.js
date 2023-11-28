@@ -22,6 +22,47 @@ exports.snappUserRequired = {
   user_image: 1,
 };
 
+exports.snappLatestComment = [
+  {
+    $lookup: {
+      from: "comments",
+      let: {
+        id: "$_id",
+      },
+      pipeline: [
+        {
+          $match: {
+            $expr: {
+              $eq: ["$snapp_id", "$$id"],
+            },
+          },
+        },
+        {
+          $sort: {
+            createdAt: -1,
+          },
+        },
+        {
+          $limit: 1,
+        },
+        {
+          $project: {
+            comment: 1,
+            createdAt: 1,
+          },
+        },
+      ],
+      as: "commentData",
+    },
+  },
+  {
+    $unwind: {
+      path: "$commentData",
+      preserveNullAndEmptyArrays: true,
+    },
+  },
+];
+
 exports.snappUserDetails = [
   {
     $lookup: {

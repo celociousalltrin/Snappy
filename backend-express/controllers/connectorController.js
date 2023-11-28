@@ -62,12 +62,12 @@ exports.getConnectorList = [
 
 exports.getConnectorAllianceList = [
   async (req, res) => {
-    const { _id } = req.userDetails;
+    const { id } = req.params;
 
     try {
       await getConnectorListService({
         db: connectorModel,
-        id: _id,
+        id,
         res,
         type: 2,
       });
@@ -79,12 +79,13 @@ exports.getConnectorAllianceList = [
 
 exports.getConnectorFanList = [
   async (req, res) => {
-    const { _id } = req.userDetails;
+    const { id } = req.params;
+    console.log("🚀 ~ file: connectorController.js:83 ~ id:", id);
 
     try {
       await getConnectorListService({
         db: connectorModel,
-        id: _id,
+        id,
         res,
         type: 3,
       });

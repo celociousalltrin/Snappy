@@ -79,6 +79,7 @@ exports.loginService = async (db, userData, res) => {
       last_name,
       user_image: { public_id },
       is_external_authenticated_user,
+      _id,
     } = getUser;
 
     const hash = bcrypt.compareSync(password, getUser.password);
@@ -98,6 +99,7 @@ exports.loginService = async (db, userData, res) => {
       first_name,
       last_name,
       public_id,
+      user_id: _id,
       is_external_authenticated_user,
       access_token: generateAccessToken({ user_email }),
     };

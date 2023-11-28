@@ -35,7 +35,6 @@ const Snapp = () => {
           "emoji",
           "link",
           "mention",
-          "hashtag",
         ]}
         isToolbarIcon
         toolbarCustomComponent={<EditorToolbarImageIcon />}

@@ -76,9 +76,9 @@ const Header = () => {
                 <NavDropdown.Item onClick={() => navigate("/setting")}>
                   <FaCog /> Setting
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => navigate("/messages")}>
+                {/* <NavDropdown.Item onClick={() => navigate("/messages")}>
                   <BsFillChatFill /> Messages
-                </NavDropdown.Item>
+                </NavDropdown.Item> */}
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => navigate("/logout")}>
                   <FaSignOutAlt /> Log Out

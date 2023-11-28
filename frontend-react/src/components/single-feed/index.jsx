@@ -71,6 +71,16 @@ const SingleFeed = () => {
         snapp_comments: [...prev.snapp_comments, response.data.response_data],
       }));
 
+      setSingleFeedData((prev) => ({
+        ...prev,
+        comments_count: {
+          ...prev.comments_count,
+          count: prev.comments_count?.count
+            ? prev.comments_count?.count + 1
+            : 0 + 1,
+        },
+      }));
+
       responseMessage(response.data.code);
     } catch (err) {
       console.log("🚀 ~ file: index.jsx:35 ~ handleAddComment ~ err:", err);

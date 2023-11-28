@@ -27,19 +27,24 @@ const NotificationList = ({ list }) => {
   }, [list]);
 
   const displayNotificationButton = (type) => {
+    console.log(
+      "🚀 ~ file: index.jsx:30 ~ displayNotificationButton ~ type:",
+      type
+    );
     if ([1, 2, 3].includes(type)) {
       return (
         <button className="btn btn-sm btn-primary mt-2 ms-2" type="button">
           View
         </button>
       );
-    } else {
-      return (
-        <button className="btn btn-sm btn-info mt-2 ms-2" type="button">
-          Send Greeting
-        </button>
-      );
     }
+    //  else {
+    //   return (
+    //     <button className="btn btn-sm btn-info mt-2 ms-2" type="button">
+    //       Send Greeting
+    //     </button>
+    //   );
+    // }
   };
   const notificationMessage = (type, name) => {
     let msg;
@@ -105,7 +110,7 @@ const NotificationList = ({ list }) => {
     <div className="container">
       {notifyList.length > 0 && (
         <button
-          className="d-flex ms-auto btn btn-danger btn-sm"
+          className="d-flex ms-auto btn btn-danger btn-sm mb-4"
           type="button"
           onClick={handleClearAllNotification}
         >
@@ -144,7 +149,9 @@ const NotificationList = ({ list }) => {
                 `${obj.userData.first_name} ${obj.userData.last_name}`
               )}
             </div>
-            {obj.type !== 5 && <div>{displayNotificationButton(obj.type)}</div>}
+            {obj.type !== 5 && (
+              <div>{displayNotificationButton(obj.notify_type)}</div>
+            )}
           </div>
           <AiOutlineClose
             onClick={(e) => handleCloseNotification(e, obj._id)}

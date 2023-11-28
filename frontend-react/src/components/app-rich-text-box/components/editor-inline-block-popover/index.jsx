@@ -33,7 +33,7 @@ const EditorInlineBlockPopover = ({
 
   return (
     <div ref={popoverRef} className="editor-inline-block-popover">
-      {mentionUsers.map((user, i) => {
+      {mentionUsers.map(({ user_name }, i) => {
         return (
           <p
             className={
@@ -42,7 +42,7 @@ const EditorInlineBlockPopover = ({
                 : "editor-inline-block-not-selected"
             }
           >
-            {user}
+            {user_name.toLowerCase().replace(/\s+/g, "_")}
           </p>
         );
       })}

@@ -11,12 +11,12 @@ import SingleFeed from "../single-feed";
 import { singleFeedData } from "../../utils/mock-common";
 
 const HomePage = () => {
-  const { id } = useParams();
+  const { id, page_id } = useParams();
   const [activeTab, setActiveTab] = useState("feed-for-you");
 
   return (
     <>
-      {id ? (
+      {id && id !== "user" ? (
         <SingleFeed />
       ) : (
         <Tabs

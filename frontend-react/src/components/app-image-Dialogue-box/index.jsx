@@ -14,6 +14,8 @@ const AppImageDialogueBox = ({
   setSelectedImageDataURL,
   callback = () => {},
   isProfile,
+  width,
+  height,
 }) => {
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
@@ -39,6 +41,8 @@ const AppImageDialogueBox = ({
             image={selectedImageDataURL}
             setCroppedAreaPixels={setCroppedAreaPixels}
             {...(isProfile && { shape: "round" })}
+            {...(width && { width })}
+            {...(height && { height })}
           />
         </Modal.Body>
         <Modal.Footer>

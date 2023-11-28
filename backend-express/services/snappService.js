@@ -8,6 +8,7 @@ const {
   snappLikes,
   snappMetaCount,
   snappReplyUserData,
+  snappLatestComment,
 } = require("../utils/mongoCommonQuery");
 
 exports.createSnappService = async (db, snappData, res) => {
@@ -163,6 +164,7 @@ exports.getSingleSnappService = async (db, snappId, userId) => {
 };
 
 exports.getSnapps = async (db, id) => {
+  console.log("🚀 ~ file: snappService.js:167 ~ exports.getSnapps= ~ id:", id);
   try {
     const result = await db.aggregate([
       {
@@ -177,6 +179,8 @@ exports.getSnapps = async (db, id) => {
           createdAt: -1,
         },
       },
+      ...snappMetaCount("likes", "likes_count"),
+      ...snappMetaCount("comments", "comments_count"),
       ...snappUserDetails,
       ...snappLikes,
       ...snappBookmarks,
@@ -190,9 +194,9 @@ exports.getSnapps = async (db, id) => {
   }
 };
 
-exports.getUserBasedFavouritifySnappsService = async (db, userId) => {
+exports.getUserBasedFavouritifySnappsService = async (db, userId, type) => {
   try {
-    const result = await db.aggregate([
+    let pipeline = [
       {
         $match: {
           user_id: new mongoose.Types.ObjectId(userId),
@@ -235,7 +239,14 @@ exports.getUserBasedFavouritifySnappsService = async (db, userId) => {
       ...snappLikes,
       ...snappBookmarks,
       ...snappMetaCount("likes", "likes_count"),
-    ]);
+    ];
+
+    if (type === "2") {
+      pipeline = pipeline.concat(snappLatestComment);
+    }
+
+    const result = await db.aggregate(pipeline);
+
     return result.length > 0 ? result : [];
   } catch (err) {
     console.log(

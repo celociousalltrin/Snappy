@@ -8,7 +8,7 @@ import "./style.css";
 const DiscoverPanel = () => {
   return (
     <div className="me-5 pe-3 ms-2 row discover-container">
-      <DiscoverSearch />
+      {/* <DiscoverSearch /> */}
       <AllianceList />
       <ExperimentalFeatures />
     </div>

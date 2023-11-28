@@ -76,10 +76,11 @@ export const renderElement = (props, navigate) => {
           style={{ color: "rgb(38, 114, 165)" }}
           onClick={(e) => {
             e.preventDefault();
-            navigate(`/profile/${element.character}`);
+            e.stopPropagation();
+            navigate(`/profile/user/${element.user_id}`);
           }}
         >
-          @{element.character}
+          @{element.character.toLowerCase().replace(/\s+/g, "_")}
         </span>
       );
     case "hashtag":

@@ -27,7 +27,7 @@ export const appRouter = { navigate: null };
 export const sideBarData = [
   { id: 1, name: "Home", icon: <FaHome />, route: "/home" },
   { id: 2, name: "Explore", icon: <FaSearch />, route: "/explore" },
-  { id: 3, name: "Messages", icon: <BsFillChatFill />, route: "/messages" },
+  // { id: 3, name: "Messages", icon: <BsFillChatFill />, route: "/messages" },
   { id: 4, name: "Connectors", icon: <FaUserFriends />, route: "/connectors" },
   { id: 5, name: "Notifications", icon: <FaBell />, route: "/notification" },
   { id: 6, name: "Bookmarks", icon: <FaBookmark />, route: "/bookmark" },
@@ -115,9 +115,7 @@ export const feedInfo = [
   {
     type: 1,
     value: "Liked",
-    icon: (
-      <AiTwotoneLike className="align-self-center me-2 ms-2" color="blue" />
-    ),
+    icon: <AiTwotoneLike className="align-self-center me-2 ms-2" />,
   },
   {
     type: 2,

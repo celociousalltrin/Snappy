@@ -10,12 +10,12 @@ const {
 var router = express.Router();
 
 router.get("/list", getConnectorList);
-router.get("/fan-list", getConnectorFanList);
+router.get("/fan-list/:id", getConnectorFanList);
 router.get(
   "/favouritify-connector-list/:snapp_id/:type",
   getConnectorBasedOnFavouritify
 );
-router.get("/alliance-list", getConnectorAllianceList);
+router.get("/alliance-list/:id", getConnectorAllianceList);
 router.post("/", createConnector);
 router.delete("/:alliance_id", deleteConnector);
 

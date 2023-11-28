@@ -47,11 +47,13 @@ exports.get_snapps = [
 exports.getUserBasedFavouritifySnapps = [
   async (req, res) => {
     const { _id } = req.userDetails;
+    console.log("🚀 ~ file: snappController.js:50 ~ _id:", _id);
     const { type } = req.params;
     try {
       const result = await getUserBasedFavouritifySnappsService(
         getDbBasedOnType(parseInt(type)),
-        _id
+        _id,
+        type
       );
       return successResponse({
         res,
@@ -69,7 +71,7 @@ exports.getUserSnapps = [
   async (req, res) => {
     const { _id } = req.userDetails;
     try {
-      const result = getUserSnappsService(snappModal, _id);
+      const result = await getUserSnappsService(snappModal, _id);
       return successResponse({
         res,
         new_access_token: req.new_access_token,

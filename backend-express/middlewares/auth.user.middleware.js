@@ -55,7 +55,6 @@ module.exports = async (req, res, next) => {
     });
 
     req.userDetails = userDetails;
-
     next();
   } catch (err) {
     console.log(

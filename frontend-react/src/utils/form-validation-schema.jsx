@@ -51,3 +51,8 @@ export const editorLinkSchema = yup.object().shape({
   editor_link_text: yup.string().required("It is required"),
   editor_link: yup.string().url("Invalid Url").required("It is required"),
 });
+
+export const changePasswordSchema = yup.object().shape({
+  old_password: passwordSchema,
+  new_password: passwordSchema,
+});

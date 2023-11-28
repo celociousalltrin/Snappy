@@ -14,6 +14,7 @@ var logoutRouter = require("../routes/logout");
 var externalAuthUserRouter = require("../routes/external-auth-user");
 var authUserMiddleware = require("../middlewares/auth.user.middleware");
 var externalAuthUserMiddleware = require("../middlewares/external.auth.user.middleware");
+var userRouter = require("./user");
 
 var router = express.Router();
 
@@ -29,6 +30,7 @@ router.use(
 );
 router.use("/validation", validationRouter);
 router.use("/snapp", authUserMiddleware, snappRouter);
+router.use("/user", authUserMiddleware, userRouter);
 router.use("/like", authUserMiddleware, likeRouter);
 router.use("/bookmark", authUserMiddleware, bookmarkRouter);
 router.use("/connector", authUserMiddleware, connectorRouter);
