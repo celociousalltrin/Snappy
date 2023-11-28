@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import { AiOutlineLike } from "react-icons/ai";
-import { FaRegBookmark, FaRegComment, FaReply } from "react-icons/fa";
+import { AiFillLike, AiOutlineLike } from "react-icons/ai";
+import {
+  FaBookmark,
+  FaRegBookmark,
+  FaRegComment,
+  FaReply,
+} from "react-icons/fa";
 
 import commentProfile from "../../assets/mock-image/5mutual.jpg";
 
@@ -35,7 +40,7 @@ const SingleFeed = () => {
     snapp_id: "",
   };
   const [singleFeedData, setSingleFeedData] = useState({});
-  const { user_image } = useSelector((state) => state.user.data);
+  const data = useSelector((state) => state.user.data);
 
   const { listUniqueId, showLess, showMore } = useListToggleContent();
 
@@ -250,7 +255,13 @@ const SingleFeed = () => {
                     <div className="d-flex justify-content-around mt-3 pb-3 border-bottom">
                       <div>
                         <AppToolTip title="like">
-                          <AiOutlineLike size={20} className="cursor-pointer" />
+                          {!singleFeedData.snappLikedUserIds?.some(
+                            ({ user_id }) => user_id == data.user_id
+                          ) ? (
+                            <AiOutlineLike size={20} />
+                          ) : (
+                            <AiFillLike size={20} />
+                          )}
                         </AppToolTip>
                         <span>{singleFeedData.likes_count?.count}</span>
                       </div>
@@ -262,14 +273,20 @@ const SingleFeed = () => {
                       </div>
                       <div>
                         <AppToolTip title="Bookmark">
-                          <FaRegBookmark size={20} className="cursor-pointer" />
+                          {!singleFeedData.snappBookmarkedUserIds?.some(
+                            ({ user_id }) => user_id == data.user_id
+                          ) ? (
+                            <FaRegBookmark size={20} />
+                          ) : (
+                            <FaBookmark size={20} />
+                          )}
                         </AppToolTip>
                       </div>
                     </div>
                     <div className="mt-3">
                       <div className="d-flex">
                         <img
-                          src={user_image.secure_url}
+                          src={data.user_image.secure_url}
                           alt="comment-profile"
                           width="40px"
                           height="40px"

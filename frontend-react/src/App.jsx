@@ -18,6 +18,7 @@ import ExternalAuthenticate from "./pages/external-authenticate";
 import ProfileCompletion from "./pages/profile-completion";
 
 import { appRouter } from "./utils/common-data";
+import { useSelector } from "react-redux";
 
 function App() {
   return (
@@ -42,10 +43,14 @@ function App() {
 const AppRoutes = () => {
   const navigate = useNavigate();
   appRouter.navigate = navigate;
+  const { access_token } = useSelector((state) => state.user.data);
   return (
     <>
       <Routes>
-        <Route path="/" element={<Explore />} />
+        <Route
+          path="/"
+          element={access_token ? <Navigate to="/home" /> : <Login />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signup-success" element={<SignupSuccess />} />

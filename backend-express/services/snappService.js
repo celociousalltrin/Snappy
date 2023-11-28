@@ -113,6 +113,8 @@ exports.getSingleSnappService = async (db, snappId, userId) => {
       ...snappMetaCount("likes", "likes_count"),
       ...snappMetaCount("comments", "comments_count"),
       ...snappMetaCount("bookmarks", "bookmarks_count"),
+      ...snappLikedUserIds,
+      ...snappBookmarkedUserIds,
       {
         $lookup: {
           from: "comments",

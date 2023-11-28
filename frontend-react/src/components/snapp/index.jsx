@@ -52,7 +52,7 @@ export const EditorToolbarImageIcon = () => {
   const { user_image } = useSelector((state) => state.user.data);
   return (
     <img
-      src={user_image.secure_url}
+      src={user_image?.secure_url}
       className="editor-user-profile"
       width="50px"
       height="50px"
