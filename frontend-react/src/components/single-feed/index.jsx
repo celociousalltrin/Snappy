@@ -151,7 +151,7 @@ const SingleFeed = () => {
                         navigateToProfile(
                           e,
                           navigate,
-                          displayUserName(singleFeedData.userData.user_name),
+                          singleFeedData.user_id,
                           page_id
                         )
                       }
@@ -163,7 +163,7 @@ const SingleFeed = () => {
                           navigateToProfile(
                             e,
                             navigate,
-                            displayUserName(singleFeedData.userData.user_name),
+                            singleFeedData.user_id,
                             page_id
                           )
                         }
@@ -318,7 +318,7 @@ const SingleFeed = () => {
                                     navigateToProfile(
                                       e,
                                       navigate,
-                                      displayUserName(obj.userData.user_name),
+                                      obj.user_id,
                                       page_id
                                     )
                                   }
