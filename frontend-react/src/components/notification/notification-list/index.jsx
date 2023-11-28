@@ -11,8 +11,11 @@ import {
   clearSingleNotification,
   readNotification,
 } from "../../../services/method";
+import AppNoDataFound from "../../app-no-data-found";
+import { IoNotificationsOffCircleSharp } from "react-icons/io5";
+import { BulletList } from "react-content-loader";
 
-const NotificationList = ({ list }) => {
+const NotificationList = ({ list, isApiExecuted }) => {
   const navigate = useNavigate();
 
   const [tempReadNotificationIds, setTempReadNotifdicationIds] = useState([]);
@@ -108,58 +111,73 @@ const NotificationList = ({ list }) => {
 
   return (
     <div className="container">
-      {notifyList.length > 0 && (
-        <button
-          className="d-flex ms-auto btn btn-danger btn-sm mb-4"
-          type="button"
-          onClick={handleClearAllNotification}
-        >
-          Clear All notification
-        </button>
-      )}
-      {notifyList.map((obj) => (
-        <div
-          key={`ntfy_lst${obj._id}`}
-          className={`d-flex mb-4 pb-3 rounded notify-container position-relative ${
-            tempReadNotificationIds.includes(obj._id) || obj.is_read
-              ? ""
-              : "notify-container--unread"
-          }`}
-          onClick={() => handlereadNotification(obj._id)}
-        >
-          <div>
-            <img
-              src={obj.userData.user_image.secure_url}
-              alt="profile_image"
-              width="50px"
-              height="50px"
-              className="notification_profile--img "
-            />
-          </div>
-          <div>
-            <div className="d-flex mt-2 ms-2">
-              <p className="fw-bold mb-0">{`${obj.userData.first_name} ${obj.userData.last_name}`}</p>
-              <p className="text-muted ms-2 mb-0">
-                {displayUserName(obj.userData.user_name)}
-              </p>
-            </div>
-            <div className="ms-2">
-              {notificationMessage(
-                obj.notify_type,
-                `${obj.userData.first_name} ${obj.userData.last_name}`
+      {isApiExecuted ? (
+        <>
+          {list.length > 0 ? (
+            <>
+              {notifyList.length > 0 && (
+                <button
+                  className="d-flex ms-auto btn btn-danger btn-sm mb-4"
+                  type="button"
+                  onClick={handleClearAllNotification}
+                >
+                  Clear All notification
+                </button>
               )}
-            </div>
-            {obj.type !== 5 && (
-              <div>{displayNotificationButton(obj.notify_type)}</div>
-            )}
-          </div>
-          <AiOutlineClose
-            onClick={(e) => handleCloseNotification(e, obj._id)}
-            size={20}
-            className="notification-close__btn"
-          />
-        </div>
-      ))}
+              {notifyList.map((obj) => (
+                <div
+                  key={`ntfy_lst${obj._id}`}
+                  className={`d-flex mb-4 pb-3 rounded notify-container position-relative ${
+                    tempReadNotificationIds.includes(obj._id) || obj.is_read
+                      ? ""
+                      : "notify-container--unread"
+                  }`}
+                  onClick={() => handlereadNotification(obj._id)}
+                >
+                  <div>
+                    <img
+                      src={obj.userData.user_image.secure_url}
+                      alt="profile_image"
+                      width="50px"
+                      height="50px"
+                      className="notification_profile--img "
+                    />
+                  </div>
+                  <div>
+                    <div className="d-flex mt-2 ms-2">
+                      <p className="fw-bold mb-0">{`${obj.userData.first_name} ${obj.userData.last_name}`}</p>
+                      <p className="text-muted ms-2 mb-0">
+                        {displayUserName(obj.userData.user_name)}
+                      </p>
+                    </div>
+                    <div className="ms-2">
+                      {notificationMessage(
+                        obj.notify_type,
+                        `${obj.userData.first_name} ${obj.userData.last_name}`
+                      )}
+                    </div>
+                    {obj.type !== 5 && (
+                      <div>{displayNotificationButton(obj.notify_type)}</div>
+                    )}
+                  </div>
+                  <AiOutlineClose
+                    onClick={(e) => handleCloseNotification(e, obj._id)}
+                    size={20}
+                    className="notification-close__btn"
+                  />
+                </div>
+              ))}
+            </>
+          ) : (
+            <AppNoDataFound content={"No Notifcation is Present"} />
+          )}
+        </>
+      ) : (
+        <>
+          <BulletList />
+          <BulletList />
+        </>
+      )}
     </div>
   );
 };

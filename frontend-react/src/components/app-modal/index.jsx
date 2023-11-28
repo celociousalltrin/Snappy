@@ -11,10 +11,11 @@ import { getFavouritifyConnectorList } from "../../services/method";
 
 const AppModal = ({ openModal, handleModelClose, api, isProfile, userId }) => {
   const { open_type, show, snapp_id } = openModal;
-
+  const [isApiExecuted, setApiExecuted] = useState(false);
   const [list, setlist] = useState([]);
 
   const getList = async (id, type) => {
+    setApiExecuted(false);
     try {
       let response;
       if (isProfile) {
@@ -27,6 +28,8 @@ const AppModal = ({ openModal, handleModelClose, api, isProfile, userId }) => {
     } catch (err) {
       responseMessage(err.data.code);
       console.log("🚀 ~ file: index.jsx:17 ~ getList ~ err:", err);
+    } finally {
+      setApiExecuted(true);
     }
   };
 
@@ -68,12 +71,14 @@ const AppModal = ({ openModal, handleModelClose, api, isProfile, userId }) => {
               connecteduserList={list}
               isFansList={open_type === 4 ? true : false}
               isAllianceList={open_type === 5 ? true : false}
+              isApiExecuted={isApiExecuted}
             />
           ) : (
             <ConnectorsList
               connecteduserList={list.userData || []}
               allianceIds={list.alianceIds}
               isConnectorList
+              isApiExecuted={isApiExecuted}
             />
           )}
         </Modal.Body>

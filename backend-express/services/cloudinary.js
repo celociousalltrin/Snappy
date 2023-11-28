@@ -1,3 +1,6 @@
+const { errorResponse } = require("../utils/responseHandler");
+const { responseMessage } = require("../utils/responseMessage");
+
 require("dotenv").config();
 var cloudinary = require("cloudinary").v2;
 
@@ -23,6 +26,7 @@ exports.uploadImageService = async ({
       "🚀 ~ file: cloudinary.js:5 ~ exports.uploadImageService= ~ err:",
       err
     );
+    return errorResponse({ res, responseDetails: responseMessage("ER999") });
   }
 };
 
@@ -40,7 +44,7 @@ exports.deleteImageService = async (publicId) => {
   }
 };
 
-exports.resizeImageService = async (publicId, width, height) => {
+exports.resizeImageService = async (publicId, width = 100, height = 100) => {
   try {
     const resizedImageUrl = cloudinary.url(publicId, {
       width,

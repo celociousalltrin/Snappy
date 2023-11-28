@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 const { errorResponse, successResponse } = require("../utils/responseHandler");
 const { responseMessage } = require("../utils/responseMessage");
-const { uploadImageService } = require("./cloudinary");
+const { uploadImageService, resizeImageService } = require("./cloudinary");
 const {
   snappBookmarks,
   snappUserDetails,
@@ -9,6 +9,8 @@ const {
   snappMetaCount,
   snappReplyUserData,
   snappLatestComment,
+  snappLikedUserIds,
+  snappBookmarkedUserIds,
 } = require("../utils/mongoCommonQuery");
 
 exports.createSnappService = async (db, snappData, res) => {
@@ -76,8 +78,8 @@ exports.getSnappBasedOnConnectorsService = async (db, id) => {
               },
             },
             ...snappUserDetails,
-
-            ...snappLikes,
+            ...snappLikedUserIds,
+            ...snappBookmarkedUserIds,
             ...snappBookmarks,
           ],
           as: "snappList",
@@ -164,7 +166,6 @@ exports.getSingleSnappService = async (db, snappId, userId) => {
 };
 
 exports.getSnapps = async (db, id) => {
-  console.log("🚀 ~ file: snappService.js:167 ~ exports.getSnapps= ~ id:", id);
   try {
     const result = await db.aggregate([
       {
@@ -182,9 +183,11 @@ exports.getSnapps = async (db, id) => {
       ...snappMetaCount("likes", "likes_count"),
       ...snappMetaCount("comments", "comments_count"),
       ...snappUserDetails,
-      ...snappLikes,
+      ...snappLikedUserIds,
+      ...snappBookmarkedUserIds,
       ...snappBookmarks,
     ]);
+
     return result;
   } catch (err) {
     console.log(
@@ -236,8 +239,10 @@ exports.getUserBasedFavouritifySnappsService = async (db, userId, type) => {
         },
       },
       ...snappUserDetails,
-      ...snappLikes,
+      ...snappLikedUserIds,
       ...snappBookmarks,
+      ...snappBookmarkedUserIds,
+      ...snappLikedUserIds,
       ...snappMetaCount("likes", "likes_count"),
     ];
 
@@ -265,8 +270,9 @@ exports.getUserSnappsService = async (db, userId) => {
         },
       },
       ...snappUserDetails,
-      ...snappLikes,
+      ...snappLikedUserIds,
       ...snappBookmarks,
+      ...snappBookmarkedUserIds,
       ...snappMetaCount("likes", "likes_count"),
     ]);
     return result.length > 0 ? result : [];

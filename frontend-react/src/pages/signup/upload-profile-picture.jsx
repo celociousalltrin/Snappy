@@ -5,6 +5,7 @@ import { convertFileToDataURL } from "../../utils/common-function";
 import AppImageDialogueBox from "../../components/app-image-Dialogue-box";
 
 import "./style.css";
+import { staticResponseMessage } from "../../utils/static-response-message";
 
 const UploadProfilePicture = ({
   data: { user_data_url },
@@ -16,6 +17,11 @@ const UploadProfilePicture = ({
 
   const handleFileChange = async (e) => {
     const selectedFile = e.target.files[0];
+    const maxSizeInBytes = 1024 * 1024;
+    if (selectedFile.size > maxSizeInBytes) {
+      staticResponseMessage("FA012");
+      return;
+    }
     setDate(new Date());
 
     if (selectedFile) {

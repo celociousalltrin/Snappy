@@ -37,6 +37,8 @@ import {
 import ReactDatePicker from "react-datepicker";
 import AppImageDialogueBox from "../app-image-Dialogue-box";
 import { useSelector } from "react-redux";
+import { staticResponseMessage } from "../../utils/static-response-message";
+import { Instagram } from "react-content-loader";
 
 const Profile = () => {
   const { page_id, id, sec_id } = useParams();
@@ -54,12 +56,23 @@ const Profile = () => {
   const [selectedImageDataURL, setSelectedImageDataURL] = useState();
   const [date, setDate] = useState(new Date());
   const [isBannerImage, setIsBannerImage] = useState(false);
+  const [isApiExecuted, setApiExecuted] = useState(false);
 
   const handleFileChange = async (e, shape) => {
     const selectedFile = e.target.files[0];
+
     setDate(new Date());
 
     if (selectedFile) {
+      if (!(selectedFile.type && selectedFile.type.startsWith("image/"))) {
+        staticResponseMessage("FA013");
+        return;
+      }
+      const maxSizeInBytes = 1024 * 1024;
+      if (selectedFile.size > maxSizeInBytes) {
+        staticResponseMessage("FA012");
+        return;
+      }
       // We can Create Like this but it does not support on every browser
       // const imageURL = URL.createObjectURL(selectedFile);
       const imageURL = await convertFileToDataURL(selectedFile);
@@ -83,18 +96,21 @@ const Profile = () => {
     setOpenModal(init);
   };
 
-  const getList = async ({ api, type }) => {
+  const getList = async ({ api, type, id }) => {
+    setApiExecuted(false);
     try {
       let response;
       if (!!type) {
-        response = await api(type);
+        response = await api(type, id);
       } else {
-        response = await api();
+        response = await api(id);
       }
       setList(response.data.response_data);
     } catch (err) {
       console.log("🚀 ~ file: index.jsx:45 ~ getList ~ err:", err);
       responseMessage(err.data.code);
+    } finally {
+      setApiExecuted(true);
     }
   };
 
@@ -102,8 +118,9 @@ const Profile = () => {
     getList({
       api: activeTab === "snapp" ? getUserSnapps : getUserFavouritifySnapp,
       type: activeTab === "likes" ? 1 : activeTab === "comments" ? 2 : 0,
+      id: sec_id ? sec_id : user_id,
     });
-  }, [activeTab]);
+  }, [activeTab, sec_id]);
 
   const getUserData = async (id) => {
     try {
@@ -117,7 +134,7 @@ const Profile = () => {
 
   useEffect(() => {
     getUserData(sec_id ? sec_id : user_id);
-  }, []);
+  }, [sec_id]);
   const cond = 0;
 
   const handleUpdateProfile = async () => {
@@ -133,7 +150,6 @@ const Profile = () => {
   };
 
   const handleChangeProfile = ({ value, date, url, name }) => {
-    console.log("🚀 ~ file: index.jsx:135 ~ handleChangeProfile ~ name:", name);
     if (name === "first_name" || name == "last_name") {
       setTempUserData((prev) => ({ ...prev, [name]: value }));
     } else if (name === "dob") {
@@ -150,148 +166,154 @@ const Profile = () => {
     <div className="container">
       {id && id !== "user" ? (
         <SingleFeed />
-      ) : (
-        userData &&
-        Object.keys(userData).length > 0 && (
-          <>
-            <div className="d-flex">
-              <MdOutlineArrowBack
-                size={20}
-                className="me-4 mt-3 cursor-pointer"
-                onClick={() =>
-                  navigate(
-                    state
-                      ? `/${state.from}`
-                      : pathname.substring(0, pathname.indexOf("/", 1))
-                  )
-                }
-              />
-              <div>
-                <h4 className="fw-bold mb-0">{`${userData.first_name} ${userData.last_name}`}</h4>
-                <p>{`${userData.counts.snapp_count} Snapps`}</p>
-              </div>
-            </div>
-            <div className="image-container">
-              {userData.user_banner_image ? (
-                <img
-                  src={userData.user_banner_image.secure_url}
-                  alt="banner_img"
-                  className="banner_img"
-                />
-              ) : (
-                <div className="banner-no-img"></div>
-              )}
-              <img
-                src={userData.user_image.secure_url}
-                alt="profile__img"
-                className="profile_cover--img "
-              />
-            </div>
+      ) : userData && Object.keys(userData).length > 0 ? (
+        <>
+          <div className="d-flex">
+            <MdOutlineArrowBack
+              size={20}
+              className="me-4 mt-3 cursor-pointer"
+              onClick={() =>
+                navigate(
+                  state
+                    ? `/${state.from}`
+                    : pathname.substring(0, pathname.indexOf("/", 1))
+                )
+              }
+            />
             <div>
-              {cond ? (
-                <div className="d-flex justify-content-end mt-3">
+              <h4 className="fw-bold mb-0">{`${userData.first_name} ${userData.last_name}`}</h4>
+              <p>{`${userData.counts.snapp_count} Snapps`}</p>
+            </div>
+          </div>
+          <div className="image-container">
+            {userData.user_banner_image ? (
+              <img
+                src={userData.user_banner_image.secure_url}
+                alt="banner_img"
+                className="banner_img"
+              />
+            ) : (
+              <div className="banner-no-img"></div>
+            )}
+            <img
+              src={userData.user_image.secure_url}
+              alt="profile__img"
+              className="profile_cover--img "
+            />
+          </div>
+          <div>
+            {cond ? (
+              <div className="d-flex justify-content-end mt-3">
+                <button
+                  className="btn btn-outline-dark rounded-pill me-3 sm-btn-ctm"
+                  type="button"
+                >
+                  Send Message
+                </button>
+                <AppFramerButton>
                   <button
-                    className="btn btn-outline-dark rounded-pill me-3 sm-btn-ctm"
+                    className="btn btn-primary rounded-pill sm-btn-ctm"
                     type="button"
                   >
-                    Send Message
+                    Add Alliance
                   </button>
-                  <AppFramerButton>
-                    <button
-                      className="btn btn-primary rounded-pill sm-btn-ctm"
-                      type="button"
-                    >
-                      Add Alliance
-                    </button>
-                  </AppFramerButton>
-                </div>
-              ) : (
-                !sec_id && (
-                  <div className="d-flex justify-content-end">
-                    <button
-                      className="btn btn-outline-secondary rounded-pill mt-3"
-                      onClick={() => setShow(true)}
-                    >
-                      Edit Profile
-                    </button>
-                  </div>
-                )
-              )}
-            </div>
-            <div className={`mt-4 ms-2 ${sec_id && "pt-5"}`}>
-              <h4 className="fw-bold mb-0">{`${userData.first_name} ${userData.last_name}`}</h4>
-              <p className="text-muted">
-                {displayUserName(userData.user_name)}
-              </p>
-              <div>
-                <SlCalender />{" "}
-                <span className="text-muted">{` Joined ${formatDate(
-                  userData?.createdAt
-                )}`}</span>
+                </AppFramerButton>
               </div>
-              <div className="d-flex">
-                <p className="mt-2">
-                  <span className="fw-bold">{userData.counts.total_fans}</span>{" "}
-                  <span
-                    onClick={() =>
-                      setOpenModal({
-                        show: true,
-                        open_type: 4,
-                        snapp_id: sec_id ? sec_id : user_id,
-                      })
-                    }
-                    className="profile-connectors-info"
+            ) : (
+              !sec_id && (
+                <div className="d-flex justify-content-end">
+                  <button
+                    className="btn btn-outline-secondary rounded-pill mt-3"
+                    onClick={() => {
+                      setShow(true);
+                      setTempUserData({
+                        old_user_image_public_id: userData.user_image.public_id,
+                        ...(userData.user_banner_image && {
+                          old_banner_image_public_id:
+                            userData.user_banner_image.public_id,
+                        }),
+                      });
+                    }}
                   >
-                    Fans
-                  </span>
-                </p>
-                <p className="mt-2 ms-3">
-                  {mockProfileInfo.alliances ? (
-                    <>
-                      {" "}
-                      <span className="fw-bold">
-                        {userData.counts.total_alliance}
-                      </span>{" "}
-                      <span
-                        onClick={() =>
-                          setOpenModal({
-                            show: true,
-                            open_type: 5,
-                            snapp_id: sec_id ? sec_id : user_id,
-                          })
-                        }
-                        className="profile-alliances-info"
-                      >
-                        Alliances
-                      </span>{" "}
-                    </>
-                  ) : (
-                    "No Mutuals"
-                  )}
-                </p>
-              </div>
-            </div>
+                    Edit Profile
+                  </button>
+                </div>
+              )
+            )}
+          </div>
+          <div className={`mt-4 ms-2 ${sec_id && "pt-5"}`}>
+            <h4 className="fw-bold mb-0">{`${userData.first_name} ${userData.last_name}`}</h4>
+            <p className="text-muted">{displayUserName(userData.user_name)}</p>
             <div>
-              <Tabs
-                defaultActiveKey="snapp"
-                justify="true"
-                variant="underline"
-                className="profile-container mb-4"
-                onSelect={(key) => setActiveTab(key)}
-              >
-                <Tab eventKey="snapp" title="Snapps">
-                  <Feeds feedData={list} />
-                </Tab>
-                <Tab eventKey="likes" title="Likes">
-                  <Feeds feedData={list} type={1} />
-                </Tab>
-                <Tab eventKey="comments" title="Comments">
-                  <Feeds feedData={list} type={2} />
-                </Tab>
-              </Tabs>
+              <SlCalender />{" "}
+              <span className="text-muted">{` Joined ${formatDate(
+                userData?.createdAt
+              )}`}</span>
             </div>
-          </>
-        )
+            <div className="d-flex">
+              <p className="mt-2">
+                <span className="fw-bold">{userData.counts.total_fans}</span>{" "}
+                <span
+                  onClick={() =>
+                    setOpenModal({
+                      show: true,
+                      open_type: 4,
+                      snapp_id: sec_id ? sec_id : user_id,
+                    })
+                  }
+                  className="profile-connectors-info"
+                >
+                  Fans
+                </span>
+              </p>
+              <p className="mt-2 ms-3">
+                {mockProfileInfo.alliances ? (
+                  <>
+                    {" "}
+                    <span className="fw-bold">
+                      {userData.counts.total_alliance}
+                    </span>{" "}
+                    <span
+                      onClick={() =>
+                        setOpenModal({
+                          show: true,
+                          open_type: 5,
+                          snapp_id: sec_id ? sec_id : user_id,
+                        })
+                      }
+                      className="profile-alliances-info"
+                    >
+                      Alliances
+                    </span>{" "}
+                  </>
+                ) : (
+                  "No Mutuals"
+                )}
+              </p>
+            </div>
+          </div>
+          <div>
+            <Tabs
+              defaultActiveKey="snapp"
+              justify="true"
+              variant="underline"
+              className="profile-container mb-4"
+              onSelect={(key) => setActiveTab(key)}
+            >
+              <Tab eventKey="snapp" title="Snapps">
+                <Feeds feedData={list} isApiExecuted={isApiExecuted} />
+              </Tab>
+              <Tab eventKey="likes" title="Likes">
+                <Feeds feedData={list} type={1} isApiExecuted={isApiExecuted} />
+              </Tab>
+              <Tab eventKey="comments" title="Comments">
+                <Feeds feedData={list} type={2} isApiExecuted={isApiExecuted} />
+              </Tab>
+            </Tabs>
+          </div>
+        </>
+      ) : (
+        <Instagram />
       )}
       <AppModal
         openModal={openModal}

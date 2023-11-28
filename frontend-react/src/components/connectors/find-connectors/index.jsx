@@ -9,6 +9,7 @@ import { responseMessage } from "../../../utils/response-message";
 
 const FindConnectors = ({ activeTab }) => {
   const [list, setList] = useState([]);
+  const [isApiExecuted, setApiExecuted] = useState(false);
 
   const getConnectorData = async () => {
     try {
@@ -17,6 +18,8 @@ const FindConnectors = ({ activeTab }) => {
     } catch (err) {
       responseMessage(err.data.code);
       console.log("🚀 ~ file: index.jsx:14 ~ getConnectorList ~ err:", err);
+    } finally {
+      setApiExecuted(true);
     }
   };
   useEffect(() => {
@@ -26,7 +29,11 @@ const FindConnectors = ({ activeTab }) => {
   }, [activeTab]);
   return (
     <div>
-      <ConnectorsList connecteduserList={list} isConnectorList />
+      <ConnectorsList
+        connecteduserList={list}
+        isConnectorList
+        isApiExecuted={isApiExecuted}
+      />
     </div>
   );
 };

@@ -12,10 +12,15 @@ import { bottomNavbarData, sideBarData } from "../../utils/common-data";
 
 import "./style.css";
 import AppToolTip from "../app-tooltip";
+import { useSelector } from "react-redux";
+import { displayUserName } from "../../utils/common-function";
+import { Instagram } from "react-content-loader";
 
 const Header = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
+  const { user_name, first_name } = useSelector((state) => state.user.data);
+
   return (
     <>
       <Navbar
@@ -66,7 +71,7 @@ const Header = () => {
                 </AppToolTip>
               </Nav.Link>
               <NavDropdown
-                title="Hi Celocious"
+                title={first_name}
                 id="basic-nav-dropdown"
                 className="ms-2 rounded border border-light"
               >
@@ -94,12 +99,9 @@ const Header = () => {
                     setShow(false);
                   }}
                 >
-                  Celocious
+                  {first_name}
                 </p>
-                <p className="text-muted fs-6">@celo123</p>
-                <p className="text-muted  mt-2">
-                  <span className="fw-bold me-1 text-black">22</span>Fans
-                </p>
+                <p className="text-muted fs-6">{displayUserName(user_name)}</p>
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body className="d-lg-none d-xs-flex">

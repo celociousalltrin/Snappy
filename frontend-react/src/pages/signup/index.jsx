@@ -16,7 +16,7 @@ import { multiStepFormValidationFunction } from "../../utils/common-function";
 import { editorInitialValue } from "../../components/app-rich-text-box/utils/editorData";
 
 const SignUp = () => {
-  const [isVerified, setIsVerified] = useState(true);
+  const [isVerified, setIsVerified] = useState(false);
 
   const init = {
     first_name: "",
@@ -72,7 +72,6 @@ const SignUp = () => {
     <MultiStepForm
       componentsList={
         <div>
-          <SignupAddAlliances data={alliances} formik={formik} />
           <UserInfoForm
             data={rest}
             handleChange={formik.handleChange}
@@ -98,6 +97,7 @@ const SignUp = () => {
           />
           <UserBio data={{ about }} setFieldValue={formik.setFieldValue} />
           <InterestedFields data={interest} formik={formik} />
+          <SignupAddAlliances data={alliances} formik={formik} />
         </div>
       }
       formHeading="Create Snappy Account"

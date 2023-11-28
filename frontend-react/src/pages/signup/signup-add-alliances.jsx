@@ -12,7 +12,7 @@ const SignupAddAlliances = ({ data, formik: { setFieldValue } }) => {
   const { isShow, showMore, showLess } = useToggleContent();
   const [showIcon, setShowIcon] = useState(true);
   const [connectorList, setConnectorList] = useState([]);
-
+  const [isApiExecuted, setApiExecuted] = useState(false);
   useEffect(() => {
     getConnectorList();
   }, []);
@@ -27,6 +27,8 @@ const SignupAddAlliances = ({ data, formik: { setFieldValue } }) => {
         err
       );
       responseMessage(err.data.code);
+    } finally {
+      setApiExecuted(true);
     }
   };
 
@@ -61,6 +63,7 @@ const SignupAddAlliances = ({ data, formik: { setFieldValue } }) => {
           }
         }}
         signupConnectedUsers={data}
+        isApiExecuted={isApiExecuted}
       />
     </div>
   );

@@ -7,7 +7,6 @@ import { responseMessage } from "../../utils/response-message";
 import { useLocation, useNavigate } from "react-router-dom";
 import { purgeStore } from "../../redux/store";
 
-
 const Logout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -16,7 +15,6 @@ const Logout = () => {
   }, []);
 
   const { state } = useLocation();
-  console.log("🚀 ~ file: index.jsx:18 ~ Logout ~ state:", state);
 
   const userLogout = async () => {
     try {

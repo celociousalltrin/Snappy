@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 const AllianceList = ({ activeTab }) => {
   const [list, setList] = useState([]);
-
+  const [isApiExecuted, setApiExecuted] = useState(false);
   const { user_id } = useSelector((state) => state.user.data);
 
   const getConnectorList = async () => {
@@ -18,6 +18,8 @@ const AllianceList = ({ activeTab }) => {
     } catch (err) {
       responseMessage(err.data.code);
       console.log("🚀 ~ file: index.jsx:14 ~ getConnectorList ~ err:", err);
+    } finally {
+      setApiExecuted(true);
     }
   };
   useEffect(() => {
@@ -32,6 +34,7 @@ const AllianceList = ({ activeTab }) => {
         connecteduserList={list}
         isAllianceList
         allianceCB={(id) => setList((prev) => prev.filter((o) => o._id !== id))}
+        isApiExecuted={isApiExecuted}
       />
     </div>
   );

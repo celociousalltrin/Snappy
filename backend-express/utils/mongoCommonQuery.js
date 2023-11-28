@@ -100,6 +100,59 @@ exports.snappUserDetails = [
   },
 ];
 
+exports.snappLikedUserIds = [
+  {
+    $lookup: {
+      from: "likes",
+      let: {
+        id: "$_id",
+      },
+      pipeline: [
+        {
+          $match: {
+            $expr: {
+              $eq: ["$snapp_id", "$$id"],
+            },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            user_id: 1,
+          },
+        },
+      ],
+      as: "snappLikedUserIds",
+    },
+  },
+];
+exports.snappBookmarkedUserIds = [
+  {
+    $lookup: {
+      from: "bookmarks",
+      let: {
+        id: "$_id",
+      },
+      pipeline: [
+        {
+          $match: {
+            $expr: {
+              $eq: ["$snapp_id", "$$id"],
+            },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            user_id: 1,
+          },
+        },
+      ],
+      as: "snappBookmarkedUserIds",
+    },
+  },
+];
+
 exports.snappLikes = [
   {
     $lookup: {

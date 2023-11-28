@@ -25,7 +25,13 @@ const AppPopover = ({ children, type, isNoPopOver }) => {
   const popoverComponent = (input) => {
     switch (input) {
       case 1:
-        return <ProfilePopover setOpenModal={setOpenModal} setShow={setShow} />;
+        return (
+          <ProfilePopover
+            setOpenModal={setOpenModal}
+            setShow={setShow}
+            id={id}
+          />
+        );
     }
   };
 

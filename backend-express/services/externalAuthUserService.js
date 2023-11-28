@@ -12,8 +12,9 @@ exports.loginExternalAuthenticatedUserService = async (db, res, req) => {
     const {
       user_name,
       is_external_authenticated_user,
-      user_image: { public_id },
+      user_image,
       _id,
+      first_name,
     } = await db.findOne({
       email: user_email,
     });
@@ -28,9 +29,10 @@ exports.loginExternalAuthenticatedUserService = async (db, res, req) => {
     assignRefreshTokeninCookie(res, { user_email });
 
     const result = {
-      user_name: "",
+      first_name,
+      user_name,
       user_email,
-      public_id,
+      user_image,
       user_id: _id,
       is_external_authenticated_user,
       access_token: generateAccessToken({ user_email }),

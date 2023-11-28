@@ -8,6 +8,7 @@ import { getSnapps } from "../../services/method";
 
 const Explore = () => {
   const { page_id, id } = useParams();
+  const [isApiExecuted, setApiExecuted] = useState(false);
 
   const [feedList, setFeedList] = useState([]);
 
@@ -22,11 +23,17 @@ const Explore = () => {
     } catch (err) {
       console.log("🚀 ~ file: index.jsx:18 ~ getFeeds ~ err:", err);
       responseMessage(err.data.code);
+    } finally {
+      setApiExecuted(true);
     }
   };
   return (
     <div>
-      {id && id !== "user" ? <SingleFeed /> : <Feeds feedData={feedList} />}
+      {id ? (
+        <SingleFeed />
+      ) : (
+        <Feeds feedData={feedList} isApiExecuted={isApiExecuted} />
+      )}
     </div>
   );
 };

@@ -7,6 +7,7 @@ import "./style.css";
 import { editorInitialValue } from "../app-rich-text-box/utils/editorData";
 import { createSnapp } from "../../services/method";
 import { responseMessage } from "../../utils/response-message";
+import { useSelector } from "react-redux";
 
 const Snapp = () => {
   const [document, setDocument] = useState(editorInitialValue);
@@ -48,9 +49,10 @@ const Snapp = () => {
 };
 
 export const EditorToolbarImageIcon = () => {
+  const { user_image } = useSelector((state) => state.user.data);
   return (
     <img
-      src={customimg}
+      src={user_image.secure_url}
       className="editor-user-profile"
       width="50px"
       height="50px"

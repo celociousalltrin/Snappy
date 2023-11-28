@@ -53,6 +53,14 @@ const staticResponseData = [
     code: "FA011",
     message: "To proceed, You must create Description about 15 characters",
   },
+  {
+    code: "FA012",
+    message: "Only the Image size within 1 mb is allowed to upload",
+  },
+  {
+    code: "FA013",
+    message: "Only the Image is allowed to upload",
+  },
 ];
 
 const staticResponseType = (code) => {

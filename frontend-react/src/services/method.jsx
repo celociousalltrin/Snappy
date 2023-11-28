@@ -41,10 +41,11 @@ export const getuserBasedOnSearch = (search) =>
 export const getSnapps = (type) => axios.get(`/snapp/${type}`);
 export const createSnapp = (props) => axios.post("/snapp", props);
 export const getSingleSnapp = (id) => axios.get(`/snapp/single-snapp/${id}`);
-export const getUserFavouritifySnapp = (type) =>
-  axios.get(`/snapp/user-snapps-favouritify/${type}`);
+export const getUserFavouritifySnapp = (type, user_id) =>
+  axios.get(`/snapp/user-snapps-favouritify/${type}/${user_id}`);
 
-export const getUserSnapps = () => axios.get("/snapp/user-snapps");
+export const getUserSnapps = (user_id) =>
+  axios.get(`/snapp/user-snapps/${user_id}`);
 
 // LIKE APIS
 export const createLike = (props) => axios.post("/like", props);

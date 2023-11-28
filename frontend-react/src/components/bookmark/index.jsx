@@ -9,6 +9,7 @@ import { getUserFavouritifySnapp } from "../../services/method";
 const Bookmark = () => {
   const { id, page_id } = useParams();
   const [list, setList] = useState([]);
+  const [isApiExecuted, setApiExecuted] = useState(false);
 
   const getList = async () => {
     try {
@@ -17,6 +18,8 @@ const Bookmark = () => {
     } catch (err) {
       responseMessage(err.data.code);
       console.log("🚀 ~ file: index.jsx:15 ~ getList ~ err:", err);
+    } finally {
+      setApiExecuted(true);
     }
   };
 
@@ -29,7 +32,7 @@ const Bookmark = () => {
       {id && id !== "user" ? (
         <SingleFeed />
       ) : (
-        <Feeds feedData={list} type={3} />
+        <Feeds feedData={list} type={3} isApiExecuted={isApiExecuted} />
       )}
     </div>
   );

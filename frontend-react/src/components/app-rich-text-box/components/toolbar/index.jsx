@@ -13,6 +13,7 @@ import Picker from "emoji-picker-react";
 import AppComponentPopover from "../../../app-component-popover";
 import EditorLink from "../editor-link";
 import { toolbarButtons } from "../../utils/editorData";
+import { staticResponseMessage } from "../../../../utils/static-response-message";
 
 const RichTextToolbar = ({
   editor,
@@ -61,6 +62,11 @@ const RichTextToolbar = ({
 
   const handleFileChange = async (e) => {
     const selectedFile = e.target.files[0];
+    const maxSizeInBytes = 1024 * 1024;
+    if (selectedFile.size > maxSizeInBytes) {
+      staticResponseMessage("FA012");
+      return;
+    }
     setDate(new Date());
 
     if (selectedFile) {

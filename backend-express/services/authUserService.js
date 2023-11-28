@@ -77,7 +77,7 @@ exports.loginService = async (db, userData, res) => {
       user_name,
       first_name,
       last_name,
-      user_image: { public_id },
+      user_image,
       is_external_authenticated_user,
       _id,
     } = getUser;
@@ -98,7 +98,7 @@ exports.loginService = async (db, userData, res) => {
       user_email,
       first_name,
       last_name,
-      public_id,
+      user_image,
       user_id: _id,
       is_external_authenticated_user,
       access_token: generateAccessToken({ user_email }),

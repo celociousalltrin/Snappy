@@ -1,5 +1,8 @@
 const userModel = require("../models/userModel");
-const { uploadImageService } = require("../services/cloudinary");
+const {
+  uploadImageService,
+  deleteImageService,
+} = require("../services/cloudinary");
 const { getUserService } = require("../services/userService");
 const { dataHashing } = require("../utils/commonFunction");
 const { successResponse, errorResponse } = require("../utils/responseHandler");
@@ -9,22 +12,43 @@ const bcrypt = require("bcryptjs");
 exports.updateUser = [
   async (req, res) => {
     const { _id } = req.userDetails;
-    const { user_banner_image_uri, user_image_uri, ...rest } = req.body;
-    try {
-      const userCloudinaryImage = await uploadImageService({
-        data_uri: user_image_uri,
-        sub_folder: "user",
-      });
+    const {
+      user_banner_image_uri,
+      user_image_uri,
+      old_user_image_public_id,
+      old_banner_image_public_id,
+      ...rest
+    } = req.body;
 
-      const userBannerCloudinaryImage = await uploadImageService({
-        data_uri: user_banner_image_uri,
-        sub_folder: "user/banner",
-      });
+    try {
+      if (user_image_uri) {
+        var userCloudinaryImage = await uploadImageService({
+          data_uri: user_image_uri,
+          sub_folder: "user",
+        });
+
+        await deleteImageService(old_user_image_public_id);
+      }
+
+      if (user_banner_image_uri) {
+        var userBannerCloudinaryImage = await uploadImageService({
+          data_uri: user_banner_image_uri,
+          sub_folder: "user/banner",
+        });
+        {
+          old_banner_image_public_id &&
+            (await deleteImageService(old_banner_image_public_id));
+        }
+      }
+
       const data = {
         ...rest,
-        user_banner_image: userBannerCloudinaryImage,
-        user_image: userCloudinaryImage,
+        ...(user_banner_image_uri && {
+          user_banner_image: userBannerCloudinaryImage,
+        }),
+        ...(user_image_uri && { user_image: userCloudinaryImage }),
       };
+
       const result = await userModel.findOneAndUpdate(
         { _id },
         { ...data },

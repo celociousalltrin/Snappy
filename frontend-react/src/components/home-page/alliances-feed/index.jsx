@@ -6,6 +6,7 @@ import { responseMessage } from "../../../utils/response-message";
 
 const AlliancesFeed = ({ activeTab }) => {
   const [feedList, setFeedList] = useState([]);
+  const [isApiExecuted, setApiExecuted] = useState(false);
 
   useEffect(() => {
     if (activeTab === "alliance-feeds") {
@@ -20,11 +21,13 @@ const AlliancesFeed = ({ activeTab }) => {
     } catch (err) {
       console.log("🚀 ~ file: index.jsx:18 ~ getFeeds ~ err:", err);
       responseMessage(err.data.code);
+    } finally {
+      setApiExecuted(true);
     }
   };
   return (
     <div>
-      <Feeds feedData={feedList} />
+      <Feeds feedData={feedList} isApiExecuted={isApiExecuted} />
     </div>
   );
 };

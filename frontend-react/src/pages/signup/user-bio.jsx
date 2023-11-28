@@ -12,7 +12,7 @@ const UserBio = ({ data: { about }, setFieldValue }) => {
         data={about}
         onChange={(data) => setFieldValue("about", data)}
         postDataName="Snapp"
-        editorElements={["emoji", "link", "hashtag"]}
+        editorElements={["emoji", "link"]}
         progressIcon={{ length: 280, size: 25, width: 3 }}
       />
     </div>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MockProfilePopoverData } from "../../utils/mock-common";
 import {
   isToggleContent,
@@ -101,11 +101,10 @@ const ProfilePopover = ({ setOpenModal, setShow }) => {
             </p>
           </div>
         </div>
-        <p className="mt-2">
-          {isToggleContent(MockProfilePopoverData.bio, 100)
-            ? sliceContent(MockProfilePopoverData.bio, 100)
+        {/* <p className="mt-2">
+          {
             : MockProfilePopoverData.bio}
-        </p>
+        </p> */}
       </div>
     </>
   );

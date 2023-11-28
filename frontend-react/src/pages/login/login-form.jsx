@@ -75,7 +75,7 @@ const LoginForm = () => {
       </div>
       <form onSubmit={formik.handleSubmit}>
         <div>
-          <div className="login-input-container">
+          <div className="login-input-container mb-4">
             <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
               <Form.Control
@@ -104,13 +104,13 @@ const LoginForm = () => {
             </Form.Group>
           </div>
 
-          <p
+          {/* <p
             className="text-primary mt-0 login-forgot-password"
             onClick={() => navigate("/forgot-password")}
             type="button"
           >
             Forgot Your Password ?
-          </p>
+          </p> */}
           <AppFramerButton>
             <button
               className="btn btn-dark p-2 pt-1 login-button"

@@ -6,6 +6,7 @@ import { responseMessage } from "../../../utils/response-message";
 
 const FeedNotification = ({ activeTab }) => {
   const [list, setList] = useState([]);
+  const [isApiExecuted, setApiExecuted] = useState(false);
 
   const getNotificationData = async () => {
     try {
@@ -14,6 +15,8 @@ const FeedNotification = ({ activeTab }) => {
     } catch (err) {
       responseMessage(err.data.code);
       console.log("🚀 ~ file: index.jsx:12 ~ getNotificationList ~ err:", err);
+    } finally {
+      setApiExecuted(true);
     }
   };
   useEffect(() => {
@@ -23,7 +26,7 @@ const FeedNotification = ({ activeTab }) => {
   }, [activeTab]);
   return (
     <div>
-      <NotificationList list={list} />
+      <NotificationList list={list} isApiExecuted={isApiExecuted} />
     </div>
   );
 };

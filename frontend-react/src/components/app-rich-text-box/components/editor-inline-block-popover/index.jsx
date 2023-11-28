@@ -41,6 +41,7 @@ const EditorInlineBlockPopover = ({
                 ? "editor-inline-block-selected"
                 : "editor-inline-block-not-selected"
             }
+            key={`eb${i}`}
           >
             {user_name.toLowerCase().replace(/\s+/g, "_")}
           </p>

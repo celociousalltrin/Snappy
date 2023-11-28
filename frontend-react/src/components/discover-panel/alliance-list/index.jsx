@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 const AllianceList = () => {
   const navigate = useNavigate();
   const [list, setList] = useState([]);
+  const [isApiExecuted, setApiExecuted] = useState(false);
 
   const { isConnectorChnaged } = useSelector((state) => state.user);
 
@@ -20,6 +21,8 @@ const AllianceList = () => {
     } catch (err) {
       responseMessage(err.data.code);
       console.log("🚀 ~ file: index.jsx:14 ~ getConnectorList ~ err:", err);
+    } finally {
+      setApiExecuted(true);
     }
   };
   useEffect(() => {
@@ -29,7 +32,12 @@ const AllianceList = () => {
   return (
     <div className="discover_container mt-5">
       <h4 className="text-center pt-4 mb-3">Alliances</h4>
-      <ConnectorsList connecteduserList={list} isDiscoverAlliance length={3} />
+      <ConnectorsList
+        connecteduserList={list}
+        isDiscoverAlliance
+        length={3}
+        isApiExecuted={isApiExecuted}
+      />
       <div className="pt-2 pb-1">
         <p
           className="text-primary text-center cursor-pointer"
