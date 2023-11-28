@@ -161,7 +161,7 @@ const findAdditionalNode = (editorText) => {
       return { type: "plainText", text: editorText };
   }
 };
-export const editorCustomNode = (editor) => {
+export const editorCustomNode = (editor, invisible_toolbar_buttons) => {
   const { selection } = editor;
 
   if (selection && Range.isCollapsed(selection)) {
@@ -170,7 +170,7 @@ export const editorCustomNode = (editor) => {
     const before = wordBefore && Editor.before(editor, wordBefore);
     const beforeRange = before && Editor.range(editor, before, start);
     const beforeText = beforeRange && Editor.string(editor, beforeRange);
-    if (beforeText) {
+    if (invisible_toolbar_buttons && beforeText) {
       var node = findAdditionalNode(beforeText);
     }
     if (node) {

@@ -7,9 +7,6 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 
-// disable react-dev-tools
-import { disableReactDevTools } from "@fvilers/disable-react-devtools";
-
 // Bootstrap Package
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";

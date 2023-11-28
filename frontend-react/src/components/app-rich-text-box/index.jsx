@@ -105,7 +105,7 @@ const AppRichTextBox = ({
 
   const handleChange = useCallback(
     (document) => {
-      const nodeData = editorCustomNode(editor);
+      const nodeData = editorCustomNode(editor, invisible_toolbar_buttons);
       setCustomNodeData(nodeData);
       onChange(document);
       setTextLength(editorTextlength(document));
