@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 
 import "./style.css";
 import { notificationInfo } from "../../../utils/common-data";
-import { displayUserName } from "../../../utils/common-function";
+import {
+  displayUserName,
+  navigateToProfile,
+} from "../../../utils/common-function";
 import { responseMessage } from "../../../utils/response-message";
 import {
   clearAllNotification,
@@ -17,6 +20,7 @@ import { BulletList } from "react-content-loader";
 
 const NotificationList = ({ list, isApiExecuted }) => {
   const navigate = useNavigate();
+  const { page_id } = useParams();
 
   const [tempReadNotificationIds, setTempReadNotifdicationIds] = useState([]);
 
@@ -29,14 +33,14 @@ const NotificationList = ({ list, isApiExecuted }) => {
     setnotifyList(list);
   }, [list]);
 
-  const displayNotificationButton = (type) => {
-    console.log(
-      "🚀 ~ file: index.jsx:30 ~ displayNotificationButton ~ type:",
-      type
-    );
+  const displayNotificationButton = (type, snappUserid) => {
     if ([1, 2, 3].includes(type)) {
       return (
-        <button className="btn btn-sm btn-primary mt-2 ms-2" type="button">
+        <button
+          className="btn btn-sm btn-primary mt-2 ms-2"
+          type="button"
+          onClick={(e) => navigateToProfile(e, navigate, snappUserid, page_id)}
+        >
           View
         </button>
       );
@@ -157,7 +161,12 @@ const NotificationList = ({ list, isApiExecuted }) => {
                       )}
                     </div>
                     {obj.type !== 5 && (
-                      <div>{displayNotificationButton(obj.notify_type)}</div>
+                      <div>
+                        {displayNotificationButton(
+                          obj.notify_type,
+                          obj?.userData?._id
+                        )}
+                      </div>
                     )}
                   </div>
                   <AiOutlineClose

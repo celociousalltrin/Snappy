@@ -26,6 +26,7 @@ import {
 import AppListExpand from "../app-list-expand";
 import useListToggleContent from "../../custom-hooks/useListToggleContent";
 import { Instagram } from "react-content-loader";
+import { useSelector } from "react-redux";
 
 const SingleFeed = () => {
   const init = {
@@ -34,6 +35,7 @@ const SingleFeed = () => {
     snapp_id: "",
   };
   const [singleFeedData, setSingleFeedData] = useState({});
+  const { user_image } = useSelector((state) => state.user.data);
 
   const { listUniqueId, showLess, showMore } = useListToggleContent();
 
@@ -267,7 +269,7 @@ const SingleFeed = () => {
                     <div className="mt-3">
                       <div className="d-flex">
                         <img
-                          src={commentProfile}
+                          src={user_image.secure_url}
                           alt="comment-profile"
                           width="40px"
                           height="40px"
