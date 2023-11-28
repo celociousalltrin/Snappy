@@ -80,7 +80,6 @@ exports.getConnectorAllianceList = [
 exports.getConnectorFanList = [
   async (req, res) => {
     const { id } = req.params;
-    console.log("🚀 ~ file: connectorController.js:83 ~ id:", id);
 
     try {
       await getConnectorListService({

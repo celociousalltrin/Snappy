@@ -11,9 +11,8 @@ const UserBio = ({ data: { about }, setFieldValue }) => {
       <AppRichTextBox
         data={about}
         onChange={(data) => setFieldValue("about", data)}
-        postDataName="Snapp"
         editorElements={["emoji", "link"]}
-        progressIcon={{ length: 280, size: 25, width: 3 }}
+        progressIcon={{ length: 150, size: 25, width: 3 }}
       />
     </div>
   );

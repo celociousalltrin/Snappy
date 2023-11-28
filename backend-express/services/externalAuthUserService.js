@@ -58,7 +58,8 @@ exports.externalAuthenticatedUserProfileCompletionService = async (
 ) => {
   try {
     const { user_email: email } = req;
-    await db.findOneAndUpdate({ email }, { ...body });
+    const { _id } = await db.findOneAndUpdate({ email }, { ...body });
+    return _id;
   } catch (err) {
     console.log("🚀 ~ file: externalAuthUserService.js:58 ~ err:", err);
   }

@@ -22,7 +22,7 @@ exports.externalAuthenticatedUserProfileCompletion = [
   async (req, res) => {
     try {
       const { body } = req;
-      await externalAuthenticatedUserProfileCompletionService(
+      const userId = await externalAuthenticatedUserProfileCompletionService(
         userModel,
         body,
         res,

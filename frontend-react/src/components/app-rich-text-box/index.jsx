@@ -194,18 +194,20 @@ const AppRichTextBox = ({
             iconSize={progressIcon.size}
           />
         </AppToolTip>
-        <AppFramerButton>
-          <button
-            className="btn btn-primary mb-1 cursor-pointer"
-            disabled={!editorInitialValidator(data, 5)}
-            onClick={async () => {
-              await handlePostData();
-              resetEditor(editor);
-            }}
-          >
-            {postDataName}
-          </button>
-        </AppFramerButton>
+        {postDataName && (
+          <AppFramerButton>
+            <button
+              className="btn btn-primary mb-1 cursor-pointer"
+              disabled={!editorInitialValidator(data, 5)}
+              onClick={async () => {
+                await handlePostData();
+                resetEditor(editor);
+              }}
+            >
+              {postDataName}
+            </button>
+          </AppFramerButton>
+        )}
       </div>
     </div>
   );
