@@ -109,8 +109,7 @@ const responseData = [
   },
   {
     code: "ER008",
-    message:
-      "Oops! You have reached your snap limit. However, you can create a new Snapp by deleting the existing Snapp.",
+    message: "Oops! You have reached your snap limit.",
   },
   {
     code: "ER009",

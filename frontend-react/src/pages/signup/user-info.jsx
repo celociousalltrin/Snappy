@@ -156,6 +156,9 @@ const UserInfoForm = ({
             showMonthDropdown
             showYearDropdown
             dropdownMode="select"
+            maxDate={new Date(2002, 0, 1)}
+            minDate={new Date(1970, 0, 1)}
+            openToDate={new Date(1970, 0, 1)}
           />
         </div>
         <div className="col-12 col-md-6">

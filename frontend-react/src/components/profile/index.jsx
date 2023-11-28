@@ -467,9 +467,6 @@ const Profile = () => {
                           ? new Date(tempUserData?.dob)
                           : new Date(userData.dob)
                       }
-                      // onChange={(date) =>
-                      //   setFieldValue("dob", date.toISOString())
-                      // }
                       onChange={(date) =>
                         handleChangeProfile({
                           date: date.toISOString(),
@@ -480,6 +477,9 @@ const Profile = () => {
                       showMonthDropdown
                       showYearDropdown
                       dropdownMode="select"
+                      maxDate={new Date(2002, 0, 1)}
+                      minDate={new Date(1970, 0, 1)}
+                      openToDate={new Date(1970, 0, 1)}
                     />
                   </Form.Group>
                 </div>
