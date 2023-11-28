@@ -35,6 +35,7 @@ const ConnectorsList = ({
   isConnectorList,
   allianceIds,
   isApiExecuted,
+  isModal,
 }) => {
   const { showMore, showLess, listUniqueId } = useListToggleContent();
   const [connectorsIDs, setConnectorsIDs] = useState([]);
@@ -76,6 +77,7 @@ const ConnectorsList = ({
       dispatch(connectorChanged(!isConnectorChnaged));
       responseMessage(response.data.code);
       allianceCB(id);
+
       setConnectorsIDs((prev) => prev.filter((o) => o !== id));
     } catch (err) {
       console.log(
@@ -174,7 +176,7 @@ const ConnectorsList = ({
                             </p>
                           </div>
                           <div className="d-flex align-items-center">
-                            {!sec_id && (
+                            {!isModal && (
                               <AppFramerButton>
                                 <button
                                   className={`${isSignup && "text-nowrap"} ${

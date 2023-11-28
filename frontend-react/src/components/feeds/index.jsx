@@ -32,7 +32,7 @@ import { Instagram } from "react-content-loader";
 import AppNoDataFound from "../app-no-data-found";
 
 const Feeds = ({ feedData, type, isApiExecuted }) => {
-  const { id } = useParams();
+  const { id, sec_id } = useParams();
 
   const [list, setList] = useState([]);
   const data = useSelector((state) => state.user.data);
@@ -180,7 +180,9 @@ const Feeds = ({ feedData, type, isApiExecuted }) => {
                   <div key={`fd_data${obj._id}`} className="mb-4">
                     <div
                       className="feed-container rounded cursor-pointer"
-                      onClick={() => navigate(obj._id)}
+                      onClick={() =>
+                        navigate(sec_id ? `/profile/${obj._id}` : obj._id)
+                      }
                     >
                       {type &&
                         feedmetaData(
