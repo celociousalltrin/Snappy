@@ -41,7 +41,7 @@ const Snapp = () => {
         toolbarCustomComponent={<EditorToolbarImageIcon />}
         isValidator
         validatorIcons={[{ name: "image", length: 1 }]}
-        progressIcon={{ length: 1000, size: 25, width: 3 }}
+        progressIcon={{ length: 250, size: 25, width: 3 }}
         handlePostData={handleSnapp}
       />
     </div>

@@ -198,7 +198,10 @@ const AppRichTextBox = ({
           <AppFramerButton>
             <button
               className="btn btn-primary mb-1 cursor-pointer"
-              disabled={!editorInitialValidator(data, 5)}
+              disabled={
+                !editorInitialValidator(data, 5) ||
+                textLength > progressIcon.length
+              }
               onClick={async () => {
                 await handlePostData();
                 resetEditor(editor);

@@ -125,10 +125,6 @@ export const textBlockElement = (editor, type, level) => {
 };
 
 export const insertCustomNode = (editor, data) => {
-  console.log(
-    "🚀 ~ file: editorFunction.jsx:128 ~ insertCustomNode ~ data:",
-    data
-  );
   const {
     customNode: { type, text, user_id },
     range,
