@@ -33,6 +33,7 @@ import AppNoDataFound from "../app-no-data-found";
 
 const Feeds = ({ feedData, type, isApiExecuted }) => {
   const { id, sec_id } = useParams();
+  const [isFavouritifyLoading, setIsFavouritifyLoading] = useState(false);
 
   const [list, setList] = useState([]);
   const data = useSelector((state) => state.user.data);
@@ -126,6 +127,7 @@ const Feeds = ({ feedData, type, isApiExecuted }) => {
   const handleAddFavouritify = async (e, snapp_id, api, favouritifyName) => {
     e.stopPropagation();
     e.preventDefault();
+    setIsFavouritifyLoading(true);
     try {
       const response = await api({ snapp_id });
       if (favouritifyName === "like") {
@@ -137,6 +139,8 @@ const Feeds = ({ feedData, type, isApiExecuted }) => {
     } catch (err) {
       responseMessage(err.data.code);
       console.log("🚀 ~ file: index.jsx:39 ~ handleLike ~ err:", err);
+    } finally {
+      setIsFavouritifyLoading(false);
     }
   };
 
@@ -149,6 +153,7 @@ const Feeds = ({ feedData, type, isApiExecuted }) => {
   ) => {
     e.stopPropagation();
     e.preventDefault();
+    setIsFavouritifyLoading(true);
     try {
       const response = await api(snapp_id);
       if (
@@ -166,6 +171,8 @@ const Feeds = ({ feedData, type, isApiExecuted }) => {
     } catch (err) {
       responseMessage(err.data.code);
       console.log("🚀 ~ file: index.jsx:39 ~ handleLike ~ err:", err);
+    } finally {
+      setIsFavouritifyLoading(false);
     }
   };
 
@@ -275,10 +282,12 @@ const Feeds = ({ feedData, type, isApiExecuted }) => {
                             <div>
                               <AppToolTip
                                 title={
-                                  obj.snappLikedUserIds?.some(
-                                    ({ user_id }) => user_id == data.user_id
-                                  )
-                                    ? "remove Like"
+                                  isFavouritifyLoading
+                                    ? "Loading....."
+                                    : obj.snappLikedUserIds?.some(
+                                        ({ user_id }) => user_id == data.user_id
+                                      )
+                                    ? "Liked"
                                     : "like"
                                 }
                               >
@@ -326,10 +335,12 @@ const Feeds = ({ feedData, type, isApiExecuted }) => {
                             <div>
                               <AppToolTip
                                 title={
-                                  obj.snappBookmarkedUserIds?.some(
-                                    ({ user_id }) => user_id == data.user_id
-                                  )
-                                    ? "remove Bookmark"
+                                  isFavouritifyLoading
+                                    ? "Loading...."
+                                    : obj.snappBookmarkedUserIds?.some(
+                                        ({ user_id }) => user_id == data.user_id
+                                      )
+                                    ? "Bookmarked"
                                     : "Bookmark"
                                 }
                               >
