@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Feeds from "../feeds";
+
 import { useParams } from "react-router-dom";
-import SingleFeed from "../single-feed";
-import { feedData, singleFeedData } from "../../utils/mock-common";
-import { responseMessage } from "../../utils/response-message";
-import { getUserFavouritifySnapp } from "../../services/method";
 import { useSelector } from "react-redux";
+
+import { responseMessage } from "../../utils/response-message";
+
+import Feeds from "../feeds";
+import SingleFeed from "../single-feed";
+
+import { getUserFavouritifySnapp } from "../../services/method";
 
 const Bookmark = () => {
   const { id, page_id } = useParams();

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import useListToggleContent from "../../custom-hooks/useListToggleContent";
 
 import "./style.css";
-import AppFramerButton from "../app-framer-button";
 
 const ExperimentalComponent = ({ list }) => {
   const { showMore, showLess, listUniqueId } = useListToggleContent();

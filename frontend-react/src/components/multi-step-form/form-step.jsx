@@ -1,9 +1,10 @@
-import useCustomArray from "../../custom-hooks/useCustomArray";
 import { motion } from "framer-motion";
+
 import {
   SignupStepContainervariants,
   signupStepIconVariants,
 } from "../../utils/framer-variants";
+import useCustomArray from "../../custom-hooks/useCustomArray";
 import { FramerCheckIcon } from "../../utils/framer-svgs";
 
 import "./style.css";

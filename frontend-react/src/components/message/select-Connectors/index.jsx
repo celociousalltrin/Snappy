@@ -1,6 +1,7 @@
 import React from "react";
-import ConnectorsList from "../../connectors/connectors-list";
+
 import { MockConnectorsList } from "../../../utils/mock-common";
+import ConnectorsList from "../../connectors/connectors-list";
 
 import "./style.css";
 

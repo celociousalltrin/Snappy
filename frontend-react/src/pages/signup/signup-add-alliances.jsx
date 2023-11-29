@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import ConnectorsList from "../../components/connectors/connectors-list";
-import { MockConnectorsList } from "../../utils/mock-common";
-import "./style.css";
+
 import { AiOutlineDownCircle, AiOutlineUpCircle } from "react-icons/ai";
+
 import useToggleContent from "../../custom-hooks/useToggleContent";
-import AppFramerExpand from "../../components/app-framer-expand";
-import { getSignupConnectorsList } from "../../services/method";
 import { responseMessage } from "../../utils/response-message";
+
+import ConnectorsList from "../../components/connectors/connectors-list";
+import AppFramerExpand from "../../components/app-framer-expand";
+
+import "./style.css";
+
+import { getSignupConnectorsList } from "../../services/method";
 
 const SignupAddAlliances = ({ data, formik: { setFieldValue } }) => {
   const { isShow, showMore, showLess } = useToggleContent();

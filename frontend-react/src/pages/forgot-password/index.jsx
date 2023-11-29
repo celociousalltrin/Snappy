@@ -1,15 +1,17 @@
 import React, { useState } from "react";
+
+import { useFormik } from "formik";
+
+import { ForgotPasswordSchema } from "../../utils/form-validation-schema";
+import { multiStepFormValidationFunction } from "../../utils/common-function";
+import { ForgotPasswordHeader } from "../../utils/common-data";
+
 import MultiStepForm from "../../components/multi-step-form";
 import AppVerificationCode from "../../components/app-verification-code";
 import CreatePassword from "../signup/create-password";
-import { ForgotPasswordHeader } from "../../utils/common-data";
-import { Form } from "react-bootstrap";
+import AppEmail from "../../components/app-email";
 
 import "./style.css";
-import AppEmail from "../../components/app-email";
-import { useFormik } from "formik";
-import { ForgotPasswordSchema } from "../../utils/form-validation-schema";
-import { multiStepFormValidationFunction } from "../../utils/common-function";
 
 const ForgotPassword = () => {
   const init = {

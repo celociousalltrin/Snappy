@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
-import { MockProfilePopoverData } from "../../utils/mock-common";
-import {
-  isToggleContent,
-  navigateToProfile,
-  sliceContent,
-} from "../../utils/common-function";
-import "./style.css";
+import React from "react";
+
 import { useNavigate, useParams } from "react-router-dom";
+
+import { MockProfilePopoverData } from "../../utils/mock-common";
+import { navigateToProfile } from "../../utils/common-function";
+
+import "./style.css";
 
 const ProfilePopover = ({ setOpenModal, setShow }) => {
   const navigate = useNavigate();

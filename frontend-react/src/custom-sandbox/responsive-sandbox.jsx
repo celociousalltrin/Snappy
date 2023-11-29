@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 
 import "./style.css";
-import { isToggleContent, sliceContent } from "../utils/common-function";
-import { MockProfilePopoverData } from "../utils/mock-common";
+
 import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 
 function BasicExample() {

@@ -1,6 +1,8 @@
 import React from "react";
-import { mockDiscoverfacts } from "../../../../utils/mock-common";
+
 import { useNavigate } from "react-router-dom";
+
+import { mockDiscoverfacts } from "../../../../utils/mock-common";
 
 const DiscoverFacts = () => {
   const navigate = useNavigate();

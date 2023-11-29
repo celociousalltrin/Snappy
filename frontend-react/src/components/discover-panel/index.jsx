@@ -1,7 +1,7 @@
 import React from "react";
+
 import AllianceList from "./alliance-list";
 import ExperimentalFeatures from "./experimental-features";
-import DiscoverSearch from "./discover-search";
 
 import "./style.css";
 

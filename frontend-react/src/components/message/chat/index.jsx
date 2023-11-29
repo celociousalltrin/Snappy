@@ -1,19 +1,21 @@
 import React, { useState } from "react";
+
 import { useNavigate, useParams } from "react-router-dom";
+import { AiOutlineClose } from "react-icons/ai";
 import { FaCheck } from "react-icons/fa";
+import Modal from "react-bootstrap/Modal";
+import { BsThreeDots } from "react-icons/bs";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
+
 import { mockChatInfo, mockMessageInfo } from "../../../utils/mock-common";
 import { navigateToProfile } from "../../../utils/common-function";
-import Modal from "react-bootstrap/Modal";
+
 import AppInput from "../../app-input";
-import { AiOutlineClose } from "react-icons/ai";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import { BsThreeDots } from "react-icons/bs";
+import AppFramerButton from "../../app-framer-button";
+import AppPopover from "../../app-popover";
 
 import "./style.css";
-import AppFramerButton from "../../app-framer-button";
-import AppToolTip from "../../app-tooltip";
-import AppPopover from "../../app-popover";
 
 const Chat = () => {
   const navigate = useNavigate();

@@ -1,8 +1,7 @@
-import { Form } from "react-bootstrap";
-import "./style.css";
-import { responseMessage } from "../../utils/response-message";
-import toast from "react-hot-toast";
 import { useState } from "react";
+import { Form } from "react-bootstrap";
+import { responseMessage } from "../../utils/response-message";
+import "./style.css";
 
 const AppEmail = ({
   setIsNotRecieved,

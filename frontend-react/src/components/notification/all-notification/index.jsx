@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import NotificationList from "../notification-list";
-import { mockNotifications } from "../../../utils/mock-common";
+
 import { responseMessage } from "../../../utils/response-message";
+
+import NotificationList from "../notification-list";
+
 import { getNotificationList } from "../../../services/method";
 
 const AllNotifications = ({ activeTab }) => {

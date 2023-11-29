@@ -1,6 +1,6 @@
-import "./style.css";
-
 import React from "react";
+
+import "./style.css";
 
 const AppNoDataFound = ({ icon, content }) => {
   return (

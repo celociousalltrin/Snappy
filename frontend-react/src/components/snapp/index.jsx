@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+
+import { responseMessage } from "../../utils/response-message";
+import { editorInitialValue } from "../app-rich-text-box/utils/editorData";
+
 import AppRichTextBox from "../app-rich-text-box";
 
-import customimg from "../../assets/mock-image/1mutual.jpg";
-
 import "./style.css";
-import { editorInitialValue } from "../app-rich-text-box/utils/editorData";
 import { createSnapp } from "../../services/method";
-import { responseMessage } from "../../utils/response-message";
-import { useSelector } from "react-redux";
 
 const Snapp = () => {
   const [document, setDocument] = useState(editorInitialValue);

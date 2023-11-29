@@ -12,10 +12,9 @@ import {
 } from "react-icons/fa";
 import { MdTheaterComedy } from "react-icons/md";
 import { BsFillChatFill } from "react-icons/bs";
-import { AiFillCodeSandboxCircle, AiTwotoneLike } from "react-icons/ai";
+import { AiTwotoneLike } from "react-icons/ai";
 
 import createProfileLogin from "../assets/login-images/create_profile_login.svg";
-import imageUploadLogin from "../assets/login-images/image_upload_login.svg";
 import snappShareLogin from "../assets/login-images/snapp_share_login.svg";
 import socialCommunicateLogin from "../assets/login-images/social_communicate_login.svg";
 

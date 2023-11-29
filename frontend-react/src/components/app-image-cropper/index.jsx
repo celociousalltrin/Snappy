@@ -1,7 +1,7 @@
-import "./style.css";
 import Cropper from "react-easy-crop";
-
 import React, { useState } from "react";
+
+import "./style.css";
 
 const AppImageCropper = ({
   width = 1,

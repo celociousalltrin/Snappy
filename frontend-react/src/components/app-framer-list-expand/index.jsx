@@ -1,5 +1,5 @@
-import { motion, AnimatePresence } from "framer-motion";
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ListExpandVariants } from "../../utils/framer-variants";
 
 const AppFramerListExpand = ({ isExpand, children }) => {

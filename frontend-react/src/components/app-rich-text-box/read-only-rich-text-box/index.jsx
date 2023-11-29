@@ -1,9 +1,11 @@
 import React, { useMemo } from "react";
+
 import { createEditor } from "slate";
 import { Editable, Slate, withReact } from "slate-react";
-import { renderElement, renderLeaf } from "../hooks/useEditorConfig";
 import { useNavigate } from "react-router-dom";
+
 import { mockReadOnlyEditor } from "../../../utils/mock-common";
+import { renderElement, renderLeaf } from "../hooks/useEditorConfig";
 
 const ReadOnlyRichTextBox = ({ value }) => {
   const editor = useMemo(() => withReact(createEditor()), []);

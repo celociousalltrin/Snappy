@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Modal from "react-bootstrap/Modal";
+
 import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 import {
   FaBookmark,
@@ -7,31 +7,32 @@ import {
   FaRegComment,
   FaReply,
 } from "react-icons/fa";
+import { useNavigate, useParams } from "react-router-dom";
+import { Instagram } from "react-content-loader";
+import { useSelector } from "react-redux";
+import Modal from "react-bootstrap/Modal";
 
-import commentProfile from "../../assets/mock-image/5mutual.jpg";
-
-import "./style.css";
-import AppTextArea from "../app-text-area";
-import AppModal from "../app-modal";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   customTimeAgo,
   displayUserName,
   navigateToProfile,
 } from "../../utils/common-function";
+import { responseMessage } from "../../utils/response-message";
+import useListToggleContent from "../../custom-hooks/useListToggleContent";
+
 import AppToolTip from "../app-tooltip";
 import AppFramerButton from "../app-framer-button";
-import AppPopover from "../app-popover";
-import { responseMessage } from "../../utils/response-message";
+import AppListExpand from "../app-list-expand";
+import AppTextArea from "../app-text-area";
+import AppModal from "../app-modal";
+
+import "./style.css";
+
 import {
   createComment,
   getSingleSnapp,
   replyComment,
 } from "../../services/method";
-import AppListExpand from "../app-list-expand";
-import useListToggleContent from "../../custom-hooks/useListToggleContent";
-import { Instagram } from "react-content-loader";
-import { useSelector } from "react-redux";
 
 const SingleFeed = () => {
   const init = {
@@ -309,7 +310,7 @@ const SingleFeed = () => {
                           <button
                             className="btn btn-sm me-1 btn-primary rounded"
                             onClick={() => handleAddComment(id)}
-                            disabled={tempComment.length > 10 ? false : true}
+                            disabled={tempComment.length > 3 ? false : true}
                           >
                             {isAdding ? "Adding......" : "Add Comment"}
                           </button>

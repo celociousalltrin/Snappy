@@ -1,6 +1,6 @@
 import React from "react";
-import ExperimentalComponent from "../experimental-component";
 import { mockDiscoverfacts } from "../../utils/mock-common";
+import ExperimentalComponent from "../experimental-component";
 
 const Facts = () => {
   return (

@@ -1,7 +1,9 @@
 import React from "react";
-import { page_info } from "../../utils/common-data";
+
 import { MdOutlineArrowBack } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
+
+import { page_info } from "../../utils/common-data";
 
 const PageHeader = ({ page_id, id, title }) => {
   const { pathname } = useLocation();

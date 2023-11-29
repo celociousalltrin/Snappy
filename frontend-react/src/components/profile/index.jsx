@@ -1,26 +1,36 @@
-import React, { useEffect, useRef, useState } from "react";
-import {
-  mockEditProfileInfo,
-  mockProfileInfo,
-  mockSnappInfo,
-  singleFeedData,
-} from "../../utils/mock-common";
+import React, { useEffect, useState } from "react";
+
 import { SlCalender } from "react-icons/sl";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { MdOutlineArrowBack } from "react-icons/md";
+import { TbCameraPlus } from "react-icons/tb";
+import { useSelector } from "react-redux";
+import { Instagram } from "react-content-loader";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Modal from "react-bootstrap/Modal";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import Form from "react-bootstrap/Form";
+import ReactDatePicker from "react-datepicker";
+import toast from "react-hot-toast";
+
+import { mockProfileInfo } from "../../utils/mock-common";
 import SingleFeed from "../single-feed";
 import Feeds from "../feeds";
-import { MdOutlineArrowBack } from "react-icons/md";
-import { TbCameraPlus } from "react-icons/tb";
-import Form from "react-bootstrap/Form";
-import AppTextArea from "../app-text-area";
 
-import "./style.css";
+import { responseMessage } from "../../utils/response-message";
+import { staticResponseMessage } from "../../utils/static-response-message";
+import {
+  convertFileToDataURL,
+  displayUserName,
+  formatDate,
+} from "../../utils/common-function";
+
+import AppImageDialogueBox from "../app-image-Dialogue-box";
 import AppFramerButton from "../app-framer-button";
 import AppModal from "../app-modal";
-import { responseMessage } from "../../utils/response-message";
+
+import "./style.css";
+
 import {
   getAllianceConnectorList,
   getFanConnectorList,
@@ -29,17 +39,6 @@ import {
   getUserSnapps,
   updateUserDetails,
 } from "../../services/method";
-import {
-  convertFileToDataURL,
-  displayUserName,
-  formatDate,
-} from "../../utils/common-function";
-import ReactDatePicker from "react-datepicker";
-import AppImageDialogueBox from "../app-image-Dialogue-box";
-import { useSelector } from "react-redux";
-import { staticResponseMessage } from "../../utils/static-response-message";
-import { Instagram } from "react-content-loader";
-import toast from "react-hot-toast";
 
 const Profile = () => {
   const { page_id, id, sec_id } = useParams();

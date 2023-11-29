@@ -1,14 +1,17 @@
-import React, { Suspense, useEffect } from "react";
+import React from "react";
+
 import {
   BrowserRouter,
   Routes,
   Route,
-  useLocation,
   Navigate,
   useNavigate,
 } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import Explore from "./pages/explore";
+import { useSelector } from "react-redux";
+
+import { appRouter } from "./utils/common-data";
+
 import Home from "./pages/home";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
@@ -16,9 +19,6 @@ import SignupSuccess from "./pages/signup-success";
 import ForgotPassword from "./pages/forgot-password";
 import ExternalAuthenticate from "./pages/external-authenticate";
 import ProfileCompletion from "./pages/profile-completion";
-
-import { appRouter } from "./utils/common-data";
-import { useSelector } from "react-redux";
 
 function App() {
   return (

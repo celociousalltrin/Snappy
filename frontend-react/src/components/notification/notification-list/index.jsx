@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
+
 import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
+import { BulletList } from "react-content-loader";
 
-import "./style.css";
 import { notificationInfo } from "../../../utils/common-data";
 import {
   displayUserName,
   navigateToProfile,
 } from "../../../utils/common-function";
 import { responseMessage } from "../../../utils/response-message";
+
+import AppNoDataFound from "../../app-no-data-found";
+
+import "./style.css";
+
 import {
   clearAllNotification,
   clearSingleNotification,
   readNotification,
 } from "../../../services/method";
-import AppNoDataFound from "../../app-no-data-found";
-import { IoNotificationsOffCircleSharp } from "react-icons/io5";
-import { BulletList } from "react-content-loader";
 
 const NotificationList = ({ list, isApiExecuted }) => {
   const navigate = useNavigate();

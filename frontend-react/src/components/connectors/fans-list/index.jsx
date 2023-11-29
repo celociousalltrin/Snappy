@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import "./style.css";
-import ConnectorsList from "../connectors-list";
-import { MockConnectorsList } from "../../../utils/mock-common";
-import { getFanConnectorList } from "../../../services/method";
-import { responseMessage } from "../../../utils/response-message";
-import { useSelector } from "react-redux";
+
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import { responseMessage } from "../../../utils/response-message";
+
+import ConnectorsList from "../connectors-list";
+
+import "./style.css";
+
+import { getFanConnectorList } from "../../../services/method";
 
 const FansList = ({ activeTab }) => {
   const [list, setList] = useState([]);

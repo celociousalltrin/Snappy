@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import avatar from "../../assets/avatar/avatar-icon.png";
+
 import { TbCameraPlus } from "react-icons/tb";
+
+import avatar from "../../assets/avatar/avatar-icon.png";
 import { convertFileToDataURL } from "../../utils/common-function";
+import { staticResponseMessage } from "../../utils/static-response-message";
+
 import AppImageDialogueBox from "../../components/app-image-Dialogue-box";
 
 import "./style.css";
-import { staticResponseMessage } from "../../utils/static-response-message";
 
 const UploadProfilePicture = ({
   data: { user_data_url },

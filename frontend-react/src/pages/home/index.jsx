@@ -1,6 +1,6 @@
-import { useLocation, useParams } from "react-router-dom";
-
 import React from "react";
+import { useParams } from "react-router-dom";
+
 import Profile from "../../components/profile";
 import Connectors from "../../components/connectors";
 import Page from "../../components/page";

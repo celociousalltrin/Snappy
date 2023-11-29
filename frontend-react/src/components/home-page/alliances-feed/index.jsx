@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Feeds from "../../feeds";
-import { feedData } from "../../../utils/mock-common";
-import { getSnapps } from "../../../services/method";
+
 import { responseMessage } from "../../../utils/response-message";
+
+import Feeds from "../../feeds";
+
+import { getSnapps } from "../../../services/method";
 
 const AlliancesFeed = ({ activeTab }) => {
   const [feedList, setFeedList] = useState([]);

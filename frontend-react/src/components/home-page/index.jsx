@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import { useParams } from "react-router-dom";
+
 import FeedForYou from "./feed-for-you";
 import AlliancesFeed from "./alliances-feed";
-import { useParams } from "react-router-dom";
 import Snapp from "../snapp";
+import SingleFeed from "../single-feed";
 
 import "./style.css";
-import SingleFeed from "../single-feed";
-import { singleFeedData } from "../../utils/mock-common";
 
 const HomePage = () => {
   const { id, page_id } = useParams();

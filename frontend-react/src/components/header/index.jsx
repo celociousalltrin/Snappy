@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import snappyLogo from "../../assets/logo-transparent.png";
+
 import { FaBell, FaCog, FaSignOutAlt, FaUserAlt } from "react-icons/fa";
-import { BsFillChatFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { useNavigate } from "react-router-dom";
+
+import snappyLogo from "../../assets/logo-transparent.png";
 import { bottomNavbarData, sideBarData } from "../../utils/common-data";
+import { displayUserName } from "../../utils/common-function";
+
+import AppToolTip from "../app-tooltip";
 
 import "./style.css";
-import AppToolTip from "../app-tooltip";
-import { useSelector } from "react-redux";
-import { displayUserName } from "../../utils/common-function";
-import { Instagram } from "react-content-loader";
 
 const Header = () => {
   const navigate = useNavigate();

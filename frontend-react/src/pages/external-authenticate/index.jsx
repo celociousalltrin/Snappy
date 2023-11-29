@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
-import { loginExternalAuthenticateUser } from "../../services/method";
+
 import { useNavigate } from "react-router-dom";
-import { responseMessage } from "../../utils/response-message";
 import { useDispatch } from "react-redux";
+
+import { responseMessage } from "../../utils/response-message";
 import { userData } from "../../redux/slices/userSlice";
+
+import { loginExternalAuthenticateUser } from "../../services/method";
 
 const ExternalAuthenticate = () => {
   const navigate = useNavigate();

@@ -1,7 +1,9 @@
 import React from "react";
-import AppFramerListExpand from "../app-framer-list-expand";
-import { isToggleContent, sliceContent } from "../../utils/common-function";
 import { BiSolidChevronDown, BiSolidChevronUp } from "react-icons/bi";
+
+import { isToggleContent, sliceContent } from "../../utils/common-function";
+
+import AppFramerListExpand from "../app-framer-list-expand";
 import AppToolTip from "../app-tooltip";
 import ReadOnlyRichTextBox from "../app-rich-text-box/read-only-rich-text-box";
 

@@ -254,8 +254,13 @@ exports.getUserBasedFavouritifySnappsService = async (db, userId, type) => {
     }
 
     const result = await db.aggregate(pipeline);
+    console.log(
+      "🚀 ~ file: snappService.js:257 ~ exports.getUserBasedFavouritifySnappsService= ~ result:",
+      result
+    );
 
-    return result.length > 0 ? result : [];
+    // return result.length > 0 ? result : [];
+    return [];
   } catch (err) {
     console.log(
       "🚀 ~ file: snappService.js:197 ~ exports.getUserBasedFavouritify= ~ err:",

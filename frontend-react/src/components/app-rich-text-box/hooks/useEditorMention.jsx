@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { mockMentionUsers } from "../../../utils/mock-common";
+
 import { Transforms } from "slate";
+
 import { insertCustomNode } from "../utils/editorFunction";
 import { responseMessage } from "../../../utils/response-message";
+
 import { getuserBasedOnSearch } from "../../../services/method";
 
 export const useEditorMention = (customNodeData) => {

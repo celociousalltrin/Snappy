@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 
-import "./style.css";
+import { responseMessage } from "../../utils/response-message";
+import { staticResponseMessage } from "../../utils/static-response-message";
 
+import { signupStepIconVariants } from "../../utils/framer-variants";
+import { FramerCheckIcon } from "../../utils/framer-svgs";
 import AppEmail from "../app-email";
 import AppOTP from "../app-otp";
-import { FramerCheckIcon } from "../../utils/framer-svgs";
-import { signupStepIconVariants } from "../../utils/framer-variants";
 import AppTimer from "../app-timer";
 
-import { responseMessage } from "../../utils/response-message";
+import "./style.css";
+
 import {
   generateEmailVerificationOTP,
   verifyEmailVerificationOTP,
 } from "../../services/method";
-import { staticResponseMessage } from "../../utils/static-response-message";
 
 const AppVerificationCode = ({
   isValid,

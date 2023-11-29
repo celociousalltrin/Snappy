@@ -1,8 +1,10 @@
 import React from "react";
+
+import { useParams } from "react-router-dom";
+
 import PageHeader from "../page-header";
 import Header from "../header";
 import SideBar from "../sidebar";
-import { useParams } from "react-router-dom";
 import DiscoverPanel from "../discover-panel";
 
 const Page = ({ children }) => {

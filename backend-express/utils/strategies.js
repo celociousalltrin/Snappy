@@ -1,10 +1,10 @@
-const passport = require("passport");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+
 const { isValid } = require("../services/validationService");
 const userModel = require("../models/userModel");
 const {
   createExtrernalAuthenticatedUserService,
 } = require("../services/authUserService");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 const passportGoogleStartegy = new GoogleStrategy(
   {

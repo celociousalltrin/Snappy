@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+
 import ConnectorsList from "../connectors-list";
-import { getConnectorList } from "../../../services/method";
+
+import { responseMessage } from "../../../utils/response-message";
 
 import "./style.css";
 
-import { MockConnectorsList } from "../../../utils/mock-common";
-import { responseMessage } from "../../../utils/response-message";
+import { getConnectorList } from "../../../services/method";
 
 const FindConnectors = ({ activeTab }) => {
   const [list, setList] = useState([]);

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+
 import Modal from "react-bootstrap/Modal";
+
 import { generateCroppedImageDataURL } from "../../utils/common-function";
+import { staticResponseMessage } from "../../utils/static-response-message";
+
 import AppFramerButton from "../app-framer-button";
+import AppImageCropper from "../app-image-cropper";
 
 import "./style.css";
-import AppImageCropper from "../app-image-cropper";
-import { staticResponseMessage } from "../../utils/static-response-message";
 
 const AppImageDialogueBox = ({
   show,

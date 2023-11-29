@@ -1,9 +1,12 @@
 import React from "react";
-import "./style.css";
-import { FramerCheckIcon } from "../../utils/framer-svgs";
-import { signupStepIconVariants } from "../../utils/framer-variants";
+
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+
+import { FramerCheckIcon } from "../../utils/framer-svgs";
+import { signupStepIconVariants } from "../../utils/framer-variants";
+
+import "./style.css";
 
 const SignupSuccess = () => {
   const navigate = useNavigate();

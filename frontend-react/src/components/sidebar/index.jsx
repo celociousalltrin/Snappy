@@ -1,7 +1,9 @@
 import React from "react";
-import { sideBarData } from "../../utils/common-data";
-import "./style.css";
 import { useNavigate, useParams } from "react-router-dom";
+
+import { sideBarData } from "../../utils/common-data";
+
+import "./style.css";
 
 const SideBar = () => {
   const navigate = useNavigate();

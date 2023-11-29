@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { Editor, Transforms } from "slate";
-import { ReactEditor, useSlateStatic } from "slate-react";
+import React, { useState, useEffect } from "react";
 
+import { Transforms } from "slate";
+import { ReactEditor, useSlateStatic } from "slate-react";
 import { AiFillCloseCircle, AiFillEye } from "react-icons/ai";
 
-import "./style.css";
 import AppImageDialogueBox from "../../../app-image-Dialogue-box";
-import { useEffect } from "react";
-import AppToolTip from "../../../app-tooltip";
+
+import "./style.css";
 
 const EditorImage = ({ attributes, children, element }) => {
   const [selectedImageDataURL, setSelectedImageDataURL] = useState();

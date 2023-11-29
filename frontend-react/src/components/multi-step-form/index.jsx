@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import useMultiStepForm from "../../custom-hooks/useMultiStepForm";
 import { AnimatePresence, motion } from "framer-motion";
-import { signupFormVariants } from "../../utils/framer-variants";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import "./style.css";
+import useMultiStepForm from "../../custom-hooks/useMultiStepForm";
+import { signupFormVariants } from "../../utils/framer-variants";
+import { responseMessage } from "../../utils/response-message";
+import { staticResponseMessage } from "../../utils/static-response-message";
+
 import FormSteps from "./form-step";
 import AppFramerButton from "../app-framer-button";
+
+import "./style.css";
+
 import {
   createUser,
   externalAuthenticatedUserProfileCompletion,
 } from "../../services/method";
-import { responseMessage } from "../../utils/response-message";
-import { staticResponseMessage } from "../../utils/static-response-message";
 
 const MultiStepForm = ({
   componentsList,

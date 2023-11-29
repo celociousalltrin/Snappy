@@ -1,9 +1,11 @@
-import { useFormik } from "formik";
 import React from "react";
+
+import { useFormik } from "formik";
 import Form from "react-bootstrap/Form";
-import { editorLinkSchema } from "../../../../utils/form-validation-schema";
 import { useSlateStatic } from "slate-react";
 import { Transforms } from "slate";
+
+import { editorLinkSchema } from "../../../../utils/form-validation-schema";
 import { staticResponseMessage } from "../../../../utils/static-response-message";
 
 const EditorLink = ({ setShowPopover, handleApplyStyles }) => {

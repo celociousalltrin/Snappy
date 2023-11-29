@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
+
 import Modal from "react-bootstrap/Modal";
+import { AiOutlineClose } from "react-icons/ai";
+
 import { modelOpenInfo } from "../../utils/common-data";
-import { MockConnectorsList } from "../../utils/mock-common";
+import { responseMessage } from "../../utils/response-message";
+
+import ConnectorsList from "../connectors/connectors-list";
 
 import "./style.css";
-import ConnectorsList from "../connectors/connectors-list";
-import { AiOutlineClose } from "react-icons/ai";
-import { responseMessage } from "../../utils/response-message";
+
 import { getFavouritifyConnectorList } from "../../services/method";
 
 const AppModal = ({ openModal, handleModelClose, api, isProfile, userId }) => {

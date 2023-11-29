@@ -1,11 +1,15 @@
 import React from "react";
-import AppPasswordInput from "../app-password-input";
+
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useFormik } from "formik";
+
 import { changePasswordSchema } from "../../utils/form-validation-schema";
 import { responseMessage } from "../../utils/response-message";
+
+import AppPasswordInput from "../app-password-input";
+
 import { changeUserPassword } from "../../services/method";
-import { useNavigate } from "react-router-dom";
 
 const Setting = () => {
   const { is_external_authenticated_user } = useSelector(

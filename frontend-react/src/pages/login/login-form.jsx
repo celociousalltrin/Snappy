@@ -1,18 +1,24 @@
 import React from "react";
+
 import snappyLogo from "../../assets/logo.png";
-import "./style.css";
-import Form from "react-bootstrap/Form";
+
 import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import AppFramerButton from "../../components/app-framer-button";
 import { useFormik } from "formik";
-import AppPasswordInput from "../../components/app-password-input";
+import { useDispatch } from "react-redux";
+import Form from "react-bootstrap/Form";
+
 import { loginSchema } from "../../utils/form-validation-schema";
-import { login, testRoute } from "../../services/method";
 import { responseMessage } from "../../utils/response-message";
-import { useDispatch, useSelector } from "react-redux";
-import { userData } from "../../redux/slices/userSlice";
 import { handleGoogleExternalAuth } from "../../utils/common-function";
+import { userData } from "../../redux/slices/userSlice";
+
+import AppFramerButton from "../../components/app-framer-button";
+import AppPasswordInput from "../../components/app-password-input";
+
+import "./style.css";
+
+import { login } from "../../services/method";
 
 const LoginForm = () => {
   const navigate = useNavigate();

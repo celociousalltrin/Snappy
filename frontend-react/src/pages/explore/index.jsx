@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Feeds from "../../components/feeds";
 import { useParams } from "react-router-dom";
-import SingleFeed from "../../components/single-feed";
-import { feedData, singleFeedData } from "../../utils/mock-common";
+
 import { responseMessage } from "../../utils/response-message";
+
+import Feeds from "../../components/feeds";
+import SingleFeed from "../../components/single-feed";
 import { getSnapps } from "../../services/method";
 
 const Explore = () => {

@@ -1,7 +1,10 @@
 import React from "react";
-import "./style.css";
-import ExperimentalComponent from "../experimental-component";
+
 import { mockDiscoverJokes } from "../../utils/mock-common";
+
+import ExperimentalComponent from "../experimental-component";
+
+import "./style.css";
 
 const Joke = () => {
   return (

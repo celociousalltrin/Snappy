@@ -1,19 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import { editorCustomNode, getIconForButton } from "../../utils/editorFunction";
-import { useSlateStatic } from "slate-react";
 
-import customimg from "../../../../assets/mock-image/1mutual.jpg";
-import "./style.css";
-import ToolBarButton from "./toolbar-components/button";
-import ToolBarDropDown from "./toolbar-components/drop-down";
-import { Element, Transforms } from "slate";
-import AppImageDialogueBox from "../../../app-image-Dialogue-box";
-import { convertFileToDataURL } from "../../../../utils/common-function";
 import Picker from "emoji-picker-react";
+import { Transforms } from "slate";
+
+import { staticResponseMessage } from "../../../../utils/static-response-message";
+import { toolbarButtons } from "../../utils/editorData";
+import { convertFileToDataURL } from "../../../../utils/common-function";
+
+import AppImageDialogueBox from "../../../app-image-Dialogue-box";
+import ToolBarButton from "./toolbar-components/button";
 import AppComponentPopover from "../../../app-component-popover";
 import EditorLink from "../editor-link";
-import { toolbarButtons } from "../../utils/editorData";
-import { staticResponseMessage } from "../../../../utils/static-response-message";
+
+import "./style.css";
 
 const RichTextToolbar = ({
   editor,
