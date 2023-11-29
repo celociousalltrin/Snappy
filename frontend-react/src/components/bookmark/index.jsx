@@ -37,7 +37,14 @@ const Bookmark = () => {
       {id && id !== "user" ? (
         <SingleFeed />
       ) : (
-        <Feeds feedData={list} type={3} isApiExecuted={isApiExecuted} />
+        <Feeds
+          feedData={list.filter(
+            (obj, index, arr) =>
+              arr.findIndex(({ _id }) => _id == obj._id) == index
+          )}
+          type={3}
+          isApiExecuted={isApiExecuted}
+        />
       )}
     </div>
   );
