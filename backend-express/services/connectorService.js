@@ -166,6 +166,12 @@ exports.getConnectorFavouritifyService = async ({ db, id, userId, res }) => {
         },
       },
       {
+        $unwind: {
+          path: "$userData",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
         $lookup: {
           from: "connectors",
           let: {
@@ -175,7 +181,10 @@ exports.getConnectorFavouritifyService = async ({ db, id, userId, res }) => {
             {
               $match: {
                 $expr: {
-                  $eq: ["$fan_id", "$$id"],
+                  $or: [
+                    { $eq: ["$fan_id", "$$id"] },
+                    { $eq: ["$alliance_id", "$$id"] },
+                  ],
                 },
               },
             },
@@ -183,11 +192,28 @@ exports.getConnectorFavouritifyService = async ({ db, id, userId, res }) => {
           as: "alianceIds",
         },
       },
+      {
+        $group: {
+          _id: "$user_id",
+          user_id: {
+            $first: "$user_id",
+          },
+          snapp_id: {
+            $first: "$snapp_id",
+          },
+          userData: {
+            $first: "$userData",
+          },
+          alliance_id: {
+            $first: "$userData",
+          },
+        },
+      },
     ]);
 
     return successResponse({
       res,
-      response_data: result.length > 0 ? result[0] : [],
+      response_data: result.length > 0 ? result : [],
     });
   } catch (err) {
     console.log(

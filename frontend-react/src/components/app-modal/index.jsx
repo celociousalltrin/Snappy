@@ -76,8 +76,12 @@ const AppModal = ({ openModal, handleModelClose, api, isProfile, userId }) => {
             />
           ) : (
             <ConnectorsList
-              connecteduserList={list.userData || []}
-              allianceIds={list.alianceIds}
+              connecteduserList={
+                (list.length > 0 && list.map(({ userData }) => userData)) || []
+              }
+              allianceIds={
+                list.length > 0 && list.map(({ alliance_id }) => alliance_id)
+              }
               isConnectorList
               isApiExecuted={isApiExecuted}
               isModal

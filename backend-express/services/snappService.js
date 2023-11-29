@@ -246,6 +246,7 @@ exports.getUserBasedFavouritifySnappsService = async (db, userId, type) => {
       ...snappBookmarkedUserIds,
       ...snappLikedUserIds,
       ...snappMetaCount("likes", "likes_count"),
+      ...snappMetaCount("comments", "comments_count"),
     ];
 
     if (type === "2") {
@@ -276,6 +277,7 @@ exports.getUserSnappsService = async (db, userId) => {
       ...snappBookmarks,
       ...snappBookmarkedUserIds,
       ...snappMetaCount("likes", "likes_count"),
+      ...snappMetaCount("comments", "comments_count"),
     ]);
     return result.length > 0 ? result : [];
   } catch (err) {
