@@ -213,12 +213,6 @@ exports.snappBookmarks = [
       as: "bookmarks",
     },
   },
-  {
-    $unwind: {
-      path: "$bookmarks",
-      preserveNullAndEmptyArrays: true,
-    },
-  },
 ];
 
 exports.snappReplyUserData = [
