@@ -107,7 +107,6 @@ const RichTextToolbar = ({
       setShowPopover(false);
     } else if (Object.keys(button)[0] === "link") {
       setShowPopover(true);
-      s;
     }
   };
 
