@@ -42,6 +42,7 @@ const SingleFeed = () => {
   };
   const [singleFeedData, setSingleFeedData] = useState({});
   const data = useSelector((state) => state.user.data);
+  const [isReplying, setIsReplying] = useState(false);
 
   const { listUniqueId, showLess, showMore } = useListToggleContent();
 
@@ -122,6 +123,7 @@ const SingleFeed = () => {
   };
 
   const handleReplyComment = async (cmnt_id) => {
+    setIsReplying(true);
     try {
       const response = await replyComment({
         _id: cmnt_id,
@@ -141,6 +143,8 @@ const SingleFeed = () => {
         err
       );
       responseMessage(err.data.code);
+    } finally {
+      setIsReplying(false);
     }
   };
 
@@ -373,12 +377,12 @@ const SingleFeed = () => {
                           </div>
                           <div>
                             {obj?.reply_comments?.length > 0 &&
-                              obj.reply_comments.map((o) => {
+                              obj.reply_comments.map((o, ind) => {
                                 const replyUser = obj.reply_userData.find(
                                   (xx) => xx._id === o.reply_user_id
                                 );
                                 return (
-                                  <div>
+                                  <div key={`reply_${ind}`}>
                                     <div
                                       key={`rply${o._id}`}
                                       className="d-flex mt-3"
@@ -476,7 +480,7 @@ const SingleFeed = () => {
                     type="button"
                     onClick={() => handleReplyComment(tempReplyCommentId)}
                   >
-                    Reply Comment
+                    {isReplying ? "Replying....." : "Reply Comment"}
                   </button>
                 </Modal.Footer>
               </Modal>

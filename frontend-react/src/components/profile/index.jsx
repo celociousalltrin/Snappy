@@ -11,7 +11,6 @@ import Tabs from "react-bootstrap/Tabs";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import ReactDatePicker from "react-datepicker";
-import toast from "react-hot-toast";
 
 import { mockProfileInfo } from "../../utils/mock-common";
 import SingleFeed from "../single-feed";
@@ -48,6 +47,7 @@ const Profile = () => {
   const [tempUserData, setTempUserData] = useState({});
 
   const { user_id } = useSelector((state) => state.user.data);
+  const [isProfileUpdating, setIsProfileUpdating] = useState(false);
 
   const navigate = useNavigate();
   const { pathname, state } = useLocation();
@@ -92,6 +92,7 @@ const Profile = () => {
     snapp_id: "",
   };
   const [openModal, setOpenModal] = useState(init);
+
   const handleModelClose = () => {
     setOpenModal(init);
   };
@@ -134,36 +135,23 @@ const Profile = () => {
 
   useEffect(() => {
     getUserData(sec_id ? sec_id : user_id);
+    handleModelClose();
   }, [sec_id]);
   const cond = 0;
 
-  // const handleUpdateProfile = async () => {
-  //   try {
-  //     const response = await updateUserDetails(tempUserData);
-  //     setUserData(({ counts }) => ({ ...response.data.response_data, counts }));
-  //     setShow(false);
-  //     responseMessage(response.data.code);
-  //     setTempUserData({});
-  //   } catch (err) {
-  //     responseMessage(err.data.code);
-  //   }
-  // };
-
   const handleUpdateProfile = async () => {
+    setIsProfileUpdating(true);
     try {
-      const promise = updateUserDetails(tempUserData);
-      const loadingToast = toast.promise(promise, {
-        loading: "Updating profile...",
-      });
-
-      const response = await promise;
+      const response = await updateUserDetails(tempUserData);
       setUserData(({ counts }) => ({ ...response.data.response_data, counts }));
       setShow(false);
-      setTempUserData({});
       responseMessage(response.data.code);
-      loadingToast.resolve();
+      setTempUserData({});
     } catch (err) {
+      console.log("🚀 ~ file: index.jsx:148 ~ handleUpdateProfile ~ err:", err);
       responseMessage(err.data.code);
+    } finally {
+      setIsProfileUpdating(false);
     }
   };
 
@@ -241,7 +229,7 @@ const Profile = () => {
               !sec_id && (
                 <div className="d-flex justify-content-end">
                   <button
-                    className="btn btn-outline-secondary rounded-pill mt-3"
+                    className="btn btn-outline-dark rounded-pill mt-3"
                     onClick={() => {
                       setShow(true);
                       setTempUserData({
@@ -515,10 +503,12 @@ const Profile = () => {
               Close
             </button>
             <button
-              className="btn btn-primary ms-3"
+              className={`btn ${
+                isProfileUpdating ? "btn-info" : "btn-primary"
+              } ms-3`}
               onClick={handleUpdateProfile}
             >
-              Save Changes
+              {isProfileUpdating ? "Updating...." : "Update"}
             </button>
           </Modal.Footer>
         </Modal>

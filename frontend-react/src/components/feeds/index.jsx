@@ -269,7 +269,7 @@ const Feeds = ({ feedData, type, isApiExecuted }) => {
                           </div>
                           {type === 2 && (
                             <div
-                              style={{ "background-color": "#E5E4E2" }}
+                              style={{ backgroundColor: "#E5E4E2" }}
                               className="mt-2 rounded p-2 pb-0"
                             >
                               <p className="fw-bold fs-6 mb-0">Comment:</p>

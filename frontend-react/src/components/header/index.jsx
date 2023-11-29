@@ -110,11 +110,12 @@ const Header = () => {
                 className="justify-content-end flex-grow-1 pe-3 nav-select"
                 onSelect={() => setShow(false)}
               >
-                {sideBarData.map((obj) => (
+                {sideBarData.map((obj, ind) => (
                   <Nav.Link
                     onClick={() => navigate(`${obj.route}`)}
                     className="fs-4"
                     eventKey={obj.route}
+                    key={`header_${ind}`}
                   >
                     <span>{obj.icon}</span>{" "}
                     <span className="ms-1">{obj.name}</span>

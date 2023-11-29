@@ -158,7 +158,7 @@ const AppRichTextBox = ({
           !!editorValidatorIcons.length &&
           editorValidatorIcons
             .filter((o) => validatorIcons.map((o) => o.name).includes(o.name))
-            .map((x) => {
+            .map((x, ind) => {
               const { name, length } = findIconValidator(
                 validatorIcons,
                 x.name
@@ -168,6 +168,7 @@ const AppRichTextBox = ({
                 <AppToolTip
                   title={editorValidatorMessage(name, length)}
                   position={"bottom"}
+                  key={`icons_${ind}`}
                 >
                   <span
                     style={{

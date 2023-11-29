@@ -152,10 +152,12 @@ export const profileCompletionValid1 = async (next, rest) => {
 export const profileCompletionValid2 = (next, rest) => {
   const { data } = rest[3];
 
-  if (editorTextlength(data.about) > 15) {
+  if (editorTextlength(data.about) > 150) {
+    return staticResponseMessage("FA016", 3000);
+  } else if (editorTextlength(data.about) > 15) {
     next();
   } else {
-    staticResponseMessage("FA011", 3000);
+    return staticResponseMessage("FA011", 3000);
   }
 };
 

@@ -57,7 +57,7 @@ const InterestedFields = ({ data, formik: { setFieldValue } }) => {
         </AppFramerExpand>
       </div>
       {SignupInterestedFields.map((obj) => (
-        <div className="col-md-4 col-lg-3">
+        <div className="col-md-4 col-lg-3" key={`sign_inter${obj.id}`}>
           <div
             className={`shadow p-3 mb-5 rounded interest-single-container ${
               data.includes(obj.id) && "bg-primary text-light"

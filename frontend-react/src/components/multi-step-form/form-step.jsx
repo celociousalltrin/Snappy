@@ -15,10 +15,12 @@ const FormSteps = ({ currentIndex, componentLength }) => {
   };
 
   const customArray = useCustomArray(componentLength);
+
   return (
     <div className="d-flex justify-content-between justify-content-md-around">
       {customArray.map((obj) => (
         <motion.p
+          key={`custom_${obj}`}
           className={`${
             activeSteps(obj)
               ? "form-step-check-icon"

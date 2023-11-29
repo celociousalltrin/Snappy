@@ -69,6 +69,10 @@ const staticResponseData = [
     code: "FA015",
     message: "User Email Already Exist",
   },
+  {
+    code: "FA016",
+    message: "To proceed, You must create Description less than 150 characters",
+  },
 ];
 
 const staticResponseType = (code) => {

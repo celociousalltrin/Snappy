@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
+import { MdOutlineArrowBack } from "react-icons/md";
 
 import useMultiStepForm from "../../custom-hooks/useMultiStepForm";
 import { signupFormVariants } from "../../utils/framer-variants";
@@ -73,6 +74,14 @@ const MultiStepForm = ({
     }, 1000);
   };
 
+  const isSignupFormMobileScreen = () => {
+    if (isSignupForm && window.innerWidth < 768) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div>
       {" "}
@@ -84,6 +93,27 @@ const MultiStepForm = ({
           opacity: isFinish ? 0 : 1,
         }}
       >
+        {!isSignupFormMobileScreen() && isSignupForm ? (
+          <div className="position-relative">
+            <button
+              className="btn btn-outline-dark position-absolute mt-2 ms-3 btn-sm"
+              type="button"
+              onClick={() => navigate("/login")}
+            >
+              <MdOutlineArrowBack size={15} className="mb-1 " /> Back to Login
+            </button>
+          </div>
+        ) : (
+          isSignupForm && (
+            <div className="position-relative">
+              <MdOutlineArrowBack
+                size={25}
+                className="position-absolute"
+                onClick={() => navigate("/login")}
+              />
+            </div>
+          )
+        )}
         <div className="shadow p-3 mt-4 bg-white rounded multi-step-form-parent-container text-center">
           <h3 className="mb-4 mt-0 pt-0">{formHeading}</h3>
           <FormSteps
