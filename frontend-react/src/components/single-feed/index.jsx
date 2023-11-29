@@ -52,6 +52,7 @@ const SingleFeed = () => {
   const [isApiExecuted, setApiExecuted] = useState(false);
   const navigate = useNavigate();
   const { page_id, id } = useParams();
+  const [isAdding, setIsAdding] = useState(false);
 
   const getData = async (snapp_id) => {
     try {
@@ -74,6 +75,7 @@ const SingleFeed = () => {
   };
 
   const handleAddComment = async (snapp_id) => {
+    setIsAdding(true);
     try {
       const response = await createComment({ snapp_id, comment: tempComment });
       setTempComment("");
@@ -96,6 +98,8 @@ const SingleFeed = () => {
     } catch (err) {
       console.log("🚀 ~ file: index.jsx:35 ~ handleAddComment ~ err:", err);
       responseMessage(err.data.code);
+    } finally {
+      setIsAdding(false);
     }
   };
 
@@ -307,7 +311,7 @@ const SingleFeed = () => {
                             onClick={() => handleAddComment(id)}
                             disabled={tempComment.length > 10 ? false : true}
                           >
-                            Add Comment
+                            {isAdding ? "Adding......" : "Add Comment"}
                           </button>
                         </AppFramerButton>
                       </div>

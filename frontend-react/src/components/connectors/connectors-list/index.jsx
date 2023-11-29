@@ -39,6 +39,7 @@ const ConnectorsList = ({
 }) => {
   const { showMore, showLess, listUniqueId } = useListToggleContent();
   const [connectorsIDs, setConnectorsIDs] = useState([]);
+  const [connectingIDs, setConnectingIds] = useState([]);
 
   useEffect(() => {
     if (!!allianceIds) {
@@ -57,6 +58,7 @@ const ConnectorsList = ({
     : connecteduserList;
 
   const handleCreateConnector = async (id) => {
+    setConnectingIds((prev) => [...prev, id]);
     try {
       const response = await createConnector({ alliance_id: id });
       dispatch(connectorChanged(!isConnectorChnaged));
@@ -68,10 +70,13 @@ const ConnectorsList = ({
         err
       );
       responseMessage(response.data.code);
+    } finally {
+      setConnectingIds((prev) => prev.filter((xx) => xx !== id));
     }
   };
 
   const handleRemoveConnector = async (id) => {
+    setConnectingIds((prev) => [...prev, id]);
     try {
       const response = await removeConnector(id);
       dispatch(connectorChanged(!isConnectorChnaged));
@@ -85,6 +90,8 @@ const ConnectorsList = ({
         err
       );
       responseMessage(response.data.code);
+    } finally {
+      setConnectingIds((prev) => prev.filter((xx) => xx !== id));
     }
   };
 
@@ -211,6 +218,8 @@ const ConnectorsList = ({
                                     >
                                       {isMessage
                                         ? "Send Message"
+                                        : connectingIDs.includes(obj._id)
+                                        ? "Removing..."
                                         : "Remove Alliance"}{" "}
                                     </span>
                                   ) : (
@@ -222,6 +231,8 @@ const ConnectorsList = ({
                                       {" "}
                                       {isMessage
                                         ? "Send Message"
+                                        : connectingIDs.includes(obj._id)
+                                        ? "Adding..."
                                         : "Add Alliance"}{" "}
                                     </span>
                                   )}

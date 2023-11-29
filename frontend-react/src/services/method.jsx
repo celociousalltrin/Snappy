@@ -101,3 +101,6 @@ export const logout = () => axios.get("/logout");
 // VALIDATION APIS
 export const validateUserName = (props) =>
   axios.post("/validation/user-name", props);
+
+export const validateUserEmail = (props) =>
+  axios.post("/validation/user-email", props);

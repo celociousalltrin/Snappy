@@ -17,3 +17,17 @@ exports.signupFormUserNameValidation = [
     }
   },
 ];
+exports.signupFormEmailValidation = [
+  async (req, res) => {
+    try {
+      const { email } = req.body;
+
+      const isEmailExist = await isValid(userModel, "email", email);
+
+      return successResponse({ res, response_data: isEmailExist });
+    } catch (err) {
+      console.log("🚀 ~ file: validationController.js:6 ~ err:", err);
+      return errorResponse({ res, responseDetails: responseMessage("ER999") });
+    }
+  },
+];

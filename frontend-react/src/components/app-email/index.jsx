@@ -1,6 +1,8 @@
 import { Form } from "react-bootstrap";
 import "./style.css";
 import { responseMessage } from "../../utils/response-message";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 const AppEmail = ({
   setIsNotRecieved,
@@ -10,7 +12,9 @@ const AppEmail = ({
   formik: { handleBlur, touched, errors, dirty },
   GenerateVerifyCode,
 }) => {
+  const [isCodeGenerating, setIsCodeGenrating] = useState(false);
   const handleGenerateEmailCode = async (input) => {
+    setIsCodeGenrating(true);
     try {
       await GenerateVerifyCode(input);
       setIsNotRecieved(false);
@@ -20,6 +24,8 @@ const AppEmail = ({
         err
       );
       responseMessage(err?.data?.code);
+    } finally {
+      setIsCodeGenrating(false);
     }
   };
   return (
@@ -48,7 +54,7 @@ const AppEmail = ({
           className="btn btn-sm btn-dark mt-3"
           onClick={() => handleGenerateEmailCode(data)}
         >
-          Generate Code
+          {isCodeGenerating ? "Generating...." : "Generate Code"}
         </button>
       )}
     </div>

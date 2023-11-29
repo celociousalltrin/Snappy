@@ -26,6 +26,7 @@ const AppVerificationCode = ({
   const [generateCode, setGenerateCode] = useState(false);
   const [isOTPExpired, setIsOTPExpired] = useState(false);
   const [otp, setOtp] = useState("");
+  const [isCodeGenerating, setIsCodeGenrating] = useState(false);
 
   const VerifyCodeNote = () => {
     return (
@@ -48,6 +49,7 @@ const AppVerificationCode = ({
 
   const handleGenerateVerifyCode = async (input) => {
     const { email, first_name, last_name } = input;
+    setIsCodeGenrating(true);
     try {
       const response = await generateEmailVerificationOTP({
         email,
@@ -64,6 +66,8 @@ const AppVerificationCode = ({
         err
       );
       responseMessage(err?.data?.code);
+    } finally {
+      setIsCodeGenrating(false);
     }
   };
 
@@ -117,10 +121,12 @@ const AppVerificationCode = ({
           {!generateCode ? (
             <div className="verify-code">
               <button
-                className="btn btn-primary"
+                className={`btn ${
+                  isCodeGenerating ? "btn-info" : "btn-primary"
+                }`}
                 onClick={() => handleGenerateVerifyCode(data)}
               >
-                Generate Code
+                {isCodeGenerating ? "Generating......" : "Generate Code"}
               </button>
               {VerifyCodeNote()}
             </div>

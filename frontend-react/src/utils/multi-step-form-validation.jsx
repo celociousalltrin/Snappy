@@ -1,6 +1,7 @@
 import { editorTextlength } from "../components/app-rich-text-box/utils/editorFunction";
-import { validateUserName } from "../services/method";
+import { validateUserEmail, validateUserName } from "../services/method";
 import { isFormikError, isValidData } from "./common-function";
+import { responseMessage } from "./response-message";
 import { staticResponseMessage } from "./static-response-message";
 
 const userNameValidate = async (input) => {
@@ -9,8 +10,22 @@ const userNameValidate = async (input) => {
 
     return data.response_data;
   } catch (err) {
+    responseMessage(err.data.code);
     console.log(
       "🚀 ~ file: useMultiStepForm.jsx:13 ~ userNameValidate ~ err:",
+      err
+    );
+  }
+};
+
+const userEmailValidate = async (input) => {
+  try {
+    const { data } = await validateUserEmail(input);
+    return data.response_data;
+  } catch (err) {
+    responseMessage(err.data.code);
+    console.log(
+      "🚀 ~ file: multi-step-form-validation.jsx:23 ~ userEmailValidate ~ err:",
       err
     );
   }
@@ -23,7 +38,10 @@ export const signupValid1 = async (next, rest) => {
       user_name: data.user_name,
     })
   ) {
-    staticResponseMessage("FA002");
+    staticResponseMessage("FA014");
+  }
+  if (await userEmailValidate({ email: data.email })) {
+    staticResponseMessage("FA015");
   } else if (
     isFormikError(touched, errors) ||
     !isValidData(componentProps.data)

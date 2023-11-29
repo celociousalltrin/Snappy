@@ -61,6 +61,14 @@ const staticResponseData = [
     code: "FA013",
     message: "Only the Image is allowed to upload",
   },
+  {
+    code: "FA014",
+    message: "Username already Exist",
+  },
+  {
+    code: "FA015",
+    message: "User Email Already Exist",
+  },
 ];
 
 const staticResponseType = (code) => {
