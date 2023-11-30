@@ -13,6 +13,7 @@ const UserBio = ({ data: { about }, setFieldValue }) => {
         onChange={(data) => setFieldValue("about", data)}
         editorElements={["emoji", "link"]}
         progressIcon={{ length: 150, size: 25, width: 3 }}
+        placeholder="User Bio"
       />
     </div>
   );

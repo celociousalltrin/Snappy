@@ -45,6 +45,7 @@ const AppRichTextBox = ({
   validatorIcons,
   progressIcon,
   handlePostData,
+  placeholder = "",
 }) => {
   const editor = useMemo(() => withReact(withHistory(createEditor())), []);
 
@@ -131,7 +132,7 @@ const AppRichTextBox = ({
         />
 
         <Editable
-          placeholder="Share your Snapps"
+          placeholder={placeholder}
           renderElement={(elementdata) => renderElement(elementdata, navigate)}
           renderLeaf={renderLeaf}
           onKeyDown={onEditorKeyDown}

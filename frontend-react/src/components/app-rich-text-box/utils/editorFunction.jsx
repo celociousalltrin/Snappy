@@ -176,7 +176,11 @@ export const editorCustomNode = (editor, invisible_toolbar_buttons) => {
 };
 
 export const editorInitialValidator = (data, number) => {
-  if (data.length > 1 || data[0].children[0].text.length > number) {
+  if (
+    data.length > 1 ||
+    data[0].children[0].text.length > number ||
+    data[0].children.length > 1
+  ) {
     return true;
   } else {
     return false;
@@ -220,7 +224,7 @@ export const editorValidatorMessage = (name, length) => {
     case "image":
       return `You can add only ${customLength} image to Snapp.`;
     case "text":
-      return `when creating a snapp, you can enter ${customLength} text`;
+      return `when creating a snapp, you can enter ${customLength} Characters`;
     default:
       return "";
   }

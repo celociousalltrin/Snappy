@@ -43,6 +43,7 @@ const Snapp = () => {
         validatorIcons={[{ name: "image", length: 1 }]}
         progressIcon={{ length: 250, size: 25, width: 3 }}
         handlePostData={handleSnapp}
+        placeholder="Share your snapps. Use @ to mention other snappers"
       />
     </div>
   );
