@@ -191,17 +191,7 @@ const Feeds = ({ feedData, type, isApiExecuted }) => {
                         navigate(sec_id ? `/profile/${obj._id}` : obj._id)
                       }
                     >
-                      {type &&
-                        feedmetaData(
-                          type,
-                          obj[
-                            type === 1
-                              ? "likes"
-                              : type === 2
-                              ? "commentData"
-                              : "bookmarks"
-                          ]?.createdAt
-                        )}
+                      {type && feedmetaData(type, obj?.favouritify_createdAt)}
                       <div className="d-flex">
                         <div>
                           <img

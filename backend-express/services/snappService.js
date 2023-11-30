@@ -237,7 +237,8 @@ exports.getUserBasedFavouritifySnappsService = async (db, userId, type) => {
           user_id: { $first: "$snappData.user_id" },
           data: { $first: "$snappData.data" },
           snapp_image: { $first: "$snappData.snapp_image" },
-          createdAt: { $first: "$createdAt" },
+          favouritify_createdAt: { $first: "$createdAt" },
+          createdAt: { $first: "$snappData.createdAt" },
         },
       },
       ...snappUserDetails,
@@ -247,6 +248,11 @@ exports.getUserBasedFavouritifySnappsService = async (db, userId, type) => {
       ...snappLikedUserIds,
       ...snappMetaCount("likes", "likes_count"),
       ...snappMetaCount("comments", "comments_count"),
+      {
+        $sort: {
+          favouritify_createdAt: -1,
+        },
+      },
     ];
 
     if (type === "2") {
