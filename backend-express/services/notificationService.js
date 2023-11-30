@@ -1,4 +1,4 @@
-const { successResponse, errorResponse } = require("../utils/responseHandler");
+const { errorResponse } = require("../utils/responseHandler");
 const { responseMessage } = require("../utils/responseMessage");
 
 exports.createNotificationService = async (db, data) => {
