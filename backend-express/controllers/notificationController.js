@@ -20,6 +20,7 @@ exports.createNotification = [
       return successResponse({
         res,
         responseDetails: responseMessage("OK016"),
+        new_access_token: req.new_access_token,
       });
     } catch (err) {
       console.log("🚀 ~ file: notificationController.js:7 ~ err:", err);
@@ -86,6 +87,7 @@ exports.getNotificationList = [
         res,
         responseDetails: responseMessage("OK019"),
         response_data: result,
+        new_access_token: req.new_access_token,
       });
     } catch (err) {
       console.log("🚀 ~ file: notificationController.js:30 ~ err:", err);
@@ -105,6 +107,7 @@ exports.readNotification = [
       return successResponse({
         res,
         responseDetails: responseMessage("OK017"),
+        new_access_token: req.new_access_token,
       });
     } catch (err) {
       console.log(
@@ -126,6 +129,7 @@ exports.clearnotification = [
       return successResponse({
         res,
         responseDetails: responseMessage("OK018"),
+        new_access_token: req.new_access_token,
       });
     } catch (err) {
       console.log("🚀 ~ file: notificationController.js:52 ~ err:", err);
@@ -143,6 +147,7 @@ exports.clearSingleNotification = [
       return successResponse({
         res,
         responseDetails: responseMessage("OK020"),
+        new_access_token: req.new_access_token,
       });
     } catch (err) {
       console.log(

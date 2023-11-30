@@ -58,6 +58,7 @@ exports.updateUser = [
         res,
         response_data: result,
         responseDetails: responseMessage("OK021"),
+        new_access_token: req.new_access_token,
       });
     } catch (err) {
       console.log("🚀 ~ file: userController.js:7 ~ err:", err);
@@ -74,6 +75,7 @@ exports.getUser = [
       return successResponse({
         res,
         response_data: result,
+        new_access_token: req.new_access_token,
       });
     } catch (err) {
       console.log("🚀 ~ file: userController.js:15 ~ err:", err);
@@ -99,6 +101,7 @@ exports.changeUserPassword = [
       return successResponse({
         res,
         responseDetails: responseMessage("OK022"),
+        new_access_token: req.new_access_token,
       });
     } catch (err) {
       console.log("🚀 ~ file: userController.js:64 ~ err:", err);
@@ -126,6 +129,7 @@ exports.getUserBasedOnSearch = [
       return successResponse({
         res,
         response_data: result,
+        new_access_token: req.new_access_token,
       });
     } catch (err) {
       console.log("🚀 ~ file: userController.js:64 ~ err:", err);

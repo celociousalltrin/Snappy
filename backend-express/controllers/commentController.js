@@ -51,6 +51,7 @@ exports.createComment = [
       return successResponse({
         res,
         responseDetails: responseMessage("OK012"),
+        new_access_token: req.new_access_token,
         response_data: result[0],
       });
     } catch (err) {
@@ -79,6 +80,7 @@ exports.replyComment = [
       return successResponse({
         res,
         responseDetails: responseMessage("OK015"),
+        new_access_token: req.new_access_token,
         response_data: result[0],
       });
     } catch (err) {

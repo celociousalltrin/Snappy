@@ -31,6 +31,7 @@ exports.createBookmark = [
 
       return successResponse({
         res,
+        new_access_token: req.new_access_token,
         responseDetails: responseMessage("OK013"),
       });
     } catch (err) {
@@ -47,6 +48,7 @@ exports.removeBookmark = [
       await removeFavouritifyService(bookmarkModel, data, res);
       return successResponse({
         res,
+        new_access_token: req.new_access_token,
         responseDetails: responseMessage("OK014"),
       });
     } catch (err) {

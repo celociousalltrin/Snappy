@@ -31,6 +31,7 @@ exports.createLike = [
 
       return successResponse({
         res,
+        new_access_token: req.new_access_token,
         responseDetails: responseMessage("OK010"),
       });
     } catch (err) {
@@ -47,6 +48,7 @@ exports.removeLike = [
       await removeFavouritifyService(likedModel, data, res);
       return successResponse({
         res,
+        new_access_token: req.new_access_token,
         responseDetails: responseMessage("OK011"),
       });
     } catch (err) {
