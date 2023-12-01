@@ -19,7 +19,7 @@ const Explore = () => {
 
   const getFeeds = async () => {
     try {
-      const response = await getSnapps();
+      const response = await getSnapps("feeds");
       setFeedList(response.data.response_data);
     } catch (err) {
       console.log("🚀 ~ file: index.jsx:18 ~ getFeeds ~ err:", err);

@@ -18,6 +18,7 @@ axios.interceptors.request.use(
     return config;
   },
   function (error) {
+    console.log("🚀 ~ file: axios-utils.jsx:21 ~ error:", error);
     document.body.classList.remove("loading-indicator");
     return Promise.reject(error);
   }
@@ -33,6 +34,7 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
+    console.log("🚀 ~ file: axios-utils.jsx:36 ~ error:", error);
     document.body.classList.remove("loading-indicator");
     if (error.response.status === 401) {
       appRouter.navigate("/logout", {
